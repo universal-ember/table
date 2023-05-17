@@ -630,8 +630,19 @@ module("Plugins | columnReordering", function (hooks) {
       assert.strictEqual(getColumnOrder(), "B C A D", "pre-test setup");
 
       let order = new ColumnOrder({
-        columns: () =>
-          [{ key: "D" }, { key: "C" }, { key: "B" }, { key: "A" }] as Column[],
+        allColumns: () =>
+          [
+            { key: "D" },
+            { key: "C" },
+            { key: "B" },
+            { key: "A" },
+          ] as Column[],
+        availableColumns: () => ({
+          A: true,
+          B: true,
+          C: true,
+          D: true,
+        }),
         existingOrder: new Map([
           ["A", 3],
           ["B", 2],
@@ -640,7 +651,6 @@ module("Plugins | columnReordering", function (hooks) {
         ]),
       });
 
-      // @ts-expect-error
       setColumnOrder(ctx.table, order);
 
       assert.deepEqual(preferences, {

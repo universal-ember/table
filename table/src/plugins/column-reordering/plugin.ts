@@ -62,6 +62,7 @@ export class ColumnMeta {
     return this.#tableMeta.getPosition(this.column);
   }
 
+  // Swaps this column with the column in the new position
   set position(value: number) {
     this.#tableMeta.setPosition(this.column, value);
   }
@@ -113,7 +114,8 @@ export class TableMeta {
    */
   @tracked
   columnOrder = new ColumnOrder({
-    columns: () => this.availableColumns,
+    allColumns: () => this.allColumns,
+    availableColumns: () => this.availableColumns,
     save: this.save,
     existingOrder: this.read(),
   });
@@ -149,7 +151,8 @@ export class TableMeta {
   reset() {
     preferences.forTable(this.table, ColumnReordering).delete('order');
     this.columnOrder = new ColumnOrder({
-      columns: () => this.availableColumns,
+      allColumns: () => this.allColumns,
+      availableColumns: () => this.availableColumns,
       save: this.save,
     });
   }
@@ -183,15 +186,23 @@ export class TableMeta {
   }
 
   get columns() {
-    return this.columnOrder.orderedColumns;
+    return this.columnOrder.orderedColumns.filter(
+      (column) => this.availableColumns[column.key],
+    );
   }
 
-  /**
-   * @private
-   * This isn't our data to expose, but it is useful to alias
-   */
   private get availableColumns() {
-    return columns.for(this.table, ColumnReordering);
+    return columns
+      .for(this.table, ColumnReordering)
+      .reduce<Record<string, boolean>>((acc, column) => {
+        acc[column.key] = true;
+
+        return acc;
+      }, {});
+  }
+
+  private get allColumns() {
+    return this.table.columns.values();
   }
 }
 
@@ -207,13 +218,19 @@ export class ColumnOrder {
 
   constructor(
     private args: {
-      columns: () => Column[];
+      allColumns: () => Column[];
+      availableColumns: () => Record<string, boolean>;
       save?: (order: Map<string, number>) => void;
       existingOrder?: Map<string, number>;
     },
   ) {
     if (args.existingOrder) {
       this.map = new TrackedMap(args.existingOrder);
+      // TODO: Add anything from `allColumns` that wasn't in `existingOrder` to the end
+    } else {
+      this.map = new TrackedMap(
+        args.allColumns().map((column, i) => [column.key, i]),
+      );
     }
   }
 
@@ -226,16 +243,32 @@ export class ColumnOrder {
    */
   @action
   moveLeft(key: string) {
-    const orderedColumns = this.orderedColumns;
+    if (this.map.get(key) === 0) {
+      return;
+    }
 
     let found = false;
-    let nextColumn: { key: string } | undefined;
 
-    for (const column of orderedColumns.reverse()) {
+    for (const column of this.orderedColumns.reverse()) {
       if (found) {
-        nextColumn = column;
+        // Shift moved column left
+        let currentPosition = this.map.get(key);
 
-        break;
+        assert('current key must exist in map', currentPosition !== undefined);
+        this.map.set(key, currentPosition - 1);
+
+        // Shift displayed column right
+        let displayedColumnPosition = this.map.get(column.key);
+
+        assert(
+          'displaced key must exist in map',
+          displayedColumnPosition !== undefined,
+        );
+        this.map.set(column.key, displayedColumnPosition + 1);
+
+        if (this.args.availableColumns()[column.key]) {
+          break;
+        }
       }
 
       if (column.key === key) {
@@ -243,14 +276,11 @@ export class ColumnOrder {
       }
     }
 
-    if (!nextColumn) return;
-
-    const nextPosition = this.get(nextColumn.key);
-
-    this.swapWith(key, nextPosition);
+    this.args.save?.(this.map);
   }
 
   setAll = (map: Map<string, number>) => {
+    // TODO: Verify that the passed `map` has consectuive values set?
     this.map.clear();
 
     for (const [key, value] of map.entries()) {
@@ -258,6 +288,7 @@ export class ColumnOrder {
     }
 
     this.args.save?.(map);
+    // TODO: Add anything from `allColumns` that wasn't in the passed `map` to the end
   };
 
   /**
@@ -270,15 +301,28 @@ export class ColumnOrder {
   @action
   moveRight(key: string) {
     const orderedColumns = this.orderedColumns;
-
     let found = false;
-    let nextColumn: { key: string } | undefined;
 
     for (const column of orderedColumns) {
       if (found) {
-        nextColumn = column;
+        // Shift moved column right
+        let currentPosition = this.map.get(key);
 
-        break;
+        assert('current key must exist in map', currentPosition !== undefined);
+        this.map.set(key, currentPosition + 1);
+
+        // Shift displaced column left
+        let displayedColumnPosition = this.map.get(column.key);
+
+        assert(
+          'displaced key must exist in map',
+          displayedColumnPosition !== undefined,
+        );
+        this.map.set(column.key, displayedColumnPosition - 1);
+
+        if (this.args.availableColumns()[column.key]) {
+          break;
+        }
       }
 
       if (column.key === key) {
@@ -286,11 +330,7 @@ export class ColumnOrder {
       }
     }
 
-    if (!nextColumn) return;
-
-    const nextPosition = this.get(nextColumn.key);
-
-    this.swapWith(key, nextPosition);
+    this.args.save?.(this.map);
   }
 
   /**
@@ -320,10 +360,7 @@ export class ColumnOrder {
           .map((entry) => entry.join(' => '))
           .join(', ') +
         ` and the availableColumns are: ` +
-        this.args
-          .columns()
-          .map((column) => column.key)
-          .join(', ') +
+        Object.keys(this.args.availableColumns()).join(', ') +
         ` and current "map" (${this.map.size}) is: ` +
         [...this.map.entries()].map((entry) => entry.join(' => ')).join(', '),
       undefined !== currentPosition,
@@ -391,16 +428,15 @@ export class ColumnOrder {
    */
   @cached
   get orderedMap(): ReadonlyMap<string, number> {
-    return orderOf(this.args.columns(), this.map);
+    return orderOf(this.args.allColumns(), this.map);
   }
 
   @cached
   get orderedColumns(): Column[] {
-    const availableColumns = this.args.columns();
+    const availableColumns = this.args.allColumns();
     const availableByKey = availableColumns.reduce(
       (keyMap, column) => {
         keyMap[column.key] = column;
-
         return keyMap;
       },
       {} as Record<string, Column>,
