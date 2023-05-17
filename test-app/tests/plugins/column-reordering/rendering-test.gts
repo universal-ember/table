@@ -375,6 +375,50 @@ module("Plugins | columnReordering", function (hooks) {
         "B A D C",
         "test scenario is set up",
       );
+    });
+
+    test("a column in the middle can be moved to the right", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D");
+
+      await click("th.B .right");
+
+      assert.strictEqual(getColumnOrder(), "A C B D");
+    });
+
+    test("a column on the left can be moved to the right", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D");
+
+      await click("th.A .right");
+
+      assert.strictEqual(getColumnOrder(), "B A C D");
+    });
+
+    test("a column on the right can be moved to the left", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D");
+
+      await click("th.D .left");
+
+      assert.strictEqual(getColumnOrder(), "A B D C");
+    });
+
+    test("a column on the right, moved to the right, does not move", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D");
+
+      await click("th.D .right");
+
+      assert.strictEqual(getColumnOrder(), "A B C D");
+    });
+
+    test("a column on the left, moved to the left, does not move", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D");
+
+      await click("th.A .left");
+
+      assert.strictEqual(getColumnOrder(), "A B C D");
+    });
+
+    test("without setting the order of anything, we retain the order of the columns when they are added or removed", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D", "test scenario is set up");
 
       let columnC = ctx.columns.find((column) => column.key === "C");
       debugAssert("Column C is missing!", columnC);
@@ -386,7 +430,7 @@ module("Plugins | columnReordering", function (hooks) {
       ctx.columns = [...ctx.columns, columnC];
       await settled();
 
-      assert.strictEqual(getColumnOrder(), "B A D C", "column C is restored");
+      assert.strictEqual(getColumnOrder(), "A B C D", "column C is restored in the correct place");
     });
 
     test("hiding and showing a column preserves order", async function (assert) {
@@ -444,26 +488,26 @@ module("Plugins | columnReordering", function (hooks) {
       );
     });
 
-    test('moving past hidden columns works as expected', async function (assert) {
-      assert.strictEqual(getColumnOrder(), 'A B C D', 'initially, columns exist as defined');
+    test("moving past hidden columns works as expected", async function (assert) {
+      assert.strictEqual(getColumnOrder(), "A B C D", "initially, columns exist as defined");
 
-      await click('.B.hide')
-      assert.strictEqual(getColumnOrder(), 'A C D', 'column B is no longer shown, and the order of the remaining columns is retained');
+      await click(".B.hide")
+      assert.strictEqual(getColumnOrder(), "A C D", "column B is no longer shown, and the order of the remaining columns is retained");
 
-      await click('th.A .right');
-      assert.strictEqual(getColumnOrder(), 'C A D', 'column A was moved to the right');
+      await click("th.A .right");
+      assert.strictEqual(getColumnOrder(), "C A D", "column A was moved to the right");
 
-      await click('.B.show');
-      assert.strictEqual(getColumnOrder(), 'B C A D', 'column B is now shown');
+      await click(".B.show");
+      assert.strictEqual(getColumnOrder(), "B C A D", "column B is now shown");
 
-      await click('.A.hide');
-      assert.strictEqual(getColumnOrder(), 'B C D', 'column A is hidden');
+      await click(".A.hide");
+      assert.strictEqual(getColumnOrder(), "B C D", "column A is hidden");
 
-      await click('th.D .left');
-      assert.strictEqual(getColumnOrder(), 'B D C', 'column D was moved to the left');
+      await click("th.D .left");
+      assert.strictEqual(getColumnOrder(), "B D C", "column D was moved to the left");
 
-      await click('.A.show');
-      assert.strictEqual(getColumnOrder(), 'B D C A', 'column A has returned, and it is in the right place');
+      await click(".A.show");
+      assert.strictEqual(getColumnOrder(), "B D C A", "column A has returned, and it is in the right place");
     });
   });
 
