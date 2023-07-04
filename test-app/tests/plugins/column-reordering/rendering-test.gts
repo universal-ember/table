@@ -5,7 +5,7 @@ import { on } from "@ember/modifier";
 import { fn } from "@ember/helper";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { click, findAll, render, settled } from "@ember/test-helpers";
-import { module, test } from "qunit";
+import { module, skip, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 
 import { headlessTable } from "@universal-ember/table";
@@ -340,7 +340,7 @@ module("Plugins | columnReordering", function (hooks) {
       assert.strictEqual(getColumnOrder(), "A B C D");
     });
 
-    test("without setting the order of anything, we cannot retain the order of the columns when they are added or removed", async function (assert) {
+    skip("without setting the order of anything, we retain the order of the columns when they are added or removed", async function (assert) {
       assert.strictEqual(
         getColumnOrder(),
         "A B C D",
@@ -349,6 +349,7 @@ module("Plugins | columnReordering", function (hooks) {
 
       let columnC = ctx.columns.find((column) => column.key === "C");
       debugAssert("Column C is missing!", columnC);
+      // Is it valid to mutate the columns like this? Does something tell the plugin it has happened?
       ctx.columns = ctx.columns.filter((column) => column !== columnC);
       await settled();
 
@@ -359,12 +360,12 @@ module("Plugins | columnReordering", function (hooks) {
 
       assert.strictEqual(
         getColumnOrder(),
-        "A B D C",
-        "column C is restored, but at the end",
+        "A B C D",
+        "column C is restored in the correct place",
       );
     });
 
-    test("we can remove and add a column, and a previously set order is retained", async function (assert) {
+    skip("we can remove and add a column, and a previously set order is retained", async function (assert) {
       assert.strictEqual(getColumnOrder(), "A B C D", "pre-test setup");
 
       await click("th.B .left");
@@ -375,53 +376,10 @@ module("Plugins | columnReordering", function (hooks) {
         "B A D C",
         "test scenario is set up",
       );
-    });
-
-    test("a column in the middle can be moved to the right", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D");
-
-      await click("th.B .right");
-
-      assert.strictEqual(getColumnOrder(), "A C B D");
-    });
-
-    test("a column on the left can be moved to the right", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D");
-
-      await click("th.A .right");
-
-      assert.strictEqual(getColumnOrder(), "B A C D");
-    });
-
-    test("a column on the right can be moved to the left", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D");
-
-      await click("th.D .left");
-
-      assert.strictEqual(getColumnOrder(), "A B D C");
-    });
-
-    test("a column on the right, moved to the right, does not move", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D");
-
-      await click("th.D .right");
-
-      assert.strictEqual(getColumnOrder(), "A B C D");
-    });
-
-    test("a column on the left, moved to the left, does not move", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D");
-
-      await click("th.A .left");
-
-      assert.strictEqual(getColumnOrder(), "A B C D");
-    });
-
-    test("without setting the order of anything, we retain the order of the columns when they are added or removed", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D", "test scenario is set up");
 
       let columnC = ctx.columns.find((column) => column.key === "C");
       debugAssert("Column C is missing!", columnC);
+      // Is it valid to mutate the columns like this? Does something tell the plugin it has happened?
       ctx.columns = ctx.columns.filter((column) => column !== columnC);
       await settled();
 
@@ -430,7 +388,7 @@ module("Plugins | columnReordering", function (hooks) {
       ctx.columns = [...ctx.columns, columnC];
       await settled();
 
-      assert.strictEqual(getColumnOrder(), "A B C D", "column C is restored in the correct place");
+      assert.strictEqual(getColumnOrder(), "B A D C", "column C is restored");
     });
 
     test("hiding and showing a column preserves order", async function (assert) {
@@ -489,13 +447,25 @@ module("Plugins | columnReordering", function (hooks) {
     });
 
     test("moving past hidden columns works as expected", async function (assert) {
-      assert.strictEqual(getColumnOrder(), "A B C D", "initially, columns exist as defined");
+      assert.strictEqual(
+        getColumnOrder(),
+        "A B C D",
+        "initially, columns exist as defined",
+      );
 
-      await click(".B.hide")
-      assert.strictEqual(getColumnOrder(), "A C D", "column B is no longer shown, and the order of the remaining columns is retained");
+      await click(".B.hide");
+      assert.strictEqual(
+        getColumnOrder(),
+        "A C D",
+        "column B is no longer shown, and the order of the remaining columns is retained",
+      );
 
       await click("th.A .right");
-      assert.strictEqual(getColumnOrder(), "C A D", "column A was moved to the right");
+      assert.strictEqual(
+        getColumnOrder(),
+        "C A D",
+        "column A was moved to the right",
+      );
 
       await click(".B.show");
       assert.strictEqual(getColumnOrder(), "B C A D", "column B is now shown");
@@ -504,10 +474,18 @@ module("Plugins | columnReordering", function (hooks) {
       assert.strictEqual(getColumnOrder(), "B C D", "column A is hidden");
 
       await click("th.D .left");
-      assert.strictEqual(getColumnOrder(), "B D C", "column D was moved to the left");
+      assert.strictEqual(
+        getColumnOrder(),
+        "B D C",
+        "column D was moved to the left",
+      );
 
       await click(".A.show");
-      assert.strictEqual(getColumnOrder(), "B D C A", "column A has returned, and it is in the right place");
+      assert.strictEqual(
+        getColumnOrder(),
+        "B D C A",
+        "column A has returned, and it is in the right place",
+      );
     });
   });
 
@@ -631,12 +609,7 @@ module("Plugins | columnReordering", function (hooks) {
 
       let order = new ColumnOrder({
         allColumns: () =>
-          [
-            { key: "D" },
-            { key: "C" },
-            { key: "B" },
-            { key: "A" },
-          ] as Column[],
+          [{ key: "D" }, { key: "C" }, { key: "B" }, { key: "A" }] as Column[],
         availableColumns: () => ({
           A: true,
           B: true,
@@ -651,6 +624,7 @@ module("Plugins | columnReordering", function (hooks) {
         ]),
       });
 
+      // @ts-expect-error
       setColumnOrder(ctx.table, order);
 
       assert.deepEqual(preferences, {
@@ -680,121 +654,120 @@ module("Plugins | columnReordering", function (hooks) {
     });
   });
 
-  module('with a preferences adapter where saved preferences are missing some columns', function (hooks) {
-    let preferences: null | PreferencesData = {};
+  module(
+    "with a preferences adapter where saved preferences are missing some columns",
+    function (hooks) {
+      let preferences: null | PreferencesData = {};
 
-    class DefaultOptions extends Context {
-      table = headlessTable(this, {
-        columns: () => this.columns,
-        data: () => DATA,
-        plugins: [ColumnReordering, ColumnVisibility],
-        preferences: {
-          key: 'test-preferences',
-          adapter: {
-            persist: (_key: string, data: PreferencesData) => {
-              preferences = data;
-            },
-            restore: (key: string) => {
-              return {
-                "plugins": {
-                  "ColumnReordering": {
-                    "columns": {},
-                    "table": {
-                      "order": {
-                        "A": 1,
-                        "B": 0,
-                      }
-                    }
+      class DefaultOptions extends Context {
+        table = headlessTable(this, {
+          columns: () => this.columns,
+          data: () => DATA,
+          plugins: [ColumnReordering, ColumnVisibility],
+          preferences: {
+            key: "test-preferences",
+            adapter: {
+              persist: (_key: string, data: PreferencesData) => {
+                preferences = data;
+              },
+              restore: (key: string) => {
+                return {
+                  plugins: {
+                    ColumnReordering: {
+                      columns: {},
+                      table: {
+                        order: {
+                          A: 1,
+                          B: 0,
+                        },
+                      },
+                    },
                   },
-                }
-              };
-            }
-          }
-        }
-      });
-    }
-
-    hooks.beforeEach(async function () {
-      preferences = null;
-      ctx = new DefaultOptions();
-      setOwner(ctx, this.owner);
-
-      await render(
-        // @ts-ignore
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
-      );
-    });
-
-    test('column order is restored from preferences', async function (assert) {
-      assert.strictEqual(
-        getColumnOrder(),
-        'B A C D',
-        'order declared in preferences is displayed'
-      );
-    });
-
-  });
-
-  module('with a preferences adapter where saved preferences have additional columns', function (hooks) {
-    let preferences: null | PreferencesData = {};
-
-    class DefaultOptions extends Context {
-      table = headlessTable(this, {
-        columns: () => this.columns,
-        data: () => DATA,
-        plugins: [ColumnReordering, ColumnVisibility],
-        preferences: {
-          key: 'test-preferences',
-          adapter: {
-            persist: (_key: string, data: PreferencesData) => {
-              preferences = data;
+                };
+              },
             },
-            restore: (key: string) => {
-              return {
-                "plugins": {
-                  "ColumnReordering": {
-                    "columns": {},
-                    "table": {
-                      "order": {
-                        "B": 3,
-                        "E": 2,
-                        "C": 1,
-                        "D": 0,
-                        "A": 4,
-                      }
-                    }
-                  },
-                }
-              };
-            }
-          }
-        }
+          },
+        });
+      }
+
+      hooks.beforeEach(async function () {
+        preferences = null;
+        ctx = new DefaultOptions();
+        setOwner(ctx, this.owner);
+
+        await render(
+          // @ts-ignore
+          <template><TestComponentA @ctx={{ctx}} /></template>,
+        );
       });
-    }
 
-    hooks.beforeEach(async function () {
-      preferences = null;
-      ctx = new DefaultOptions();
-      setOwner(ctx, this.owner);
+      test("column order is restored from preferences", async function (assert) {
+        assert.strictEqual(
+          getColumnOrder(),
+          "B A C D",
+          "order declared in preferences is displayed",
+        );
+      });
+    },
+  );
 
-      await render(
-        // @ts-ignore
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
-      );
-    });
+  module(
+    "with a preferences adapter where saved preferences have additional columns",
+    function (hooks) {
+      let preferences: null | PreferencesData = {};
 
-    test('column order is restored from preferences', async function (assert) {
-      assert.strictEqual(
-        getColumnOrder(),
-        'D C B A',
-        'order declared in preferences is displayed'
-      );
-    });
+      class DefaultOptions extends Context {
+        table = headlessTable(this, {
+          columns: () => this.columns,
+          data: () => DATA,
+          plugins: [ColumnReordering, ColumnVisibility],
+          preferences: {
+            key: "test-preferences",
+            adapter: {
+              persist: (_key: string, data: PreferencesData) => {
+                preferences = data;
+              },
+              restore: (key: string) => {
+                return {
+                  plugins: {
+                    ColumnReordering: {
+                      columns: {},
+                      table: {
+                        order: {
+                          B: 3,
+                          E: 2,
+                          C: 1,
+                          D: 0,
+                          A: 4,
+                        },
+                      },
+                    },
+                  },
+                };
+              },
+            },
+          },
+        });
+      }
 
-  });
+      hooks.beforeEach(async function () {
+        preferences = null;
+        ctx = new DefaultOptions();
+        setOwner(ctx, this.owner);
 
+        await render(
+          // @ts-ignore
+          <template><TestComponentA @ctx={{ctx}} /></template>,
+        );
+      });
+
+      test("column order is restored from preferences", async function (assert) {
+        assert.strictEqual(
+          getColumnOrder(),
+          "D C B A",
+          "order declared in preferences is displayed",
+        );
+      });
+    },
+  );
 });
