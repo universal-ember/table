@@ -1,5 +1,5 @@
 {
-  "tsconfig": "../@universal-ember/table/tsconfig.json",
+  "tsconfig": "../table/tsconfig.json",
   "entryPoints": [
     "../table/src/index.ts",
     "../table/src/test-support/index.ts",
