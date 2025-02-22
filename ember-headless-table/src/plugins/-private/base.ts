@@ -157,9 +157,9 @@ export const preferences = {
        * delete an entry on the underlying `Map` used for this column-plugin pair
        */
       delete(key: string) {
-        let prefs = column.table.preferences;
-        let existing = prefs.storage.forPlugin(klass.name);
-        let columnPrefs = existing.forColumn(column.key);
+        const prefs = column.table.preferences;
+        const existing = prefs.storage.forPlugin(klass.name);
+        const columnPrefs = existing.forColumn(column.key);
 
         columnPrefs.delete(key);
 
@@ -169,9 +169,9 @@ export const preferences = {
        * get an entry on the underlying `Map` used for this column-plugin pair
        */
       get(key: string) {
-        let prefs = column.table.preferences;
-        let existing = prefs.storage.forPlugin(klass.name);
-        let columnPrefs = existing.forColumn(column.key);
+        const prefs = column.table.preferences;
+        const existing = prefs.storage.forPlugin(klass.name);
+        const columnPrefs = existing.forColumn(column.key);
 
         return columnPrefs.get(key);
       },
@@ -179,9 +179,9 @@ export const preferences = {
        * set an entry on the underlying `Map` used for this column-plugin pair
        */
       set(key: string, value: unknown) {
-        let prefs = column.table.preferences;
-        let existing = prefs.storage.forPlugin(klass.name);
-        let columnPrefs = existing.forColumn(column.key);
+        const prefs = column.table.preferences;
+        const existing = prefs.storage.forPlugin(klass.name);
+        const columnPrefs = existing.forColumn(column.key);
 
         columnPrefs.set(key, value);
 
@@ -202,12 +202,12 @@ export const preferences = {
        * delete an entry on every column in the underlying column `Map` for this table-plugin pair
        */
       delete(key: string) {
-        let tablePrefs = table.preferences;
+        const tablePrefs = table.preferences;
 
-        for (let column of table.columns) {
-          let prefs = column.table.preferences;
-          let existing = prefs.storage.forPlugin(klass.name);
-          let columnPrefs = existing.forColumn(column.key);
+        for (const column of table.columns) {
+          const prefs = column.table.preferences;
+          const existing = prefs.storage.forPlugin(klass.name);
+          const columnPrefs = existing.forColumn(column.key);
 
           columnPrefs.delete(key);
         }
@@ -233,8 +233,8 @@ export const preferences = {
        * delete an entry on the underlying `Map` used for this table-plugin pair
        */
       delete(key: string) {
-        let prefs = table.preferences;
-        let existing = prefs.storage.forPlugin(klass.name);
+        const prefs = table.preferences;
+        const existing = prefs.storage.forPlugin(klass.name);
 
         existing.table.delete(key);
 
@@ -244,8 +244,8 @@ export const preferences = {
        * get an entry on the underlying `Map` used for this table-plugin pair
        */
       get(key: string) {
-        let prefs = table.preferences;
-        let existing = prefs.storage.forPlugin(klass.name);
+        const prefs = table.preferences;
+        const existing = prefs.storage.forPlugin(klass.name);
 
         return existing.table.get(key);
       },
@@ -253,8 +253,8 @@ export const preferences = {
        * set an entry on the underlying `Map` used for this table-plugin pair
        */
       set(key: string, value: unknown) {
-        let prefs = table.preferences;
-        let existing = prefs.storage.forPlugin(klass.name);
+        const prefs = table.preferences;
+        const existing = prefs.storage.forPlugin(klass.name);
 
         existing.table.set(key, value);
 
@@ -283,13 +283,13 @@ export const preferences = {
  */
 function columnsFor<DataType = any>(
   table: Table<DataType>,
-  requester?: Plugin<any> | undefined
+  requester?: Plugin<any>  
 ): Column<DataType>[] {
   assert(`First argument passed to columns.for must be an instance of Table`, table[TABLE_KEY]);
 
-  let visibility = findPlugin(table.plugins, 'columnVisibility');
-  let reordering = findPlugin(table.plugins, 'columnOrder');
-  let sizing = findPlugin(table.plugins, 'columnResizing');
+  const visibility = findPlugin(table.plugins, 'columnVisibility');
+  const reordering = findPlugin(table.plugins, 'columnOrder');
+  const sizing = findPlugin(table.plugins, 'columnResizing');
 
   // TODO: actually resolve the graph, rather than use the hardcoded feature names
   //       atm, this only "happens" to work based on expectations of
@@ -401,9 +401,9 @@ export const columns = {
     current: Column<Data>,
     requester?: Plugin<any>
   ): Column<Data> | undefined => {
-    let columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
 
-    let referenceIndex = columns.indexOf(current);
+    const referenceIndex = columns.indexOf(current);
 
     assert(
       `index of reference column must be >= 0. column likely not a part of the table`,
@@ -431,8 +431,8 @@ export const columns = {
     current: Column<Data>,
     requester?: Plugin<any>
   ): Column<Data> | undefined => {
-    let columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
-    let referenceIndex = columns.indexOf(current);
+    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+    const referenceIndex = columns.indexOf(current);
 
     assert(
       `index of reference column must be >= 0. column likely not a part of the table`,
@@ -456,9 +456,9 @@ export const columns = {
    * will be respected.
    */
   before: <Data = unknown>(current: Column<Data>, requester?: Plugin<any>): Column<Data>[] => {
-    let columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
 
-    let referenceIndex = columns.indexOf(current);
+    const referenceIndex = columns.indexOf(current);
 
     return columns.slice(0, referenceIndex);
   },
@@ -470,9 +470,9 @@ export const columns = {
    * will be respected.
    */
   after: <Data = unknown>(current: Column<Data>, requester?: Plugin<any>): Column<Data>[] => {
-    let columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
 
-    let referenceIndex = columns.indexOf(current);
+    const referenceIndex = columns.indexOf(current);
 
     return columns.slice(referenceIndex + 1);
   },
@@ -491,10 +491,10 @@ export const meta = {
     column: Column<Data>,
     klass: Class<P>
   ): ColumnMetaFor<SignatureFrom<P>> {
-    let columnMeta = column.table[COLUMN_META_KEY];
+    const columnMeta = column.table[COLUMN_META_KEY];
 
     return getPluginInstance(columnMeta, column, klass, () => {
-      let plugin = column.table.pluginOf(klass);
+      const plugin = column.table.pluginOf(klass);
 
       assert(`[${klass.name}] cannot get plugin instance of unregistered plugin class`, plugin);
       assert(`<#${plugin.name}> plugin does not have meta specified`, plugin.meta);
@@ -516,10 +516,10 @@ export const meta = {
     row: Row<Data>,
     klass: Class<P>
   ): RowMetaFor<SignatureFrom<P>> {
-    let rowMeta = row.table[ROW_META_KEY];
+    const rowMeta = row.table[ROW_META_KEY];
 
     return getPluginInstance(rowMeta, row, klass, () => {
-      let plugin = row.table.pluginOf(klass);
+      const plugin = row.table.pluginOf(klass);
 
       assert(`[${klass.name}] cannot get plugin instance of unregistered plugin class`, plugin);
       assert(`<#${plugin.name}> plugin does not have meta specified`, plugin.meta);
@@ -539,10 +539,10 @@ export const meta = {
     table: Table<Data>,
     klass: Class<P>
   ): TableMetaFor<SignatureFrom<P>> {
-    let tableMeta = table[TABLE_META_KEY];
+    const tableMeta = table[TABLE_META_KEY];
 
     return getPluginInstance(tableMeta, klass, () => {
-      let plugin = table.pluginOf(klass);
+      const plugin = table.pluginOf(klass);
 
       assert(`[${klass.name}] cannot get plugin instance of unregistered plugin class`, plugin);
       assert(`<#${plugin.name}> plugin does not have meta specified`, plugin.meta);
@@ -575,9 +575,9 @@ export const meta = {
       column: Column<Data>,
       featureName: FeatureName
     ): ColumnFeatures[FeatureName] {
-      let { plugins } = column.table;
+      const { plugins } = column.table;
 
-      let provider = findPlugin(plugins, featureName);
+      const provider = findPlugin(plugins, featureName);
 
       assert(
         `Could not find plugin with feature: ${featureName}. ` +
@@ -602,9 +602,9 @@ export const meta = {
       table: Table<Data>,
       featureName: FeatureName
     ): TableFeatures[FeatureName] {
-      let { plugins } = table;
+      const { plugins } = table;
 
-      let provider = findPlugin(plugins, featureName);
+      const provider = findPlugin(plugins, featureName);
 
       assert(
         `Could not find plugin with feature: ${featureName}. ` +
@@ -619,14 +619,14 @@ export const meta = {
 };
 
 function findPlugin(plugins: Plugin[], featureName: string) {
-  let provider = plugins.find((plugin) => {
+  const provider = plugins.find((plugin) => {
     /*
      * have to cast in order to get static properties, but we may not have a base plugin
      * so we must rely on nullish coalesting to protect from throwing exceptions
      *
      * (Plugin || BasePlugin).features)
      */
-    let features = plugin.features || (plugin.constructor as typeof BasePlugin).features;
+    const features = plugin.features || (plugin.constructor as typeof BasePlugin).features;
 
     return features?.includes(featureName);
   });
@@ -635,7 +635,7 @@ function findPlugin(plugins: Plugin[], featureName: string) {
 }
 
 function availableFeatures(plugins: Plugin[]): string {
-  let allFeatures = plugins
+  const allFeatures = plugins
     .map((plugin) => {
       /*
        * have to cast in order to get static properties, but we may not have a base plugin
@@ -643,7 +643,7 @@ function availableFeatures(plugins: Plugin[]): string {
        *
        * (Plugin || BasePlugin).features)
        */
-      let features = plugin.features || (plugin.constructor as typeof BasePlugin).features;
+      const features = plugin.features || (plugin.constructor as typeof BasePlugin).features;
 
       return features;
     })
@@ -664,14 +664,14 @@ export const options = {
     table: Table<Data>,
     klass: Class<P>
   ): Partial<OptionsFor<SignatureFrom<P>>> {
-    let normalized = normalizePluginsConfig(table?.config?.plugins);
-    let tuple = normalized?.find((option) => option[0] === klass);
-    let t = tuple as [Class<P>, () => OptionsFor<SignatureFrom<P>>];
+    const normalized = normalizePluginsConfig(table?.config?.plugins);
+    const tuple = normalized?.find((option) => option[0] === klass);
+    const t = tuple as [Class<P>, () => OptionsFor<SignatureFrom<P>>];
 
     // Plugin not provided, likely
     if (!t) return {};
 
-    let fn = t[1];
+    const fn = t[1];
 
     return fn() ?? {};
   },
@@ -680,10 +680,10 @@ export const options = {
     column: Column<Data>,
     klass: Class<P>
   ): Partial<ColumnOptionsFor<SignatureFrom<P>>> {
-    let tuple = column.config.pluginOptions?.find((option) => option[0] === klass);
-    let t = tuple as [unknown, () => ColumnOptionsFor<SignatureFrom<P>>];
+    const tuple = column.config.pluginOptions?.find((option) => option[0] === klass);
+    const t = tuple as [unknown, () => ColumnOptionsFor<SignatureFrom<P>>];
 
-    let fn = t?.[1];
+    const fn = t?.[1];
 
     if (!fn) return {};
 

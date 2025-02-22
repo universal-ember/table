@@ -17,9 +17,9 @@
   integer, which can sometimes cause subpixel gaps.
 **/
 export const getAccurateClientWidth = (element: HTMLElement) => {
-  let style = getComputedStyle(element);
-  let padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
-  let scrollbarWidth = element.offsetWidth - element.clientWidth;
+  const style = getComputedStyle(element);
+  const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+  const scrollbarWidth = element.offsetWidth - element.clientWidth;
 
   return element.getBoundingClientRect().width - padding - scrollbarWidth;
 };
@@ -27,15 +27,15 @@ export const getAccurateClientWidth = (element: HTMLElement) => {
 export const totalGapOf = (element?: Element | null) => {
   if (!element) return 0;
 
-  let style = getComputedStyle(element);
-  let gapSize = parseFloat(style.columnGap);
-  let cells = element.querySelectorAll('[role="cell"], [role="columnheader"]');
+  const style = getComputedStyle(element);
+  const gapSize = parseFloat(style.columnGap);
+  const cells = element.querySelectorAll('[role="cell"], [role="columnheader"]');
 
   let totalCellPadding = 0;
 
-  for (let cell of cells) {
-    let style = getComputedStyle(cell);
-    let padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+  for (const cell of cells) {
+    const style = getComputedStyle(cell);
+    const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
 
     totalCellPadding += padding;
   }
@@ -44,7 +44,7 @@ export const totalGapOf = (element?: Element | null) => {
 };
 
 export const getAccurateClientHeight = (element: HTMLElement) => {
-  let scrollbarHeight = element.offsetHeight - element.clientHeight;
+  const scrollbarHeight = element.offsetHeight - element.clientHeight;
 
   return element.getBoundingClientRect().height - scrollbarHeight;
 };

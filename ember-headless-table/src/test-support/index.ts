@@ -13,7 +13,7 @@ export function createHelpers(selectors: Selectors) {
       selectors.resizeHandle
     );
 
-    let element = parent.querySelector(selectors.resizeHandle);
+    const element = parent.querySelector(selectors.resizeHandle);
 
     assert(`Can't resize without a handle`, element);
 
@@ -21,10 +21,10 @@ export function createHelpers(selectors: Selectors) {
      * Start the click in exactly the middle of the element.
      * "startX" is the horizontal middle of "element"
      */
-    let rect = element.getBoundingClientRect();
-    let startX = (rect.right + rect.left) / 2;
+    const rect = element.getBoundingClientRect();
+    const startX = (rect.right + rect.left) / 2;
 
-    let targetX = startX + delta;
+    const targetX = startX + delta;
 
     triggerEvent(element, 'mousedown', { clientX: startX, button: 0 });
     triggerEvent(element, 'mousemove', { clientX: targetX, button: 0 });
@@ -39,7 +39,7 @@ export function createHelpers(selectors: Selectors) {
       selectors.scrollContainer
     );
 
-    let element = find(selectors.scrollContainer);
+    const element = find(selectors.scrollContainer);
 
     assert(`scroll container not found`, element instanceof HTMLElement);
 
@@ -47,14 +47,14 @@ export function createHelpers(selectors: Selectors) {
   }
 
   async function scrollRight(distance: number) {
-    let element = horizontalScrollElement();
+    const element = horizontalScrollElement();
 
     element.scrollLeft += distance;
     await requestAnimationFrameSettled();
   }
 
   async function scrollLeft(distance: number) {
-    let element = horizontalScrollElement();
+    const element = horizontalScrollElement();
 
     element.scrollLeft -= distance;
     await requestAnimationFrameSettled();

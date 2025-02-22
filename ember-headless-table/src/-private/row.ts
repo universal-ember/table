@@ -8,7 +8,7 @@ export class Row<DataType = Record<string, unknown>> {
   table: Table<DataType>;
 
   get index(): number {
-    let i = this.table.rows.values().indexOf(this);
+    const i = this.table.rows.values().indexOf(this);
 
     assert(`Row is no longer a part of the table, something has gone wrong`, i >= 0);
 
@@ -39,11 +39,11 @@ export class Row<DataType = Record<string, unknown>> {
       event.target instanceof HTMLElement || event.target instanceof SVGElement
     );
 
-    let selection = document.getSelection();
+    const selection = document.getSelection();
 
     if (selection) {
-      let { type, anchorNode } = selection;
-      let isSelectingText = type === 'Range' && event.target?.contains(anchorNode);
+      const { type, anchorNode } = selection;
+      const isSelectingText = type === 'Range' && event.target?.contains(anchorNode);
 
       if (isSelectingText) {
         event.stopPropagation();
@@ -53,7 +53,7 @@ export class Row<DataType = Record<string, unknown>> {
     }
 
     // Ignore clicks on interactive elements within the row
-    let inputParent = event.target.closest('input, button, label, a, select');
+    const inputParent = event.target.closest('input, button, label, a, select');
 
     if (inputParent) {
       return;

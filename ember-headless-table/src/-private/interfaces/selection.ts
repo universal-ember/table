@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /**
  * Types minimally replicated here so we don't need to depend on the package that
  * actually defines these types

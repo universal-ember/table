@@ -85,7 +85,7 @@ export class Sorting<DataType = unknown> extends BasePlugin<Signature<DataType>>
   };
 
   headerCellModifier = (element: HTMLElement, { column }: ColumnApi) => {
-    let columnMeta = meta.forColumn(column, Sorting);
+    const columnMeta = meta.forColumn(column, Sorting);
 
     element.setAttribute('data-test-is-sortable', `${columnMeta.isSortable}`);
     element.setAttribute('aria-sort', `${columnMeta.sortDirection}`);
@@ -109,7 +109,7 @@ export class ColumnMeta {
   }
 
   get sortDirection() {
-    let sort = this.tableMeta.sorts.find((sort) => sort.property === this.sortProperty);
+    const sort = this.tableMeta.sorts.find((sort) => sort.property === this.sortProperty);
 
     return sort?.direction ?? SortDirection.None;
   }
@@ -153,7 +153,7 @@ export class TableMeta {
 
   @action
   handleSort(column: Column) {
-    let columnMeta = meta.forColumn(column, Sorting);
+    const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
       return;
@@ -170,7 +170,7 @@ export class TableMeta {
 
   @action
   toggleAscending(column: Column) {
-    let columnMeta = meta.forColumn(column, Sorting);
+    const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
       return;
@@ -185,7 +185,7 @@ export class TableMeta {
 
   @action
   toggleDescending(column: Column) {
-    let columnMeta = meta.forColumn(column, Sorting);
+    const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
       return;

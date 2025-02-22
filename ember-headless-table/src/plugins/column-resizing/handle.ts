@@ -9,7 +9,7 @@ import { ColumnResizing } from './plugin';
 import type { ColumnMeta } from './plugin';
 import type { Column } from '#/column';
 
-let waiter = buildWaiter('ColumnResizing#ResizeHandle');
+const waiter = buildWaiter('ColumnResizing#ResizeHandle');
 
 /**
  * - why are mouse events used instead of drag events?
@@ -83,7 +83,7 @@ class ResizeHandle extends Modifier<{ Args: { Positional: [Column] } }> {
     if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
 
     if ('TouchEvent' in window && event instanceof TouchEvent) {
-      let firstTouch = event.touches[0];
+      const firstTouch = event.touches[0];
 
       if (!firstTouch) return;
 
@@ -99,7 +99,7 @@ class ResizeHandle extends Modifier<{ Args: { Positional: [Column] } }> {
     if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
 
     if ('TouchEvent' in window && event instanceof TouchEvent) {
-      let firstTouch = event.touches[0];
+      const firstTouch = event.touches[0];
 
       if (!firstTouch) return;
 
@@ -184,8 +184,8 @@ class ResizeHandle extends Modifier<{ Args: { Positional: [Column] } }> {
   };
 
   keyHandler = (event: KeyboardEvent) => {
-    let deltaT = new Date().getTime() - this.lastKey;
-    let isRapid = deltaT < 50;
+    const deltaT = new Date().getTime() - this.lastKey;
+    const isRapid = deltaT < 50;
 
     if (event.code === 'ArrowDown' || event.code === 'ArrowRight') {
       this.keyDistance += isRapid ? 8 : 1;

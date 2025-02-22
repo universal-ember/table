@@ -43,7 +43,7 @@ export const hasResizeHandle = (column: Column) =>
 export const styleStringFor = <DataType = unknown>(
   column: Column<DataType>
 ): ReturnType<typeof htmlSafe> => {
-  let columnMeta = meta.forColumn(column, ColumnResizing);
+  const columnMeta = meta.forColumn(column, ColumnResizing);
 
   let result = '';
 
@@ -52,7 +52,7 @@ export const styleStringFor = <DataType = unknown>(
    * because in non-<table> UIs, we need to ensure that all cells in a column
    * have the same width
    */
-  for (let [key, value] of Object.entries(columnMeta.style)) {
+  for (const [key, value] of Object.entries(columnMeta.style)) {
     result += `${toStyle(key)}:${value};`;
   }
 

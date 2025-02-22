@@ -25,7 +25,7 @@ export const deserializeSorts = (
     return [];
   }
 
-  let { transform, separator } = options;
+  const { transform, separator } = options;
   let [key, direction] = sortString.split(separator);
 
   assert(`No key found for input: \`${sortString}\` using \`${separator}\` as a separator`, key);
@@ -61,8 +61,8 @@ export function serializeSorts(
 ): string {
   const { transform, separator } = options;
 
-  let sortParameters = sorts.map(({ direction, property }) => {
-    let shortDirection = direction === 'ascending' ? 'asc' : 'desc';
+  const sortParameters = sorts.map(({ direction, property }) => {
+    const shortDirection = direction === 'ascending' ? 'asc' : 'desc';
 
     let sortField = property;
 

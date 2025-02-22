@@ -78,7 +78,7 @@ export class StickyColumns extends BasePlugin<Signature> {
       return;
     }
 
-    let columnMeta = meta.forColumn(column, StickyColumns);
+    const columnMeta = meta.forColumn(column, StickyColumns);
 
     if (columnMeta.isSticky) {
       applyStyles(element, columnMeta.style);
@@ -97,7 +97,7 @@ export class StickyColumns extends BasePlugin<Signature> {
       return;
     }
 
-    let columnMeta = meta.forColumn(column, StickyColumns);
+    const columnMeta = meta.forColumn(column, StickyColumns);
 
     if (columnMeta.isSticky) {
       applyStyles(element, columnMeta.style);
@@ -120,7 +120,7 @@ export class ColumnMeta {
   }
 
   get position(): 'left' | 'right' | 'none' {
-    let sticky = options.forColumn(this.column, StickyColumns)?.sticky;
+    const sticky = options.forColumn(this.column, StickyColumns)?.sticky;
 
     assert(
       `Invalid sticky value, ${sticky}. Valid values: 'left', 'right', false`,
@@ -137,9 +137,9 @@ export class ColumnMeta {
     }
 
     if (this.position === 'left') {
-      let leftColumns = columns.before(this.column);
-      let left = leftColumns.reduce((acc, column) => {
-        let columnMeta = meta.withFeature.forColumn(column, 'columnWidth');
+      const leftColumns = columns.before(this.column);
+      const left = leftColumns.reduce((acc, column) => {
+        const columnMeta = meta.withFeature.forColumn(column, 'columnWidth');
 
         if (hasWidth(columnMeta)) {
           return acc + (columnMeta.width ?? 0);
@@ -152,9 +152,9 @@ export class ColumnMeta {
     }
 
     if (this.position === 'right') {
-      let rightColumns = columns.after(this.column);
-      let right = rightColumns.reduce((acc, column) => {
-        let columnMeta = meta.withFeature.forColumn(column, 'columnWidth');
+      const rightColumns = columns.after(this.column);
+      const right = rightColumns.reduce((acc, column) => {
+        const columnMeta = meta.withFeature.forColumn(column, 'columnWidth');
 
         if (hasWidth(columnMeta)) {
           return acc + (columnMeta.width ?? 0);

@@ -44,7 +44,7 @@ export function headlessTable<T = unknown>(destroyable: object, options: TableCo
 
 export function headlessTable<T = unknown>(...args: Args<T>): Table<T> {
   if (args.length === 2) {
-    let [destroyable, options] = args;
+    const [destroyable, options] = args;
 
     /**
      * If any "root level" config changes, we need to throw-away everything.
@@ -54,7 +54,7 @@ export function headlessTable<T = unknown>(...args: Args<T>): Table<T> {
     return Table.from<Table<T>>(destroyable, () => options);
   }
 
-  let [options] = args;
+  const [options] = args;
 
   return Table.from<Table<T>>(() => options);
 }
