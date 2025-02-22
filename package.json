@@ -2,7 +2,7 @@
   "name": "@universal-ember/table",
   "version": "0.0.0",
   "private": true,
-  "repository": "https://github.com/universal-ember/table.git",
+  "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "CrowdStrike UX Team",
   "scripts": {

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Test app for the @universal-ember/table addon",
-  "repository": "",
+  "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "",
   "directories": {
