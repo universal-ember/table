@@ -10,7 +10,7 @@
   ],
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
-  "author": "CrowdStrike UX Team",
+  "author": "NullVoxPopuli",
   "files": [
     "addon-main.js",
     "dist"
