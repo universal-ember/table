@@ -1,10 +1,10 @@
 import { cached } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
-import { BasePlugin, meta, options } from '../-private/base';
-import { SortDirection } from './types';
+import { BasePlugin, meta, options } from '../-private/base.ts';
+import { SortDirection } from './types.ts';
 
-import type { Sort, SortItem } from './types';
+import type { Sort, SortItem } from './types.ts';
 import type { ColumnApi, PluginPreferences } from '[public-plugin-types]';
 import type { Column, Table } from '[public-types]';
 

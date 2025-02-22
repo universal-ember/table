@@ -1,9 +1,9 @@
 import { assert } from '@ember/debug';
 
-import { COLUMN_META_KEY, ROW_META_KEY, TABLE_KEY, TABLE_META_KEY } from '../../-private/table';
-import { normalizePluginsConfig } from './utils';
+import { COLUMN_META_KEY, ROW_META_KEY, TABLE_KEY, TABLE_META_KEY } from '../../-private/table.ts';
+import { normalizePluginsConfig } from './utils.ts';
 
-import type { Table } from '../../-private/table';
+import type { Table } from '../../-private/table.ts';
 import type { ColumnReordering } from '../column-reordering';
 import type { ColumnVisibility } from '../column-visibility';
 import type { Class, Constructor } from '[private-types]';
@@ -283,7 +283,7 @@ export const preferences = {
  */
 function columnsFor<DataType = any>(
   table: Table<DataType>,
-  requester?: Plugin<any>  
+  requester?: Plugin<any>
 ): Column<DataType>[] {
   assert(`First argument passed to columns.for must be an instance of Table`, table[TABLE_KEY]);
 

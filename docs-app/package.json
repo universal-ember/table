@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "ember build --environment=production",
+    "build:prod": "ember build --environment=production",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
@@ -102,7 +102,7 @@
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "^4.9.5",
+    "typescript": "~5.5.0",
     "webpack": "^5.83.1"
   },
   "ember": {
@@ -112,10 +112,10 @@
     "@crowdstrike/ember-oss-docs": "^1.1.4",
     "@ember/test-waiters": "^3.0.2",
     "@embroider/router": "^2.0.0",
+    "@universal-ember/table": "workspace:*",
     "dompurify": "^2.4.5",
     "ember-browser-services": "^4.0.4",
     "ember-cached-decorator-polyfill": "^1.0.1",
-    "@universal-ember/table": "workspace:*",
     "ember-modifier": "^4.1.0",
     "ember-resources": "^6.0.0",
     "highlight.js": "^11.7.0",

@@ -1,9 +1,9 @@
 import { assert } from '@ember/debug';
 import { camelize, underscore } from '@ember/string';
 
-import { SortDirection } from './plugins/data-sorting/types';
+import { SortDirection } from './plugins/data-sorting/types.ts';
 
-import type { Sort, SortsOptions } from './plugins/data-sorting/types';
+import type { Sort, SortsOptions } from './plugins/data-sorting/types.ts';
 
 /**
  * @example

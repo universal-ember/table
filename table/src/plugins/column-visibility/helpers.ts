@@ -1,5 +1,5 @@
-import { meta } from '../-private/base';
-import { ColumnVisibility } from './plugin';
+import { meta } from '../-private/base.ts';
+import { ColumnVisibility } from './plugin.ts';
 
 import type { Column } from '[public-types]';
 

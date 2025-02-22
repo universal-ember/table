@@ -9,13 +9,13 @@ import { modifier } from 'ember-modifier';
 import { Resource } from 'ember-resources/core';
 import { map } from 'ember-resources/util/map';
 
-import { normalizePluginsConfig, verifyPlugins } from '../plugins/-private/utils';
-import { Column } from './column';
-import { TablePreferences } from './preferences';
-import { Row } from './row';
-import { composeFunctionModifiers } from './utils';
+import { normalizePluginsConfig, verifyPlugins } from '../plugins/-private/utils.ts';
+import { Column } from './column.ts';
+import { TablePreferences } from './preferences.ts';
+import { Row } from './row.ts';
+import { composeFunctionModifiers } from './utils.ts';
 
-import type { BasePlugin, Plugin } from '../plugins';
+import type { BasePlugin, Plugin } from '../plugins/index.ts';
 import type { Class } from '[private-types]';
 import type { Destructor, TableConfig } from '#interfaces';
 
@@ -136,7 +136,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
         const modifiers = this.plugins.map((plugin) => plugin.containerModifier);
         const composed = composeFunctionModifiers([attachContainer, ...modifiers]);
 
-        return composed(element, this);
+        return composed(element, this as Table<DataType>);
       },
       { eager: false }
     ),

@@ -1,5 +1,5 @@
 packages:
-  - '@universal-ember/table'
+  - 'table'
   - 'test-app'
   - 'docs-app'
   - 'docs-api'

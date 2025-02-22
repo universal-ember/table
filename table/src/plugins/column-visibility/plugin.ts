@@ -1,7 +1,7 @@
 import { cached } from '@glimmer/tracking';
 import { action } from '@ember/object';
 
-import { BasePlugin, meta, options, preferences } from '../-private/base';
+import { BasePlugin, meta, options, preferences } from '../-private/base.ts';
 
 import type { Plugin, PluginPreferences } from '[public-plugin-types]';
 import type { Column, Table } from '[public-types]';

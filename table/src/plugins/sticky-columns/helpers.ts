@@ -1,7 +1,7 @@
 import { htmlSafe } from '@ember/template';
 
-import { meta } from '../-private/base';
-import { StickyColumns } from './plugin';
+import { meta } from '../-private/base.ts';
+import { StickyColumns } from './plugin.ts';
 
 import type { Column } from '[public-types]';
 

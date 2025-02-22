@@ -6,7 +6,7 @@ import { TrackedMap } from 'tracked-built-ins';
 
 import { preferences } from '[public-plugin-types]';
 
-import { BasePlugin, columns, meta } from '../-private/base';
+import { BasePlugin, columns, meta } from '../-private/base.ts';
 
 import type { PluginPreferences } from '[public-plugin-types]';
 import type { Column, Table } from '[public-types]';

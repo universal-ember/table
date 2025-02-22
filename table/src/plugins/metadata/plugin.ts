@@ -1,4 +1,4 @@
-import { BasePlugin } from '../-private/base';
+import { BasePlugin } from '../-private/base.ts';
 
 /**
  * Data stored per column or table can be arbitrary

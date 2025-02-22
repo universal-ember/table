@@ -36,23 +36,14 @@
   },
   "pnpm": {
     "peerDependencyRules": {
-      "ignore-notes": {
-        "ember-cli-htmlbars": "required by ember-tracked-storage-polyfill and tracked-built-ins: solution convert to babel plugin?",
-        "webpack": "required by anything that depends on ember-auto-import: solution: convert ember-source & co to v2 addons"
-      },
       "ignoreMissing": [
         "webpack",
         "ember-cli-htmlbars"
       ]
     },
     "overrides": {
-      "@embroider/macros": "1.10.0",
-      "@types/eslint": "^7.0.0",
+      "@embroider/macros": "^1.10.0",
       "ember-auto-import": "^2.6.2"
-    },
-    "overrides-notes": {
-      "@types/eslint": "webpack brings in v8, but we use v7",
-      "ember-auto-import": "ember-qunit is bringing in an ancient version"
     }
   }
 }

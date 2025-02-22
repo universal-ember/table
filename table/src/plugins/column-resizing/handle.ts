@@ -3,10 +3,10 @@ import { buildWaiter } from '@ember/test-waiters';
 
 import Modifier from 'ember-modifier';
 
-import { meta } from '../-private/base';
-import { ColumnResizing } from './plugin';
+import { meta } from '../-private/base.ts';
+import { ColumnResizing } from './plugin.ts';
 
-import type { ColumnMeta } from './plugin';
+import type { ColumnMeta } from './plugin.ts';
 import type { Column } from '#/column';
 
 const waiter = buildWaiter('ColumnResizing#ResizeHandle');

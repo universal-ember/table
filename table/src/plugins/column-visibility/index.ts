@@ -1,6 +1,6 @@
-export * from './helpers';
-export { ColumnVisibility } from './plugin';
-export { ColumnVisibility as Plugin } from './plugin';
+export * from './helpers.ts';
+export { ColumnVisibility } from './plugin.ts';
+export { ColumnVisibility as Plugin } from './plugin.ts';
 
 // Types
-export type { Signature } from './plugin';
+export type { Signature } from './plugin.ts';

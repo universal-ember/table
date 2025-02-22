@@ -1,7 +1,7 @@
 // Public API
-export * from './helpers';
-export { StickyColumns } from './plugin';
-export { StickyColumns as Plugin } from './plugin';
+export * from './helpers.ts';
+export { StickyColumns } from './plugin.ts';
+export { StickyColumns as Plugin } from './plugin.ts';
 
 // Public types
-export type { Signature } from './plugin';
+export type { Signature } from './plugin.ts';
