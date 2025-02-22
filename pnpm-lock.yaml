@@ -10,7 +10,7 @@ overrides:
 
 patchedDependencies:
   github-changelog:
-    hash: 23096f9e4d7dbc31375545d5781925b714babb313d48e0e9c6ed4853aca0a502
+    hash: 1b0c1c3e293f732a0b8fc667a1067626ed734d4726c32e6e8a58fc18df6c4d18
     path: patches/github-changelog.patch
 
 importers:
@@ -11325,7 +11325,7 @@ snapshots:
       '@types/ember__string': 3.0.15
       '@types/ember__template': 4.0.7
       '@types/ember__test': 4.0.6(@babel/core@7.26.9)
-      '@types/ember__utils': 4.0.7(@babel/core@7.26.9)
+      '@types/ember__utils': 4.0.7
       '@types/rsvp': 4.0.9
     optional: true
 
@@ -11472,6 +11472,11 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
+    optional: true
+
+  '@types/ember__utils@4.0.7':
+    dependencies:
+      '@types/ember': 4.0.11
     optional: true
 
   '@types/ember__utils@4.0.7(@babel/core@7.26.9)':
@@ -16186,7 +16191,7 @@ snapshots:
 
   git-repo-info@2.1.1: {}
 
-  github-changelog@1.1.0(patch_hash=23096f9e4d7dbc31375545d5781925b714babb313d48e0e9c6ed4853aca0a502):
+  github-changelog@1.1.0(patch_hash=1b0c1c3e293f732a0b8fc667a1067626ed734d4726c32e6e8a58fc18df6c4d18):
     dependencies:
       '@manypkg/get-packages': 2.2.2
       chalk: 4.1.2
@@ -18855,7 +18860,7 @@ snapshots:
       cli-highlight: 2.1.11
       execa: 4.1.0
       fs-extra: 11.3.0
-      github-changelog: 1.1.0(patch_hash=23096f9e4d7dbc31375545d5781925b714babb313d48e0e9c6ed4853aca0a502)
+      github-changelog: 1.1.0(patch_hash=1b0c1c3e293f732a0b8fc667a1067626ed734d4726c32e6e8a58fc18df6c4d18)
       js-yaml: 4.1.0
       latest-version: 9.0.0
       parse-github-repo-url: 1.4.1
