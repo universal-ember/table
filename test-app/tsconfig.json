@@ -24,7 +24,10 @@
       "*": [
         "types/*"
       ]
-    }
+    },
+    "types": [
+      "ember-source/types"
+    ]
   },
   "include": [
     "app/**/*",
