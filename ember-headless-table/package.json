@@ -8,7 +8,7 @@
     "table",
     "plugins"
   ],
-  "repository": "https://github.com/CrowdStrike/ember-headless-table",
+  "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "CrowdStrike UX Team",
   "files": [

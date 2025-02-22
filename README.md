@@ -13,13 +13,13 @@ Bring your own markup and styles without the need to implement any of the table 
 ## Install
 
 ```bash
-pnpm add ember-headless-table
+pnpm add @universal-ember/table 
 # or
-yarn add ember-headless-table
+yarn add @universal-ember/table 
 # or
-npm install ember-headless-table
+npm install @universal-ember/table 
 # or
-ember install ember-headless-table
+ember install @universal-ember/table 
 ```
 
 ### Compatibility
@@ -28,7 +28,6 @@ ember install ember-headless-table
 * ember-source >= 3.28
 * embroider safe + optimized
 * typescript >= 4.8, [rolling window policy](https://www.semver-ts.org/#decouple-typescript-support-from-lts-cycles), range: TS@current-2 to TS@current (3 version window).
-  Note that types changes will be considered bugfixes until Glint support is added to ember-headless-table
 * Glint -- 1.0+
 
 ### Usage

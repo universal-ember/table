@@ -1,60 +1,61 @@
 {
-  "name": "ember-headless-table",
+  "name": "@universal-ember/table",
   "version": "0.0.0",
   "private": true,
-  "repository": "https://github.com/CrowdStrike/ember-headless-table.git",
+  "repository": "https://github.com/universal-ember/table.git",
   "license": "MIT",
   "author": "CrowdStrike UX Team",
   "scripts": {
-    "release": "changeset publish",
-    "build:docs": "pnpm build:docs-app && pnpm build:docs-api && cp ./docs-api/dist ./docs-app/dist/api -r",
-    "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
-    "start:docs": "pnpm turbo --filter docs-app start",
-    "start:tests": "pnpm turbo --filter test-app start",
-    "start:addon": "pnpm --filter ember-headless-table start --no-watch.clearScreen",
-    "start:docs-api": "pnpm --filter 'docs-api' docs:watch --preserveWatchOutput",
     "build": "pnpm turbo build",
-    "build:docs-app": "pnpm turbo --filter docs-app build",
+    "build:docs": "pnpm build:docs-app && pnpm build:docs-api && cp ./docs-api/dist ./docs-app/dist/api -r",
     "build:docs-api": "pnpm turbo --filter docs-api docs:build",
+    "build:docs-app": "pnpm turbo --filter docs-app build",
     "ci:update": "npx ember-ci-update",
-    "test": "pnpm turbo --filter test-app test",
     "lint": "pnpm turbo lint",
-    "lint:fix": "pnpm --filter '*' lint:fix"
+    "lint:fix": "pnpm --filter '*' lint:fix",
+    "release": "changeset publish",
+    "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
+    "start:addon": "pnpm --filter ember-headless-table start --no-watch.clearScreen",
+    "start:docs": "pnpm turbo --filter docs-app start",
+    "start:docs-api": "pnpm --filter 'docs-api' docs:watch --preserveWatchOutput",
+    "start:tests": "pnpm turbo --filter test-app start",
+    "test": "pnpm turbo --filter test-app test"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.0",
     "@changesets/cli": "^2.26.0",
     "concurrently": "^8.0.0",
     "prettier": "^2.8.2",
+    "release-plan": "^0.13.1",
     "turbo": "^1.7.4"
   },
+  "packageManager": "pnpm@10.4.1",
+  "engines": {
+    "node": "22.14.0"
+  },
+  "volta": {
+    "node": "22.14.0",
+    "pnpm": "10.4.1"
+  },
   "pnpm": {
+    "peerDependencyRules": {
+      "ignore-notes": {
+        "ember-cli-htmlbars": "required by ember-tracked-storage-polyfill and tracked-built-ins: solution convert to babel plugin?",
+        "webpack": "required by anything that depends on ember-auto-import: solution: convert ember-source & co to v2 addons"
+      },
+      "ignoreMissing": [
+        "webpack",
+        "ember-cli-htmlbars"
+      ]
+    },
     "overrides": {
-      "@types/eslint": "^7.0.0",
       "@embroider/macros": "1.10.0",
+      "@types/eslint": "^7.0.0",
       "ember-auto-import": "^2.6.2"
     },
     "overrides-notes": {
       "@types/eslint": "webpack brings in v8, but we use v7",
       "ember-auto-import": "ember-qunit is bringing in an ancient version"
-    },
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "webpack",
-        "ember-cli-htmlbars"
-      ],
-      "ignore-notes": {
-        "webpack": "required by anything that depends on ember-auto-import: solution: convert ember-source & co to v2 addons",
-        "ember-cli-htmlbars": "required by ember-tracked-storage-polyfill and tracked-built-ins: solution convert to babel plugin?"
-      }
     }
-  },
-  "engines": {
-    "node": "22.14.0"
-  },
-  "packageManager": "pnpm@10.4.1",
-  "volta": {
-    "node": "22.14.0",
-    "pnpm": "10.4.1"
   }
 }
