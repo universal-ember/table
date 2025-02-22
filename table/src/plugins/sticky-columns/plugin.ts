@@ -1,8 +1,8 @@
 import { cached } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 
-import { BasePlugin, columns, meta, options } from '../-private/base';
-import { applyStyles } from '../-private/utils';
+import { BasePlugin, columns, meta, options } from '../-private/base.ts';
+import { applyStyles } from '../-private/utils.ts';
 
 import type { ColumnApi } from '[public-plugin-types]';
 import type { Column } from '[public-types]';

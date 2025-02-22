@@ -1,7 +1,7 @@
-export { resizeHandle } from './handle';
-export * from './helpers';
-export { ColumnResizing } from './plugin';
-export { ColumnResizing as Plugin } from './plugin';
+export { resizeHandle } from './handle.ts';
+export * from './helpers.ts';
+export { ColumnResizing } from './plugin.ts';
+export { ColumnResizing as Plugin } from './plugin.ts';
 
 // Types
-export type { ColumnOptions, TableOptions } from './plugin';
+export type { ColumnOptions, TableOptions } from './plugin.ts';

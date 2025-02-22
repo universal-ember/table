@@ -1,7 +1,7 @@
 import { cached } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 
-import { BasePlugin, meta, options } from '../-private/base';
+import { BasePlugin, meta, options } from '../-private/base.ts';
 
 import type { Row, Table } from '[public-types]';
 import type { PluginSignature, RowApi } from '#interfaces';

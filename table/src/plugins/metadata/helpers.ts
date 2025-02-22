@@ -1,5 +1,5 @@
-import { options } from '../-private/base';
-import { Metadata } from './plugin';
+import { options } from '../-private/base.ts';
+import { Metadata } from './plugin.ts';
 
 import type { Column, Table } from '[public-types]';
 

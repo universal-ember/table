@@ -63,9 +63,9 @@ expectTypeOf(preferences.forColumn(y, SimplePlugin)).toEqualTypeOf<MapLite>();
 // A Real plugin
 //////////////////////////////////////////////
 
-import { DataSorting } from '../../plugins/data-sorting';
+import { DataSorting } from '../../plugins/data-sorting/index.ts';
 
-import type { Signature as DataSortingSignature } from '../../plugins/data-sorting';
+import type { Signature as DataSortingSignature } from '../../plugins/data-sorting/index.ts';
 
 // Options
 expectTypeOf(options.forTable(x, DataSorting)).toEqualTypeOf<

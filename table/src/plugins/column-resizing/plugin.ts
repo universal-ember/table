@@ -5,9 +5,9 @@ import { action } from '@ember/object';
 
 import { preferences } from '[public-plugin-types]';
 
-import { BasePlugin, columns, meta, options } from '../-private/base';
-import { applyStyles } from '../-private/utils';
-import { getAccurateClientHeight, getAccurateClientWidth, totalGapOf } from './utils';
+import { BasePlugin, columns, meta, options } from '../-private/base.ts';
+import { applyStyles } from '../-private/utils.ts';
+import { getAccurateClientHeight, getAccurateClientWidth, totalGapOf } from './utils.ts';
 
 import type { ColumnApi, PluginPreferences } from '[public-plugin-types]';
 import type { Column, Table } from '[public-types]';

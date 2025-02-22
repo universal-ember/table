@@ -1,8 +1,8 @@
 import { expectTypeOf } from 'expect-type';
 
-import { ColumnReordering } from '../../plugins/column-reordering';
-import { ColumnResizing } from '../../plugins/column-resizing';
-import { DataSorting } from '../../plugins/data-sorting';
+import { ColumnReordering } from '../../plugins/column-reordering/index.ts';
+import { ColumnResizing } from '../../plugins/column-resizing/index.ts';
+import { DataSorting } from '../../plugins/data-sorting/index.ts';
 
 import type { Table } from '[public-types]';
 

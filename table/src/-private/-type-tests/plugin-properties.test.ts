@@ -1,6 +1,6 @@
 import { expectTypeOf } from 'expect-type';
 
-import { BasePlugin } from '../../plugins';
+import { BasePlugin } from '../../plugins/index.ts';
 
 import type { Table } from '[public-types]';
 

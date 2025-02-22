@@ -2,16 +2,16 @@
  * Public API
  *******************************/
 // The main export, the headlessTable resource
-export { headlessTable } from './-private/js-helper';
+export { headlessTable } from './-private/js-helper.ts';
 
 // Utilities
-export { TablePreferences } from './-private/preferences';
-export { deserializeSorts, serializeSorts } from './utils';
+export { TablePreferences } from './-private/preferences.ts';
+export { deserializeSorts, serializeSorts } from './utils.ts';
 
 /********************************
  * Public Types
  *******************************/
-export type { Column } from './-private/column';
+export type { Column } from './-private/column.ts';
 export type {
   ColumnConfig,
   ColumnKey,
@@ -21,6 +21,6 @@ export type {
   Selection,
   TableConfig,
   TableMeta,
-} from './-private/interfaces';
-export type { Row } from './-private/row';
-export type { Table } from './-private/table';
+} from './-private/interfaces/index.ts';
+export type { Row } from './-private/row.ts';
+export type { Table } from './-private/table.ts';

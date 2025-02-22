@@ -4,4 +4,5 @@ README.md
 
 # deps and output
 dist/
+declarations/
 node_modules/

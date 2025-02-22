@@ -1,11 +1,11 @@
 import { expectTypeOf } from 'expect-type';
 
-import { BasePlugin } from '../../plugins/-private/base';
-import { ColumnReordering } from '../../plugins/column-reordering';
-import { ColumnResizing } from '../../plugins/column-resizing';
-import { ColumnVisibility } from '../../plugins/column-visibility';
-import { DataSorting } from '../../plugins/data-sorting';
-import { StickyColumns } from '../../plugins/sticky-columns';
+import { BasePlugin } from '../../plugins/-private/base.ts';
+import { ColumnReordering } from '../../plugins/column-reordering/index.ts';
+import { ColumnResizing } from '../../plugins/column-resizing/index.ts';
+import { ColumnVisibility } from '../../plugins/column-visibility/index.ts';
+import { DataSorting } from '../../plugins/data-sorting/index.ts';
+import { StickyColumns } from '../../plugins/sticky-columns/index.ts';
 
 import type { Plugins } from '../../plugins/-private/utils';
 import type { SortItem } from '../../plugins/data-sorting';

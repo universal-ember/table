@@ -1,7 +1,7 @@
 import { htmlSafe } from '@ember/template';
 
-import { meta } from '../-private/base';
-import { ColumnResizing } from './plugin';
+import { meta } from '../-private/base.ts';
+import { ColumnResizing } from './plugin.ts';
 
 import type { Column } from '[public-types]';
 

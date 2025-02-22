@@ -1,7 +1,7 @@
-import { meta } from '../-private/base';
-import { ColumnReordering } from './plugin';
+import { meta } from '../-private/base.ts';
+import { ColumnReordering } from './plugin.ts';
 
-import type { ColumnOrder } from './plugin';
+import type { ColumnOrder } from './plugin.ts';
 import type { Column, Table } from '[public-types]';
 
 /**

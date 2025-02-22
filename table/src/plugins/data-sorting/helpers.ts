@@ -1,5 +1,5 @@
-import { meta } from '../-private/base';
-import { Sorting } from './plugin';
+import { meta } from '../-private/base.ts';
+import { Sorting } from './plugin.ts';
 
 import type { Column } from '[public-types]';
 

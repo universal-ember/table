@@ -1,5 +1,5 @@
-import { DataSorting } from '../../plugins/data-sorting';
-import { RowSelection } from '../../plugins/row-selection';
+import { DataSorting } from '../../plugins/data-sorting/index.ts';
+import { RowSelection } from '../../plugins/row-selection/index.ts';
 
 import type { SortItem } from '../../plugins/data-sorting';
 

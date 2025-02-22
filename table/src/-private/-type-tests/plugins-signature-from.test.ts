@@ -1,8 +1,8 @@
 import { expectTypeOf } from 'expect-type';
 
-import { BasePlugin } from '../../plugins';
+import { BasePlugin } from '../../plugins/index.ts';
 
-import type { SignatureFrom } from '../../plugins/-private/base';
+import type { SignatureFrom } from '../../plugins/-private/base.ts';
 
 class ATableMeta {
   a = 1;

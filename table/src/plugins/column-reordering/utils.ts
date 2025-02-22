@@ -1,5 +1,5 @@
-import { meta } from '../-private/base';
-import { ColumnReordering } from './plugin';
+import { meta } from '../-private/base.ts';
+import { ColumnReordering } from './plugin.ts';
 
 import type { Column } from '[public-types]';
 

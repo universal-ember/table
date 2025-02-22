@@ -1,6 +1,6 @@
-export * from './helpers';
-export { ColumnOrder, ColumnReordering, orderOf } from './plugin';
-export { ColumnReordering as Plugin } from './plugin';
+export * from './helpers.ts';
+export { ColumnOrder, ColumnReordering, orderOf } from './plugin.ts';
+export { ColumnReordering as Plugin } from './plugin.ts';
 
 // Types
-export type { Signature } from './plugin';
+export type { Signature } from './plugin.ts';
