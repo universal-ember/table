@@ -87,7 +87,7 @@
     "@ember/test-waiters": "^3.0.2",
     "@embroider/router": "^2.0.0",
     "@universal-ember/table": "workspace:*",
-    "dompurify": "^2.4.5",
+    "dompurify": "^3.2.4",
     "ember-browser-services": "^4.0.4",
     "ember-cached-decorator-polyfill": "^1.0.1",
     "ember-modifier": "^4.1.0",
