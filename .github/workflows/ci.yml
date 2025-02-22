@@ -13,7 +13,7 @@ concurrency:
 
 env:
   CI: true
-  dist: ember-headless-table/dist
+  dist: table/dist
 
 jobs:
   install_dependencies:
