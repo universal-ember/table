@@ -58,7 +58,10 @@
       "[public-types]": ["./src/"],
       "[public-plugin-types]": ["./src/plugins/"],
       "[private-types]": ["./src/-private/private-types.ts"]
-    }
+    },
+    "types": [
+      "ember-source/types"
+    ]
   },
   "include": [
     "src/**/*",
