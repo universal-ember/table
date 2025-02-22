@@ -13,9 +13,9 @@ export type Plugins = PluginOption[];
 export function normalizePluginsConfig(plugins?: Plugins): ExpandedPluginOption[] {
   if (!plugins) return [];
 
-  let result: ExpandedPluginOption[] = [];
+  const result: ExpandedPluginOption[] = [];
 
-  for (let plugin of plugins) {
+  for (const plugin of plugins) {
     if (!Array.isArray(plugin)) {
       result.push([plugin, () => ({})]);
 
@@ -43,11 +43,11 @@ export function normalizePluginsConfig(plugins?: Plugins): ExpandedPluginOption[
  * Creates a map of featureName => [plugins providing said feature name]
  */
 function collectFeatures(plugins: ExpandedPluginOption[]) {
-  let result: Record<string, { name: string }[]> = {};
+  const result: Record<string, { name: string }[]> = {};
 
-  for (let [plugin] of plugins) {
+  for (const [plugin] of plugins) {
     if ('features' in plugin) {
-      for (let feature of (plugin as unknown as typeof BasePlugin).features || []) {
+      for (const feature of (plugin as unknown as typeof BasePlugin).features || []) {
         result[feature] = [...(result[feature] || []), plugin];
       }
     }
@@ -60,11 +60,11 @@ function collectFeatures(plugins: ExpandedPluginOption[]) {
  * Creates a map of requirement => [plugins requesting the feature / requirement]
  */
 function collectRequirements(plugins: ExpandedPluginOption[]) {
-  let result: Record<string, { name: string }[]> = {};
+  const result: Record<string, { name: string }[]> = {};
 
-  for (let [plugin] of plugins) {
+  for (const [plugin] of plugins) {
     if ('requires' in plugin) {
-      for (let requirement of (plugin as unknown as typeof BasePlugin).requires || []) {
+      for (const requirement of (plugin as unknown as typeof BasePlugin).requires || []) {
         result[requirement] = [...(result[requirement] || []), plugin];
       }
     }
@@ -74,13 +74,13 @@ function collectRequirements(plugins: ExpandedPluginOption[]) {
 }
 
 export function verifyPlugins(plugins: ExpandedPluginOption[]) {
-  let features = collectFeatures(plugins);
-  let requirements = collectRequirements(plugins);
-  let allFeatures = Object.keys(features);
-  let errors: string[] = [];
+  const features = collectFeatures(plugins);
+  const requirements = collectRequirements(plugins);
+  const allFeatures = Object.keys(features);
+  const errors: string[] = [];
 
   // Only one plugin can provide each feature
-  for (let [feature, providingPlugins] of Object.entries(features)) {
+  for (const [feature, providingPlugins] of Object.entries(features)) {
     if (providingPlugins.length > 1) {
       errors.push(
         `More than one plugin is providing the feature: ${feature}. ` +
@@ -89,7 +89,7 @@ export function verifyPlugins(plugins: ExpandedPluginOption[]) {
     }
   }
 
-  for (let [requirement, requestingPlugins] of Object.entries(requirements)) {
+  for (const [requirement, requestingPlugins] of Object.entries(requirements)) {
     if (!allFeatures.includes(requirement)) {
       errors.push(
         `Configuration is missing requirement: ${requirement}, ` +
@@ -112,7 +112,7 @@ type AssignableStyles = Omit<CSSStyleDeclaration, 'length' | 'parentRule'>;
  * Utility that helps safely apply styles to an element
  */
 export function applyStyles(element: HTMLElement | SVGElement, styles: Partial<AssignableStyles>) {
-  for (let [name, value] of Object.entries(styles)) {
+  for (const [name, value] of Object.entries(styles)) {
     if (name in element.style) {
       assignStyle(
         element,
@@ -148,7 +148,7 @@ export function removeStyles(
   element: HTMLElement | SVGElement,
   styles: Array<keyof AssignableStyles>
 ) {
-  for (let name of styles) {
+  for (const name of styles) {
     if (typeof name !== 'string') continue;
     removeStyle(element, name);
   }

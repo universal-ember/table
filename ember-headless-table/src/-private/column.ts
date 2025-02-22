@@ -35,7 +35,7 @@ export class Column<T = unknown> {
 
     // Cast here, because ember get's types do not support nested keys
     // even though the real implementation does
-    let value = get(row.data, this.config.key as keyof typeof row.data);
+    const value = get(row.data, this.config.key as keyof typeof row.data);
 
     if (isEmpty(value)) {
       return this.getDefaultValue(row);
@@ -54,7 +54,7 @@ export class Column<T = unknown> {
 
   @action
   getOptionsForRow(row: Row<T>) {
-    let defaults = DEFAULT_OPTIONS;
+    const defaults = DEFAULT_OPTIONS;
 
     return {
       ...defaults,

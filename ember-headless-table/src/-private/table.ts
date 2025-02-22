@@ -109,7 +109,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
     // only set the preferences once
     if (!this.preferences) {
-      let { key = guidFor(this), adapter } = named?.preferences ?? {};
+      const { key = guidFor(this), adapter } = named?.preferences ?? {};
 
       // TODO: when no key is present,
       //       use "local-storage" preferences.
@@ -133,8 +133,8 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
   modifiers = {
     container: modifier(
       (element: HTMLElement): Destructor => {
-        let modifiers = this.plugins.map((plugin) => plugin.containerModifier);
-        let composed = composeFunctionModifiers([attachContainer, ...modifiers]);
+        const modifiers = this.plugins.map((plugin) => plugin.containerModifier);
+        const composed = composeFunctionModifiers([attachContainer, ...modifiers]);
 
         return composed(element, this);
       },
@@ -152,8 +152,8 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
     //       that has tracked changes would run, leaving the other modifiers alone
     columnHeader: modifier(
       (element: HTMLElement, [column]: [Column<DataType>]): Destructor => {
-        let modifiers = this.plugins.map((plugin) => plugin.headerCellModifier);
-        let composed = composeFunctionModifiers(modifiers);
+        const modifiers = this.plugins.map((plugin) => plugin.headerCellModifier);
+        const composed = composeFunctionModifiers(modifiers);
 
         return composed(element, { column, table: this });
       },
@@ -162,8 +162,8 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
     row: modifier(
       (element: HTMLElement, [row]: [Row<DataType>]): Destructor => {
-        let modifiers = this.plugins.map((plugin) => plugin.rowModifier);
-        let composed = composeFunctionModifiers(modifiers);
+        const modifiers = this.plugins.map((plugin) => plugin.rowModifier);
+        const composed = composeFunctionModifiers(modifiers);
 
         return composed(element, { row, table: this });
       },
@@ -180,18 +180,18 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
    */
   @cached
   get plugins(): Plugin[] {
-    let plugins = normalizePluginsConfig(this.args.named?.plugins);
+    const plugins = normalizePluginsConfig(this.args.named?.plugins);
 
     verifyPlugins(plugins);
 
     return plugins.map((tuple) => {
       // We don't need the options here
-      let [PluginClass] = tuple;
+      const [PluginClass] = tuple;
 
       if (typeof PluginClass === 'function') {
-        let plugin = new PluginClass(this);
+        const plugin = new PluginClass(this);
 
-        let owner = getOwner(this);
+        const owner = getOwner(this);
 
         assert(`The Table does not have an owner. cannot create a plugin without an owner`, owner);
         setOwner(plugin, owner);
@@ -209,7 +209,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
    * Get the active plugin instance for the given plugin class
    */
   pluginOf<Instance extends BasePlugin<any>>(klass: Class<Instance>): Instance | undefined {
-    let result = this.plugins.find((plugin) => plugin instanceof klass);
+    const result = this.plugins.find((plugin) => plugin instanceof klass);
 
     /**
      * This is an unsafe cast, because Instance could be unrelated to any of the types
@@ -234,7 +234,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
   rows = map(this, {
     data: () => {
-      let dataFn = this.args.named?.data;
+      const dataFn = this.args.named?.data;
 
       if (!dataFn) return [];
 
@@ -245,19 +245,19 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
   columns = map(this, {
     data: () => {
-      let configFn = this.args.named?.columns;
+      const configFn = this.args.named?.columns;
 
       if (!configFn) return [];
 
-      let result = configFn() ?? [];
+      const result = configFn() ?? [];
 
       if (macroCondition(isDevelopingApp())) {
         /**
          * Assertions for a column config to be valid:
          * - every key must be unique
          */
-        let keys = new Set();
-        let allKeys = result.map((columnConfig) => columnConfig.key);
+        const keys = new Set();
+        const allKeys = result.map((columnConfig) => columnConfig.key);
 
         result.forEach((columnConfig) => {
           if (keys.has(columnConfig.key)) {

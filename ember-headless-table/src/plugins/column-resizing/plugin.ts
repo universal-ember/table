@@ -90,7 +90,7 @@ export class ColumnResizing extends BasePlugin<Signature> {
   };
 
   headerCellModifier = (element: HTMLElement, { column }: ColumnApi) => {
-    let columnMeta = meta.forColumn(column, ColumnResizing);
+    const columnMeta = meta.forColumn(column, ColumnResizing);
 
     element.setAttribute('data-test-is-resizable', `${columnMeta.isResizable}`);
 
@@ -135,8 +135,8 @@ export class ColumnMeta {
 
   @cached
   get options() {
-    let columnOptions = options.forColumn(this.column, ColumnResizing);
-    let filteredOptions = Object.entries(columnOptions || {}).reduce((result, [k, v]) => {
+    const columnOptions = options.forColumn(this.column, ColumnResizing);
+    const filteredOptions = Object.entries(columnOptions || {}).reduce((result, [k, v]) => {
       if (ALLOWED_COLUMN_OPTIONS.includes(k)) {
         result[k] = v;
       }
@@ -159,7 +159,7 @@ export class ColumnMeta {
   }
 
   get initialWidth() {
-    let savedWidth = preferences.forColumn(this.column, ColumnResizing).get('width');
+    const savedWidth = preferences.forColumn(this.column, ColumnResizing).get('width');
 
     if (!savedWidth) {
       return this.options.width;
@@ -183,7 +183,7 @@ export class ColumnMeta {
   }
 
   get hasResizeHandle() {
-    let previous = columns.previous(this.column);
+    const previous = columns.previous(this.column);
 
     if (!previous) return false;
 
@@ -194,7 +194,7 @@ export class ColumnMeta {
     let width = this._width ?? this.initialWidth;
 
     if (!width) {
-      let { defaultColumnWidth } = this.tableMeta;
+      const { defaultColumnWidth } = this.tableMeta;
 
       width = defaultColumnWidth ? Math.max(defaultColumnWidth, this.minWidth) : this.minWidth;
     }
@@ -207,7 +207,7 @@ export class ColumnMeta {
   }
 
   get style() {
-    let styles: Partial<Pick<CSSStyleDeclaration, 'width' | 'minWidth'>> = {};
+    const styles: Partial<Pick<CSSStyleDeclaration, 'width' | 'minWidth'>> = {};
 
     if (this.width) styles.width = `${this.width}px`;
     if (this.minWidth) styles.minWidth = `${this.minWidth}px`;
@@ -240,15 +240,15 @@ export class ColumnMeta {
 function distributeDelta(delta: number, visibleColumns: Column[]) {
   if (delta === 0) return;
 
-  let metas = visibleColumns.map((column) => meta.forColumn(column, ColumnResizing));
+  const metas = visibleColumns.map((column) => meta.forColumn(column, ColumnResizing));
 
-  let resizableMetas = metas.filter(
+  const resizableMetas = metas.filter(
     (meta) => meta.isResizable && (delta < 0 ? meta.canShrink : true)
   );
 
-  let columnDelta = delta / resizableMetas.length;
+  const columnDelta = delta / resizableMetas.length;
 
-  for (let meta of resizableMetas) {
+  for (const meta of resizableMetas) {
     assert('cannot resize a column that does not have a width', meta.width);
     meta.width = Math.max(meta.width + columnDelta, meta.minWidth);
   }
@@ -304,11 +304,11 @@ export class TableMeta {
 
   @action
   saveColWidths(visibleColumnMetas: ColumnMeta[]) {
-    let tablePrefs = this.table.preferences;
+    const tablePrefs = this.table.preferences;
 
-    for (let column of visibleColumnMetas) {
-      let existing = tablePrefs.storage.forPlugin('ColumnResizing');
-      let columnPrefs = existing.forColumn(column.key);
+    for (const column of visibleColumnMetas) {
+      const existing = tablePrefs.storage.forPlugin('ColumnResizing');
+      const columnPrefs = existing.forColumn(column.key);
 
       columnPrefs.set('width', column.width.toString());
     }
@@ -320,7 +320,7 @@ export class TableMeta {
   reset() {
     if (!this.scrollContainerWidth) return;
 
-    for (let column of this.visibleColumnMetas) {
+    for (const column of this.visibleColumnMetas) {
       column._width = undefined;
     }
   }
@@ -335,8 +335,8 @@ export class TableMeta {
     // TODO: extract this to card-list and remove it from the plugin
     //       card-list will provide its own column-resizing plugin
     //       by sub-classing this one, and defining its own way of calculating the "diff"
-    let totalGap = totalGapOf(entry.target.querySelector('[role="row"]'));
-    let diff = this.scrollContainerWidth - this.totalVisibleColumnsWidth - totalGap;
+    const totalGap = totalGapOf(entry.target.querySelector('[role="row"]'));
+    const diff = this.scrollContainerWidth - this.totalVisibleColumnsWidth - totalGap;
 
     distributeDelta(diff, this.#availableColumns);
   }
@@ -361,8 +361,8 @@ export class TableMeta {
      * This is CSS dependent, and can be configured in plugin
      * options
      */
-    let isDraggingRight = delta > 0;
-    let position = this.options?.handlePosition ?? 'left';
+    const isDraggingRight = delta > 0;
+    const position = this.options?.handlePosition ?? 'left';
 
     let growingColumn: Column | null | undefined;
 
@@ -374,25 +374,25 @@ export class TableMeta {
 
     if (!growingColumn) return;
 
-    let growingColumnMeta = meta.forColumn(growingColumn, ColumnResizing);
+    const growingColumnMeta = meta.forColumn(growingColumn, ColumnResizing);
 
     assert('cannot resize a column that does not have a width', growingColumnMeta.width);
 
-    let shrinkableColumns =
+    const shrinkableColumns =
       delta > 0 ? columns.after(growingColumn) : columns.before(growingColumn).reverse();
 
-    let shrinkableColumnsMetas = shrinkableColumns
+    const shrinkableColumnsMetas = shrinkableColumns
       .map((column) => meta.forColumn(column, ColumnResizing))
       .filter((meta) => meta.canShrink);
 
     let remainder = Math.abs(delta);
 
     while (shrinkableColumnsMetas.length > 0) {
-      let shrinkingColumnMeta = shrinkableColumnsMetas.shift();
+      const shrinkingColumnMeta = shrinkableColumnsMetas.shift();
 
       assert('cannot resize a column that does not have a width', shrinkingColumnMeta?.width);
 
-      let actualDelta = Math.min(remainder, shrinkingColumnMeta.roomToShrink);
+      const actualDelta = Math.min(remainder, shrinkingColumnMeta.roomToShrink);
 
       growingColumnMeta.width += actualDelta;
       shrinkingColumnMeta.width -= actualDelta;
@@ -414,7 +414,7 @@ export class TableMeta {
  * ```
  */
 function resizeObserver(element: HTMLElement, table: Table) {
-  let observer = getObserver(element, table);
+  const observer = getObserver(element, table);
 
   observer.observe(element);
 
@@ -423,7 +423,7 @@ function resizeObserver(element: HTMLElement, table: Table) {
   };
 }
 
-let CACHE = new WeakMap<HTMLElement, ResizeObserver>();
+const CACHE = new WeakMap<HTMLElement, ResizeObserver>();
 
 /**
  * This is technically "inefficient" as you don't want too many resize
@@ -440,7 +440,7 @@ function getObserver(element: HTMLElement, table: Table): ResizeObserver {
       return;
     }
 
-    for (let entry of entries) {
+    for (const entry of entries) {
       meta.forTable(table, ColumnResizing).onTableResize(entry);
     }
   });

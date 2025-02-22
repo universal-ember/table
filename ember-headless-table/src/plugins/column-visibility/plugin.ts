@@ -64,8 +64,8 @@ export class ColumnMeta<Data = unknown> {
   constructor(private column: Column<Data>) {}
 
   get isVisible(): boolean {
-    let columnPreferences = preferences.forColumn(this.column, ColumnVisibility);
-    let columnOptions = options.forColumn(this.column, ColumnVisibility);
+    const columnPreferences = preferences.forColumn(this.column, ColumnVisibility);
+    const columnOptions = options.forColumn(this.column, ColumnVisibility);
 
     return Boolean(columnPreferences.get('isVisible') ?? columnOptions?.isVisible ?? true);
   }
@@ -77,10 +77,10 @@ export class ColumnMeta<Data = unknown> {
   hide = () => {
     if (!this.isVisible) return;
 
-    let myPreferences = preferences.forColumn(this.column, ColumnVisibility);
-    let myOptions = options.forColumn(this.column, ColumnVisibility);
-    let currentSaved = myPreferences.get('isVisible');
-    let willBeDefault = Boolean(currentSaved) === !myOptions?.isVisible;
+    const myPreferences = preferences.forColumn(this.column, ColumnVisibility);
+    const myOptions = options.forColumn(this.column, ColumnVisibility);
+    const currentSaved = myPreferences.get('isVisible');
+    const willBeDefault = Boolean(currentSaved) === !myOptions?.isVisible;
 
     if (willBeDefault) {
       myPreferences.set('isVisible', false);
@@ -96,10 +96,10 @@ export class ColumnMeta<Data = unknown> {
   show = () => {
     if (this.isVisible) return;
 
-    let myPreferences = preferences.forColumn(this.column, ColumnVisibility);
-    let myOptions = options.forColumn(this.column, ColumnVisibility);
-    let currentSaved = myPreferences.get('isVisible');
-    let willBeDefault = currentSaved === !myOptions?.isVisible;
+    const myPreferences = preferences.forColumn(this.column, ColumnVisibility);
+    const myOptions = options.forColumn(this.column, ColumnVisibility);
+    const currentSaved = myPreferences.get('isVisible');
+    const willBeDefault = currentSaved === !myOptions?.isVisible;
 
     if (willBeDefault) {
       myPreferences.set('isVisible', true);
@@ -128,10 +128,10 @@ export class TableMeta<Data = unknown> {
 
   @cached
   get visibleColumns(): Column<Data>[] {
-    let allColumns = this.table.columns.values();
+    const allColumns = this.table.columns.values();
 
     return allColumns.filter((column) => {
-      let columnMeta = meta.forColumn(column, ColumnVisibility);
+      const columnMeta = meta.forColumn(column, ColumnVisibility);
 
       return columnMeta.isVisible;
     });
@@ -139,7 +139,7 @@ export class TableMeta<Data = unknown> {
 
   @action
   toggleColumnVisibility(column: Column<Data>) {
-    let columnMeta = meta.forColumn(column, ColumnVisibility);
+    const columnMeta = meta.forColumn(column, ColumnVisibility);
 
     columnMeta.toggle();
   }

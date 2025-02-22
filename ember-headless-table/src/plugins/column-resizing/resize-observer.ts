@@ -13,7 +13,7 @@ import { isDestroyed, isDestroying } from '@ember/destroyable';
  * ```
  */
 export function resizeObserver(element: HTMLElement, table: any) {
-  let observer = getObserver(element, table);
+  const observer = getObserver(element, table);
 
   observer.observe(element);
 
@@ -22,7 +22,7 @@ export function resizeObserver(element: HTMLElement, table: any) {
   };
 }
 
-let CACHE = new WeakMap<HTMLElement, ResizeObserver>();
+const CACHE = new WeakMap<HTMLElement, ResizeObserver>();
 
 /**
  * This is technically "inefficient" as you don't want too many resize
@@ -39,7 +39,7 @@ function getObserver(element: HTMLElement, table: any): ResizeObserver {
       return;
     }
 
-    for (let entry of entries) {
+    for (const entry of entries) {
       table.handleScrollContainerResize(entry);
     }
   });

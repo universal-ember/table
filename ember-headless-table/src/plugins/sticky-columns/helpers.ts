@@ -26,12 +26,12 @@ export const styleFor = <DataType = unknown>(
 export const styleStringFor = <DataType = unknown>(
   column: Column<DataType>
 ): ReturnType<typeof htmlSafe> => {
-  let columnMeta = meta.forColumn(column, StickyColumns);
+  const columnMeta = meta.forColumn(column, StickyColumns);
 
   let result = '';
 
   if (columnMeta.isSticky) {
-    for (let [key, value] of Object.entries(columnMeta.style)) {
+    for (const [key, value] of Object.entries(columnMeta.style)) {
       result += `${toStyle(key)}:${value};`;
     }
 

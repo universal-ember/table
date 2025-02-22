@@ -40,7 +40,7 @@ export class ColumnReordering extends BasePlugin<Signature> {
   } as const;
 
   reset() {
-    let tableMeta = meta.forTable(this.table, ColumnReordering);
+    const tableMeta = meta.forTable(this.table, ColumnReordering);
 
     tableMeta.reset();
   }
@@ -155,9 +155,9 @@ export class TableMeta {
    */
   @action
   save(map: Map<string, number>) {
-    let order: Record<string, number> = {};
+    const order: Record<string, number> = {};
 
-    for (let [key, position] of map.entries()) {
+    for (const [key, position] of map.entries()) {
       order[key] = position;
     }
 
@@ -169,7 +169,7 @@ export class TableMeta {
    */
   @action
   private read() {
-    let order = preferences.forTable(this.table, ColumnReordering).get('order');
+    const order = preferences.forTable(this.table, ColumnReordering).get('order');
 
     if (!order) return;
 
@@ -220,12 +220,12 @@ export class ColumnOrder {
    */
   @action
   moveLeft(key: string) {
-    let orderedColumns = this.orderedColumns;
+    const orderedColumns = this.orderedColumns;
 
     let found = false;
     let nextColumn: { key: string } | undefined;
 
-    for (let column of orderedColumns.reverse()) {
+    for (const column of orderedColumns.reverse()) {
       if (found) {
         nextColumn = column;
 
@@ -239,7 +239,7 @@ export class ColumnOrder {
 
     if (!nextColumn) return;
 
-    let nextPosition = this.get(nextColumn.key);
+    const nextPosition = this.get(nextColumn.key);
 
     this.swapWith(key, nextPosition);
   }
@@ -247,7 +247,7 @@ export class ColumnOrder {
   setAll = (map: Map<string, number>) => {
     this.map.clear();
 
-    for (let [key, value] of map.entries()) {
+    for (const [key, value] of map.entries()) {
       this.map.set(key, value);
     }
 
@@ -263,12 +263,12 @@ export class ColumnOrder {
    */
   @action
   moveRight(key: string) {
-    let orderedColumns = this.orderedColumns;
+    const orderedColumns = this.orderedColumns;
 
     let found = false;
     let nextColumn: { key: string } | undefined;
 
-    for (let column of orderedColumns) {
+    for (const column of orderedColumns) {
       if (found) {
         nextColumn = column;
 
@@ -282,7 +282,7 @@ export class ColumnOrder {
 
     if (!nextColumn) return;
 
-    let nextPosition = this.get(nextColumn.key);
+    const nextPosition = this.get(nextColumn.key);
 
     this.swapWith(key, nextPosition);
   }
@@ -292,7 +292,7 @@ export class ColumnOrder {
    */
   @action
   swapWith(key: string, position: number) {
-    let validPositions = [...this.orderedMap.values()];
+    const validPositions = [...this.orderedMap.values()];
 
     /**
      * Position to swap to must exist
@@ -305,14 +305,14 @@ export class ColumnOrder {
      * Where did this column `key` come from? we can find out
      * by reading orderedMap
      */
-    let currentPosition = this.orderedMap.get(key);
+    const currentPosition = this.orderedMap.get(key);
 
     assert(
       `Pre-existing position for ${key} could not be found. Does the column exist? ` +
         `The current positions are: ` +
         [...this.orderedMap.entries()].map((entry) => entry.join(' => ')).join(', ') +
         ` and the availableColumns are: ` +
-        this.args.columns().map((column) => column.key) +
+        this.args.columns().map((column) => column.key).join(', ') +
         ` and current "map" (${this.map.size}) is: ` +
         [...this.map.entries()].map((entry) => entry.join(' => ')).join(', '),
       undefined !== currentPosition
@@ -326,11 +326,11 @@ export class ColumnOrder {
       return false;
     }
 
-    let keyByPosition = new Map<number, string>(
+    const keyByPosition = new Map<number, string>(
       [...this.orderedMap.entries()].map((entry) => entry.reverse() as [number, string])
     );
 
-    for (let [existingPosition, key] of keyByPosition.entries()) {
+    for (const [existingPosition, key] of keyByPosition.entries()) {
       if (existingPosition === position) {
         /**
          * We swap positions because the positions are not incremental
@@ -351,7 +351,7 @@ export class ColumnOrder {
      * Now that we've set the value for one column,
      * we need to make sure that all columns have a recorded position.
      */
-    for (let [key, position] of this.orderedMap.entries()) {
+    for (const [key, position] of this.orderedMap.entries()) {
       if (this.map.has(key)) continue;
 
       this.map.set(key, position);
@@ -362,7 +362,7 @@ export class ColumnOrder {
 
   @action
   get(key: string) {
-    let result = this.orderedMap.get(key);
+    const result = this.orderedMap.get(key);
 
     assert(
       `No position found for ${key}. Is the column used within this table?`,
@@ -383,18 +383,18 @@ export class ColumnOrder {
 
   @cached
   get orderedColumns(): Column[] {
-    let availableColumns = this.args.columns();
-    let availableByKey = availableColumns.reduce((keyMap, column) => {
+    const availableColumns = this.args.columns();
+    const availableByKey = availableColumns.reduce((keyMap, column) => {
       keyMap[column.key] = column;
 
       return keyMap;
     }, {} as Record<string, Column>);
-    let mergedOrder = orderOf(availableColumns, this.map);
+    const mergedOrder = orderOf(availableColumns, this.map);
 
-    let result: Column[] = Array.from({ length: availableColumns.length });
+    const result: Column[] = Array.from({ length: availableColumns.length });
 
-    for (let [key, position] of mergedOrder.entries()) {
-      let column = availableByKey[key];
+    for (const [key, position] of mergedOrder.entries()) {
+      const column = availableByKey[key];
 
       assert(`Could not find column for pair: ${key} @ @{position}`, column);
       result[position] = column;
@@ -425,10 +425,10 @@ export function orderOf(
   columns: { key: string }[],
   currentOrder: Map<string, number>
 ): Map<string, number> {
-  let result = new Map<string, number>();
-  let availableColumns = columns.map((column) => column.key);
-  let availableSet = new Set(availableColumns);
-  let current = new Map<number, string>(
+  const result = new Map<string, number>();
+  const availableColumns = columns.map((column) => column.key);
+  const availableSet = new Set(availableColumns);
+  const current = new Map<number, string>(
     [...currentOrder.entries()].map(([key, position]) => [position, key])
   );
 
@@ -436,7 +436,7 @@ export function orderOf(
    * O(n * log(n)) ?
    */
   for (let i = 0; i < Math.max(columns.length, current.size); i++) {
-    let orderedKey = current.get(i);
+    const orderedKey = current.get(i);
 
     if (orderedKey) {
       /**

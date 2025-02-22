@@ -75,7 +75,7 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
   constructor(table: Table) {
     super(table);
 
-    let pluginOptions = options.forTable(this.table, RowSelection);
+    const pluginOptions = options.forTable(this.table, RowSelection);
 
     assert(
       `selection, onSelect, and onDeselect are all required arguments for the RowSelection plugin. ` +
@@ -85,7 +85,7 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
   }
 
   rowModifier = (element: HTMLElement, { row }: RowApi<Table<any>>) => {
-    let handler = (event: Event) => {
+    const handler = (event: Event) => {
       this.#clickHandler(row, event);
     };
 
@@ -102,11 +102,11 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
       event.target instanceof HTMLElement || event.target instanceof SVGElement
     );
 
-    let selection = document.getSelection();
+    const selection = document.getSelection();
 
     if (selection) {
-      let { type, anchorNode } = selection;
-      let isSelectingText = type === 'Range' && event.target?.contains(anchorNode);
+      const { type, anchorNode } = selection;
+      const isSelectingText = type === 'Range' && event.target?.contains(anchorNode);
 
       if (isSelectingText) {
         event.stopPropagation();
@@ -116,13 +116,13 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
     }
 
     // Ignore clicks on interactive elements within the row
-    let inputParent = event.target.closest('input, button, label, a, select');
+    const inputParent = event.target.closest('input, button, label, a, select');
 
     if (inputParent) {
       return;
     }
 
-    let rowMeta = meta.forRow(row, RowSelection);
+    const rowMeta = meta.forRow(row, RowSelection);
 
     rowMeta.toggle();
   };
@@ -137,7 +137,7 @@ class TableMeta {
 
   @cached
   get selection(): Set<unknown> {
-    let passedSelection = options.forTable(this.#table, RowSelection).selection;
+    const passedSelection = options.forTable(this.#table, RowSelection).selection;
 
     assert(`Cannot access selection because it is undefined`, passedSelection);
 
@@ -157,16 +157,16 @@ class RowMeta {
   }
 
   get isSelected(): boolean {
-    let tableMeta = meta.forTable(this.#row.table, RowSelection);
-    let pluginOptions = options.forTable(this.#row.table, RowSelection);
+    const tableMeta = meta.forTable(this.#row.table, RowSelection);
+    const pluginOptions = options.forTable(this.#row.table, RowSelection);
 
     if ('key' in pluginOptions && pluginOptions.key) {
-      let compareWith = pluginOptions.key(this.#row.data);
+      const compareWith = pluginOptions.key(this.#row.data);
 
       return tableMeta.selection.has(compareWith);
     }
 
-    let compareWith = this.#row.data;
+    const compareWith = this.#row.data;
 
     return tableMeta.selection.has(compareWith);
   }
@@ -182,10 +182,10 @@ class RowMeta {
   };
 
   select = () => {
-    let pluginOptions = options.forTable(this.#row.table, RowSelection);
+    const pluginOptions = options.forTable(this.#row.table, RowSelection);
 
     if ('key' in pluginOptions && pluginOptions.key) {
-      let key = pluginOptions.key(this.#row.data);
+      const key = pluginOptions.key(this.#row.data);
 
       pluginOptions.onSelect?.(key, this.#row);
 
@@ -196,10 +196,10 @@ class RowMeta {
   };
 
   deselect = () => {
-    let pluginOptions = options.forTable(this.#row.table, RowSelection);
+    const pluginOptions = options.forTable(this.#row.table, RowSelection);
 
     if ('key' in pluginOptions && pluginOptions.key) {
-      let key = pluginOptions.key(this.#row.data);
+      const key = pluginOptions.key(this.#row.data);
 
       pluginOptions.onDeselect?.(key, this.#row);
 

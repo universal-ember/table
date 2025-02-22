@@ -17,8 +17,8 @@ class A extends BasePlugin<{ Meta: { Table: TableMeta; Column: ColumnMeta; Row: 
   name = 'a plugin';
 }
 
-let x = 0 as unknown as Table;
-let a = new A(x);
+const x = 0 as unknown as Table;
+const a = new A(x);
 
 ///////////////////////////////////////////////////
 // Meta instantiation

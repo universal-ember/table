@@ -43,7 +43,7 @@ export class TablePreferences {
    * to {@link TrackedPreferences }
    */
   restore(adapter: Adapter) {
-    let data = adapter?.restore?.(this.key);
+    const data = adapter?.restore?.(this.key);
 
     if (!data) return;
 
@@ -75,9 +75,9 @@ class TrackedPreferences {
   }
 
   serialize(): TablePreferencesData {
-    let plugins: TablePreferencesData['plugins'] = {};
+    const plugins: TablePreferencesData['plugins'] = {};
 
-    for (let [pluginName, preferences] of this.plugins.entries()) {
+    for (const [pluginName, preferences] of this.plugins.entries()) {
       /**
        * This cast is dirty, and should be fixed eventually.
        * We should be able to, knowing that pluginName
@@ -93,10 +93,10 @@ class TrackedPreferences {
   }
 
   restore(data: TablePreferencesData): void {
-    let { plugins } = data;
+    const { plugins } = data;
 
-    for (let [pluginName, preferences] of Object.entries(plugins || {})) {
-      let trackedPluginPrefs = new TrackedPluginPrefs();
+    for (const [pluginName, preferences] of Object.entries(plugins || {})) {
+      const trackedPluginPrefs = new TrackedPluginPrefs();
 
       trackedPluginPrefs.restore(preferences);
 
@@ -125,20 +125,20 @@ class TrackedPluginPrefs<PluginName = unknown> {
   };
 
   serialize(): PluginPreferenceFor<PluginName> {
-    let columnsPrefs: PluginPreferences['columns'] = {};
-    let tablePrefs: PluginPreferences['table'] = {};
+    const columnsPrefs: PluginPreferences['columns'] = {};
+    const tablePrefs: PluginPreferences['table'] = {};
 
-    for (let [columnKey, preferences] of this.columns.entries()) {
-      let serializedPreferences: Record<string, unknown> = {};
+    for (const [columnKey, preferences] of this.columns.entries()) {
+      const serializedPreferences: Record<string, unknown> = {};
 
-      for (let [key, preference] of preferences.entries()) {
+      for (const [key, preference] of preferences.entries()) {
         serializedPreferences[key] = preference;
       }
 
       columnsPrefs[columnKey] = serializedPreferences;
     }
 
-    for (let [key, preference] of this.table.entries()) {
+    for (const [key, preference] of this.table.entries()) {
       tablePrefs[key] = preference;
     }
 
@@ -149,10 +149,10 @@ class TrackedPluginPrefs<PluginName = unknown> {
   }
 
   restore(data: PluginPreferences): void {
-    let { table, columns } = data;
+    const { table, columns } = data;
 
-    for (let [key, preferences] of Object.entries(columns)) {
-      let trackedPluginPrefs = new TrackedMap(Object.entries(preferences));
+    for (const [key, preferences] of Object.entries(columns)) {
+      const trackedPluginPrefs = new TrackedMap(Object.entries(preferences));
 
       this.columns.set(key, trackedPluginPrefs);
     }
