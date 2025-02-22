@@ -20,10 +20,11 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test:ember": "ember test",
-    "_syncPnpm": "pnpm sync-pnpm"
+    "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
+    "@babel/eslint-parser": "^7.11.0",
     "@crowdstrike/ember-toucan-styles": "^2.0.0",
     "@crowdstrike/tailwind-toucan-base": "^4.0.0",
     "@docfy/core": "^0.8.0",
@@ -69,7 +70,6 @@
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
     "autoprefixer": "^10.4.14",
-    "@babel/eslint-parser": "^7.11.0",
     "broccoli-asset-rev": "^3.0.0",
     "concurrently": "^8.0.0",
     "cssnano": "^6.0.0",
@@ -98,13 +98,13 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-qunit": "^7.3.1",
     "loader.js": "^4.7.0",
+    "pnpm-sync-dependencies-meta-injected": "^0.0.14",
     "postcss": "^8.4.24",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.3",
     "prettier": "^2.7.1",
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
-    "sync-pnpm": "workspace:*",
     "tailwindcss": "^3.3.2",
     "typescript": "^4.9.5",
     "webpack": "^5.83.1"
