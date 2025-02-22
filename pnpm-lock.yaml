@@ -437,9 +437,6 @@ importers:
       '@ember/optional-features':
         specifier: ^2.0.0
         version: 2.2.0
-      '@embroider/test-setup':
-        specifier: ^2.0.2
-        version: 2.1.1
       '@glimmer/component':
         specifier: ^1.1.2
         version: 1.1.2(@babel/core@7.26.9)
@@ -1354,10 +1351,6 @@ packages:
 
   '@embroider/shared-internals@2.9.0':
     resolution: {integrity: sha512-8untWEvGy6av/oYibqZWMz/yB+LHsKxEOoUZiLvcpFwWj2Sipc0DcXeTJQZQZ++otNkLCWyDrDhOLrOkgjOPSg==}
-    engines: {node: 12.* || 14.* || >= 16}
-
-  '@embroider/test-setup@2.1.1':
-    resolution: {integrity: sha512-t81a2z2OEFAOZVbV7wkgiDuCyZ3ajD7J7J+keaTfNSRiXoQgeFFASEECYq1TCsH8m/R+xHMRiY59apF2FIeFhw==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/util@1.13.2':
@@ -10366,11 +10359,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/test-setup@2.1.1':
-    dependencies:
-      lodash: 4.17.21
-      resolve: 1.22.10
-
   '@embroider/util@1.13.2(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(@types/ember__array@4.0.10(@babel/core@7.26.9))(@types/ember__component@4.0.22(@babel/core@7.26.9))(@types/ember__controller@4.0.12(@babel/core@7.26.9))(@types/ember__object@4.0.12(@babel/core@7.26.9))(@types/ember__routing@4.0.22(@babel/core@7.26.9))(ember-cli-htmlbars@6.3.0)(ember-modifier@3.2.7(@babel/core@7.26.9)))(@glint/template@1.5.2)(ember-source@4.12.4(@babel/core@7.26.9)(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2))':
     dependencies:
       '@embroider/macros': 1.16.11(@glint/template@1.5.2)
@@ -11337,7 +11325,7 @@ snapshots:
       '@types/ember__string': 3.0.15
       '@types/ember__template': 4.0.7
       '@types/ember__test': 4.0.6(@babel/core@7.26.9)
-      '@types/ember__utils': 4.0.7
+      '@types/ember__utils': 4.0.7(@babel/core@7.26.9)
       '@types/rsvp': 4.0.9
     optional: true
 
@@ -11484,11 +11472,6 @@ snapshots:
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
-    optional: true
-
-  '@types/ember__utils@4.0.7':
-    dependencies:
-      '@types/ember': 4.0.11
     optional: true
 
   '@types/ember__utils@4.0.7(@babel/core@7.26.9)':

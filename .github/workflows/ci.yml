@@ -121,11 +121,6 @@ jobs:
           - ember-release
           - ember-beta
           - ember-canary
-          - "'ember-release + embroider-safe'"
-          - "'ember-release + embroider-optimized'"
-          - "'ember-lts-3.28 + embroider-optimized'"
-          - "'ember-lts-4.4 + embroider-optimized'"
-          - "'ember-lts-4.8 + embroider-optimized'"
 
     steps:
       - uses: actions/checkout@v4
