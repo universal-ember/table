@@ -8,6 +8,11 @@ overrides:
   '@embroider/macros': ^1.10.0
   ember-auto-import: ^2.6.2
 
+patchedDependencies:
+  github-changelog:
+    hash: 596a2bf6537d3aa25cd3d0cf2c599841c3290d3ef34bb4344436f65e2fa6ac57
+    path: patches/github-changelog.patch
+
 importers:
 
   .:
@@ -16126,7 +16131,7 @@ snapshots:
 
   git-repo-info@2.1.1: {}
 
-  github-changelog@1.1.0:
+  github-changelog@1.1.0(patch_hash=596a2bf6537d3aa25cd3d0cf2c599841c3290d3ef34bb4344436f65e2fa6ac57):
     dependencies:
       '@manypkg/get-packages': 2.2.2
       chalk: 4.1.2
@@ -18744,7 +18749,7 @@ snapshots:
       cli-highlight: 2.1.11
       execa: 4.1.0
       fs-extra: 11.3.0
-      github-changelog: 1.1.0
+      github-changelog: 1.1.0(patch_hash=596a2bf6537d3aa25cd3d0cf2c599841c3290d3ef34bb4344436f65e2fa6ac57)
       js-yaml: 4.1.0
       latest-version: 9.0.0
       parse-github-repo-url: 1.4.1

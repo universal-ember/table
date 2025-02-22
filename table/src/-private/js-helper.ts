@@ -12,7 +12,7 @@ type Args<T> = [destroyable: object, options: TableConfig<T>] | [options: TableC
  * @example
  * ```js
  * import { use } from 'ember-resources';
- * import { headlessTable } '@crowdstrike/@universal-ember/table';
+ * import { headlessTable } '@universal-ember/table';
  *
  * class MyImplementation {
  *   @use table = headlessTable({
@@ -30,7 +30,7 @@ export function headlessTable<T = unknown>(options: TableConfig<T>): Table<T>;
  *
  * @example
  * ```js
- * import { headlessTable } '@crowdstrike/@universal-ember/table';
+ * import { headlessTable } '@universal-ember/table';
  *
  * class MyImplementation {
  *   table = headlessTable(this, {

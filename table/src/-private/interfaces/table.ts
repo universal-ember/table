@@ -39,8 +39,8 @@ export interface TableConfig<DataType> {
    *
    * Example:
    * ```js
-   * import { DataSorting } from '@crowdstrike/@universal-ember/table/plugins/data-sorting';
-   * import { ColumnResizing }  from '@crowdstrike/@universal-ember/table/plugins/column-resizing';
+   * import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
+   * import { ColumnResizing }  from '@universal-ember/table/plugins/column-resizing';
    *
    *  ...
    *
@@ -61,8 +61,8 @@ export interface TableConfig<DataType> {
    *
    * However, for plugins with no needed options, the list can be simplified:
    * ```js
-   * import { ColumnResizing }  from '@crowdstrike/@universal-ember/table/plugins/column-resizing';
-   * import { StickyColumns }  from '@crowdstrike/@universal-ember/table/plugins/sticky-columns';
+   * import { ColumnResizing }  from '@universal-ember/table/plugins/column-resizing';
+   * import { StickyColumns }  from '@universal-ember/table/plugins/sticky-columns';
    *
    *  ...
    *

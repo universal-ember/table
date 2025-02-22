@@ -1,5 +1,5 @@
 {
-  "name": "@universal-ember/table",
+  "name": "monorepo-root",
   "version": "0.0.0",
   "private": true,
   "repository": "https://github.com/universal-ember/table",
@@ -44,6 +44,9 @@
     "overrides": {
       "@embroider/macros": "^1.10.0",
       "ember-auto-import": "^2.6.2"
+    },
+    "patchedDependencies": {
+      "github-changelog": "patches/github-changelog.patch"
     }
   }
 }
