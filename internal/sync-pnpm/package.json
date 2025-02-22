@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Sync build artifacts of workspace packages to pnpm injected/hard linked copies",
-  "repository": "https://github.com/CrowdStrike/ember-headless-table.git",
+  "repository": "https://github.com/universal-ember/table.git",
   "license": "MIT",
   "author": "CrowdStrike UX Team",
   "main": "index.js",
