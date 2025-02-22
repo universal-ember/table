@@ -4,7 +4,7 @@
   "private": true,
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
-  "author": "CrowdStrike UX Team",
+  "author": "NullVoxPopuli",
   "scripts": {
     "build": "pnpm turbo build",
     "build:docs": "pnpm build:docs-app && pnpm build:docs-api && cp ./docs-api/dist ./docs-app/dist/api -r",

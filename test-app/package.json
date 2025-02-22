@@ -5,11 +5,7 @@
   "description": "Test app for the @universal-ember/table addon",
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
-  "author": "",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
+  "author": "NullVoxPopuli",
   "scripts": {
     "build:prod": "ember build --environment=production",
     "format": "prettier . --cache --write",
