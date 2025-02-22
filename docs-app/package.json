@@ -91,7 +91,7 @@
     "ember-browser-services": "^4.0.4",
     "ember-cached-decorator-polyfill": "^1.0.1",
     "ember-modifier": "^4.1.0",
-    "ember-resources": "^6.0.0",
+    "ember-resources": "^7.0.2",
     "highlight.js": "^11.7.0",
     "highlightjs-glimmer": "^2.0.1",
     "tracked-built-ins": "^3.1.1"
