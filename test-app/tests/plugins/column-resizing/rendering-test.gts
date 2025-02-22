@@ -12,11 +12,11 @@ import { on } from '@ember/modifier';
 // @ts-ignore
 import { fn } from '@ember/helper';
 
-import { headlessTable, type ColumnConfig, type PreferencesData } from 'ember-headless-table';
-import { ColumnResizing, resizeHandle, hasResizeHandle } from 'ember-headless-table/plugins/column-resizing';
-import { ColumnVisibility } from 'ember-headless-table/plugins/column-visibility';
-import { ColumnReordering, moveLeft, moveRight } from 'ember-headless-table/plugins/column-reordering';
-import { createHelpers, requestAnimationFrameSettled } from 'ember-headless-table/test-support';
+import { headlessTable, type ColumnConfig, type PreferencesData } from '@universal-ember/table';
+import { ColumnResizing, resizeHandle, hasResizeHandle } from '@universal-ember/table/plugins/column-resizing';
+import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
+import { ColumnReordering, moveLeft, moveRight } from '@universal-ember/table/plugins/column-reordering';
+import { createHelpers, requestAnimationFrameSettled } from '@universal-ember/table/test-support';
 
 import {
   TestStyles,

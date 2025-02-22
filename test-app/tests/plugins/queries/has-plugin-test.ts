@@ -1,10 +1,10 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { hasPlugin } from 'ember-headless-table/plugins';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
-import { DataSorting } from 'ember-headless-table/plugins/data-sorting';
+import { headlessTable } from '@universal-ember/table';
+import { hasPlugin } from '@universal-ember/table/plugins';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
+import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
 
 module('Plugins | Queries | hasPlugin', function (hooks) {
   setupTest(hooks);

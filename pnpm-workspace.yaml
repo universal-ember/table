@@ -1,5 +1,5 @@
 packages:
-  - 'ember-headless-table'
+  - '@universal-ember/table'
   - 'test-app'
   - 'docs-app'
   - 'docs-api'

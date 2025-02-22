@@ -7,8 +7,8 @@ API Documentation available [here][api-docs]
 ## Usage
 
 ```js
-import { headlessTable } from 'ember-headless-table';
-import { ColumnReordering } from 'ember-headless-table/plugins/column-reordering';
+import { headlessTable } from '@universal-ember/table';
+import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
 
 // ...
 // in a class
@@ -66,7 +66,7 @@ import { fn } from '@ember/helper';
 import { on } from '@ember/modifier';
 import {
   moveLeft, moveRight, cannotMoveLeft, cannotMoveRight
-} from 'ember-headless-table/plugins/column-reordering';
+} from '@universal-ember/table/plugins/column-reordering';
 
 export const THead = <template>
   <thead>

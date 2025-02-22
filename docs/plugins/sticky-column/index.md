@@ -7,9 +7,9 @@ API Documentation available [here][api-docs]
 ## Usage
 
 ```js
-import { headlessTable } from 'ember-headless-table';
-import { StickyColumns } from 'ember-headless-table/plugins/sticky-columns';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
+import { headlessTable } from '@universal-ember/table';
+import { StickyColumns } from '@universal-ember/table/plugins/sticky-columns';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
 
 // ...
 // in a class
@@ -60,7 +60,7 @@ it's recommended to use `<button>`s or radio inputs for configuring if a column 
 There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
 
 ```gjs
-import { StickyColumns, isSticky } from 'ember-headless-table/plugins/sticky-columns';
+import { StickyColumns, isSticky } from '@universal-ember/table/plugins/sticky-columns';
 
 export const THead = <template>
   <thead>

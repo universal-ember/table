@@ -268,7 +268,7 @@ export const preferences = {
  * if a `requester` is not provided,
  * Get the columns for the table, considering any and all plugins that could modify columns.
  *
- * If you are an end-consumer of ember-headless-table, this is the function to use.
+ * If you are an end-consumer of @universal-ember/table, this is the function to use.
  * If you are a plugin-author, you'll want to pass your plugin class as the second parameter.
  *
  * For a given plugin, `requester`, determine what columns should be returned.

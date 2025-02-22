@@ -18,7 +18,7 @@
       // Shorthand for private stuff
       "#*": ["./src/-private/*"],
 
-      "ember-headless-table/plugins": ["./src/plugins/"],
+      "@universal-ember/table/plugins": ["./src/plugins/"],
 
       // Shorthand for type-imports only, but to denote public API
       // Type-imports are removed at build-time, so importing values from this

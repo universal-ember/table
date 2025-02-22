@@ -8,13 +8,13 @@ import { click, render, findAll, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta, columns } from 'ember-headless-table/plugins';
-import { ColumnVisibility, hide, show } from 'ember-headless-table/plugins/column-visibility';
-import { ColumnReordering, moveLeft, moveRight } from 'ember-headless-table/plugins/column-reordering';
+import { headlessTable } from '@universal-ember/table';
+import { meta, columns } from '@universal-ember/table/plugins';
+import { ColumnVisibility, hide, show } from '@universal-ember/table/plugins/column-visibility';
+import { ColumnReordering, moveLeft, moveRight } from '@universal-ember/table/plugins/column-reordering';
 
 import { DATA } from 'test-app/data';
-import type { Table, PreferencesData } from 'ember-headless-table';
+import type { Table, PreferencesData } from '@universal-ember/table';
 import { setOwner } from '@ember/application';
 
 module('Plugins | columnVisibility', function (hooks) {
@@ -283,7 +283,7 @@ module('Plugins | columnVisibility', function (hooks) {
       }).join(' ').trim();
 
       /**
-        * https://github.com/CrowdStrike/ember-headless-table/issues/60
+        * https://github.com/CrowdStrike/@universal-ember/table/issues/60
         *
         * When moving a column over a hidden column, all columns become hidden.
         * This shouldn't happen.

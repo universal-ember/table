@@ -7,8 +7,8 @@ API Documentation available [here][api-docs]
 ## Usage
 
 ```js
-import { headlessTable } from 'ember-headless-table';
-import { ColumnResizing, resizeHandle } from 'ember-headless-table/plugins/column-resizing';
+import { headlessTable } from '@universal-ember/table';
+import { ColumnResizing, resizeHandle } from '@universal-ember/table/plugins/column-resizing';
 
 // ...
 // in a class
@@ -78,7 +78,7 @@ This will ensure that keyboard users, as well as mouse users can resize their co
 There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
 
 ```gjs
-import { isResizing, resizeHandle } from 'ember-headless-table/plugins/column-resizing';
+import { isResizing, resizeHandle } from '@universal-ember/table/plugins/column-resizing';
 
 export const THead = <template>
   <thead>

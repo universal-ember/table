@@ -1,13 +1,13 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { options } from 'ember-headless-table/plugins';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
-import { DataSorting } from 'ember-headless-table/plugins/data-sorting';
-import { StickyColumns } from 'ember-headless-table/plugins/sticky-columns';
+import { headlessTable } from '@universal-ember/table';
+import { options } from '@universal-ember/table/plugins';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
+import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
+import { StickyColumns } from '@universal-ember/table/plugins/sticky-columns';
 
-import type { Sort } from 'ember-headless-table/plugins/data-sorting';
+import type { Sort } from '@universal-ember/table/plugins/data-sorting';
 
 module('Plugins | consumption', function (hooks) {
   setupTest(hooks);

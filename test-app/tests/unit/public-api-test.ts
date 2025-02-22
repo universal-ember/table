@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 
-import * as headlessTable from 'ember-headless-table';
-import * as plugins from 'ember-headless-table/plugins';
+import * as headlessTable from '@universal-ember/table';
+import * as plugins from '@universal-ember/table/plugins';
 
 module('Public API', function () {
   /**

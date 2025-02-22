@@ -4,10 +4,10 @@ import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
 import { setupRenderingTest, setupTest } from 'ember-qunit';
 
-import { TablePreferences } from 'ember-headless-table';
+import { TablePreferences } from '@universal-ember/table';
 
 // import sinon from 'sinon';
-import type { PreferencesData } from 'ember-headless-table';
+import type { PreferencesData } from '@universal-ember/table';
 
 module('Unit | -private | table-preferences', function (hooks) {
   setupTest(hooks);

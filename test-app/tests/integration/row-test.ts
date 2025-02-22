@@ -2,7 +2,7 @@ import { tracked } from '@glimmer/tracking';
 import { settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 module('Integration | Row', function () {
   test('row references to the table are stable', async function (assert) {

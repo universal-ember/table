@@ -1,4 +1,4 @@
-import { BasePlugin, meta, options, preferences } from 'ember-headless-table/plugins';
+import { BasePlugin, meta, options, preferences } from '@universal-ember/table/plugins';
 import { expectTypeOf } from 'expect-type';
 
 import type { Column, Table } from '[public-types]';

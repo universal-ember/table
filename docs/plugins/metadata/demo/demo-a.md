@@ -34,8 +34,8 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
-import { Metadata, forColumn, forTable } from 'ember-headless-table/plugins/metadata';
+import { headlessTable } from '@universal-ember/table';
+import { Metadata, forColumn, forTable } from '@universal-ember/table/plugins/metadata';
 
 import { DATA } from 'docs-app/sample-data';
 

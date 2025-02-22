@@ -6,9 +6,9 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setOwner } from '@ember/application';
 
-import { headlessTable } from 'ember-headless-table';
-import { ColumnResizing, resizeHandle, hasResizeHandle, styleStringFor } from 'ember-headless-table/plugins/column-resizing';
-import { createHelpers, requestAnimationFrameSettled } from 'ember-headless-table/test-support';
+import { headlessTable } from '@universal-ember/table';
+import { ColumnResizing, resizeHandle, hasResizeHandle, styleStringFor } from '@universal-ember/table/plugins/column-resizing';
+import { createHelpers, requestAnimationFrameSettled } from '@universal-ember/table/test-support';
 
 import {
   Context,

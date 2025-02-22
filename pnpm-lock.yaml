@@ -70,9 +70,9 @@ importers:
       ember-cached-decorator-polyfill:
         specifier: ^1.0.1
         version: 1.0.2(@babel/core@7.26.9)(ember-source@4.12.4(@babel/core@7.26.9)(@glimmer/component@1.1.2(@babel/core@7.26.9))(webpack@5.98.0))
-      ember-headless-table:
+      @universal-ember/table:
         specifier: workspace:*
-        version: file:ember-headless-table(5d8d8ab5c7120a922ab80c85d5e5a670)
+        version: file:@universal-ember/table(5d8d8ab5c7120a922ab80c85d5e5a670)
       ember-modifier:
         specifier: ^4.1.0
         version: 4.2.0(@babel/core@7.26.9)(ember-source@4.12.4(@babel/core@7.26.9)(@glimmer/component@1.1.2(@babel/core@7.26.9))(webpack@5.98.0))
@@ -89,7 +89,7 @@ importers:
         specifier: ^3.1.1
         version: 3.4.0(@babel/core@7.26.9)
     dependenciesMeta:
-      ember-headless-table:
+      @universal-ember/table:
         injected: true
     devDependencies:
       '@babel/core':
@@ -330,7 +330,7 @@ importers:
         specifier: ^5.83.1
         version: 5.98.0
 
-  ember-headless-table:
+  @universal-ember/table:
     dependencies:
       '@babel/runtime':
         specifier: ^7.17.8
@@ -501,9 +501,9 @@ importers:
       ember-functions-as-helper-polyfill:
         specifier: ^2.1.1
         version: 2.1.2(ember-source@3.28.12(@babel/core@7.26.9))
-      ember-headless-table:
+      @universal-ember/table:
         specifier: workspace:*
-        version: file:ember-headless-table(@babel/core@7.26.9)(@ember/test-helpers@2.9.4(@babel/core@7.26.9)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(@types/ember__array@4.0.10(@babel/core@7.26.9))(@types/ember__component@4.0.22(@babel/core@7.26.9))(@types/ember__controller@4.0.12(@babel/core@7.26.9))(@types/ember__object@4.0.12(@babel/core@7.26.9))(@types/ember__routing@4.0.22(@babel/core@7.26.9))(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9))))(@glint/template@1.5.2)(ember-source@3.28.12(@babel/core@7.26.9)))(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-cached-decorator-polyfill@1.0.2(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9)))(ember-source@3.28.12(@babel/core@7.26.9))
+        version: file:@universal-ember/table(@babel/core@7.26.9)(@ember/test-helpers@2.9.4(@babel/core@7.26.9)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(@types/ember__array@4.0.10(@babel/core@7.26.9))(@types/ember__component@4.0.22(@babel/core@7.26.9))(@types/ember__controller@4.0.12(@babel/core@7.26.9))(@types/ember__object@4.0.12(@babel/core@7.26.9))(@types/ember__routing@4.0.22(@babel/core@7.26.9))(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9))))(@glint/template@1.5.2)(ember-source@3.28.12(@babel/core@7.26.9)))(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-cached-decorator-polyfill@1.0.2(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9)))(ember-source@3.28.12(@babel/core@7.26.9))
       ember-resources:
         specifier: ^5.4.0
         version: 5.6.4(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-source@3.28.12(@babel/core@7.26.9))
@@ -511,7 +511,7 @@ importers:
         specifier: ^3.1.0
         version: 3.4.0(@babel/core@7.26.9)
     dependenciesMeta:
-      ember-headless-table:
+      @universal-ember/table:
         injected: true
     devDependencies:
       '@babel/core':
@@ -4401,8 +4401,8 @@ packages:
     resolution: {integrity: sha512-diD+HwwY8QqpEk5DnDYfH7onYwl6NOgr1qv1ENbXih+/iiWYUVS/e0S/PlM7A4gdorD9spn1bnisnTLTf49Wpw==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  ember-headless-table@file:ember-headless-table:
-    resolution: {directory: ember-headless-table, type: directory}
+  @universal-ember/table@file:@universal-ember/table:
+    resolution: {directory: @universal-ember/table, type: directory}
     peerDependencies:
       '@ember/test-helpers': '>= 2.6.0'
       '@ember/test-waiters': ^2.4.5 || >= 3.0.0
@@ -14935,7 +14935,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  ember-headless-table@file:ember-headless-table(5d8d8ab5c7120a922ab80c85d5e5a670):
+  @universal-ember/table@file:@universal-ember/table(5d8d8ab5c7120a922ab80c85d5e5a670):
     dependencies:
       '@babel/runtime': 7.26.9
       '@ember/string': 3.1.1
@@ -14958,7 +14958,7 @@ snapshots:
       - ember-concurrency
       - supports-color
 
-  ember-headless-table@file:ember-headless-table(@babel/core@7.26.9)(@ember/test-helpers@2.9.4(@babel/core@7.26.9)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(@types/ember__array@4.0.10(@babel/core@7.26.9))(@types/ember__component@4.0.22(@babel/core@7.26.9))(@types/ember__controller@4.0.12(@babel/core@7.26.9))(@types/ember__object@4.0.12(@babel/core@7.26.9))(@types/ember__routing@4.0.22(@babel/core@7.26.9))(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9))))(@glint/template@1.5.2)(ember-source@3.28.12(@babel/core@7.26.9)))(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-cached-decorator-polyfill@1.0.2(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9)))(ember-source@3.28.12(@babel/core@7.26.9)):
+  @universal-ember/table@file:@universal-ember/table(@babel/core@7.26.9)(@ember/test-helpers@2.9.4(@babel/core@7.26.9)(@glint/environment-ember-loose@1.5.2(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glint/template@1.5.2)(@types/ember__array@4.0.10(@babel/core@7.26.9))(@types/ember__component@4.0.22(@babel/core@7.26.9))(@types/ember__controller@4.0.12(@babel/core@7.26.9))(@types/ember__object@4.0.12(@babel/core@7.26.9))(@types/ember__routing@4.0.22(@babel/core@7.26.9))(ember-cli-htmlbars@6.3.0)(ember-modifier@4.2.0(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9))))(@glint/template@1.5.2)(ember-source@3.28.12(@babel/core@7.26.9)))(@ember/test-waiters@3.1.0)(@glimmer/component@1.1.2(@babel/core@7.26.9))(@glimmer/tracking@1.1.2)(@glint/template@1.5.2)(ember-cached-decorator-polyfill@1.0.2(@babel/core@7.26.9)(ember-source@3.28.12(@babel/core@7.26.9)))(ember-source@3.28.12(@babel/core@7.26.9)):
     dependencies:
       '@babel/runtime': 7.26.9
       '@ember/string': 3.1.1

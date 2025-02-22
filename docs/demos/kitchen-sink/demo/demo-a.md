@@ -76,26 +76,26 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { htmlSafe } from '@ember/template';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta, columns } from 'ember-headless-table/plugins';
+import { headlessTable } from '@universal-ember/table';
+import { meta, columns } from '@universal-ember/table/plugins';
 import {
   ColumnResizing,
   isResizing, resizeHandle
-} from 'ember-headless-table/plugins/column-resizing';
+} from '@universal-ember/table/plugins/column-resizing';
 import {
   ColumnReordering,
   moveLeft, moveRight, cannotMoveLeft, cannotMoveRight
-} from 'ember-headless-table/plugins/column-reordering';
+} from '@universal-ember/table/plugins/column-reordering';
 import {
   ColumnVisibility,
   hide, show, isVisible, isHidden
-} from 'ember-headless-table/plugins/column-visibility';
+} from '@universal-ember/table/plugins/column-visibility';
 import {
   DataSorting, sort, isAscending, isDescending
-} from 'ember-headless-table/plugins/data-sorting';
+} from '@universal-ember/table/plugins/data-sorting';
 import {
   StickyColumns, isSticky
-} from 'ember-headless-table/plugins/sticky-columns';
+} from '@universal-ember/table/plugins/sticky-columns';
 
 import { DATA } from 'docs-app/sample-data';
 

@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-headless-table`
+* `cd @universal-ember/table`
 * `pnpm install`
 
 ## Linting
@@ -13,7 +13,7 @@
 
 ## Building the addon
 
-* `cd ember-headless-table`
+* `cd @universal-ember/table`
 * `pnpm build`
 
 ## Running tests

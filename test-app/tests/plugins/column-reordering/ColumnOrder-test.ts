@@ -1,8 +1,8 @@
 import { module, test } from 'qunit';
 
-import { ColumnOrder } from 'ember-headless-table/plugins/column-reordering';
+import { ColumnOrder } from '@universal-ember/table/plugins/column-reordering';
 
-import type { Column } from 'ember-headless-table';
+import type { Column } from '@universal-ember/table';
 
 module('Plugin | column-reordering | ColumnOrder', function () {
   const toEntries = (map: ReadonlyMap<unknown, unknown>) => [...map.entries()];

@@ -2,11 +2,11 @@ import { module, test } from 'qunit';
 import { assert } from '@ember/debug';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { preferences } from 'ember-headless-table/plugins';
-import { DataSorting } from 'ember-headless-table/plugins/data-sorting';
+import { headlessTable } from '@universal-ember/table';
+import { preferences } from '@universal-ember/table/plugins';
+import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
 
-import type { ColumnConfig, PreferencesData } from 'ember-headless-table';
+import type { ColumnConfig, PreferencesData } from '@universal-ember/table';
 import { render, settled } from '@ember/test-helpers';
 
 module('Rendering | Plugins | Queries | preferences', function (hooks) {

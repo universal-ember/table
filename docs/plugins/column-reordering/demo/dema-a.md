@@ -33,12 +33,12 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta, columns } from 'ember-headless-table/plugins';
+import { headlessTable } from '@universal-ember/table';
+import { meta, columns } from '@universal-ember/table/plugins';
 import {
   ColumnReordering,
   moveLeft, moveRight
-} from 'ember-headless-table/plugins/column-reordering';
+} from '@universal-ember/table/plugins/column-reordering';
 
 import { DATA } from 'docs-app/sample-data';
 

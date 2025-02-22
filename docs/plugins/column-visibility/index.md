@@ -53,7 +53,7 @@ There are convenience helpers for aiding in more ergonomic template usage when u
 ```gjs
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
-import { hide, show, isHidden, isVisible } from 'ember-headless-table/plugins/column-visibility';
+import { hide, show, isHidden, isVisible } from '@universal-ember/table/plugins/column-visibility';
 
 export const VisibilityMenu = <template>
   {{#each @table.columns as |column|}}

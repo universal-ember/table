@@ -2,7 +2,7 @@
   "name": "docs-app",
   "version": "0.0.0",
   "private": true,
-  "description": "Documentation for the ember-headless-table addon",
+  "description": "Documentation for the @universal-ember/table addon",
   "repository": "",
   "license": "MIT",
   "author": "",
@@ -115,7 +115,7 @@
     "dompurify": "^2.4.5",
     "ember-browser-services": "^4.0.4",
     "ember-cached-decorator-polyfill": "^1.0.1",
-    "ember-headless-table": "workspace:*",
+    "@universal-ember/table": "workspace:*",
     "ember-modifier": "^4.1.0",
     "ember-resources": "^6.0.0",
     "highlight.js": "^11.7.0",
@@ -123,7 +123,7 @@
     "tracked-built-ins": "^3.1.1"
   },
   "dependenciesMeta": {
-    "ember-headless-table": {
+    "@universal-ember/table": {
       "injected": true
     }
   },

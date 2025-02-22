@@ -18,7 +18,7 @@ to reduce impact on the browser as much as possible.
 import {
   createHelpers,
   requestAnimationFrameSettled
-} from 'ember-headless-table/test-support';
+} from '@universal-ember/table/test-support';
 
 ```
 

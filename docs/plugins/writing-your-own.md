@@ -1,7 +1,7 @@
 # Writing your own
 
 Plugins are a good way to provide functionality to every part of a table without needing to add branching logic to a particular table's implementation.
-`ember-headless-table` provides hooks in to the plugin system in a way that allows for unlimited plugin use without any changes to the template markup.
+`@universal-ember/table` provides hooks in to the plugin system in a way that allows for unlimited plugin use without any changes to the template markup.
 
 
 This document is an overview of the plugin system. For details, see the _[Plugin API Documentation][docs-plugins]_.
@@ -65,7 +65,7 @@ Column meta may also be discarded and/or re-created as columns are added or remo
 
 ## Managing API surface area
 
-All of `ember-headless-table`'s public APIs are public for everyone, which end up allowing direct access to the instances of your Table and Column metas.
+All of `@universal-ember/table`'s public APIs are public for everyone, which end up allowing direct access to the instances of your Table and Column metas.
 The best strategy for mitigating improper use of the data available on the metas is to use [private fields and methods][mdn-private-features] -- this allows only what is required to use your pluign to be accessible from the consumer's template or javascript contexts.
 
 ## Accessing data from other plugins
@@ -75,7 +75,7 @@ The easiest way to do this is to use the [meta][docs-plugin-api-meta] accessor t
 For example:
 
 ```js
-import { meta } from 'ember-headless-table/plugins';
+import { meta } from '@universal-ember/table/plugins';
 
 // ...
 
@@ -97,7 +97,7 @@ Instead, working with a [`CSSStyleSheet`][mdn-CSSStylesheet] and setting specifi
 and can be done safely through some helper utilities provided by the plugin module:
 
 ```js
-import { applyStyles, removeStyles } from 'ember-headless-table/plugins';
+import { applyStyles, removeStyles } from '@universal-ember/table/plugins';
 
 // ...
 
@@ -107,7 +107,7 @@ removeStyles(element, [ /* style property names */ ]);
 
 ## Supporting preferences
 
-It is up to the consumer of `ember-headless-table` to set their [`preferences`][docs-table-options-preferences]
+It is up to the consumer of `@universal-ember/table` to set their [`preferences`][docs-table-options-preferences]
 key when calling `headlessTable`.
 It's presently also up to the consumer to decide if they want to debounce or aggregate changes
 to their preferences over time -- which would be useful if preferences are stored remotely,
@@ -117,7 +117,7 @@ As a plugin author, interaction with the consumer's preferences adapter is abstr
 
 An example:
 ```js
-import { preferences } from 'ember-headless-table/plugins';
+import { preferences } from '@universal-ember/table/plugins';
 
 // ...
 
@@ -140,7 +140,7 @@ via JSON.stringify -- so sticking to vanilla objects and arrays will result in t
 
 ## Recommended plugin file / project Layout
 
-Ultimately, you can do whatever you want, but this is the structure that `ember-headless-table` uses for each plugin.
+Ultimately, you can do whatever you want, but this is the structure that `@universal-ember/table` uses for each plugin.
 
 - `/{plugin-name}/` - folder named after your plugin
   - `plugin.ts` - defines the actual plugin, `Meta`, `Options`, and other related structures.

@@ -5,12 +5,12 @@ import { render, find } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { headlessTable, type ColumnConfig } from 'ember-headless-table';
-import { ColumnVisibility } from 'ember-headless-table/plugins/column-visibility';
-import { StickyColumns, isSticky } from 'ember-headless-table/plugins/sticky-columns';
-import { ColumnReordering } from 'ember-headless-table/plugins/column-reordering';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
-import { createHelpers } from 'ember-headless-table/test-support';
+import { headlessTable, type ColumnConfig } from '@universal-ember/table';
+import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
+import { StickyColumns, isSticky } from '@universal-ember/table/plugins/sticky-columns';
+import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
+import { createHelpers } from '@universal-ember/table/test-support';
 import { DATA } from 'test-app/data';
 
 const minWidth = () => ColumnResizing.forColumn(() => ({ minWidth: 200 }));

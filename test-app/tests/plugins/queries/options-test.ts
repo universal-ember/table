@@ -2,12 +2,12 @@ import { assert } from '@ember/debug';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { options } from 'ember-headless-table/plugins';
-import { DataSorting } from 'ember-headless-table/plugins/data-sorting';
+import { headlessTable } from '@universal-ember/table';
+import { options } from '@universal-ember/table/plugins';
+import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
 import { expectTypeOf } from 'expect-type';
 
-import type { SortItem } from 'ember-headless-table/plugins/data-sorting';
+import type { SortItem } from '@universal-ember/table/plugins/data-sorting';
 
 module('Plugins | Queries | options', function (hooks) {
   setupTest(hooks);

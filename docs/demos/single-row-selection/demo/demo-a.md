@@ -35,10 +35,10 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta } from 'ember-headless-table/plugins';
+import { headlessTable } from '@universal-ember/table';
+import { meta } from '@universal-ember/table/plugins';
 import { TrackedSet } from 'tracked-built-ins';
-import { RowSelection, toggle, isSelected } from 'ember-headless-table/plugins/row-selection';
+import { RowSelection, toggle, isSelected } from '@universal-ember/table/plugins/row-selection';
 
 import { DATA } from 'docs-app/sample-data';
 

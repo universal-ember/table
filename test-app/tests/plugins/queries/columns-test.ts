@@ -3,13 +3,13 @@ import { assert as debugAssert } from '@ember/debug';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { type ColumnConfig, type Table, headlessTable } from 'ember-headless-table';
-import { columns, meta } from 'ember-headless-table/plugins';
-import { ColumnReordering } from 'ember-headless-table/plugins/column-reordering';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
-import { ColumnVisibility } from 'ember-headless-table/plugins/column-visibility';
-import { DataSorting } from 'ember-headless-table/plugins/data-sorting';
-import { StickyColumns } from 'ember-headless-table/plugins/sticky-columns';
+import { type ColumnConfig, type Table, headlessTable } from '@universal-ember/table';
+import { columns, meta } from '@universal-ember/table/plugins';
+import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
+import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
+import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
+import { StickyColumns } from '@universal-ember/table/plugins/sticky-columns';
 import { DATA } from 'test-app/data';
 
 import type Owner from '@ember/owner';
@@ -145,7 +145,7 @@ module('Plugins | Queries | columns', function (hooks) {
       });
     });
 
-    module('Using many of the plugins provided by ember-headless-table', function (hooks) {
+    module('Using many of the plugins provided by @universal-ember/table', function (hooks) {
       /**
        * SCENARIO: with plugins
        * This plugin graph looks like:

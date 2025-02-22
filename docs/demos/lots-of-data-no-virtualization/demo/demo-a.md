@@ -64,7 +64,7 @@ import { tracked, cached } from '@glimmer/tracking';
 import { cell, use, resource, resourceFactory } from 'ember-resources';
 import { map } from 'ember-resources/util/map';
 
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 export default class extends Component {
   table = headlessTable(this, {

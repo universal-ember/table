@@ -9,12 +9,12 @@ import { click, findAll, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta } from 'ember-headless-table/plugins';
-import { DataSorting, SortDirection } from 'ember-headless-table/plugins/data-sorting';
+import { headlessTable } from '@universal-ember/table';
+import { meta } from '@universal-ember/table/plugins';
+import { DataSorting, SortDirection } from '@universal-ember/table/plugins/data-sorting';
 
-import type { Column } from 'ember-headless-table';
-import type { SortItem } from 'ember-headless-table/plugins/data-sorting';
+import type { Column } from '@universal-ember/table';
+import type { SortItem } from '@universal-ember/table/plugins/data-sorting';
 import { setOwner } from '@ember/application';
 import { DATA } from 'test-app/data';
 

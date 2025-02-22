@@ -13,8 +13,8 @@ import { on } from '@ember/modifier';
 // @ts-ignore
 import { fn } from '@ember/helper';
 
-import { headlessTable } from 'ember-headless-table';
-import { RowSelection, toggle, isSelected, select, deselect } from 'ember-headless-table/plugins/row-selection';
+import { headlessTable } from '@universal-ember/table';
+import { RowSelection, toggle, isSelected, select, deselect } from '@universal-ember/table/plugins/row-selection';
 import { DATA } from 'test-app/data';
 
 module('Plugins | RowSelection', function (hooks) {
