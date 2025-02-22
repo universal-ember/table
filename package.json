@@ -13,7 +13,6 @@
     "ci:update": "npx ember-ci-update",
     "lint": "pnpm turbo lint",
     "lint:fix": "pnpm --filter '*' lint:fix",
-    "release": "changeset publish",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
     "start:addon": "pnpm --filter ember-headless-table start --no-watch.clearScreen",
     "start:docs": "pnpm turbo --filter docs-app start",
@@ -22,8 +21,6 @@
     "test": "pnpm turbo --filter test-app test"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.26.0",
     "concurrently": "^8.0.0",
     "prettier": "^2.8.2",
     "release-plan": "^0.13.1",
