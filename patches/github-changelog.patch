@@ -1,5 +1,5 @@
 diff --git a/lib/changelog.js b/lib/changelog.js
-index 629c594fa573a47a33e4a7c59090e8825501aef2..c42caac58522129570bbca1e9db8b20b7656e5ba 100644
+index 629c594fa573a47a33e4a7c59090e8825501aef2..cecc1f2bf5e0efc38709725cea5d63e62cc71592 100644
 --- a/lib/changelog.js
 +++ b/lib/changelog.js
 @@ -1,13 +1,35 @@
@@ -45,7 +45,7 @@ index 629c594fa573a47a33e4a7c59090e8825501aef2..c42caac58522129570bbca1e9db8b20b
  Object.defineProperty(exports, "__esModule", { value: true });
  const pMap = require("p-map");
  const { resolve, sep } = require("path");
-@@ -18,190 +40,198 @@ const github_api_1 = require("./github-api");
+@@ -18,190 +40,199 @@ const github_api_1 = require("./github-api");
  const markdown_renderer_1 = require("./markdown-renderer");
  const UNRELEASED_TAG = "___unreleased___";
  class Changelog {
@@ -322,6 +322,7 @@ index 629c594fa573a47a33e4a7c59090e8825501aef2..c42caac58522129570bbca1e9db8b20b
 -                    releaseMap[currentTag].commits.push(commit);
 -                }
 -            }
++        if (!_a?.user?.login) continue;
 +        let prUserLogin = (_a = commit.githubIssue) === null || _a === void 0 ? void 0 : _a.user.login;
 +        if (prUserLogin && !this.ignoreCommitter(prUserLogin)) {
 +          releaseMap[currentTag].commits.push(commit);
