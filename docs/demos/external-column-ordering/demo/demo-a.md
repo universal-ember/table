@@ -38,14 +38,14 @@ The order of the columns in the table
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta, columns } from 'ember-headless-table/plugins';
+import { headlessTable } from '@universal-ember/table';
+import { meta, columns } from '@universal-ember/table/plugins';
 import {
   ColumnReordering,
   ColumnOrder,
   setColumnOrder,
   moveLeft, moveRight
-} from 'ember-headless-table/plugins/column-reordering';
+} from '@universal-ember/table/plugins/column-reordering';
 
 import { DATA } from 'docs-app/sample-data';
 

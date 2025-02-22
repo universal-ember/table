@@ -36,7 +36,7 @@ There are convenience helpers for aiding in more ergonomic template usage when u
 ```gjs
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
-import { sortAscending, sortDescending, sort } from 'ember-headless-table/plugins/data-sorting';
+import { sortAscending, sortDescending, sort } from '@universal-ember/table/plugins/data-sorting';
 
 export const THead = <template>
   <thead>

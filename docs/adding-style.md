@@ -1,6 +1,6 @@
 # Adding style
 
-ember-headless-table supports any and all styling techniques.
+@universal-ember/table supports any and all styling techniques.
 - Traditional [CSS Stylesheets][css-stylesheets]
 - [CSS Modules][css-modules]
 - [Tailwind][css-tailwind]
@@ -18,7 +18,7 @@ If you use embroider + tailwind, and maybe also want CSS Modules, we recommend [
 
 <hr />
 
-Since ember-headless-table allows you to _bring your own markup_.
+Since @universal-ember/table allows you to _bring your own markup_.
 There is one caveat that we require a wrapper div so that the table can install a modifier that observes container resizes and other container-related events.
 
 
@@ -26,7 +26,7 @@ There is one caveat that we require a wrapper div so that the table can install 
 
 ```gjs
 import Component from '@glimmer/component';
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 export class TailwindDemo extends Component {
   table = headlessTable(this, {
@@ -81,7 +81,7 @@ Using co-located CSS in embroider following [this guide on discuss.ember.js.com]
 ```gjs
 /* c-s-s-demo/index.gjs */
 import Component from '@glimmer/component';
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 export class CSSDemo extends Component {
   table = headlessTable(this, {

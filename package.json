@@ -14,7 +14,7 @@
     "lint": "pnpm turbo lint",
     "lint:fix": "pnpm --filter '*' lint:fix",
     "start": "concurrently 'npm:start:*' --restart-after 5000 --prefix-colors cyan,white,yellow",
-    "start:addon": "pnpm --filter ember-headless-table start --no-watch.clearScreen",
+    "start:addon": "pnpm --filter @universal-ember/table start --no-watch.clearScreen",
     "start:docs": "pnpm turbo --filter docs-app start",
     "start:docs-api": "pnpm --filter 'docs-api' docs:watch --preserveWatchOutput",
     "start:tests": "pnpm turbo --filter test-app start",

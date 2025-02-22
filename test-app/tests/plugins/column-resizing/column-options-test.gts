@@ -8,10 +8,10 @@ import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { setOwner } from '@ember/application';
 
-import { headlessTable, type ColumnConfig } from 'ember-headless-table';
-import { meta } from 'ember-headless-table/plugins';
-import { ColumnResizing, resizeHandle, hasResizeHandle } from 'ember-headless-table/plugins/column-resizing';
-import { createHelpers, requestAnimationFrameSettled } from 'ember-headless-table/test-support';
+import { headlessTable, type ColumnConfig } from '@universal-ember/table';
+import { meta } from '@universal-ember/table/plugins';
+import { ColumnResizing, resizeHandle, hasResizeHandle } from '@universal-ember/table/plugins/column-resizing';
+import { createHelpers, requestAnimationFrameSettled } from '@universal-ember/table/test-support';
 
 import {
   TestStyles,

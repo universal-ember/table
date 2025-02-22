@@ -3,7 +3,7 @@ template: "v2-addon"
 
 # ---------------------
 
-addon: './ember-headless-table'
+addon: './@universal-ember/table'
 testApp: './test-app'
 
 lint:
@@ -53,7 +53,7 @@ extra:
         with:
           apiToken: ${{ secrets.UX_OSS_CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.UX_OSS_CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ember-headless-table
+          projectName: @universal-ember/table
           directory: ./docs-app/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 

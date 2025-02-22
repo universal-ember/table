@@ -14,7 +14,7 @@ interface ColumnVisibilityPreferences extends PluginPreferences {
   };
 }
 
-declare module 'ember-headless-table/plugins' {
+declare module '@universal-ember/table/plugins' {
   interface Registry {
     ColumnVisibility?: ColumnVisibilityPreferences;
   }

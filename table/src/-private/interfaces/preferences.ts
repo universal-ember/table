@@ -20,7 +20,7 @@ export interface TablePreferencesData {
 }
 
 /**
- * A type registry for ember-headless-table Plugin's Preferences.
+ * A type registry for @universal-ember/table Plugin's Preferences.
  * Meant to be declaration-merged so string lookups resolve to the correct type.
  *
  * And so that accessing the full "preferences" object from "persist"
@@ -29,13 +29,13 @@ export interface TablePreferencesData {
  *
  * As a plugin author, to help define what your preferences shape is, you may
  * ```ts
- * import { type PluginPreferences } from 'ember-headless-table/plugins';
+ * import { type PluginPreferences } from '@universal-ember/table/plugins';
  *
  * interface SortingPreferences extends PluginPreferences {
  *
  * }
  *
- * declare module 'ember-headless-table/plugins' {
+ * declare module '@universal-ember/table/plugins' {
  *   interface Registry {
  *     // The key *must* match the same of the class
  *     Sorting: SortingPreferences;

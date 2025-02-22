@@ -37,11 +37,11 @@
 import Component from '@glimmer/component';
 import { htmlSafe } from '@ember/template';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta } from 'ember-headless-table/plugins';
-import { ColumnVisibility } from 'ember-headless-table/plugins/column-visibility';
-import { ColumnReordering } from 'ember-headless-table/plugins/column-reordering';
-import { ColumnResizing, resizeHandle, isResizing } from 'ember-headless-table/plugins/column-resizing';
+import { headlessTable } from '@universal-ember/table';
+import { meta } from '@universal-ember/table/plugins';
+import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
+import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
+import { ColumnResizing, resizeHandle, isResizing } from '@universal-ember/table/plugins/column-resizing';
 
 import { DATA } from 'docs-app/sample-data';
 

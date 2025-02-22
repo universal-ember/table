@@ -1,5 +1,5 @@
-[![npm version](https://badge.fury.io/js/ember-headless-table.svg)](https://badge.fury.io/js/ember-headless-table)
-[![CI](https://github.com/CrowdStrike/ember-headless-table/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CrowdStrike/ember-headless-table/actions/workflows/ci.yml)
+[![npm version](https://badge.fury.io/js/@universal-ember/table.svg)](https://badge.fury.io/js/@universal-ember/table)
+[![CI](https://github.com/CrowdStrike/@universal-ember/table/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CrowdStrike/@universal-ember/table/actions/workflows/ci.yml)
 
 A headless table implementation that supports all the major product-level features needed for feature-rich tables.
 Bring your own markup and styles without the need to implement any of the table behaviors.
@@ -36,6 +36,6 @@ See the [Documentation][docs-app] for examples.
 
 [API Reference][docs-api] can be found [here][docs-api].
 
-[docs-app]: https://ember-headless-table.pages.dev/
-[docs-api]: https://ember-headless-table.pages.dev/api/modules/
+[docs-app]: https://@universal-ember/table.pages.dev/
+[docs-api]: https://@universal-ember/table.pages.dev/api/modules/
 

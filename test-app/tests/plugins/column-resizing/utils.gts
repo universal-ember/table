@@ -1,8 +1,8 @@
 import { findAll, settled } from '@ember/test-helpers';
 import { tracked } from '@glimmer/tracking';
 
-import { headlessTable, type ColumnConfig } from 'ember-headless-table';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
+import { headlessTable, type ColumnConfig } from '@universal-ember/table';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
 
 import * as QUnit from 'qunit';
 

@@ -28,7 +28,7 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 export default class extends Component {
   table = headlessTable(this, {

@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 
-import { orderOf } from 'ember-headless-table/plugins/column-reordering';
+import { orderOf } from '@universal-ember/table/plugins/column-reordering';
 
 module('Plugin | column-reordering | orderOf', function () {
   test('with no customizations, the original order is retained', function (assert) {

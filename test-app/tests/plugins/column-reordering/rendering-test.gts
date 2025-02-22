@@ -10,13 +10,13 @@ import { click, findAll, render, settled } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { columns } from 'ember-headless-table/plugins';
-import { ColumnOrder, ColumnReordering, moveLeft, moveRight, setColumnOrder } from 'ember-headless-table/plugins/column-reordering';
-import { ColumnVisibility, hide, show } from 'ember-headless-table/plugins/column-visibility';
+import { headlessTable } from '@universal-ember/table';
+import { columns } from '@universal-ember/table/plugins';
+import { ColumnOrder, ColumnReordering, moveLeft, moveRight, setColumnOrder } from '@universal-ember/table/plugins/column-reordering';
+import { ColumnVisibility, hide, show } from '@universal-ember/table/plugins/column-visibility';
 import { DATA } from 'test-app/data';
 
-import type { Column, PreferencesData } from 'ember-headless-table';
+import type { Column, PreferencesData } from '@universal-ember/table';
 
 /**
   * NOTE: these tests depend on the columnVisibility stuff working.

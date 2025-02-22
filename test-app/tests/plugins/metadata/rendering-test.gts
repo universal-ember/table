@@ -3,8 +3,8 @@ import { find, settled, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 
-import { headlessTable } from 'ember-headless-table';
-import { Metadata, forColumn, forTable } from 'ember-headless-table/plugins/metadata';
+import { headlessTable } from '@universal-ember/table';
+import { Metadata, forColumn, forTable } from '@universal-ember/table/plugins/metadata';
 
 import { setOwner } from '@ember/application';
 import { DATA } from 'test-app/data';

@@ -215,8 +215,8 @@ class ResizeHandle extends Modifier<{ Args: { Positional: [Column] } }> {
  * @example
  * ```js
  * import Component from '@glimmer/component';
- * import { meta } from 'ember-headless-table/plugins';
- * import { resizeHandle, ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
+ * import { meta } from '@universal-ember/table/plugins';
+ * import { resizeHandle, ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
  *
  * export default class TableHead extends Component {
  *   /* ✂️  *\/
@@ -246,8 +246,8 @@ class ResizeHandle extends Modifier<{ Args: { Positional: [Column] } }> {
  * @example
  * ```js
  * import Component from '@glimmer/component';
- * import { meta } from 'ember-headless-table/plugins';
- * import { resizeHandle, ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
+ * import { meta } from '@universal-ember/table/plugins';
+ * import { resizeHandle, ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
  *
  * export default class TableHead extends Component {
  *   /* ✂️  *\/

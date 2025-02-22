@@ -44,7 +44,7 @@ There are convenience helpers for aiding in more ergonomic template usage when u
 ```gjs
 import { on } from '@ember/modifier';
 import { fn } from '@ember/helper';
-import { toggle, isSelected } from 'ember-headless-table/plugins/row-selection';
+import { toggle, isSelected } from '@universal-ember/table/plugins/row-selection';
 
 export const Rows =
 <template>

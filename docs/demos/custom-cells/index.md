@@ -10,7 +10,7 @@ In strict mode, using bespoke components has far greater ergonomics.
 
 ```js
 import Component from '@glimmer/component';
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 const CustomBackground =
   <template>

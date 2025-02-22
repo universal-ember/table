@@ -44,9 +44,9 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta, columns } from 'ember-headless-table/plugins';
-import { ColumnVisibility, hide, show } from 'ember-headless-table/plugins/column-visibility';
+import { headlessTable } from '@universal-ember/table';
+import { meta, columns } from '@universal-ember/table/plugins';
+import { ColumnVisibility, hide, show } from '@universal-ember/table/plugins/column-visibility';
 
 import { DATA } from 'docs-app/sample-data';
 

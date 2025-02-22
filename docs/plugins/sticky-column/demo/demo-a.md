@@ -34,10 +34,10 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
-import { StickyColumns, isSticky, styleStringFor } from 'ember-headless-table/plugins/sticky-columns';
-import { ColumnResizing } from 'ember-headless-table/plugins/column-resizing';
-import { ColumnVisibility } from 'ember-headless-table/plugins/column-visibility';
+import { headlessTable } from '@universal-ember/table';
+import { StickyColumns, isSticky, styleStringFor } from '@universal-ember/table/plugins/sticky-columns';
+import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
+import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
 
 import { DATA } from 'docs-app/sample-data';
 

@@ -34,12 +34,12 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 
-import { headlessTable } from 'ember-headless-table';
-import { meta } from 'ember-headless-table/plugins';
+import { headlessTable } from '@universal-ember/table';
+import { meta } from '@universal-ember/table/plugins';
 import {
   DataSorting,
   sortDescending, sortAscending, sortDirection
-} from 'ember-headless-table/plugins/data-sorting';
+} from '@universal-ember/table/plugins/data-sorting';
 
 import { DATA } from 'docs-app/sample-data';
 

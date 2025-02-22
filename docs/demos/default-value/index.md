@@ -8,7 +8,7 @@ The default value can be changed in the column config.
 In strict mode, specifying a default value can be done like this:
 ```js
 import Component from '@glimmer/component';
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 export default class Demo extends Component {
   table = headlessTable(this, {

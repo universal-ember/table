@@ -14,7 +14,7 @@ interface SortingPreferences extends PluginPreferences {
   };
 }
 
-declare module 'ember-headless-table/plugins' {
+declare module '@universal-ember/table/plugins' {
   interface Registry {
     Sorting?: SortingPreferences;
   }

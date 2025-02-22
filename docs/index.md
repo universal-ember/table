@@ -20,16 +20,16 @@ title: Usage
 
 ## Installation
 
-Use your favorite package manager / installation tool -- the library is called `ember-headless-table`.
+Use your favorite package manager / installation tool -- the library is called `@universal-ember/table`.
 
 ```bash
-pnpm add ember-headless-table
+pnpm add @universal-ember/table
 # or
-yarn add ember-headless-table
+yarn add @universal-ember/table
 # or
-npm install ember-headless-table
+npm install @universal-ember/table
 # or
-ember install ember-headless-table
+ember install @universal-ember/table
 ```
 
 ## Optimizing Updates

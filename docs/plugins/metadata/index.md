@@ -13,7 +13,7 @@ headlessTable.
 For example, setting up the table can be done like:
 
 ```js
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 
 class Example {
   /* ... */
@@ -53,7 +53,7 @@ For example: rows may be their own component
 
 ```gjs
 // Two helpers are provided for accessing your Metadata
-import { forColumn /*, forTable */ } from 'ember-headless-table/plugins/metadata';
+import { forColumn /*, forTable */ } from '@universal-ember/table/plugins/metadata';
 
 const isBulkSelectable = (column) => forColumn(column, 'isBulkSelectable');
 

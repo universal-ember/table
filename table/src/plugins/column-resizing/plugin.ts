@@ -20,7 +20,7 @@ interface ColumnResizePreferences extends PluginPreferences {
   };
 }
 
-declare module 'ember-headless-table/plugins' {
+declare module '@universal-ember/table/plugins' {
   interface Registry {
     ColumnResize?: ColumnResizePreferences;
   }

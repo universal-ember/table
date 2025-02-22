@@ -28,7 +28,7 @@
 ```js component
 import Component from '@glimmer/component';
 
-import { headlessTable } from 'ember-headless-table';
+import { headlessTable } from '@universal-ember/table';
 import { DATA } from 'docs-app/sample-data';
 
 import { hbs } from 'ember-cli-htmlbars';

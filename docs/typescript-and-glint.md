@@ -20,7 +20,7 @@ If any bugs (or confusion) are encountered with the type inference, whether in J
 [gh-expect-type]: https://github.com/mmkal/expect-type
 [docs-semver]: https://semver.org/
 [docs-glint]: https://typed-ember.gitbook.io/glint/
-[self-issue]: https://github.com/CrowdStrike/ember-headless-table/issues
+[self-issue]: https://github.com/CrowdStrike/@universal-ember/table/issues
 
 ## In JavaScript and TypeScript
 
@@ -33,7 +33,7 @@ For example
 import {
   headlessTable,
   type ColumnConfig,
-} from 'ember-headless-table';
+} from '@universal-ember/table';
 
 class Demo {
   table = headlessTable(this, {
@@ -50,7 +50,7 @@ import { tracked } from '@glimmer/tracking';
 import {
   headlessTable,
   type ColumnConfig,
-} from 'ember-headless-table';
+} from '@universal-ember/table';
 
 interface MyData {
   foo: string;
