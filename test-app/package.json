@@ -73,13 +73,13 @@
     "ember-template-lint": "^7.0.0",
     "ember-try": "^3.0.0",
     "eslint": "^9.21.0",
-    "expect-type": "^0.14.2",
+    "expect-type": "^1.2.0",
     "loader.js": "^4.7.0",
     "pnpm-sync-dependencies-meta-injected": "^0.0.14",
     "prettier": "^3.5.3",
     "qunit": "^2.19.1",
     "qunit-dom": "^3.4.0",
-    "typescript": "~5.5.0",
+    "typescript": "~5.8.2",
     "webpack": "^5.74.0"
   },
   "ember": {

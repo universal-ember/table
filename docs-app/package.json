@@ -74,7 +74,7 @@
     "qunit": "^2.19.4",
     "qunit-dom": "^3.4.0",
     "tailwindcss": "^4.0.9",
-    "typescript": "~5.5.0",
+    "typescript": "~5.8.2",
     "webpack": "^5.83.1"
   },
   "ember": {
