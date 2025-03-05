@@ -27,7 +27,7 @@ ember install @universal-ember/table
 * ember-auto-import >= v2
 * ember-source >= 3.28
 * embroider safe + optimized
-* typescript >= 4.8, [rolling window policy](https://www.semver-ts.org/#decouple-typescript-support-from-lts-cycles), range: TS@current-2 to TS@current (3 version window).
+* typescript >= 5.1, [rolling window policy](https://www.semver-ts.org/#decouple-typescript-support-from-lts-cycles), range: TS@current-2 to TS@current (3 version window).
 * Glint -- 1.0+
 
 ### Usage
