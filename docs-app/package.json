@@ -7,7 +7,13 @@
   "license": "MIT",
   "author": "NullVoxPopuli",
   "scripts": {
-    "build:prod": "ember build --environment=production",
+    "build:test": "NODE_ENV=development vite build --mode test",
+    "build:prod": "vite build",
+    "lint:types": "glint",
+    "start": "vite --port 4201",
+    "test:ember": "pnpm build:test && pnpm dist:ember:test",
+    "test:preview": "pnpm vite preview",
+    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs --test-port 0",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
@@ -16,8 +22,6 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test:ember": "ember test",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "devDependencies": {
@@ -71,6 +75,7 @@
     "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
     "prettier": "^3.5.3",
+    "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.19.4",
     "qunit-dom": "^3.4.0",
     "tailwindcss": "^4.0.9",
