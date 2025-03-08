@@ -67,7 +67,7 @@
   },
   "dependencies": {
     "@ember/test-waiters": "^4.0.0",
-    "@embroider/router": "^2.0.0",
+    "@embroider/router": "alpha",
     "@universal-ember/table": "workspace:*",
     "dompurify": "^3.2.4",
     "ember-browser-services": "^5.0.1",

@@ -13,7 +13,6 @@ concurrency:
 
 env:
   CI: true
-  dist: table/dist
 
 jobs:
   install_dependencies:

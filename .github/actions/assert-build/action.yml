@@ -7,21 +7,21 @@ runs:
     shell: bash
     run: |-
       echo '
-        target: ${{ env.dist }}
+        target: table
         setup:
           run: pnpm build
           cwd: ./table
         expect: |
-          index.js
-          index.js.map
-          index.d.ts
-          plugins/index.js
-          plugins/data-sorting/index.js
-          plugins/column-reordering/index.js
-          plugins/column-resizing/index.js
-          plugins/column-visibility/index.js
-          plugins/sticky-columns/index.js
-          test-support/index.js
+          dist/index.js
+          dist/index.js.map
+          declarations/index.d.ts
+          dist/plugins/index.js
+          dist/plugins/data-sorting/index.js
+          dist/plugins/column-reordering/index.js
+          dist/plugins/column-resizing/index.js
+          dist/plugins/column-visibility/index.js
+          dist/plugins/sticky-columns/index.js
+          dist/test-support/index.js
 
       ' >> assert-contents.config.yml
       npx assert-folder-contents
@@ -29,5 +29,5 @@ runs:
   - name: Upload dist assets to cache
     uses: actions/upload-artifact@v4
     with:
-      name: dist
-      path: ${{ env.dist }}
+      name: bulit-assets
+      path: table
