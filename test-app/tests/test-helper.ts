@@ -7,10 +7,10 @@ import {
 import { getPendingWaiterState } from '@ember/test-waiters';
 import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';
-import { start } from 'ember-qunit';
+import { start as qunitStart, setupEmberOnerrorValidation } from 'ember-qunit';
 
-import Application from 'test-app/app';
-import config from 'test-app/config/environment';
+import Application from '#src/app';
+import config from '#config';
 
 // Prevent tests from re-ordering on refresh
 // (use seed query param to deliberately re-order)
@@ -23,8 +23,10 @@ QUnit.testDone(() => {
   resetOnerror();
 });
 
-setup(QUnit.assert);
-
-setApplication(Application.create(config.APP));
-
-start();
+export function start() {
+  enterTestMode();
+  setApplication(Application.create(config.APP));
+  setup(QUnit.assert);
+  setupEmberOnerrorValidation();
+  qunitStart();
+}

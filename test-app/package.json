@@ -1,14 +1,24 @@
 {
   "name": "test-app",
   "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#src/*": "./src/*",
+    "#config": "./src/config.js",
+    "#components/*": "./src/components/*"
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./src/*"
+  },
   "private": true,
   "description": "Test app for the @universal-ember/table addon",
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "NullVoxPopuli",
   "scripts": {
-    "build:prod": "ember build --environment=production",
-    "format": "prettier . --cache --write",
+    "build:prod": "vite build",
+    "build:test": "NODE_ENV=development vite build --mode test",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
     "lint:format": "prettier . --cache --check",
@@ -16,10 +26,10 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test": "npm-run-all lint \"test:!(watch)\"",
-    "test:ember": "ember test",
-    "test:watch": "ember test --server",
+    "start": "vite",
+    "test": "pnpm test:ember",
+    "test:ember": "pnpm build:test && pnpm dist:ember:test",
+    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "dependencies": {
@@ -75,6 +85,10 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
   },
   "volta": {
     "extends": "../package.json"

@@ -1,11 +1,12 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
   "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
+    "environment": ["ember-template-imports"]
   },
   "compilerOptions": {
     "noEmitOnError": false,
     "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
 
     // The combination of `baseUrl` with `paths` allows Ember's classic package
     // layout, which is not resolvable with the Node resolution algorithm, to
@@ -16,7 +17,8 @@
       "test-app/*": ["app/*"],
       "*": ["types/*"]
     },
-    "types": ["ember-source/types"]
-  },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"]
+    "types": ["vite/client",
+"@embroider/core/virtual",
+      "ember-source/types"]
+  }
 }
