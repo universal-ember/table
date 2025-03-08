@@ -54,7 +54,6 @@
     "@embroider/macros": "alpha",
     "@embroider/vite": "alpha",
     "@glimmer/component": "^2.0.0",
-    "@glimmer/tracking": "^1.1.2",
     "@glint/core": "unstable",
     "@glint/environment-ember-loose": "unstable",
     "@glint/environment-ember-template-imports": "unstable",
