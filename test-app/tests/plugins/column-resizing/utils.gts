@@ -1,10 +1,10 @@
-import { findAll, settled } from '@ember/test-helpers';
-import { tracked } from '@glimmer/tracking';
+import { findAll, settled } from "@ember/test-helpers";
+import { tracked } from "@glimmer/tracking";
 
-import { headlessTable, type ColumnConfig } from '@universal-ember/table';
-import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
+import { headlessTable, type ColumnConfig } from "@universal-ember/table";
+import { ColumnResizing } from "@universal-ember/table/plugins/column-resizing";
 
-import * as QUnit from 'qunit';
+import * as QUnit from "qunit";
 
 type Changes = Array<{ value: () => number; by: number; msg?: string }>;
 
@@ -15,7 +15,10 @@ type Changes = Array<{ value: () => number; by: number; msg?: string }>;
  *  - no border styling around cells
  *  - bax shadows are fine (for testing where column boundaries are (for humans))
  */
-export async function assertChanges(block: () => Promise<void> | void, changes: Changes) {
+export async function assertChanges(
+  block: () => Promise<void> | void,
+  changes: Changes,
+) {
   let initialValues = changes.map((change) => change.value());
 
   await block();
@@ -42,75 +45,80 @@ export function width(element: Element) {
 }
 
 export const getColumns = () => {
-  let ths = findAll('th');
+  let ths = findAll("th");
 
   return ths;
 };
 
-  export class Context {
-    @tracked containerWidth = 1000;
+export class Context {
+  @tracked containerWidth = 1000;
 
-    columns: ColumnConfig[]  = [
-      { name: 'A', key: 'A' },
-      { name: 'B', key: 'B' },
-      { name: 'C', key: 'C' },
-      { name: 'D', key: 'D' },
-    ];
+  columns: ColumnConfig[] = [
+    { name: "A", key: "A" },
+    { name: "B", key: "B" },
+    { name: "C", key: "C" },
+    { name: "D", key: "D" },
+  ];
 
-    setContainerWidth = async (width: number) => {
-      this.containerWidth = width;
-      await new Promise((resolve) => requestAnimationFrame(resolve));
-    };
+  setContainerWidth = async (width: number) => {
+    this.containerWidth = width;
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+  };
 
-    table = headlessTable(this, {
-      columns: () => this.columns,
-      data: () => [] as unknown[],
-      plugins: [ColumnResizing],
-    });
-  }
+  table = headlessTable(this, {
+    columns: () => this.columns,
+    data: () => [] as unknown[],
+    plugins: [ColumnResizing],
+  });
+}
 
-  // This removes some styling that is put on the testing container that
-  // interferes with the tests used in this module.  Mainly, the testing
-  // container has a transform: scale(0.5); by default that makes it
-  // difficult to write these tests in a way that makes sense because
-  // everything needs to be cut in half to account for it.
-  //
-  // See https://github.com/emberjs/ember-qunit/issues/521
-export  const TestStyles = <template>
-    <style>
-      #ember-testing { width: initial; height: initial; transform: initial; }
-      #ember-testing-container { width: 1000px; }
+// This removes some styling that is put on the testing container that
+// interferes with the tests used in this module.  Mainly, the testing
+// container has a transform: scale(0.5); by default that makes it
+// difficult to write these tests in a way that makes sense because
+// everything needs to be cut in half to account for it.
+//
+// See https://github.com/emberjs/ember-qunit/issues/521
+export const TestStyles = <template>
+  <style>
+    #ember-testing {
+      width: initial;
+      height: initial;
+      transform: initial;
+    }
+    #ember-testing-container {
+      width: 1000px;
+    }
 
-      [data-handle] {
-        cursor: ew-resize;
-        display: inline-block;
-        position: absolute;
-        left: -0.3rem;
-        width: 1rem;
-        text-align: center;
-      }
+    [data-handle] {
+      cursor: ew-resize;
+      display: inline-block;
+      position: absolute;
+      left: -0.3rem;
+      width: 1rem;
+      text-align: center;
+    }
 
-      th:first-child [data-handle] {
-        display: none;
-      }
+    th:first-child [data-handle] {
+      display: none;
+    }
 
-      [data-scroll-container] {
-        height: 100%;
-        overflow: auto;
-      }
+    [data-scroll-container] {
+      height: 100%;
+      overflow: auto;
+    }
 
-      * {
-        box-sizing: border-box;
-      }
+    * {
+      box-sizing: border-box;
+    }
 
-      table {
-        border-collapse: collapse;
-      }
+    table {
+      border-collapse: collapse;
+    }
 
-      th {
-        position: relative;
-        box-shadow: inset 1px 0px 0px rgb(0 0 0 / 50%);
-      }
-    </style>
-  </template>;
-
+    th {
+      position: relative;
+      box-shadow: inset 1px 0px 0px rgb(0 0 0 / 50%);
+    }
+  </style>
+</template>;

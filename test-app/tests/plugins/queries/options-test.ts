@@ -47,11 +47,19 @@ module('Plugins | Queries | options', function (hooks) {
 
       let columnOptions = options.forColumn(columnAt(table, 0), DataSorting);
 
-      expectTypeOf(columnOptions?.sortProperty).toEqualTypeOf<string | undefined>();
-      expectTypeOf(columnOptions?.isSortable).toEqualTypeOf<boolean | undefined>();
+      expectTypeOf(columnOptions?.sortProperty).toEqualTypeOf<
+        string | undefined
+      >();
+      expectTypeOf(columnOptions?.isSortable).toEqualTypeOf<
+        boolean | undefined
+      >();
 
       assert.true(columnOptions?.isSortable, 'option matches: isSortable');
-      assert.strictEqual(columnOptions?.sortProperty, 'foo', 'option matches: sortProperty');
+      assert.strictEqual(
+        columnOptions?.sortProperty,
+        'foo',
+        'option matches: sortProperty',
+      );
     });
 
     test('options were not provided', function (assert) {
@@ -69,7 +77,7 @@ module('Plugins | Queries | options', function (hooks) {
       assert.strictEqual(
         options.forColumn(columnAt(table, 0), DataSorting)?.sortProperty,
         undefined,
-        'no user-provided option'
+        'no user-provided option',
       );
     });
 
@@ -96,7 +104,7 @@ module('Plugins | Queries | options', function (hooks) {
       assert.strictEqual(
         options.forColumn(columnAt(table, 0), DataSorting)?.sortProperty,
         'foo',
-        'property exists'
+        'property exists',
       );
     });
   });
@@ -118,10 +126,20 @@ module('Plugins | Queries | options', function (hooks) {
       expectTypeOf(tableOptions?.onSort).toEqualTypeOf<
         ((sorts: SortItem<unknown>[]) => void) | undefined
       >();
-      expectTypeOf(tableOptions?.sorts).toEqualTypeOf<SortItem<unknown>[] | undefined>();
+      expectTypeOf(tableOptions?.sorts).toEqualTypeOf<
+        SortItem<unknown>[] | undefined
+      >();
 
-      assert.strictEqual(tableOptions?.sorts, sortingOptions.sorts, 'option data matches');
-      assert.strictEqual(tableOptions?.onSort, sortingOptions.onSort, 'option function matches');
+      assert.strictEqual(
+        tableOptions?.sorts,
+        sortingOptions.sorts,
+        'option data matches',
+      );
+      assert.strictEqual(
+        tableOptions?.onSort,
+        sortingOptions.onSort,
+        'option function matches',
+      );
     });
 
     test('options were not provided', function (assert) {
@@ -134,7 +152,7 @@ module('Plugins | Queries | options', function (hooks) {
       assert.strictEqual(
         options.forTable(table, DataSorting)?.sorts,
         undefined,
-        'no user-provided option'
+        'no user-provided option',
       );
     });
 
@@ -148,7 +166,7 @@ module('Plugins | Queries | options', function (hooks) {
       assert.strictEqual(
         options.forTable(table, DataSorting)?.sorts,
         undefined,
-        'no options to get'
+        'no options to get',
       );
     });
   });

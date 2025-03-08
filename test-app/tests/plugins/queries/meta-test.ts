@@ -19,7 +19,7 @@ module('Plugins | Queries | meta', function (hooks) {
     // Normally we wouldn't TS-ignore, but plugins could be authored in
     // non-TS environements. We need to have appropriate errors for the situation.
     //
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
     // @ts-ignore
     meta = {};
   }
@@ -27,13 +27,15 @@ module('Plugins | Queries | meta', function (hooks) {
   // Normally we wouldn't TS-ignore, but plugins could be authored in
   // non-TS environements. We need to have appropriate errors for the situation.
   //
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
   // @ts-ignore
   class PluginNoMeta extends BasePlugin {
     name = 'queries-no-meta-test-plugin';
   }
 
-  class TestPlugin extends BasePlugin<{ Meta: { Column: TestColumnMeta; Table: TestTableMeta } }> {
+  class TestPlugin extends BasePlugin<{
+    Meta: { Column: TestColumnMeta; Table: TestTableMeta };
+  }> {
     name = 'queries-meta-test-plugin';
     meta = {
       column: TestColumnMeta,
@@ -62,7 +64,7 @@ module('Plugins | Queries | meta', function (hooks) {
       columns?: ColumnConfig[];
       data?: unknown[];
       extraPlugins?: TableConfig<unknown>['plugins'];
-    }
+    },
   ) {
     return headlessTable(ctx, {
       columns: () => columns || [],
@@ -80,7 +82,10 @@ module('Plugins | Queries | meta', function (hooks) {
 
       let columnMeta = meta.forColumn(columnAt(table, 0), TestPlugin);
 
-      assert.true(columnMeta instanceof TestColumnMeta, `instance of the Plugin's meta.column`);
+      assert.true(
+        columnMeta instanceof TestColumnMeta,
+        `instance of the Plugin's meta.column`,
+      );
     });
 
     test('plugin does not exist', function (assert) {
@@ -93,7 +98,7 @@ module('Plugins | Queries | meta', function (hooks) {
           meta.forColumn(columnAt(table, 0), TestPlugin);
         },
         /\[TestPlugin\] cannot get plugin instance of unregistered plugin/,
-        'plugin is unregistered'
+        'plugin is unregistered',
       );
     });
 
@@ -124,7 +129,7 @@ module('Plugins | Queries | meta', function (hooks) {
           meta.forColumn(columnAt(table, 0), PluginNoMeta);
         },
         /<#queries-no-meta-test-plugin> plugin does not have meta specified/,
-        'plugin has no meta'
+        'plugin has no meta',
       );
     });
 
@@ -139,7 +144,7 @@ module('Plugins | Queries | meta', function (hooks) {
           meta.forColumn(columnAt(table, 0), PluginIncompleteMeta);
         },
         /<#queries-incomplete-meta-test-plugin> plugin does not specify column meta/,
-        'plugin has incomplete meta'
+        'plugin has incomplete meta',
       );
     });
 
@@ -167,7 +172,10 @@ module('Plugins | Queries | meta', function (hooks) {
 
       let tableMeta = meta.forTable(table, TestPlugin);
 
-      assert.true(tableMeta instanceof TestTableMeta, `instance of the Plugin's meta.table`);
+      assert.true(
+        tableMeta instanceof TestTableMeta,
+        `instance of the Plugin's meta.table`,
+      );
     });
 
     test('plugin does not exist', function (assert) {
@@ -180,7 +188,7 @@ module('Plugins | Queries | meta', function (hooks) {
           meta.forTable(table, TestPlugin);
         },
         /\[TestPlugin\] cannot get plugin instance of unregistered plugin/,
-        'plugin is unregistered'
+        'plugin is unregistered',
       );
     });
 
@@ -195,7 +203,7 @@ module('Plugins | Queries | meta', function (hooks) {
           meta.forTable(table, PluginNoMeta);
         },
         /<#queries-no-meta-test-plugin> plugin does not have meta specified/,
-        'plugin has no meta'
+        'plugin has no meta',
       );
     });
 
@@ -210,7 +218,7 @@ module('Plugins | Queries | meta', function (hooks) {
           meta.forTable(table, PluginIncompleteMeta);
         },
         /<#queries-incomplete-meta-test-plugin> plugin does not specify table meta/,
-        'plugin has incomplete meta'
+        'plugin has incomplete meta',
       );
     });
 
@@ -259,9 +267,15 @@ module('Plugins | Queries | meta', function (hooks) {
           extraPlugins: [FeatureProvidingPlugin],
         });
 
-        let tableMeta = meta.withFeature.forColumn(columnAt(table, 0), 'feature-a');
+        let tableMeta = meta.withFeature.forColumn(
+          columnAt(table, 0),
+          'feature-a',
+        );
 
-        assert.true(tableMeta instanceof TestColumnMeta, `instance of the Plugin's meta.column`);
+        assert.true(
+          tableMeta instanceof TestColumnMeta,
+          `instance of the Plugin's meta.column`,
+        );
       });
 
       test('feature does not exist', function (assert) {
@@ -274,7 +288,7 @@ module('Plugins | Queries | meta', function (hooks) {
             meta.withFeature.forColumn(columnAt(table, 0), 'feature-a');
           },
           /Could not find plugin with feature: feature-a. Available features: \[none\]/,
-          'feature not found'
+          'feature not found',
         );
       });
 
@@ -289,7 +303,7 @@ module('Plugins | Queries | meta', function (hooks) {
             meta.withFeature.forColumn(columnAt(table, 0), 'feature-a');
           },
           /Could not find plugin with feature: feature-a. Available features: feature-b/,
-          'feature not found'
+          'feature not found',
         );
       });
 
@@ -316,7 +330,10 @@ module('Plugins | Queries | meta', function (hooks) {
 
         let tableMeta = meta.withFeature.forTable(table, 'feature-a');
 
-        assert.true(tableMeta instanceof TestTableMeta, `instance of the Plugin's meta.table`);
+        assert.true(
+          tableMeta instanceof TestTableMeta,
+          `instance of the Plugin's meta.table`,
+        );
       });
 
       test('feature does not exist', function (assert) {
@@ -327,7 +344,7 @@ module('Plugins | Queries | meta', function (hooks) {
             meta.withFeature.forTable(table, 'feature-a');
           },
           /Could not find plugin with feature: feature-a. Available features: \[none\]/,
-          'feature not found'
+          'feature not found',
         );
       });
 
@@ -341,7 +358,7 @@ module('Plugins | Queries | meta', function (hooks) {
             meta.withFeature.forTable(table, 'feature-a');
           },
           /Could not find plugin with feature: feature-a. Available features: feature-b/,
-          'feature not found'
+          'feature not found',
         );
       });
 

@@ -17,6 +17,9 @@ module('Plugins | Queries | hasPlugin', function (hooks) {
     });
 
     assert.true(hasPlugin(table, DataSorting), 'has DataSorting');
-    assert.false(hasPlugin(table, ColumnResizing), 'does not have ColumnResizing');
+    assert.false(
+      hasPlugin(table, ColumnResizing),
+      'does not have ColumnResizing',
+    );
   });
 });

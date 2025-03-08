@@ -22,7 +22,7 @@ module.exports = function (defaults) {
     staticInvokables: true,
     staticEmberSource: true,
     packagerOptions: {
-       webpackConfig: { }
-    }
+      webpackConfig: {},
+    },
   });
 };

@@ -38,7 +38,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['E', 4],
           ['F', 5],
         ],
-        'test is set up'
+        'test is set up',
       );
     });
 
@@ -64,7 +64,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['A', 4],
           ['E', 5],
         ],
-        'columns are in the correct order'
+        'columns are in the correct order',
       );
     });
   });
@@ -100,7 +100,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['E', 4],
           ['F', 5],
         ],
-        'test is set up'
+        'test is set up',
       );
     });
 
@@ -163,7 +163,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['E', 4],
           ['F', 5],
         ],
-        'test is set up'
+        'test is set up',
       );
     });
 
@@ -226,7 +226,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['E', 4],
           ['F', 5],
         ],
-        'test is set up'
+        'test is set up',
       );
     });
 
@@ -243,7 +243,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['E', 4],
           ['F', 5],
         ],
-        'order is unchanged'
+        'order is unchanged',
       );
     });
 

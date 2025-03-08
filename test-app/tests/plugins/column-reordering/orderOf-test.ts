@@ -6,7 +6,7 @@ module('Plugin | column-reordering | orderOf', function () {
   test('with no customizations, the original order is retained', function (assert) {
     let result = orderOf(
       [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
-      new Map<string, number>()
+      new Map<string, number>(),
     );
 
     assert.strictEqual(result.size, 4);
@@ -17,14 +17,17 @@ module('Plugin | column-reordering | orderOf', function () {
         ['B', 1],
         ['C', 2],
         ['D', 3],
-      ]
+      ],
     );
   });
 
   test('with 1 custom position, columns are merged appropriately', function (assert) {
     let customized = new Map<string, number>([['B', 0]]);
 
-    let result = orderOf([{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }], customized);
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
+      customized,
+    );
 
     assert.strictEqual(result.size, 4);
     assert.deepEqual(
@@ -34,7 +37,7 @@ module('Plugin | column-reordering | orderOf', function () {
         ['A', 1],
         ['C', 2],
         ['D', 3],
-      ]
+      ],
     );
   });
 
@@ -44,7 +47,10 @@ module('Plugin | column-reordering | orderOf', function () {
       ['C', 3],
     ]);
 
-    let result = orderOf([{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }], customized);
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
+      customized,
+    );
 
     assert.strictEqual(result.size, 4);
     assert.deepEqual(
@@ -54,7 +60,7 @@ module('Plugin | column-reordering | orderOf', function () {
         ['A', 1],
         ['D', 2],
         ['C', 3],
-      ]
+      ],
     );
   });
 
@@ -64,7 +70,10 @@ module('Plugin | column-reordering | orderOf', function () {
       ['D', 2],
     ]);
 
-    let result = orderOf([{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }], customized);
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
+      customized,
+    );
 
     assert.strictEqual(result.size, 4);
     assert.deepEqual(
@@ -74,7 +83,7 @@ module('Plugin | column-reordering | orderOf', function () {
         ['A', 1],
         ['D', 2],
         ['C', 3],
-      ]
+      ],
     );
   });
 
@@ -84,7 +93,10 @@ module('Plugin | column-reordering | orderOf', function () {
       ['D', 2],
     ]);
 
-    let result = orderOf([{ key: 'A' }, { key: 'B' }, { key: 'C' }], customized);
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'B' }, { key: 'C' }],
+      customized,
+    );
 
     assert.strictEqual(result.size, 3);
     assert.deepEqual(
@@ -93,7 +105,7 @@ module('Plugin | column-reordering | orderOf', function () {
         ['B', 0],
         ['A', 1],
         ['C', 2],
-      ]
+      ],
     );
   });
 
@@ -105,7 +117,10 @@ module('Plugin | column-reordering | orderOf', function () {
       ['D', 3],
     ]);
 
-    let result = orderOf([{ key: 'A' }, { key: 'C' }, { key: 'D' }], customized);
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'C' }, { key: 'D' }],
+      customized,
+    );
 
     assert.strictEqual(result.size, 3);
     assert.deepEqual(
@@ -114,7 +129,7 @@ module('Plugin | column-reordering | orderOf', function () {
         ['A', 1],
         ['C', 2],
         ['D', 3],
-      ]
+      ],
     );
   });
 });

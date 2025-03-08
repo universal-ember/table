@@ -1,41 +1,45 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
 // @ts-ignore
-import { on } from '@ember/modifier';
+import { on } from "@ember/modifier";
 // @ts-ignore
-import { fn } from '@ember/helper';
-import { assert, assert as debugAssert } from '@ember/debug';
-import { click, findAll, render } from '@ember/test-helpers';
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
+import { fn } from "@ember/helper";
+import { assert, assert as debugAssert } from "@ember/debug";
+import { click, findAll, render } from "@ember/test-helpers";
+import { module, test } from "qunit";
+import { setupRenderingTest } from "ember-qunit";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta } from '@universal-ember/table/plugins';
-import { DataSorting, SortDirection } from '@universal-ember/table/plugins/data-sorting';
+import { headlessTable } from "@universal-ember/table";
+import { meta } from "@universal-ember/table/plugins";
+import {
+  DataSorting,
+  SortDirection,
+} from "@universal-ember/table/plugins/data-sorting";
 
-import type { Column } from '@universal-ember/table';
-import type { SortItem } from '@universal-ember/table/plugins/data-sorting';
-import { setOwner } from '@ember/application';
-import { DATA } from 'test-app/data';
+import type { Column } from "@universal-ember/table";
+import type { SortItem } from "@universal-ember/table/plugins/data-sorting";
+import { setOwner } from "@ember/application";
+import { DATA } from "test-app/data";
 
-module('Plugins | dataSorting', function (hooks) {
+module("Plugins | dataSorting", function (hooks) {
   setupRenderingTest(hooks);
 
   let ctx: Context;
-  let getColumns = () => findAll('th');
+  let getColumns = () => findAll("th");
   let getColumn = (index: number) => findAll(`tr td:nth-child(${index + 1})`);
-  let valuesOf = (index: number) => getColumn(index).map((element) => element.textContent?.trim());
+  let valuesOf = (index: number) =>
+    getColumn(index).map((element) => element.textContent?.trim());
   let asc = async (column: Element) => {
-    let button = column.querySelector('button.asc');
+    let button = column.querySelector("button.asc");
 
-    assert('Missing ascending button', button);
+    assert("Missing ascending button", button);
 
     await click(button);
   };
   let desc = async (column: Element) => {
-    let button = column.querySelector('button.desc');
+    let button = column.querySelector("button.desc");
 
-    assert('Missing ascending button', button);
+    assert("Missing ascending button", button);
 
     await click(button);
   };
@@ -44,10 +48,10 @@ module('Plugins | dataSorting', function (hooks) {
     @tracked containerWidth = 1000;
 
     columns = [
-      { name: 'A', key: 'A' },
-      { name: 'B', key: 'B' },
-      { name: 'C', key: 'C' },
-      { name: 'D', key: 'D' },
+      { name: "A", key: "A" },
+      { name: "B", key: "B" },
+      { name: "C", key: "C" },
+      { name: "D", key: "D" },
     ] as const;
 
     table = headlessTable(this, {
@@ -71,7 +75,7 @@ module('Plugins | dataSorting', function (hooks) {
     };
 
     <template>
-      {{!-- template-lint-disable no-forbidden-elements --}}
+      {{! template-lint-disable no-forbidden-elements }}
       <style>
         [data-scroll-container] {
           height: 100%;
@@ -83,8 +87,8 @@ module('Plugins | dataSorting', function (hooks) {
           border: 1px solid #999;
         }
       </style>
-      {{!-- template-lint-disable no-inline-styles --}}
-      {{!-- template-lint-disable style-concatenation --}}
+      {{! template-lint-disable no-inline-styles }}
+      {{! template-lint-disable style-concatenation }}
       <div data-scroll-container {{this.table.modifiers.container}}>
         <table>
           <thead>
@@ -92,10 +96,18 @@ module('Plugins | dataSorting', function (hooks) {
               {{#each this.table.columns as |column|}}
                 <th {{this.table.modifiers.columnHeader column}}>
                   <span>({{this.sortDirection column}}) {{column.name}}</span>
-                  <button class="asc" type="button" {{on 'click' (fn this.sort column)}}>
+                  <button
+                    class="asc"
+                    type="button"
+                    {{on "click" (fn this.sort column)}}
+                  >
                     Asc
                   </button>
-                  <button class="desc" type="button" {{on 'click' (fn this.sort column)}}>
+                  <button
+                    class="desc"
+                    type="button"
+                    {{on "click" (fn this.sort column)}}
+                  >
                     Desc
                   </button>
                 </th>
@@ -121,7 +133,7 @@ module('Plugins | dataSorting', function (hooks) {
     setOwner(ctx, this.owner);
   });
 
-  module('with no options specified', function (hooks) {
+  module("with no options specified", function (hooks) {
     class DefaultOptions extends Context {
       table = headlessTable(this, {
         columns: () => [...this.columns],
@@ -135,37 +147,35 @@ module('Plugins | dataSorting', function (hooks) {
       setOwner(ctx, this.owner);
     });
 
-    test('sorting does nothing', async function (assert) {
+    test("sorting does nothing", async function (assert) {
       await render(
         // @ts-ignore
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
+        <template><TestComponentA @ctx={{ctx}} /></template>,
       );
 
       let [columnA] = getColumns();
 
-      debugAssert('columnA is missing', columnA);
+      debugAssert("columnA is missing", columnA);
 
       let valuesOfA = valuesOf(0);
 
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
 
       await asc(columnA);
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
 
       await desc(columnA);
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
     });
   });
 
-  module('with basic sorting configured', function (hooks) {
+  module("with basic sorting configured", function (hooks) {
     class Configured extends Context {
       @tracked
       sorts: SortItem<unknown>[] = [
         {
           direction: SortDirection.Ascending,
-          property: 'A',
+          property: "A",
         },
       ];
 
@@ -174,7 +184,9 @@ module('Plugins | dataSorting', function (hooks) {
           this.columns[0],
           {
             ...this.columns[1],
-            pluginOptions: [DataSorting.forColumn(() => ({ isSortable: false }))],
+            pluginOptions: [
+              DataSorting.forColumn(() => ({ isSortable: false })),
+            ],
           },
           this.columns[2],
           this.columns[3],
@@ -194,12 +206,10 @@ module('Plugins | dataSorting', function (hooks) {
       setOwner(ctx, this.owner);
     });
 
-    test('sorting works', async function (assert) {
+    test("sorting works", async function (assert) {
       await render(
         // @ts-ignore
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
+        <template><TestComponentA @ctx={{ctx}} /></template>,
       );
 
       let [columnA] = getColumns();
@@ -208,21 +218,19 @@ module('Plugins | dataSorting', function (hooks) {
 
       let valuesOfA = valuesOf(0);
 
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
 
       await asc(columnA);
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
 
       await desc(columnA);
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
     });
 
-    test('The second column is not sortable', async function (assert) {
+    test("The second column is not sortable", async function (assert) {
       await render(
         // @ts-ignore
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
+        <template><TestComponentA @ctx={{ctx}} /></template>,
       );
 
       let [, columnB] = getColumns();
@@ -232,16 +240,16 @@ module('Plugins | dataSorting', function (hooks) {
       let valuesOfA = valuesOf(0);
       let valuesOfB = valuesOf(1);
 
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
-      assert.deepEqual(valuesOfB, ['Berry', 'Plantain', 'Banana']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
+      assert.deepEqual(valuesOfB, ["Berry", "Plantain", "Banana"]);
 
       await asc(columnB);
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
-      assert.deepEqual(valuesOfB, ['Berry', 'Plantain', 'Banana']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
+      assert.deepEqual(valuesOfB, ["Berry", "Plantain", "Banana"]);
 
       await desc(columnB);
-      assert.deepEqual(valuesOfA, ['Apple', 'Avocado', 'A Squash']);
-      assert.deepEqual(valuesOfB, ['Berry', 'Plantain', 'Banana']);
+      assert.deepEqual(valuesOfA, ["Apple", "Avocado", "A Squash"]);
+      assert.deepEqual(valuesOfB, ["Berry", "Plantain", "Banana"]);
     });
   });
 });

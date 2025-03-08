@@ -35,7 +35,7 @@ module('Plugins | Queries | preferences', function (hooks) {
       data?: PreferencesData;
       onPersist?: <Data>(key: string, data: Data) => void;
       restoreFrom?: (key: string) => PreferencesData;
-    }
+    },
   ) {
     return headlessTable(ctx, {
       columns: () => columns || [],
@@ -77,10 +77,14 @@ module('Plugins | Queries | preferences', function (hooks) {
 
         assert.false(
           table.preferences.storage.isAtDefault,
-          'preferences storage is not at default'
+          'preferences storage is not at default',
         );
 
-        assert.strictEqual(prefs.get('some-key'), 2, `some-key's value restored`);
+        assert.strictEqual(
+          prefs.get('some-key'),
+          2,
+          `some-key's value restored`,
+        );
 
         assert.verifySteps(['restore: test-preferences']);
       });
@@ -97,15 +101,30 @@ module('Plugins | Queries | preferences', function (hooks) {
 
         let prefs = preferences.forTable(table, DataSorting);
 
-        assert.true(table.preferences.storage.isAtDefault, 'preferences storage is at default');
+        assert.true(
+          table.preferences.storage.isAtDefault,
+          'preferences storage is at default',
+        );
 
-        assert.strictEqual(prefs.get('some-key'), undefined, 'some-key has no value');
+        assert.strictEqual(
+          prefs.get('some-key'),
+          undefined,
+          'some-key has no value',
+        );
 
         prefs.delete('some-key');
-        assert.strictEqual(prefs.get('some-key'), undefined, 'deleting does not set a value');
+        assert.strictEqual(
+          prefs.get('some-key'),
+          undefined,
+          'deleting does not set a value',
+        );
 
         prefs.set('some-key', 2);
-        assert.strictEqual(prefs.get('some-key'), 2, 'a stored value is retreived');
+        assert.strictEqual(
+          prefs.get('some-key'),
+          2,
+          'a stored value is retreived',
+        );
 
         assert.verifySteps([
           'restore: test-preferences',
@@ -120,7 +139,11 @@ module('Plugins | Queries | preferences', function (hooks) {
         let preferencesData: PreferencesData = {};
 
         let table = createTable(this, {
-          columns: [{ key: 'first!' }, { key: 'the-column-key' }, { key: 'third?' }],
+          columns: [
+            { key: 'first!' },
+            { key: 'the-column-key' },
+            { key: 'third?' },
+          ],
           onPersist: (key, data) => {
             assert.step(`persist: ${key}`);
             preferencesData = data as PreferencesData; // hopefully;
@@ -157,17 +180,21 @@ module('Plugins | Queries | preferences', function (hooks) {
               },
             },
           },
-          'the persisted preferences structure is restored'
+          'the persisted preferences structure is restored',
         );
 
         assert.false(
           table.preferences.storage.isAtDefault,
-          'preferences storage is not at default'
+          'preferences storage is not at default',
         );
 
         let prefs = preferences.forColumn(columnAt(table, 1), DataSorting);
 
-        assert.strictEqual(prefs.get('some-preference'), 2, 'stored value is accessible');
+        assert.strictEqual(
+          prefs.get('some-preference'),
+          2,
+          'stored value is accessible',
+        );
 
         prefs.set('some-key', 3);
         prefs.set('some-preference', 4);
@@ -187,7 +214,7 @@ module('Plugins | Queries | preferences', function (hooks) {
               },
             },
           },
-          'persisted data matches with our updates'
+          'persisted data matches with our updates',
         );
 
         assert.verifySteps([
@@ -212,7 +239,7 @@ module('Plugins | Queries | preferences', function (hooks) {
               },
             },
           },
-          'persisted data matches with our deletion'
+          'persisted data matches with our deletion',
         );
 
         assert.verifySteps(['persist: test-preferences']);
@@ -222,7 +249,11 @@ module('Plugins | Queries | preferences', function (hooks) {
         let preferencesData: PreferencesData = {};
 
         let table = createTable(this, {
-          columns: [{ key: 'first!' }, { key: 'the-column-key' }, { key: 'third?' }],
+          columns: [
+            { key: 'first!' },
+            { key: 'the-column-key' },
+            { key: 'third?' },
+          ],
           onPersist: (key, data) => {
             assert.step(`persist: ${key}`);
             preferencesData = data as PreferencesData; // hopefully
@@ -234,20 +265,26 @@ module('Plugins | Queries | preferences', function (hooks) {
           },
         });
 
-        assert.true(table.preferences.storage.isAtDefault, 'empty preferences is "at default"');
+        assert.true(
+          table.preferences.storage.isAtDefault,
+          'empty preferences is "at default"',
+        );
         assert.deepEqual(
           table.preferences.storage.serialize(),
           { plugins: {} },
-          'empty preferences are empty'
+          'empty preferences are empty',
         );
 
         let prefs = preferences.forColumn(columnAt(table, 1), DataSorting);
 
-        assert.true(table.preferences.storage.isAtDefault, 'preferences storage is at default');
+        assert.true(
+          table.preferences.storage.isAtDefault,
+          'preferences storage is at default',
+        );
         assert.strictEqual(
           prefs.get('some-preference'),
           undefined,
-          'when at default, getting data should be undefined'
+          'when at default, getting data should be undefined',
         );
 
         prefs.set('some-key', 3);
@@ -268,7 +305,7 @@ module('Plugins | Queries | preferences', function (hooks) {
               },
             },
           },
-          'persisted structure contains the data we set earlier'
+          'persisted structure contains the data we set earlier',
         );
 
         assert.verifySteps([

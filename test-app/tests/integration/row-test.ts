@@ -27,6 +27,7 @@ module('Integration | Row', function () {
     assert.strictEqual(ctx.table.rows.length, 0);
 
     ctx.data = [stableObject];
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     ctx.table.rows;
     await settled();
 
@@ -34,6 +35,7 @@ module('Integration | Row', function () {
 
     let firstRow = ctx.table.rows[0];
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     ctx.table.rows;
     await settled();
 
