@@ -4,7 +4,7 @@ import { ColumnReordering } from '../../plugins/column-reordering/index.ts';
 import { ColumnResizing } from '../../plugins/column-resizing/index.ts';
 import { DataSorting } from '../../plugins/data-sorting/index.ts';
 
-import type { Table } from '[public-types]';
+import type { Table } from '../../index.ts';
 
 // We're testing types, not behaviors
 const x = 0 as unknown as Table<{ x: number }>;

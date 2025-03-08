@@ -9,9 +9,9 @@ import { StickyColumns } from '../../plugins/sticky-columns/index.ts';
 
 import type { Plugins } from '../../plugins/-private/utils';
 import type { SortItem } from '../../plugins/data-sorting';
-import type { Plugin } from '[public-plugin-types]';
-import type { TableConfig } from '[public-types]';
-import type { Constructor } from '#private-types';
+import type { Plugin } from '../../plugins/index.ts';
+import type { TableConfig } from '../../index.ts';
+import type { Constructor } from '../../-private/private-types.ts';
 
 type TablePluginConfig = NonNullable<TableConfig<unknown>['plugins']>;
 
