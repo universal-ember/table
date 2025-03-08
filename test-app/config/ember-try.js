@@ -39,16 +39,16 @@ module.exports = async function () {
     'qunit-dom': '^3.4.0',
   };
 
-  const ember6Deps = {
-    ...ember5Deps,
-    '@ember/string': '^4.0.0',
-    '@ember/test-waiters': '^4.0.0',
-    '@ember/test-helpers': '^4.0.4',
-    'ember-cli': '^6.1.0',
-    'ember-load-initializers': '^3.0.1',
-    'ember-resolver': '^13.1.0',
-    typescript: '^5.7.0',
-  };
+  // const ember6Deps = {
+  //   ...ember5Deps,
+  //   '@ember/string': '^4.0.0',
+  //   '@ember/test-waiters': '^4.0.0',
+  //   '@ember/test-helpers': '^4.0.4',
+  //   'ember-cli': '^6.1.0',
+  //   'ember-load-initializers': '^3.0.1',
+  //   'ember-resolver': '^13.1.0',
+  //   typescript: '^5.7.0',
+  // };
 
   return {
     usePnpm: true,
@@ -101,7 +101,6 @@ module.exports = async function () {
         name: 'ember-release',
         npm: {
           devDependencies: {
-            ...ember6Deps,
             'ember-source': releaseVersion,
           },
         },
@@ -110,7 +109,6 @@ module.exports = async function () {
         name: 'ember-beta',
         npm: {
           devDependencies: {
-            ...ember6Deps,
             'ember-source': await getChannelURL('beta'),
           },
         },
@@ -119,7 +117,6 @@ module.exports = async function () {
         name: 'ember-canary',
         npm: {
           devDependencies: {
-            ...ember6Deps,
             'ember-source': await getChannelURL('canary'),
           },
         },
