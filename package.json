@@ -42,7 +42,7 @@
       ]
     },
     "overrides": {
-      "@embroider/macros": "^1.10.0",
+      "@embroider/macros": "alpha",
       "ember-auto-import": "^2.6.2"
     },
     "patchedDependencies": {
