@@ -20,7 +20,9 @@ type TablePluginConfig = NonNullable<TableConfig<unknown>['plugins']>;
 expectTypeOf<Plugins>().toMatchTypeOf<TablePluginConfig>();
 expectTypeOf<Constructor<Plugin>[]>().toMatchTypeOf<TablePluginConfig>();
 expectTypeOf<[Constructor<Plugin>]>().toMatchTypeOf<TablePluginConfig>();
-expectTypeOf<[Constructor<Plugin>, Constructor<Plugin>]>().toMatchTypeOf<TablePluginConfig>();
+expectTypeOf<
+  [Constructor<Plugin>, Constructor<Plugin>]
+>().toMatchTypeOf<TablePluginConfig>();
 expectTypeOf<Constructor<BasePlugin>[]>().toMatchTypeOf<TablePluginConfig>();
 expectTypeOf<[Constructor<BasePlugin>]>().toMatchTypeOf<TablePluginConfig>();
 expectTypeOf<
@@ -52,7 +54,10 @@ expectTypeOf([StickyColumns]).toMatchTypeOf<TablePluginConfig>();
 
 /////////////////////////////////////////////
 // The various ways to define plugins
-expectTypeOf([DataSorting, ColumnReordering]).toMatchTypeOf<TablePluginConfig>();
+expectTypeOf([
+  DataSorting,
+  ColumnReordering,
+]).toMatchTypeOf<TablePluginConfig>();
 
 const onSort = (_sorts: SortItem<number>[]) => {
   /* intentionally empty */
@@ -60,4 +65,6 @@ const onSort = (_sorts: SortItem<number>[]) => {
 const sorts: SortItem<number>[] = [];
 
 expectTypeOf([DataSorting.with(() => ({}))]).toMatchTypeOf<TablePluginConfig>();
-expectTypeOf([DataSorting.with(() => ({ onSort, sorts }))]).toMatchTypeOf<TablePluginConfig>();
+expectTypeOf([
+  DataSorting.with(() => ({ onSort, sorts })),
+]).toMatchTypeOf<TablePluginConfig>();

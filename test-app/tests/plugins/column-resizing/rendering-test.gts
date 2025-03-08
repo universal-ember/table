@@ -626,8 +626,8 @@ module('Plugins | resizing', function (hooks) {
         await render(
           <template>
             {{#each ctx.table.columns as |column|}}
-              <button id="{{column.key}}-left" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
-              <button id="{{column.key}}-right" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
+              <button id="{{column.key}}-left" type="button" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
+              <button id="{{column.key}}-right" type="button" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
               <br>
             {{/each}}
 

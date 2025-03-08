@@ -70,7 +70,10 @@ export class ColumnMeta {
   }
 
   get canMoveRight() {
-    return this.#tableMeta.getPosition(this.column) !== this.#tableMeta.columns.length - 1;
+    return (
+      this.#tableMeta.getPosition(this.column) !==
+      this.#tableMeta.columns.length - 1
+    );
   }
 
   get cannotMoveLeft() {
@@ -169,7 +172,9 @@ export class TableMeta {
    */
   @action
   private read() {
-    const order = preferences.forTable(this.table, ColumnReordering).get('order');
+    const order = preferences
+      .forTable(this.table, ColumnReordering)
+      .get('order');
 
     if (!order) return;
 
@@ -204,7 +209,7 @@ export class ColumnOrder {
       columns: () => Column[];
       save?: (order: Map<string, number>) => void;
       existingOrder?: Map<string, number>;
-    }
+    },
   ) {
     if (args.existingOrder) {
       this.map = new TrackedMap(args.existingOrder);
@@ -310,12 +315,17 @@ export class ColumnOrder {
     assert(
       `Pre-existing position for ${key} could not be found. Does the column exist? ` +
         `The current positions are: ` +
-        [...this.orderedMap.entries()].map((entry) => entry.join(' => ')).join(', ') +
+        [...this.orderedMap.entries()]
+          .map((entry) => entry.join(' => '))
+          .join(', ') +
         ` and the availableColumns are: ` +
-        this.args.columns().map((column) => column.key).join(', ') +
+        this.args
+          .columns()
+          .map((column) => column.key)
+          .join(', ') +
         ` and current "map" (${this.map.size}) is: ` +
         [...this.map.entries()].map((entry) => entry.join(' => ')).join(', '),
-      undefined !== currentPosition
+      undefined !== currentPosition,
     );
 
     /**
@@ -327,7 +337,9 @@ export class ColumnOrder {
     }
 
     const keyByPosition = new Map<number, string>(
-      [...this.orderedMap.entries()].map((entry) => entry.reverse() as [number, string])
+      [...this.orderedMap.entries()].map(
+        (entry) => entry.reverse() as [number, string],
+      ),
     );
 
     for (const [existingPosition, key] of keyByPosition.entries()) {
@@ -367,7 +379,7 @@ export class ColumnOrder {
     assert(
       `No position found for ${key}. Is the column used within this table?`,
       /* 0 is falsey, but it's a valid value for position */
-      undefined !== result
+      undefined !== result,
     );
 
     return result;
@@ -384,11 +396,14 @@ export class ColumnOrder {
   @cached
   get orderedColumns(): Column[] {
     const availableColumns = this.args.columns();
-    const availableByKey = availableColumns.reduce((keyMap, column) => {
-      keyMap[column.key] = column;
+    const availableByKey = availableColumns.reduce(
+      (keyMap, column) => {
+        keyMap[column.key] = column;
 
-      return keyMap;
-    }, {} as Record<string, Column>);
+        return keyMap;
+      },
+      {} as Record<string, Column>,
+    );
     const mergedOrder = orderOf(availableColumns, this.map);
 
     const result: Column[] = Array.from({ length: availableColumns.length });
@@ -408,7 +423,7 @@ export class ColumnOrder {
           .map((c) => c.key)
           .join(', ')} -- ` +
         `available columns: ${availableColumns.map((c) => c.key).join(', ')}`,
-      result.filter(Boolean).length === availableColumns.length
+      result.filter(Boolean).length === availableColumns.length,
     );
 
     return result.filter(Boolean);
@@ -423,13 +438,13 @@ export class ColumnOrder {
  */
 export function orderOf(
   columns: { key: string }[],
-  currentOrder: Map<string, number>
+  currentOrder: Map<string, number>,
 ): Map<string, number> {
   const result = new Map<string, number>();
   const availableColumns = columns.map((column) => column.key);
   const availableSet = new Set(availableColumns);
   const current = new Map<number, string>(
-    [...currentOrder.entries()].map(([key, position]) => [position, key])
+    [...currentOrder.entries()].map(([key, position]) => [position, key]),
   );
 
   /**

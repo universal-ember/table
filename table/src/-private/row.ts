@@ -10,7 +10,10 @@ export class Row<DataType = Record<string, unknown>> {
   get index(): number {
     const i = this.table.rows.values().indexOf(this);
 
-    assert(`Row is no longer a part of the table, something has gone wrong`, i >= 0);
+    assert(
+      `Row is no longer a part of the table, something has gone wrong`,
+      i >= 0,
+    );
 
     return i;
   }
@@ -36,14 +39,15 @@ export class Row<DataType = Record<string, unknown>> {
   handleClick(event: MouseEvent) {
     assert(
       `expected event.target to be an instance of HTMLElement`,
-      event.target instanceof HTMLElement || event.target instanceof SVGElement
+      event.target instanceof HTMLElement || event.target instanceof SVGElement,
     );
 
     const selection = document.getSelection();
 
     if (selection) {
       const { type, anchorNode } = selection;
-      const isSelectingText = type === 'Range' && event.target?.contains(anchorNode);
+      const isSelectingText =
+        type === 'Range' && event.target?.contains(anchorNode);
 
       if (isSelectingText) {
         event.stopPropagation();

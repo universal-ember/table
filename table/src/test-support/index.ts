@@ -10,7 +10,7 @@ export function createHelpers(selectors: Selectors) {
   async function resize(parent: Element, delta: number) {
     assert(
       `Can't use the dragLeft/dragRight/resize helpers without a \`resizeHandle\` selector`,
-      selectors.resizeHandle
+      selectors.resizeHandle,
     );
 
     const element = parent.querySelector(selectors.resizeHandle);
@@ -36,7 +36,7 @@ export function createHelpers(selectors: Selectors) {
   function horizontalScrollElement() {
     assert(
       `Can't use scrollRight/swipeLeft helpers without a \`scrollContainer\` selector`,
-      selectors.scrollContainer
+      selectors.scrollContainer,
     );
 
     const element = find(selectors.scrollContainer);

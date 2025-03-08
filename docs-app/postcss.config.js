@@ -13,7 +13,7 @@ if (env === 'production') {
   plugins.push(
     require('cssnano')({
       preset: 'default',
-    })
+    }),
   );
 }
 

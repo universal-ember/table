@@ -92,10 +92,10 @@ module('Plugins | dataSorting', function (hooks) {
               {{#each this.table.columns as |column|}}
                 <th {{this.table.modifiers.columnHeader column}}>
                   <span>({{this.sortDirection column}}) {{column.name}}</span>
-                  <button class="asc" {{on 'click' (fn this.sort column)}}>
+                  <button class="asc" type="button" {{on 'click' (fn this.sort column)}}>
                     Asc
                   </button>
-                  <button class="desc" {{on 'click' (fn this.sort column)}}>
+                  <button class="desc" type="button" {{on 'click' (fn this.sort column)}}>
                     Desc
                   </button>
                 </th>

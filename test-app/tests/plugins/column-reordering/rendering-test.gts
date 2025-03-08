@@ -67,10 +67,10 @@ module('Plugins | columnReordering', function (hooks) {
       <div>
         {{#each (columns.for this.table ColumnVisibility) as |column|}}
           {{column.name}}:
-          <button class="hide {{column.key}}" {{on 'click' (fn hide column)}}>
+          <button class="hide {{column.key}}" type="button" {{on 'click' (fn hide column)}}>
             Hide
           </button>
-          <button class="show {{column.key}}" {{on 'click' (fn show column)}}>
+          <button class="show {{column.key}}" type="button" {{on 'click' (fn show column)}}>
             Show
           </button>
           <br>
@@ -82,10 +82,10 @@ module('Plugins | columnReordering', function (hooks) {
             <tr>
               {{#each (columns.for this.table) as |column|}}
                 <th class="{{column.key}}" {{this.table.modifiers.columnHeader column}}>
-                  <button class="left" {{on 'click' (fn moveLeft column)}}>
+                  <button class="left" type="button" {{on 'click' (fn moveLeft column)}}>
                     Move Left
                   </button>
-                  <button class="right" {{on 'click' (fn moveRight column)}}>
+                  <button class="right" type="button" {{on 'click' (fn moveRight column)}}>
                     Move Right
                   </button>
                   <br>
@@ -147,10 +147,10 @@ module('Plugins | columnReordering', function (hooks) {
                 <tr>
                   {{#each (columns.for ctx.table) as |column|}}
                     <th class="{{column.key}}" {{ctx.table.modifiers.columnHeader column}}>
-                      <button class="left" {{on 'click' (fn moveLeft column)}}>
+                      <button class="left" type="button" {{on 'click' (fn moveLeft column)}}>
                         Move Left
                       </button>
-                      <button class="right" {{on 'click' (fn moveRight column)}}>
+                      <button class="right" type="button" {{on 'click' (fn moveRight column)}}>
                         Move Right
                       </button>
                       <br>

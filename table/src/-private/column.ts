@@ -25,7 +25,10 @@ export class Column<T = unknown> {
     return this.config.name;
   }
 
-  constructor(public table: Table<T>, public config: ColumnConfig<T>) {}
+  constructor(
+    public table: Table<T>,
+    public config: ColumnConfig<T>,
+  ) {}
 
   @action
   getValueForRow(row: Row<T>): ContentValue {

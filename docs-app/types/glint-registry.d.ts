@@ -1,8 +1,8 @@
-import "@glint/environment-ember-loose";
-import "@glint/environment-ember-template-imports";
+import '@glint/environment-ember-loose';
+import '@glint/environment-ember-template-imports';
 
 // Types from libraries
-import type { HelperLike, ModifierLike } from "@glint/template";
+import type { HelperLike, ModifierLike } from '@glint/template';
 // Our own types
 import type FeatureCard from 'docs-app/components/feature-card';
 import type ThemeSwitcher from 'docs-app/components/theme-switcher';
@@ -11,11 +11,11 @@ declare module '@ember/modifier' {
   export const on: ModifierLike<{
     Args: {
       Positional: [eventName: string, eventHandler: (event: Event) => void];
-    }
-  }>
+    };
+  }>;
 }
 
-declare module "@glint/environment-ember-loose/registry" {
+declare module '@glint/environment-ember-loose/registry' {
   export default interface Registry {
     ThemeSwitcher: typeof ThemeSwitcher;
     FeatureCard: typeof FeatureCard;
@@ -26,7 +26,6 @@ declare module "@glint/environment-ember-loose/registry" {
         Positional: [string];
       };
       Return: string;
-    }>
+    }>;
   }
 }
-

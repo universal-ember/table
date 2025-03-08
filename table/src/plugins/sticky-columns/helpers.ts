@@ -9,7 +9,7 @@ export const isSticky = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, StickyColumns).isSticky;
 
 export const styleFor = <DataType = unknown>(
-  column: Column<DataType>
+  column: Column<DataType>,
 ): Partial<CSSStyleDeclaration> => meta.forColumn(column, StickyColumns).style;
 
 /**
@@ -24,7 +24,7 @@ export const styleFor = <DataType = unknown>(
  * for consumers, but is a reasonable trade-off for now.
  */
 export const styleStringFor = <DataType = unknown>(
-  column: Column<DataType>
+  column: Column<DataType>,
 ): ReturnType<typeof htmlSafe> => {
   const columnMeta = meta.forColumn(column, StickyColumns);
 

@@ -9,7 +9,10 @@ import { modifier } from 'ember-modifier';
 import { Resource } from 'ember-modify-based-class-resource';
 import { map } from 'reactiveweb/map';
 
-import { normalizePluginsConfig, verifyPlugins } from '../plugins/-private/utils.ts';
+import {
+  normalizePluginsConfig,
+  verifyPlugins,
+} from '../plugins/-private/utils.ts';
 import { Column } from './column.ts';
 import { TablePreferences } from './preferences.ts';
 import { Row } from './row.ts';
@@ -133,12 +136,17 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
   modifiers = {
     container: modifier(
       (element: HTMLElement): Destructor => {
-        const modifiers = this.plugins.map((plugin) => plugin.containerModifier);
-        const composed = composeFunctionModifiers([attachContainer, ...modifiers]);
+        const modifiers = this.plugins.map(
+          (plugin) => plugin.containerModifier,
+        );
+        const composed = composeFunctionModifiers([
+          attachContainer,
+          ...modifiers,
+        ]);
 
         return composed(element, this as Table<DataType>);
       },
-      { eager: false }
+      { eager: false },
     ),
 
     // resize: ResizeModifier,
@@ -152,12 +160,14 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
     //       that has tracked changes would run, leaving the other modifiers alone
     columnHeader: modifier(
       (element: HTMLElement, [column]: [Column<DataType>]): Destructor => {
-        const modifiers = this.plugins.map((plugin) => plugin.headerCellModifier);
+        const modifiers = this.plugins.map(
+          (plugin) => plugin.headerCellModifier,
+        );
         const composed = composeFunctionModifiers(modifiers);
 
         return composed(element, { column, table: this });
       },
-      { eager: false }
+      { eager: false },
     ),
 
     row: modifier(
@@ -167,7 +177,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
         return composed(element, { row, table: this });
       },
-      { eager: false }
+      { eager: false },
     ),
   };
 
@@ -193,7 +203,10 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
         const owner = getOwner(this);
 
-        assert(`The Table does not have an owner. cannot create a plugin without an owner`, owner);
+        assert(
+          `The Table does not have an owner. cannot create a plugin without an owner`,
+          owner,
+        );
         setOwner(plugin, owner);
 
         return plugin;
@@ -208,7 +221,9 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
   /**
    * Get the active plugin instance for the given plugin class
    */
-  pluginOf<Instance extends BasePlugin<any>>(klass: Class<Instance>): Instance | undefined {
+  pluginOf<Instance extends BasePlugin<any>>(
+    klass: Class<Instance>,
+  ): Instance | undefined {
     const result = this.plugins.find((plugin) => plugin instanceof klass);
 
     /**
@@ -264,7 +279,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
             throw new Error(
               `Every column key in the table's column config must be unique. ` +
                 `Found duplicate entry: ${columnConfig.key}. ` +
-                `All keys used: ${allKeys}`
+                `All keys used: ${allKeys}`,
             );
           }
 
@@ -275,7 +290,10 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
       return result;
     },
     map: (config) => {
-      return new Column<DataType>(this, { ...DEFAULT_COLUMN_CONFIG, ...config });
+      return new Column<DataType>(this, {
+        ...DEFAULT_COLUMN_CONFIG,
+        ...config,
+      });
     },
   });
 

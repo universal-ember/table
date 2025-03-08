@@ -11,7 +11,10 @@ import type {
 export class TablePreferences {
   storage = new TrackedPreferences();
 
-  constructor(private key: string, private adapter?: Adapter) {
+  constructor(
+    private key: string,
+    private adapter?: Adapter,
+  ) {
     if (this.adapter) {
       this.restore(this.adapter);
     }
@@ -60,7 +63,9 @@ class TrackedPreferences {
   plugins = new Map<string, TrackedPluginPrefs>();
 
   get isAtDefault(): boolean {
-    return [...this.plugins.values()].every((pluginPrefs) => pluginPrefs.isAtDefault);
+    return [...this.plugins.values()].every(
+      (pluginPrefs) => pluginPrefs.isAtDefault,
+    );
   }
 
   forPlugin(name: string) {
@@ -110,7 +115,10 @@ class TrackedPluginPrefs<PluginName = unknown> {
   columns = new Map<string, TrackedMap<string, unknown>>();
 
   get isAtDefault(): boolean {
-    return this.table.size === 0 && [...this.columns.values()].every((x) => x.size === 0);
+    return (
+      this.table.size === 0 &&
+      [...this.columns.values()].every((x) => x.size === 0)
+    );
   }
 
   forColumn = (key: string): TrackedMap<string, unknown> => {
@@ -162,7 +170,7 @@ class TrackedPluginPrefs<PluginName = unknown> {
      *       each time there is a cast, there is a greater risk of runtime error.
      */
     this.table = new TrackedMap<string, PreferencesTableValues<PluginName>>(
-      Object.entries(table) as [string, PreferencesTableValues<PluginName>][]
+      Object.entries(table) as [string, PreferencesTableValues<PluginName>][],
     );
   }
 }

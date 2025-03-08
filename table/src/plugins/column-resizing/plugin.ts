@@ -7,7 +7,11 @@ import { preferences } from '[public-plugin-types]';
 
 import { BasePlugin, columns, meta, options } from '../-private/base.ts';
 import { applyStyles } from '../-private/utils.ts';
-import { getAccurateClientHeight, getAccurateClientWidth, totalGapOf } from './utils.ts';
+import {
+  getAccurateClientHeight,
+  getAccurateClientWidth,
+  totalGapOf,
+} from './utils.ts';
 
 import type { ColumnApi, PluginPreferences } from '[public-plugin-types]';
 import type { Column, Table } from '[public-types]';
@@ -136,13 +140,16 @@ export class ColumnMeta {
   @cached
   get options() {
     const columnOptions = options.forColumn(this.column, ColumnResizing);
-    const filteredOptions = Object.entries(columnOptions || {}).reduce((result, [k, v]) => {
-      if (ALLOWED_COLUMN_OPTIONS.includes(k)) {
-        result[k] = v;
-      }
+    const filteredOptions = Object.entries(columnOptions || {}).reduce(
+      (result, [k, v]) => {
+        if (ALLOWED_COLUMN_OPTIONS.includes(k)) {
+          result[k] = v;
+        }
 
-      return result;
-    }, {} as Record<string, unknown>) as ColumnOptions;
+        return result;
+      },
+      {} as Record<string, unknown>,
+    ) as ColumnOptions;
 
     return {
       ...DEFAULT_COLUMN_OPTIONS,
@@ -159,7 +166,9 @@ export class ColumnMeta {
   }
 
   get initialWidth() {
-    const savedWidth = preferences.forColumn(this.column, ColumnResizing).get('width');
+    const savedWidth = preferences
+      .forColumn(this.column, ColumnResizing)
+      .get('width');
 
     if (!savedWidth) {
       return this.options.width;
@@ -187,7 +196,9 @@ export class ColumnMeta {
 
     if (!previous) return false;
 
-    return this.isResizable && meta.forColumn(previous, ColumnResizing).isResizable;
+    return (
+      this.isResizable && meta.forColumn(previous, ColumnResizing).isResizable
+    );
   }
 
   get width() {
@@ -196,7 +207,9 @@ export class ColumnMeta {
     if (!width) {
       const { defaultColumnWidth } = this.tableMeta;
 
-      width = defaultColumnWidth ? Math.max(defaultColumnWidth, this.minWidth) : this.minWidth;
+      width = defaultColumnWidth
+        ? Math.max(defaultColumnWidth, this.minWidth)
+        : this.minWidth;
     }
 
     return width;
@@ -240,10 +253,12 @@ export class ColumnMeta {
 function distributeDelta(delta: number, visibleColumns: Column[]) {
   if (delta === 0) return;
 
-  const metas = visibleColumns.map((column) => meta.forColumn(column, ColumnResizing));
+  const metas = visibleColumns.map((column) =>
+    meta.forColumn(column, ColumnResizing),
+  );
 
   const resizableMetas = metas.filter(
-    (meta) => meta.isResizable && (delta < 0 ? meta.canShrink : true)
+    (meta) => meta.isResizable && (delta < 0 ? meta.canShrink : true),
   );
 
   const columnDelta = delta / resizableMetas.length;
@@ -287,11 +302,16 @@ export class TableMeta {
   }
 
   get visibleColumnMetas() {
-    return this.#availableColumns.map((column) => meta.forColumn(column, ColumnResizing));
+    return this.#availableColumns.map((column) =>
+      meta.forColumn(column, ColumnResizing),
+    );
   }
 
   get totalInitialColumnWidths() {
-    return this.visibleColumnMetas.reduce((acc, meta) => (acc += meta.initialWidth ?? 0), 0);
+    return this.visibleColumnMetas.reduce(
+      (acc, meta) => (acc += meta.initialWidth ?? 0),
+      0,
+    );
   }
 
   get columnsWithoutInitialWidth() {
@@ -299,7 +319,10 @@ export class TableMeta {
   }
 
   get totalVisibleColumnsWidth() {
-    return this.visibleColumnMetas.reduce((acc, column) => (acc += column.width ?? 0), 0);
+    return this.visibleColumnMetas.reduce(
+      (acc, column) => (acc += column.width ?? 0),
+      0,
+    );
   }
 
   @action
@@ -327,7 +350,10 @@ export class TableMeta {
 
   @action
   onTableResize(entry: ResizeObserverEntry) {
-    assert('scroll container element must be an HTMLElement', entry.target instanceof HTMLElement);
+    assert(
+      'scroll container element must be an HTMLElement',
+      entry.target instanceof HTMLElement,
+    );
 
     this.scrollContainerWidth = getAccurateClientWidth(entry.target);
     this.scrollContainerHeight = getAccurateClientHeight(entry.target);
@@ -336,7 +362,8 @@ export class TableMeta {
     //       card-list will provide its own column-resizing plugin
     //       by sub-classing this one, and defining its own way of calculating the "diff"
     const totalGap = totalGapOf(entry.target.querySelector('[role="row"]'));
-    const diff = this.scrollContainerWidth - this.totalVisibleColumnsWidth - totalGap;
+    const diff =
+      this.scrollContainerWidth - this.totalVisibleColumnsWidth - totalGap;
 
     distributeDelta(diff, this.#availableColumns);
   }
@@ -376,10 +403,15 @@ export class TableMeta {
 
     const growingColumnMeta = meta.forColumn(growingColumn, ColumnResizing);
 
-    assert('cannot resize a column that does not have a width', growingColumnMeta.width);
+    assert(
+      'cannot resize a column that does not have a width',
+      growingColumnMeta.width,
+    );
 
     const shrinkableColumns =
-      delta > 0 ? columns.after(growingColumn) : columns.before(growingColumn).reverse();
+      delta > 0
+        ? columns.after(growingColumn)
+        : columns.before(growingColumn).reverse();
 
     const shrinkableColumnsMetas = shrinkableColumns
       .map((column) => meta.forColumn(column, ColumnResizing))
@@ -390,7 +422,10 @@ export class TableMeta {
     while (shrinkableColumnsMetas.length > 0) {
       const shrinkingColumnMeta = shrinkableColumnsMetas.shift();
 
-      assert('cannot resize a column that does not have a width', shrinkingColumnMeta?.width);
+      assert(
+        'cannot resize a column that does not have a width',
+        shrinkingColumnMeta?.width,
+      );
 
       const actualDelta = Math.min(remainder, shrinkingColumnMeta.roomToShrink);
 

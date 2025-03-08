@@ -38,10 +38,14 @@ interface FullExtendedSignature extends PluginSignature {
   };
 }
 
-expectTypeOf<ColumnOptionsFor<FullExtendedSignature>>().toEqualTypeOf<AColumnOptions>();
+expectTypeOf<
+  ColumnOptionsFor<FullExtendedSignature>
+>().toEqualTypeOf<AColumnOptions>();
 expectTypeOf<OptionsFor<FullExtendedSignature>>().toEqualTypeOf<AOptions>();
 expectTypeOf<TableMetaFor<FullExtendedSignature>>().toEqualTypeOf<ATableMeta>();
-expectTypeOf<ColumnMetaFor<FullExtendedSignature>>().toEqualTypeOf<AColumnMeta>();
+expectTypeOf<
+  ColumnMetaFor<FullExtendedSignature>
+>().toEqualTypeOf<AColumnMeta>();
 expectTypeOf<RowMetaFor<FullExtendedSignature>>().toEqualTypeOf<ARowMeta>();
 
 interface FullFreeformSignature {
@@ -56,10 +60,14 @@ interface FullFreeformSignature {
   };
 }
 
-expectTypeOf<ColumnOptionsFor<FullFreeformSignature>>().toEqualTypeOf<AColumnOptions>();
+expectTypeOf<
+  ColumnOptionsFor<FullFreeformSignature>
+>().toEqualTypeOf<AColumnOptions>();
 expectTypeOf<OptionsFor<FullFreeformSignature>>().toEqualTypeOf<AOptions>();
 expectTypeOf<TableMetaFor<FullFreeformSignature>>().toEqualTypeOf<ATableMeta>();
-expectTypeOf<ColumnMetaFor<FullFreeformSignature>>().toEqualTypeOf<AColumnMeta>();
+expectTypeOf<
+  ColumnMetaFor<FullFreeformSignature>
+>().toEqualTypeOf<AColumnMeta>();
 expectTypeOf<RowMetaFor<FullFreeformSignature>>().toEqualTypeOf<ARowMeta>();
 
 interface WithoutOptions {
@@ -92,10 +100,16 @@ expectTypeOf<RowMetaFor<WithoutMeta>>().toEqualTypeOf<never>();
 expectTypeOf<
   ColumnOptionsFor<{ Options: { Column: AColumnOptions } }>
 >().toEqualTypeOf<AColumnOptions>();
-expectTypeOf<ColumnOptionsFor<{ Options: { Plugin: AOptions } }>>().toEqualTypeOf<EmptyObject>();
+expectTypeOf<
+  ColumnOptionsFor<{ Options: { Plugin: AOptions } }>
+>().toEqualTypeOf<EmptyObject>();
 
-expectTypeOf<OptionsFor<{ Options: { Plugin: AOptions } }>>().toEqualTypeOf<AOptions>();
-expectTypeOf<OptionsFor<{ Options: { Column: AColumnOptions } }>>().toEqualTypeOf<EmptyObject>();
+expectTypeOf<
+  OptionsFor<{ Options: { Plugin: AOptions } }>
+>().toEqualTypeOf<AOptions>();
+expectTypeOf<
+  OptionsFor<{ Options: { Column: AColumnOptions } }>
+>().toEqualTypeOf<EmptyObject>();
 
 expectTypeOf<
   TableMetaFor<{
@@ -104,8 +118,12 @@ expectTypeOf<
     };
   }>
 >().toEqualTypeOf<ATableMeta>();
-expectTypeOf<TableMetaFor<{ Meta: { Column: AColumnMeta } }>>().toEqualTypeOf<never>();
-expectTypeOf<TableMetaFor<{ Meta: { Row: ARowMeta } }>>().toEqualTypeOf<never>();
+expectTypeOf<
+  TableMetaFor<{ Meta: { Column: AColumnMeta } }>
+>().toEqualTypeOf<never>();
+expectTypeOf<
+  TableMetaFor<{ Meta: { Row: ARowMeta } }>
+>().toEqualTypeOf<never>();
 
 expectTypeOf<
   ColumnMetaFor<{
@@ -114,8 +132,12 @@ expectTypeOf<
     };
   }>
 >().toEqualTypeOf<never>();
-expectTypeOf<ColumnMetaFor<{ Meta: { Column: AColumnMeta } }>>().toEqualTypeOf<AColumnMeta>();
-expectTypeOf<ColumnMetaFor<{ Meta: { Row: ARowMeta } }>>().toEqualTypeOf<never>();
+expectTypeOf<
+  ColumnMetaFor<{ Meta: { Column: AColumnMeta } }>
+>().toEqualTypeOf<AColumnMeta>();
+expectTypeOf<
+  ColumnMetaFor<{ Meta: { Row: ARowMeta } }>
+>().toEqualTypeOf<never>();
 
 expectTypeOf<
   RowMetaFor<{
@@ -124,5 +146,9 @@ expectTypeOf<
     };
   }>
 >().toEqualTypeOf<never>();
-expectTypeOf<RowMetaFor<{ Meta: { Column: AColumnMeta } }>>().toEqualTypeOf<never>();
-expectTypeOf<RowMetaFor<{ Meta: { Row: ARowMeta } }>>().toEqualTypeOf<ARowMeta>();
+expectTypeOf<
+  RowMetaFor<{ Meta: { Column: AColumnMeta } }>
+>().toEqualTypeOf<never>();
+expectTypeOf<
+  RowMetaFor<{ Meta: { Row: ARowMeta } }>
+>().toEqualTypeOf<ARowMeta>();

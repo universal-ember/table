@@ -115,7 +115,7 @@
   To use it,
 
   ```gjs
-  import { styleStringFor } from 'ember-headless-table/plugins/column-resizing';
+  import { styleStringFor } from "ember-headless-table/plugins/column-resizing";
 
   // ...
 
@@ -124,7 +124,10 @@
     {{#each @table.rows as |row|}}
       <div role="row">
         {{#each @table.columns as |column|}}
-          <div role="cell" style={{styleStringFor column}}>{{column.getValueForRow row}}</div>
+          <div
+            role="cell"
+            style={{styleStringFor column}}
+          >{{column.getValueForRow row}}</div>
         {{/each}}
       </div>
     {{/each}}
@@ -141,9 +144,9 @@
   Example:
 
   ```js
-  import { headlessTable } from 'ember-headless-table';
-  import { hasPlugin } from 'ember-headless-table/plugins';
-  import { DataSorting } from 'ember-headless-table/plugins/data-sorting';
+  import { headlessTable } from "ember-headless-table";
+  import { hasPlugin } from "ember-headless-table/plugins";
+  import { DataSorting } from "ember-headless-table/plugins/data-sorting";
 
   // ... ✂️ ...
   let table = headlessTable(this, {
@@ -162,9 +165,9 @@
   Example:
 
   ```js
-  import { deserializeSorts } from 'ember-headless-table';
+  import { deserializeSorts } from "ember-headless-table";
 
-  deserializeSorts(''); // => []
+  deserializeSorts(""); // => []
   ```
 
   Previously, an error would be reported:
@@ -196,35 +199,35 @@
   1. invoke the `styleStringFor` helper in the template, and set the result to the `style` attribute for the `th` and `td` cells.
 
      ```gjs
-     import { styleStringFor } from 'ember-headless-table/plugins/sticky-columns'
+     import { styleStringFor } from "ember-headless-table/plugins/sticky-columns";
 
      // ...
 
      <template>
-         <div class="h-full overflow-auto">
-           <table>
-             <thead>
+       <div class="h-full overflow-auto">
+         <table>
+           <thead>
+             <tr class="relative">
+               {{#each @table.columns as |column|}}
+                 <th style="{{styleStringFor column}}">
+                   {{column.name}}
+                 </th>
+               {{/each}}
+             </tr>
+           </thead>
+           <tbody>
+             {{#each @table.rows as |row|}}
                <tr class="relative">
                  {{#each @table.columns as |column|}}
-                   <th style="{{styleStringFor column}}">
-                     {{column.name}}
-                   </th>
+                   <td style="{{styleStringFor column}}">
+                     {{column.getValueForRow row}}
+                   </td>
                  {{/each}}
                </tr>
-             </thead>
-             <tbody>
-               {{#each @table.rows as |row|}}
-                 <tr class="relative">
-                   {{#each @table.columns as |column|}}
-                     <td style="{{styleStringFor column}}">
-                       {{column.getValueForRow row}}
-                     </td>
-                   {{/each}}
-                 </tr>
-               {{/each}}
-             </tbody>
-           </table>
-         </div>
+             {{/each}}
+           </tbody>
+         </table>
+       </div>
      </template>
      ```
 
@@ -267,17 +270,17 @@
   For example, setting up the table can be done like:
 
   ```js
-  import { headlessTable } from 'ember-headless-table';
+  import { headlessTable } from "ember-headless-table";
 
   class Example {
     /* ... */
 
     table = headlessTable(this, {
       columns: () => [
-        { name: 'A', key: 'A' },
+        { name: "A", key: "A" },
         {
-          name: 'B',
-          key: 'B',
+          name: "B",
+          key: "B",
           pluginOptions: [
             Metadata.forColumn(() => ({
               isBulkSelectable: false,
@@ -285,8 +288,8 @@
           ],
         },
         {
-          name: 'D',
-          key: 'D',
+          name: "D",
+          key: "D",
           pluginOptions: [Metadata.forColumn(() => ({ isRad: this.dRed }))],
         },
       ],
@@ -307,9 +310,11 @@
 
   ```gjs
   // Two helpers are provided for accessing your Metadata
-  import { forColumn /*, forTable */ } from 'ember-headless-table/plugins/metadata';
+  import {
+    forColumn /*, forTable */,
+  } from "ember-headless-table/plugins/metadata";
 
-  const isBulkSelectable = (column) => forColumn(column, 'isBulkSelectable');
+  const isBulkSelectable = (column) => forColumn(column, "isBulkSelectable");
 
   export const Row = <template>
     <tr>
@@ -339,7 +344,7 @@
   import {
     ColumnOrder,
     setColumnOrder,
-  } from 'ember-headless-table/plugins/column-reordering';
+  } from "ember-headless-table/plugins/column-reordering";
   ```
 
   To manage the "preview column order",
@@ -372,15 +377,15 @@
 
     {{#each order.orderedColumns as |column|}}
 
-      <button {{on 'click' (fn order.moveLeft column.key)}}> ⇦ </button>
+      <button {{on "click" (fn order.moveLeft column.key)}}> ⇦ </button>
 
       {{column.name}}
 
-      <button {{on 'click' (fn order.moveRight column.key)}}> ⇨ </button>
+      <button {{on "click" (fn order.moveRight column.key)}}> ⇨ </button>
 
     {{/each}}
 
-    <button {{on 'click' this.handleReconfigure}}>Submit changes</button>
+    <button {{on "click" this.handleReconfigure}}>Submit changes</button>
   {{/let}}
   ```
 

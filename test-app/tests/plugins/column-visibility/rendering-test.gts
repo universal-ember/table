@@ -57,10 +57,10 @@ module('Plugins | columnVisibility', function (hooks) {
       <div>
         {{#each this.table.columns as |column|}}
           {{column.name}}:
-          <button class="hide {{column.key}}" {{on 'click' (fn hide column)}}>
+          <button class="hide {{column.key}}" type="button" {{on 'click' (fn hide column)}}>
             Hide
           </button>
-          <button class="show {{column.key}}" {{on 'click' (fn show column)}}>
+          <button class="show {{column.key}}" type="button" {{on 'click' (fn show column)}}>
             Show
           </button>
           <br>
@@ -314,8 +314,8 @@ module('Plugins | columnVisibility', function (hooks) {
           await render(
             <template>
               {{#each ctx.table.columns as |column|}}
-                <button id="{{column.key}}-left" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
-                <button id="{{column.key}}-right" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
+                <button id="{{column.key}}-left" type="button" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
+                <button id="{{column.key}}-right" type="button" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
                 <br>
               {{/each}}
 
@@ -359,8 +359,8 @@ module('Plugins | columnVisibility', function (hooks) {
           await render(
             <template>
               {{#each ctx.table.columns as |column|}}
-                <button id="{{column.key}}-left" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
-                <button id="{{column.key}}-right" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
+                <button id="{{column.key}}-left" type="button" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
+                <button id="{{column.key}}-right" type="button" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
                 <br>
               {{/each}}
 

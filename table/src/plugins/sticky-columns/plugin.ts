@@ -74,7 +74,10 @@ export class StickyColumns extends BasePlugin<Signature> {
   };
 
   headerCellModifier = (element: HTMLElement, { column, table }: ColumnApi) => {
-    if (options.forTable(table, StickyColumns).workaroundForModifierTimingUpdateRFC883) {
+    if (
+      options.forTable(table, StickyColumns)
+        .workaroundForModifierTimingUpdateRFC883
+    ) {
       return;
     }
 
@@ -93,7 +96,10 @@ export class StickyColumns extends BasePlugin<Signature> {
    * TODO: switch ColumnApi to "RowApi", add the row's data
    */
   cellModifier = (element: HTMLElement, { column, table }: ColumnApi) => {
-    if (options.forTable(table, StickyColumns).workaroundForModifierTimingUpdateRFC883) {
+    if (
+      options.forTable(table, StickyColumns)
+        .workaroundForModifierTimingUpdateRFC883
+    ) {
       return;
     }
 
@@ -124,7 +130,10 @@ export class ColumnMeta {
 
     assert(
       `Invalid sticky value, ${sticky}. Valid values: 'left', 'right', false`,
-      sticky === 'left' || sticky === 'right' || sticky === false || sticky === undefined
+      sticky === 'left' ||
+        sticky === 'right' ||
+        sticky === false ||
+        sticky === undefined,
     );
 
     return sticky || 'none';
@@ -169,7 +178,9 @@ export class ColumnMeta {
     return;
   }
 
-  get style(): Partial<Pick<CSSStyleDeclaration, 'position' | 'left' | 'right' | 'zIndex'>> {
+  get style(): Partial<
+    Pick<CSSStyleDeclaration, 'position' | 'left' | 'right' | 'zIndex'>
+  > {
     if (this.isSticky) {
       return {
         position: 'sticky',

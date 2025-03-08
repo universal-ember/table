@@ -1,6 +1,11 @@
 import { assert } from '@ember/debug';
 
-import { COLUMN_META_KEY, ROW_META_KEY, TABLE_KEY, TABLE_META_KEY } from '../../-private/table.ts';
+import {
+  COLUMN_META_KEY,
+  ROW_META_KEY,
+  TABLE_KEY,
+  TABLE_META_KEY,
+} from '../../-private/table.ts';
 import { normalizePluginsConfig } from './utils.ts';
 
 import type { Table } from '../../-private/table.ts';
@@ -65,9 +70,8 @@ export interface ColumnFeatures extends Record<string, unknown | undefined> {
  * @private utility type
  *
  */
-export type SignatureFrom<Klass extends BasePlugin<any>> = Klass extends BasePlugin<infer Signature>
-  ? Signature
-  : never;
+export type SignatureFrom<Klass extends BasePlugin<any>> =
+  Klass extends BasePlugin<infer Signature> ? Signature : never;
 
 declare const __Signature__: unique symbol;
 
@@ -80,7 +84,9 @@ declare const __Signature__: unique symbol;
  *
  * One instance of a plugin exists per table
  */
-export abstract class BasePlugin<Signature = unknown> implements Plugin<Signature> {
+export abstract class BasePlugin<Signature = unknown>
+  implements Plugin<Signature>
+{
   constructor(protected table: Table) {}
 
   /**
@@ -99,7 +105,7 @@ export abstract class BasePlugin<Signature = unknown> implements Plugin<Signatur
    */
   static with<T extends BasePlugin<any>>(
     this: Constructor<T>,
-    configFn: () => OptionsFor<SignatureFrom<T>>
+    configFn: () => OptionsFor<SignatureFrom<T>>,
   ): [Constructor<T>, () => OptionsFor<SignatureFrom<T>>] {
     return [this, configFn];
   }
@@ -110,7 +116,7 @@ export abstract class BasePlugin<Signature = unknown> implements Plugin<Signatur
    */
   static forColumn<T extends BasePlugin<any>>(
     this: Constructor<T>,
-    configFn: () => ColumnOptionsFor<SignatureFrom<T>>
+    configFn: () => ColumnOptionsFor<SignatureFrom<T>>,
   ): [Constructor<T>, () => ColumnOptionsFor<SignatureFrom<T>>] {
     return [this, configFn];
   }
@@ -135,7 +141,7 @@ export abstract class BasePlugin<Signature = unknown> implements Plugin<Signatur
  */
 export function hasPlugin<P extends BasePlugin<any>, Data = unknown>(
   table: Table<Data>,
-  klass: Class<P>
+  klass: Class<P>,
 ) {
   return Boolean(table.pluginOf(klass));
 }
@@ -151,7 +157,10 @@ export const preferences = {
    * (though, if other plugins can guess how the underlying plugin access
    * works, they can access this data, too. No security guaranteed)
    */
-  forColumn<P extends BasePlugin<any>, Data = unknown>(column: Column<Data>, klass: Class<P>) {
+  forColumn<P extends BasePlugin<any>, Data = unknown>(
+    column: Column<Data>,
+    klass: Class<P>,
+  ) {
     return {
       /**
        * delete an entry on the underlying `Map` used for this column-plugin pair
@@ -196,7 +205,10 @@ export const preferences = {
    * returns an object for bulk updating preferences data
    * for all columns (scoped to key and table)
    */
-  forAllColumns<P extends BasePlugin<any>, Data = unknown>(table: Table<Data>, klass: Class<P>) {
+  forAllColumns<P extends BasePlugin<any>, Data = unknown>(
+    table: Table<Data>,
+    klass: Class<P>,
+  ) {
     return {
       /**
        * delete an entry on every column in the underlying column `Map` for this table-plugin pair
@@ -227,7 +239,10 @@ export const preferences = {
    * (though, if other plugins can guess how the underlying plugin access
    * works, they can access this data, too. No security guaranteed)
    */
-  forTable<P extends BasePlugin<any>, Data = unknown>(table: Table<Data>, klass: Class<P>) {
+  forTable<P extends BasePlugin<any>, Data = unknown>(
+    table: Table<Data>,
+    klass: Class<P>,
+  ) {
     return {
       /**
        * delete an entry on the underlying `Map` used for this table-plugin pair
@@ -283,9 +298,12 @@ export const preferences = {
  */
 function columnsFor<DataType = any>(
   table: Table<DataType>,
-  requester?: Plugin<any>
+  requester?: Plugin<any>,
 ): Column<DataType>[] {
-  assert(`First argument passed to columns.for must be an instance of Table`, table[TABLE_KEY]);
+  assert(
+    `First argument passed to columns.for must be an instance of Table`,
+    table[TABLE_KEY],
+  );
 
   const visibility = findPlugin(table.plugins, 'columnVisibility');
   const reordering = findPlugin(table.plugins, 'columnOrder');
@@ -299,7 +317,9 @@ function columnsFor<DataType = any>(
     assert(
       `[${requester.name}] requested columns from the table, but the plugin, ${requester.name}, ` +
         `is not used in this table`,
-      table.plugins.some((plugin) => plugin instanceof (requester as Class<Plugin>))
+      table.plugins.some(
+        (plugin) => plugin instanceof (requester as Class<Plugin>),
+      ),
     );
 
     if (sizing && sizing.constructor === requester) {
@@ -314,7 +334,7 @@ function columnsFor<DataType = any>(
       if (visibility) {
         assert(
           `<#${visibility.name}> defined a 'columns' property, but did not return valid data.`,
-          visibility.columns && Array.isArray(visibility.columns)
+          visibility.columns && Array.isArray(visibility.columns),
         );
 
         return visibility.columns;
@@ -326,7 +346,7 @@ function columnsFor<DataType = any>(
     if (reordering) {
       assert(
         `<#${reordering.name}> defined a 'columns' property, but did not return valid data.`,
-        reordering.columns && Array.isArray(reordering.columns)
+        reordering.columns && Array.isArray(reordering.columns),
       );
 
       return reordering.columns;
@@ -335,7 +355,7 @@ function columnsFor<DataType = any>(
     if (visibility) {
       assert(
         `<#${visibility.name}> defined a 'columns' property, but did not return valid data.`,
-        visibility.columns && Array.isArray(visibility.columns)
+        visibility.columns && Array.isArray(visibility.columns),
       );
 
       return visibility.columns;
@@ -344,7 +364,7 @@ function columnsFor<DataType = any>(
     if (sizing) {
       assert(
         `<#${sizing.name}> defined a 'columns' property, but did not return valid data.`,
-        sizing.columns && Array.isArray(sizing.columns)
+        sizing.columns && Array.isArray(sizing.columns),
       );
 
       return sizing.columns;
@@ -360,7 +380,7 @@ function columnsFor<DataType = any>(
   if (reordering) {
     assert(
       `<#${reordering.name}> defined a 'columns' property, but did not return valid data.`,
-      reordering.columns && Array.isArray(reordering.columns)
+      reordering.columns && Array.isArray(reordering.columns),
     );
 
     return reordering.columns;
@@ -369,7 +389,7 @@ function columnsFor<DataType = any>(
   if (visibility) {
     assert(
       `<#${visibility.name}> defined a 'columns' property, but did not return valid data.`,
-      visibility.columns && Array.isArray(visibility.columns)
+      visibility.columns && Array.isArray(visibility.columns),
     );
 
     return visibility.columns;
@@ -378,7 +398,7 @@ function columnsFor<DataType = any>(
   if (sizing) {
     assert(
       `<#${sizing.name}> defined a 'columns' property, but did not return valid data.`,
-      sizing.columns && Array.isArray(sizing.columns)
+      sizing.columns && Array.isArray(sizing.columns),
     );
 
     return sizing.columns;
@@ -399,15 +419,17 @@ export const columns = {
    */
   next: <Data = unknown>(
     current: Column<Data>,
-    requester?: Plugin<any>
+    requester?: Plugin<any>,
   ): Column<Data> | undefined => {
-    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+    const columns = requester
+      ? columnsFor(current.table, requester)
+      : columnsFor(current.table);
 
     const referenceIndex = columns.indexOf(current);
 
     assert(
       `index of reference column must be >= 0. column likely not a part of the table`,
-      referenceIndex >= 0
+      referenceIndex >= 0,
     );
 
     /**
@@ -429,14 +451,16 @@ export const columns = {
    */
   previous: <Data = unknown>(
     current: Column<Data>,
-    requester?: Plugin<any>
+    requester?: Plugin<any>,
   ): Column<Data> | undefined => {
-    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+    const columns = requester
+      ? columnsFor(current.table, requester)
+      : columnsFor(current.table);
     const referenceIndex = columns.indexOf(current);
 
     assert(
       `index of reference column must be >= 0. column likely not a part of the table`,
-      referenceIndex >= 0
+      referenceIndex >= 0,
     );
 
     /**
@@ -455,8 +479,13 @@ export const columns = {
    * if a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  before: <Data = unknown>(current: Column<Data>, requester?: Plugin<any>): Column<Data>[] => {
-    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+  before: <Data = unknown>(
+    current: Column<Data>,
+    requester?: Plugin<any>,
+  ): Column<Data>[] => {
+    const columns = requester
+      ? columnsFor(current.table, requester)
+      : columnsFor(current.table);
 
     const referenceIndex = columns.indexOf(current);
 
@@ -469,8 +498,13 @@ export const columns = {
    * if a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  after: <Data = unknown>(current: Column<Data>, requester?: Plugin<any>): Column<Data>[] => {
-    const columns = requester ? columnsFor(current.table, requester) : columnsFor(current.table);
+  after: <Data = unknown>(
+    current: Column<Data>,
+    requester?: Plugin<any>,
+  ): Column<Data>[] => {
+    const columns = requester
+      ? columnsFor(current.table, requester)
+      : columnsFor(current.table);
 
     const referenceIndex = columns.indexOf(current);
 
@@ -489,16 +523,25 @@ export const meta = {
    */
   forColumn<P extends BasePlugin<any>, Data = unknown>(
     column: Column<Data>,
-    klass: Class<P>
+    klass: Class<P>,
   ): ColumnMetaFor<SignatureFrom<P>> {
     const columnMeta = column.table[COLUMN_META_KEY];
 
     return getPluginInstance(columnMeta, column, klass, () => {
       const plugin = column.table.pluginOf(klass);
 
-      assert(`[${klass.name}] cannot get plugin instance of unregistered plugin class`, plugin);
-      assert(`<#${plugin.name}> plugin does not have meta specified`, plugin.meta);
-      assert(`<#${plugin.name}> plugin does not specify column meta`, plugin.meta.column);
+      assert(
+        `[${klass.name}] cannot get plugin instance of unregistered plugin class`,
+        plugin,
+      );
+      assert(
+        `<#${plugin.name}> plugin does not have meta specified`,
+        plugin.meta,
+      );
+      assert(
+        `<#${plugin.name}> plugin does not specify column meta`,
+        plugin.meta.column,
+      );
 
       return new plugin.meta.column(column);
     });
@@ -514,16 +557,25 @@ export const meta = {
    */
   forRow<P extends BasePlugin<any>, Data = unknown>(
     row: Row<Data>,
-    klass: Class<P>
+    klass: Class<P>,
   ): RowMetaFor<SignatureFrom<P>> {
     const rowMeta = row.table[ROW_META_KEY];
 
     return getPluginInstance(rowMeta, row, klass, () => {
       const plugin = row.table.pluginOf(klass);
 
-      assert(`[${klass.name}] cannot get plugin instance of unregistered plugin class`, plugin);
-      assert(`<#${plugin.name}> plugin does not have meta specified`, plugin.meta);
-      assert(`<#${plugin.name}> plugin does not specify row meta`, plugin.meta.row);
+      assert(
+        `[${klass.name}] cannot get plugin instance of unregistered plugin class`,
+        plugin,
+      );
+      assert(
+        `<#${plugin.name}> plugin does not have meta specified`,
+        plugin.meta,
+      );
+      assert(
+        `<#${plugin.name}> plugin does not specify row meta`,
+        plugin.meta.row,
+      );
 
       return new plugin.meta.row(row);
     });
@@ -537,20 +589,29 @@ export const meta = {
    */
   forTable<P extends BasePlugin<any>, Data = unknown>(
     table: Table<Data>,
-    klass: Class<P>
+    klass: Class<P>,
   ): TableMetaFor<SignatureFrom<P>> {
     const tableMeta = table[TABLE_META_KEY];
 
     return getPluginInstance(tableMeta, klass, () => {
       const plugin = table.pluginOf(klass);
 
-      assert(`[${klass.name}] cannot get plugin instance of unregistered plugin class`, plugin);
-      assert(`<#${plugin.name}> plugin does not have meta specified`, plugin.meta);
-      assert(`<#${plugin.name}> plugin does not specify table meta`, plugin.meta.table);
+      assert(
+        `[${klass.name}] cannot get plugin instance of unregistered plugin class`,
+        plugin,
+      );
+      assert(
+        `<#${plugin.name}> plugin does not have meta specified`,
+        plugin.meta,
+      );
+      assert(
+        `<#${plugin.name}> plugin does not specify table meta`,
+        plugin.meta.table,
+      );
       assert(
         `<#${plugin.name}> plugin already exists for the table. ` +
           `A plugin may only be instantiated once per table.`,
-        ![...tableMeta.keys()].includes(klass)
+        ![...tableMeta.keys()].includes(klass),
       );
 
       return new plugin.meta.table(table);
@@ -573,7 +634,7 @@ export const meta = {
      */
     forColumn<FeatureName extends string, Data = unknown>(
       column: Column<Data>,
-      featureName: FeatureName
+      featureName: FeatureName,
     ): ColumnFeatures[FeatureName] {
       const { plugins } = column.table;
 
@@ -582,7 +643,7 @@ export const meta = {
       assert(
         `Could not find plugin with feature: ${featureName}. ` +
           `Available features: ${availableFeatures(plugins)}`,
-        provider
+        provider,
       );
 
       // TS doesn't believe in the constructor property?
@@ -600,7 +661,7 @@ export const meta = {
      */
     forTable<FeatureName extends string, Data = unknown>(
       table: Table<Data>,
-      featureName: FeatureName
+      featureName: FeatureName,
     ): TableFeatures[FeatureName] {
       const { plugins } = table;
 
@@ -609,7 +670,7 @@ export const meta = {
       assert(
         `Could not find plugin with feature: ${featureName}. ` +
           `Available features: ${availableFeatures(plugins)}`,
-        provider
+        provider,
       );
 
       // TS doesn't believe in the constructor property?
@@ -626,7 +687,8 @@ function findPlugin(plugins: Plugin[], featureName: string) {
      *
      * (Plugin || BasePlugin).features)
      */
-    const features = plugin.features || (plugin.constructor as typeof BasePlugin).features;
+    const features =
+      plugin.features || (plugin.constructor as typeof BasePlugin).features;
 
     return features?.includes(featureName);
   });
@@ -643,7 +705,8 @@ function availableFeatures(plugins: Plugin[]): string {
        *
        * (Plugin || BasePlugin).features)
        */
-      const features = plugin.features || (plugin.constructor as typeof BasePlugin).features;
+      const features =
+        plugin.features || (plugin.constructor as typeof BasePlugin).features;
 
       return features;
     })
@@ -662,7 +725,7 @@ export const options = {
    */
   forTable<P extends BasePlugin<any>, Data = unknown>(
     table: Table<Data>,
-    klass: Class<P>
+    klass: Class<P>,
   ): Partial<OptionsFor<SignatureFrom<P>>> {
     const normalized = normalizePluginsConfig(table?.config?.plugins);
     const tuple = normalized?.find((option) => option[0] === klass);
@@ -678,9 +741,11 @@ export const options = {
 
   forColumn<P extends BasePlugin<any>, Data = unknown>(
     column: Column<Data>,
-    klass: Class<P>
+    klass: Class<P>,
   ): Partial<ColumnOptionsFor<SignatureFrom<P>>> {
-    const tuple = column.config.pluginOptions?.find((option) => option[0] === klass);
+    const tuple = column.config.pluginOptions?.find(
+      (option) => option[0] === klass,
+    );
     const t = tuple as [unknown, () => ColumnOptionsFor<SignatureFrom<P>>];
 
     const fn = t?.[1];
@@ -699,18 +764,23 @@ type FactoryMap<Instance> = Map<Class<Instance>, Instance>;
 function getPluginInstance<Instance>(
   map: Map<Class<Instance>, Instance>,
   mapKey: Class<Instance>,
-  factory: () => Instance
+  factory: () => Instance,
 ): Instance;
 function getPluginInstance<RootKey extends Column<any> | Row<any>, Instance>(
   map: WeakMap<Column | Row, Map<Class<Instance>, Instance>>,
   rootKey: RootKey,
   mapKey: Class<Instance>,
-  factory: () => Instance
+  factory: () => Instance,
 ): Instance;
 function getPluginInstance<RootKey extends Column<any> | Row<any>, Instance>(
   ...args:
     | [FactoryMap<Instance>, Class<Instance>, () => Instance]
-    | [WeakMap<Column | Row, FactoryMap<Instance>>, RootKey, Class<Instance>, () => Instance]
+    | [
+        WeakMap<Column | Row, FactoryMap<Instance>>,
+        RootKey,
+        Class<Instance>,
+        () => Instance,
+      ]
 ): Instance {
   let map: WeakMap<Column | Row, FactoryMap<Instance>> | FactoryMap<Instance>;
   let mapKey: Class<Instance>;
@@ -732,7 +802,7 @@ function getPluginInstance<RootKey extends Column<any> | Row<any>, Instance>(
       // (esp without TS)
       `Incorrect arity passed to getPluginInstance. Expected 3 or 4, received ${
         (args as any).length
-      }`
+      }`,
     );
   }
 

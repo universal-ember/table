@@ -15,12 +15,14 @@ import type { Column } from '[public-types]';
  * be marked as isResizing, because this is a user-scoped question:
  *   "Is the user directly resizing this column?"
  */
-export const isResizing = (column: Column) => meta.forColumn(column, ColumnResizing).isResizing;
+export const isResizing = (column: Column) =>
+  meta.forColumn(column, ColumnResizing).isResizing;
 
 /**
  * Does the column have room to shrink?
  */
-export const canShrink = (column: Column) => meta.forColumn(column, ColumnResizing).canShrink;
+export const canShrink = (column: Column) =>
+  meta.forColumn(column, ColumnResizing).canShrink;
 
 /**
  * Does the column have a resize handle?
@@ -41,7 +43,7 @@ export const hasResizeHandle = (column: Column) =>
  * This utility is meant to be applied to the `style` attribute of a particular td-like element.
  */
 export const styleStringFor = <DataType = unknown>(
-  column: Column<DataType>
+  column: Column<DataType>,
 ): ReturnType<typeof htmlSafe> => {
   const columnMeta = meta.forColumn(column, ColumnResizing);
 

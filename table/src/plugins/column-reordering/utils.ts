@@ -5,7 +5,10 @@ import type { Column } from '[public-types]';
 
 type ColumnOrder = { key: string; position: number | undefined }[];
 
-export function reorderColumns(columns: Column[], orderedColumns: ColumnOrder | undefined) {
+export function reorderColumns(
+  columns: Column[],
+  orderedColumns: ColumnOrder | undefined,
+) {
   if (orderedColumns === undefined) {
     return columns;
   }
@@ -15,7 +18,9 @@ export function reorderColumns(columns: Column[], orderedColumns: ColumnOrder | 
   });
 
   for (const column of columns) {
-    const orderedColumn = orderedColumns.find((orderedColumn) => column.key === orderedColumn.key);
+    const orderedColumn = orderedColumns.find(
+      (orderedColumn) => column.key === orderedColumn.key,
+    );
     const currentMeta = meta.forColumn(column, ColumnReordering);
 
     if (orderedColumn === undefined) {
@@ -35,7 +40,9 @@ export function reorderColumns(columns: Column[], orderedColumns: ColumnOrder | 
     }
   }
 
-  repositionedColumns = repositionedColumns.filter((column) => column !== undefined);
+  repositionedColumns = repositionedColumns.filter(
+    (column) => column !== undefined,
+  );
 
   return repositionedColumns;
 }
