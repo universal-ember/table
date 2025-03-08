@@ -20,6 +20,7 @@
     "build:prod": "vite build",
     "build:test": "NODE_ENV=development vite build --mode test",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "format": "prettier . --write",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
     "lint:format": "prettier . --cache --check",
     "lint:hbs": "ember-template-lint .",
