@@ -1,6 +1,6 @@
 import { Table } from './table.ts';
 
-import type { TableConfig } from '#interfaces';
+import type { TableConfig } from './interfaces';
 
 type Args<T> =
   | [destroyable: object, options: TableConfig<T>]

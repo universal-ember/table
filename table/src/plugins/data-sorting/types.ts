@@ -1,4 +1,4 @@
-import type { ColumnKey } from '#/interfaces';
+import type { ColumnKey } from '../../-private/interfaces';
 
 export enum SortDirection {
   Ascending = 'ascending',

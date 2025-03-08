@@ -3,8 +3,8 @@ import { assert } from '@ember/debug';
 
 import { BasePlugin, meta, options } from '../-private/base.ts';
 
-import type { Row, Table } from '[public-types]';
-import type { PluginSignature, RowApi } from '#interfaces';
+import type { Row, Table } from '../../index.ts';
+import type { PluginSignature, RowApi } from '../../-private/interfaces';
 
 export interface Signature<DataType = any, Key = DataType>
   extends PluginSignature {

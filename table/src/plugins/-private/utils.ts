@@ -1,8 +1,8 @@
 import { assert } from '@ember/debug';
 
 import type { BasePlugin } from './base';
-import type { Constructor } from '[private-types]';
-import type { Plugin } from '[public-plugin-types]';
+import type { Constructor } from '../../-private/private-types';
+import type { Plugin } from '../../plugins';
 
 type PluginOption =
   | Constructor<Plugin<any>>

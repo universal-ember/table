@@ -4,8 +4,8 @@ import { assert } from '@ember/debug';
 import { BasePlugin, columns, meta, options } from '../-private/base.ts';
 import { applyStyles } from '../-private/utils.ts';
 
-import type { ColumnApi } from '[public-plugin-types]';
-import type { Column } from '[public-types]';
+import type { ColumnApi } from '../../plugins/index.ts';
+import type { Column } from '../../index.ts';
 
 const DEFAULT_Z_INDEX = '8';
 

@@ -1,7 +1,7 @@
 import { meta } from '../-private/base.ts';
 import { ColumnVisibility } from './plugin.ts';
 
-import type { Column } from '[public-types]';
+import type { Column } from '../../index.ts';
 
 /**
  * Hide a column

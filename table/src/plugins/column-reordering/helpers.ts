@@ -2,7 +2,7 @@ import { meta } from '../-private/base.ts';
 import { ColumnReordering } from './plugin.ts';
 
 import type { ColumnOrder } from './plugin.ts';
-import type { Column, Table } from '[public-types]';
+import type { Column, Table } from '../../index.ts';
 
 /**
  * Move the column one position to the left.

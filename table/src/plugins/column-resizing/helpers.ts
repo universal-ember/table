@@ -3,7 +3,7 @@ import { htmlSafe } from '@ember/template';
 import { meta } from '../-private/base.ts';
 import { ColumnResizing } from './plugin.ts';
 
-import type { Column } from '[public-types]';
+import type { Column } from '../../index.ts';
 
 /**
  * The column actively being resized by the user.

@@ -19,8 +19,8 @@ import { Row } from './row.ts';
 import { composeFunctionModifiers } from './utils.ts';
 
 import type { BasePlugin, Plugin } from '../plugins/index.ts';
-import type { Class } from '[private-types]';
-import type { Destructor, TableConfig } from '#interfaces';
+import type { Class } from './private-types.ts';
+import type { Destructor, TableConfig } from './interfaces';
 
 const DEFAULT_COLUMN_CONFIG = {
   isVisible: true,
