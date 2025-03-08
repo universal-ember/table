@@ -24,7 +24,7 @@ module('Plugins | consumption', function (hooks) {
 
       assert.ok(
         table.pluginOf(DataSorting) instanceof DataSorting,
-        'DataSorting plugin successfully instantiated'
+        'DataSorting plugin successfully instantiated',
       );
 
       assert.deepEqual(
@@ -33,7 +33,7 @@ module('Plugins | consumption', function (hooks) {
           sorts,
           onSort,
         },
-        'options used'
+        'options used',
       );
     });
   });
@@ -48,10 +48,14 @@ module('Plugins | consumption', function (hooks) {
 
       assert.ok(
         table.pluginOf(ColumnResizing) instanceof ColumnResizing,
-        'Resizing plugin successfully instantiating'
+        'Resizing plugin successfully instantiating',
       );
 
-      assert.deepEqual(options.forTable(table, ColumnResizing), {}, 'default options used');
+      assert.deepEqual(
+        options.forTable(table, ColumnResizing),
+        {},
+        'default options used',
+      );
     });
 
     test('supports what people should use', async function (assert) {
@@ -63,7 +67,7 @@ module('Plugins | consumption', function (hooks) {
 
       assert.ok(
         table.pluginOf(ColumnResizing) instanceof ColumnResizing,
-        'Resizing plugin successfully instantiating'
+        'Resizing plugin successfully instantiating',
       );
 
       assert.deepEqual(
@@ -71,7 +75,7 @@ module('Plugins | consumption', function (hooks) {
         {
           enabled: false,
         },
-        'options used'
+        'options used',
       );
     });
 
@@ -84,7 +88,7 @@ module('Plugins | consumption', function (hooks) {
 
       assert.ok(
         table.pluginOf(ColumnResizing) instanceof ColumnResizing,
-        'Resizing plugin successfully instantiating'
+        'Resizing plugin successfully instantiating',
       );
 
       assert.deepEqual(
@@ -92,7 +96,7 @@ module('Plugins | consumption', function (hooks) {
         {
           enabled: false,
         },
-        'options used'
+        'options used',
       );
     });
   });
@@ -107,7 +111,7 @@ module('Plugins | consumption', function (hooks) {
 
       assert.ok(
         table.pluginOf(ColumnResizing) instanceof ColumnResizing,
-        'ColumnResizing plugin successfully instantiated'
+        'ColumnResizing plugin successfully instantiated',
       );
     });
 

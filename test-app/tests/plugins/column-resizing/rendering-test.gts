@@ -1,40 +1,52 @@
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { assert, assert as debugAssert } from '@ember/debug';
-import { htmlSafe } from '@ember/template';
-import { click, render, settled } from '@ember/test-helpers';
-import * as QUnit from 'qunit';
-import { module, test, skip } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { setOwner } from '@ember/application';
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { assert, assert as debugAssert } from "@ember/debug";
+import { htmlSafe } from "@ember/template";
+import { click, render, settled } from "@ember/test-helpers";
+import * as QUnit from "qunit";
+import { module, test, skip } from "qunit";
+import { setupRenderingTest } from "ember-qunit";
+import { setOwner } from "@ember/application";
 // @ts-ignore
-import { on } from '@ember/modifier';
+import { on } from "@ember/modifier";
 // @ts-ignore
-import { fn } from '@ember/helper';
-
-import { headlessTable, type ColumnConfig, type PreferencesData } from '@universal-ember/table';
-import { ColumnResizing, resizeHandle, hasResizeHandle } from '@universal-ember/table/plugins/column-resizing';
-import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
-import { ColumnReordering, moveLeft, moveRight } from '@universal-ember/table/plugins/column-reordering';
-import { createHelpers, requestAnimationFrameSettled } from '@universal-ember/table/test-support';
+import { fn } from "@ember/helper";
 
 import {
-  TestStyles,
-  getColumns,
-  assertChanges,
-  width,
-} from './utils';
+  headlessTable,
+  type ColumnConfig,
+  type PreferencesData,
+} from "@universal-ember/table";
+import {
+  ColumnResizing,
+  resizeHandle,
+  hasResizeHandle,
+} from "@universal-ember/table/plugins/column-resizing";
+import { ColumnVisibility } from "@universal-ember/table/plugins/column-visibility";
+import {
+  ColumnReordering,
+  moveLeft,
+  moveRight,
+} from "@universal-ember/table/plugins/column-reordering";
+import {
+  createHelpers,
+  requestAnimationFrameSettled,
+} from "@universal-ember/table/test-support";
 
-module('Plugins | resizing', function (hooks) {
+import { TestStyles, getColumns, assertChanges, width } from "./utils";
+
+module("Plugins | resizing", function (hooks) {
   setupRenderingTest(hooks);
 
   let ctx: Context;
-  let { dragLeft, dragRight } = createHelpers({ resizeHandle: '[data-handle]' });
+  let { dragLeft, dragRight } = createHelpers({
+    resizeHandle: "[data-handle]",
+  });
 
   function roomToShrink(element: Element) {
-    assert('element must be an HTML element', element instanceof HTMLElement);
+    assert("element must be an HTML element", element instanceof HTMLElement);
 
-    let minWidth = parseInt(element.style.minWidth.replace('px', ''), 10) || 0;
+    let minWidth = parseInt(element.style.minWidth.replace("px", ""), 10) || 0;
 
     return width(element) - minWidth;
   }
@@ -42,11 +54,11 @@ module('Plugins | resizing', function (hooks) {
   class Context {
     @tracked containerWidth = 1000;
 
-    columns: ColumnConfig[]  = [
-      { name: 'A', key: 'A' },
-      { name: 'B', key: 'B' },
-      { name: 'C', key: 'C' },
-      { name: 'D', key: 'D' },
+    columns: ColumnConfig[] = [
+      { name: "A", key: "A" },
+      { name: "B", key: "B" },
+      { name: "C", key: "C" },
+      { name: "D", key: "D" },
     ];
 
     setContainerWidth = async (width: number) => {
@@ -135,7 +147,7 @@ module('Plugins | resizing', function (hooks) {
     </template>
   }
 
-  module('with no options specified', function (hooks) {
+  module("with no options specified", function (hooks) {
     class DefaultOptions extends Context {
       table = headlessTable(this, {
         columns: () => this.columns,
@@ -149,13 +161,9 @@ module('Plugins | resizing', function (hooks) {
       setOwner(ctx, this.owner);
     });
 
-    test('it resizes each column', async function () {
+    test("it resizes each column", async function () {
       ctx.setContainerWidth(1000);
-      await render(
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
-      )
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
       const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -169,64 +177,80 @@ module('Plugins | resizing', function (hooks) {
       await assertChanges(
         () => dragRight(columnB, 50),
         [
-          { value: () => width(columnA), by: 50, msg: 'width of A increased by 50' },
-          { value: () => width(columnB), by: -50, msg: 'width of B decreased by 50' },
-          { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-          { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-        ]
+          {
+            value: () => width(columnA),
+            by: 50,
+            msg: "width of A increased by 50",
+          },
+          {
+            value: () => width(columnB),
+            by: -50,
+            msg: "width of B decreased by 50",
+          },
+          { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+          { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+        ],
       );
 
       await assertChanges(
         () => dragLeft(columnB, 10),
         [
-          { value: () => width(columnA), by: -10, msg: 'width of A decreased by 10-' },
-          { value: () => width(columnB), by: 10, msg: 'width of B increased by 10' },
-          { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-          { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-        ]
+          {
+            value: () => width(columnA),
+            by: -10,
+            msg: "width of A decreased by 10-",
+          },
+          {
+            value: () => width(columnB),
+            by: 10,
+            msg: "width of B increased by 10",
+          },
+          { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+          { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+        ],
       );
     });
   });
 
-  module('with a preferences adapter', function (hooks) {
-      let preferences: null | PreferencesData = {};
+  module("with a preferences adapter", function (hooks) {
+    let preferences: null | PreferencesData = {};
 
-      class DefaultOptions extends Context {
+    class DefaultOptions extends Context {
       table = headlessTable(this, {
         columns: () => this.columns,
         data: () => [] as unknown[],
         plugins: [ColumnResizing],
         preferences: {
-          key: 'test-preferences',
+          key: "test-preferences",
           adapter: {
             persist: (_key: string, data: PreferencesData) => {
               preferences = data;
             },
             restore: (key: string) => {
               return {
-                "plugins": {
-                  "ColumnResizing": {
-                  "columns": {
-                      "A": {
-                        "width": "300"
+                plugins: {
+                  ColumnResizing: {
+                    columns: {
+                      A: {
+                        width: "300",
                       },
-                      "B": {
-                        "width": "250"
+                      B: {
+                        width: "250",
                       },
-                      "C": {
-                        "width": "250"
+                      C: {
+                        width: "250",
                       },
-                      "D": {
-                        "width": "200"
+                      D: {
+                        width: "200",
                       },
                     },
-                    "table": {}
+                    table: {},
                   },
-                }
-              }
-            }
-          }
-        }
+                },
+              };
+            },
+          },
+        },
       });
     }
 
@@ -236,12 +260,8 @@ module('Plugins | resizing', function (hooks) {
       setOwner(ctx, this.owner);
     });
 
-    test('it restores column widths from preferences', async function (assert) {
-      await render(
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
-      )
+    test("it restores column widths from preferences", async function (assert) {
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
       const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -250,18 +270,14 @@ module('Plugins | resizing', function (hooks) {
       debugAssert(`columnC doesn't exist`, columnC);
       debugAssert(`columnD doesn't exist`, columnD);
 
-      assert.equal(width(columnA), 300, 'col A has expected width');
-      assert.equal(width(columnB), 250, 'col B has expected width');
-      assert.equal(width(columnC), 250, 'col C has expected width');
-      assert.equal(width(columnD), 200, 'col D has expected width');
+      assert.equal(width(columnA), 300, "col A has expected width");
+      assert.equal(width(columnB), 250, "col B has expected width");
+      assert.equal(width(columnC), 250, "col C has expected width");
+      assert.equal(width(columnD), 200, "col D has expected width");
     });
 
-    test('resetting clears preferences, and restores the original column width', async function (assert) {
-      await render(
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
-      )
+    test("resetting clears preferences, and restores the original column width", async function (assert) {
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
       const [columnA, columnB, columnC, columnD] = getColumns();
 
       debugAssert(`columnA doesn't exist`, columnA);
@@ -269,41 +285,41 @@ module('Plugins | resizing', function (hooks) {
       debugAssert(`columnC doesn't exist`, columnC);
       debugAssert(`columnD doesn't exist`, columnD);
 
-      assert.equal(width(columnA), 300, 'col A has expected initial width');
-      assert.equal(width(columnB), 250, 'col B has expected initial width');
-      assert.equal(width(columnC), 250, 'col C has expected initial width');
-      assert.equal(width(columnD), 200, 'col D has expected initial width');
+      assert.equal(width(columnA), 300, "col A has expected initial width");
+      assert.equal(width(columnB), 250, "col B has expected initial width");
+      assert.equal(width(columnC), 250, "col C has expected initial width");
+      assert.equal(width(columnD), 200, "col D has expected initial width");
 
       ctx.table.resetToDefaults();
       await requestAnimationFrameSettled();
 
       // Columns are set to equal widths, so column will be 250px wide by default
-      assert.equal(width(columnA), 250, 'col A has expected width after reset');
-      assert.equal(width(columnB), 250, 'col B has expected width after reset');
-      assert.equal(width(columnC), 250, 'col C has expected width after reset');
-      assert.equal(width(columnD), 250, 'col D has expected width after reset');
-      assert.deepEqual(preferences, {
-        "plugins": {
-          "ColumnResizing": {
-            "columns": {
-              "A": {},
-              "B": {},
-              "C": {},
-              "D": {}
+      assert.equal(width(columnA), 250, "col A has expected width after reset");
+      assert.equal(width(columnB), 250, "col B has expected width after reset");
+      assert.equal(width(columnC), 250, "col C has expected width after reset");
+      assert.equal(width(columnD), 250, "col D has expected width after reset");
+      assert.deepEqual(
+        preferences,
+        {
+          plugins: {
+            ColumnResizing: {
+              columns: {
+                A: {},
+                B: {},
+                C: {},
+                D: {},
+              },
+              table: {},
             },
-            "table": {}
-          }
-        }
-      }, 'All column preferences reset');
+          },
+        },
+        "All column preferences reset",
+      );
     });
 
-    test('it resizes each column and persists the new widths in the preferences', async function (assert) {
+    test("it resizes each column and persists the new widths in the preferences", async function (assert) {
       ctx.setContainerWidth(1000);
-      await render(
-        <template>
-          <TestComponentA @ctx={{ctx}} />
-        </template>
-      )
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
       const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -312,10 +328,26 @@ module('Plugins | resizing', function (hooks) {
       debugAssert(`columnC doesn't exist`, columnC);
       debugAssert(`columnD doesn't exist`, columnD);
 
-      assert.equal(width(columnA), 300, 'col A has expected width before resize');
-      assert.equal(width(columnB), 250, 'col B has expected width before resize');
-      assert.equal(width(columnC), 250, 'col C has expected width before resize');
-      assert.equal(width(columnD), 200, 'col D has expected width before resize');
+      assert.equal(
+        width(columnA),
+        300,
+        "col A has expected width before resize",
+      );
+      assert.equal(
+        width(columnB),
+        250,
+        "col B has expected width before resize",
+      );
+      assert.equal(
+        width(columnC),
+        250,
+        "col C has expected width before resize",
+      );
+      assert.equal(
+        width(columnD),
+        200,
+        "col D has expected width before resize",
+      );
 
       await requestAnimationFrameSettled();
 
@@ -324,37 +356,57 @@ module('Plugins | resizing', function (hooks) {
       // to the right , while respecting the min width (128px)
       await dragRight(columnB, 200);
 
-      assert.equal(width(columnA), 500, 'col A has expected width after resize');
-      assert.equal(width(columnB), 128, 'col B has expected width after resize');
-      assert.equal(width(columnC), 172, 'col C has expected width after resize');
-      assert.equal(width(columnD), 200, 'col D has expected width after resize');
+      assert.equal(
+        width(columnA),
+        500,
+        "col A has expected width after resize",
+      );
+      assert.equal(
+        width(columnB),
+        128,
+        "col B has expected width after resize",
+      );
+      assert.equal(
+        width(columnC),
+        172,
+        "col C has expected width after resize",
+      );
+      assert.equal(
+        width(columnD),
+        200,
+        "col D has expected width after resize",
+      );
 
-      assert.deepEqual(preferences, {
-        "plugins": {
-          "ColumnResizing": {
-            "columns": {
-              "A": {
-                "width": "500"
+      assert.deepEqual(
+        preferences,
+        {
+          plugins: {
+            ColumnResizing: {
+              columns: {
+                A: {
+                  width: "500",
+                },
+                B: {
+                  width: "128",
+                },
+                C: {
+                  width: "172",
+                },
+                D: {
+                  width: "200",
+                },
               },
-              "B": {
-                "width": "128"
-              },
-              "C": {
-                "width": "172"
-              },
-              "D": {
-                "width": "200"
-              },
+              table: {},
             },
-            "table": {}
-          }
-        }
-      }, 'column widths saved in preferences');
+          },
+        },
+        "column widths saved in preferences",
+      );
     });
   });
 
-  module('with options that affect resize behavior', function (hooks) {
-    module('handlePosition (default)', function (hooks) {
+  module("with options that affect resize behavior", function (hooks) {
+    module("handlePosition (default)", function (hooks) {
       class DefaultOptions extends Context {
         table = headlessTable(this, {
           columns: () => this.columns,
@@ -368,13 +420,9 @@ module('Plugins | resizing', function (hooks) {
         setOwner(ctx, this.owner);
       });
 
-      test('it works', async function () {
+      test("it works", async function () {
         ctx.setContainerWidth(1000);
-        await render(
-          <template>
-            <TestComponentA @ctx={{ctx}} />
-          </template>
-        )
+        await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
         const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -388,11 +436,19 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragRight(columnB, 50),
           [
-            { value: () => width(columnA), by: 50, msg: 'width of A increased by 50' },
-            { value: () => width(columnB), by: -50, msg: 'width of B decreased by 50' },
-            { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnA),
+              by: 50,
+              msg: "width of A increased by 50",
+            },
+            {
+              value: () => width(columnB),
+              by: -50,
+              msg: "width of B decreased by 50",
+            },
+            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
 
         await requestAnimationFrameSettled();
@@ -400,28 +456,34 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragLeft(columnB, 10),
           [
-            { value: () => width(columnA), by: -10, msg: 'width of A decreased by 10-' },
-            { value: () => width(columnB), by: 10, msg: 'width of B increased by 10' },
-            { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnA),
+              by: -10,
+              msg: "width of A decreased by 10-",
+            },
+            {
+              value: () => width(columnB),
+              by: 10,
+              msg: "width of B increased by 10",
+            },
+            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
       });
 
-      test('column resizing respects column minWidth', async function (qAssert) {
+      test("column resizing respects column minWidth", async function (qAssert) {
         let bColumn = ctx.columns[1];
 
         assert(`something went wrong, bColumn not found`, bColumn);
 
-        bColumn.pluginOptions = [ColumnResizing.forColumn(() => ({ minWidth: 240 }))];
+        bColumn.pluginOptions = [
+          ColumnResizing.forColumn(() => ({ minWidth: 240 })),
+        ];
 
         ctx.setContainerWidth(1000);
         await settled();
-        await render(
-          <template>
-            <TestComponentA @ctx={{ctx}} />
-          </template>
-        )
+        await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
         const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -444,26 +506,29 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragRight(columnB, delta),
           [
-            { value: () => width(columnA), by: delta, msg: `width of A increased by delta :: by ${delta}` },
+            {
+              value: () => width(columnA),
+              by: delta,
+              msg: `width of A increased by delta :: by ${delta}`,
+            },
             {
               value: () => width(columnB),
               by: -room,
               msg: `width of B decreased to min width :: by ${room}`,
             },
-            { value: () => width(columnC), by: -50, msg: `width of C decreased by remainder :: by -50` },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnC),
+              by: -50,
+              msg: `width of C decreased by remainder :: by -50`,
+            },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
       });
 
-      test('table & columns resize to fit containing element', async function () {
+      test("table & columns resize to fit containing element", async function () {
         ctx.setContainerWidth(1000);
-        await render(
-          <template>
-            <TestComponentA @ctx={{ctx}} />
-          </template>
-        )
-
+        await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
         const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -475,38 +540,63 @@ module('Plugins | resizing', function (hooks) {
         await requestAnimationFrameSettled();
 
         // When the container grows, columns grow equally
-        await assertChanges(
-          async () => {
-            ctx.setContainerWidth(ctx.containerWidth + 4000);
-            await requestAnimationFrameSettled();
+        await assertChanges(async () => {
+          ctx.setContainerWidth(ctx.containerWidth + 4000);
+          await requestAnimationFrameSettled();
+        }, [
+          {
+            value: () => width(columnA),
+            by: 1000,
+            msg: "width of A increased by 1000",
           },
-          [
-            { value: () => width(columnA), by: 1000, msg: 'width of A increased by 1000' },
-            { value: () => width(columnB), by: 1000, msg: 'width of B increased by 1000' },
-            { value: () => width(columnC), by: 1000, msg: 'width of C increased by 1000' },
-            { value: () => width(columnD), by: 1000, msg: 'width of D increased by 1000' },
-          ]
-        );
+          {
+            value: () => width(columnB),
+            by: 1000,
+            msg: "width of B increased by 1000",
+          },
+          {
+            value: () => width(columnC),
+            by: 1000,
+            msg: "width of C increased by 1000",
+          },
+          {
+            value: () => width(columnD),
+            by: 1000,
+            msg: "width of D increased by 1000",
+          },
+        ]);
 
         // When the container shrinks, columns shrink equally
         await assertChanges(
           () => ctx.setContainerWidth(ctx.containerWidth - 2000),
           [
-            { value: () => width(columnA), by: -500, msg: 'width of A decreased by 500' },
-            { value: () => width(columnB), by: -500, msg: 'width of B decreased by 500' },
-            { value: () => width(columnC), by: -500, msg: 'width of C decreased by 500' },
-            { value: () => width(columnD), by: -500, msg: 'width of D decreased by 500' },
-          ]
+            {
+              value: () => width(columnA),
+              by: -500,
+              msg: "width of A decreased by 500",
+            },
+            {
+              value: () => width(columnB),
+              by: -500,
+              msg: "width of B decreased by 500",
+            },
+            {
+              value: () => width(columnC),
+              by: -500,
+              msg: "width of C decreased by 500",
+            },
+            {
+              value: () => width(columnD),
+              by: -500,
+              msg: "width of D decreased by 500",
+            },
+          ],
         );
       });
 
-      test('table resizing respects resized columns', async function () {
+      test("table resizing respects resized columns", async function () {
         ctx.setContainerWidth(1000);
-        await render(
-          <template>
-            <TestComponentA @ctx={{ctx}} />
-          </template>
-        )
+        await render(<template><TestComponentA @ctx={{ctx}} /></template>);
 
         const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -521,43 +611,86 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragRight(columnB, 50),
           [
-            { value: () => width(columnA), by: 50, msg: 'width of A increased by 50' },
-            { value: () => width(columnB), by: -50, msg: 'width of B decreased by 50' },
-            { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnA),
+              by: 50,
+              msg: "width of A increased by 50",
+            },
+            {
+              value: () => width(columnB),
+              by: -50,
+              msg: "width of B decreased by 50",
+            },
+            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
 
         // When the container grows by 1000, each column grows by 250
         await assertChanges(
           () => ctx.setContainerWidth(ctx.containerWidth + 1000),
           [
-            { value: () => width(columnA), by: 250, msg: 'width of A increased by 250' },
-            { value: () => width(columnB), by: 250, msg: 'width of B increased by 250' },
-            { value: () => width(columnC), by: 250, msg: 'width of C increased by 250' },
-            { value: () => width(columnD), by: 250, msg: 'width of D increased by 250' },
-          ]
+            {
+              value: () => width(columnA),
+              by: 250,
+              msg: "width of A increased by 250",
+            },
+            {
+              value: () => width(columnB),
+              by: 250,
+              msg: "width of B increased by 250",
+            },
+            {
+              value: () => width(columnC),
+              by: 250,
+              msg: "width of C increased by 250",
+            },
+            {
+              value: () => width(columnD),
+              by: 250,
+              msg: "width of D increased by 250",
+            },
+          ],
         );
 
         // When the container shrinks by 1000, each column shrinks by 250
         await assertChanges(
           () => ctx.setContainerWidth(ctx.containerWidth - 1000),
           [
-            { value: () => width(columnA), by: -250, msg: 'width of A decreased by 250' },
-            { value: () => width(columnB), by: -250, msg: 'width of B decreased by 250' },
-            { value: () => width(columnC), by: -250, msg: 'width of C decreased by 250' },
-            { value: () => width(columnD), by: -250, msg: 'width of D decreased by 250' },
-          ]
+            {
+              value: () => width(columnA),
+              by: -250,
+              msg: "width of A decreased by 250",
+            },
+            {
+              value: () => width(columnB),
+              by: -250,
+              msg: "width of B decreased by 250",
+            },
+            {
+              value: () => width(columnC),
+              by: -250,
+              msg: "width of C decreased by 250",
+            },
+            {
+              value: () => width(columnD),
+              by: -250,
+              msg: "width of D decreased by 250",
+            },
+          ],
         );
       });
     });
 
-    module('handlePosition: right', function (hooks) {
+    module("handlePosition: right", function (hooks) {
       class HandlePositionRight extends Context {
         table = headlessTable(this, {
           columns: () => this.columns,
           data: () => [] as unknown[],
-          plugins: [ColumnVisibility, ColumnResizing.with(() => ({ handlePosition: 'right' }))],
+          plugins: [
+            ColumnVisibility,
+            ColumnResizing.with(() => ({ handlePosition: "right" })),
+          ],
         });
       }
 
@@ -566,13 +699,9 @@ module('Plugins | resizing', function (hooks) {
         setOwner(ctx, this.owner);
       });
 
-      skip('it works', async function () {
+      skip("it works", async function () {
         ctx.setContainerWidth(1000);
-        await render(
-          <template>
-            <TestComponentB @ctx={{ctx}} />
-          </template>
-        )
+        await render(<template><TestComponentB @ctx={{ctx}} /></template>);
 
         const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -586,28 +715,44 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragRight(columnB, 50),
           [
-            { value: () => width(columnA), by: 50, msg: 'width of A increased by 50' },
-            { value: () => width(columnB), by: -50, msg: 'width of B decreased by 50' },
-            { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnA),
+              by: 50,
+              msg: "width of A increased by 50",
+            },
+            {
+              value: () => width(columnB),
+              by: -50,
+              msg: "width of B decreased by 50",
+            },
+            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
 
         await assertChanges(
           () => dragLeft(columnB, 10),
           [
-            { value: () => width(columnA), by: -10, msg: 'width of A decreased by 10-' },
-            { value: () => width(columnB), by: 10, msg: 'width of B increased by 10' },
-            { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnA),
+              by: -10,
+              msg: "width of A decreased by 10-",
+            },
+            {
+              value: () => width(columnB),
+              by: 10,
+              msg: "width of B increased by 10",
+            },
+            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
       });
     });
   });
 
-  module('interaction with other plugins', function () {
-    module('ColumnReordering', function(hooks) {
+  module("interaction with other plugins", function () {
+    module("ColumnReordering", function (hooks) {
       class DefaultOptions extends Context {
         table = headlessTable(this, {
           columns: () => this.columns,
@@ -621,19 +766,27 @@ module('Plugins | resizing', function (hooks) {
         setOwner(ctx, this.owner);
       });
 
-      test('resizing makes sense regardless of column order', async function (assert) {
+      test("resizing makes sense regardless of column order", async function (assert) {
         ctx.setContainerWidth(1000);
         await render(
           <template>
             {{#each ctx.table.columns as |column|}}
-              <button id="{{column.key}}-left" type="button" {{on 'click' (fn moveLeft column)}}>move {{column.key}} left</button>
-              <button id="{{column.key}}-right" type="button" {{on 'click' (fn moveRight column)}}>move {{column.key}} right</button>
-              <br>
+              <button
+                id="{{column.key}}-left"
+                type="button"
+                {{on "click" (fn moveLeft column)}}
+              >move {{column.key}} left</button>
+              <button
+                id="{{column.key}}-right"
+                type="button"
+                {{on "click" (fn moveRight column)}}
+              >move {{column.key}} right</button>
+              <br />
             {{/each}}
 
             <TestComponentA @ctx={{ctx}} />
-          </template>
-        )
+          </template>,
+        );
 
         const [columnA, columnB, columnC, columnD] = getColumns();
 
@@ -650,7 +803,7 @@ module('Plugins | resizing', function (hooks) {
 
             assert.strictEqual(actual, pair[1]);
           }
-        }
+        };
 
         assertSizes([
           [columnA, 250],
@@ -662,11 +815,19 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragRight(columnB, 50),
           [
-            { value: () => width(columnA), by: 50, msg: 'width of A increased by 50' },
-            { value: () => width(columnB), by: -50, msg: 'width of B decreased by 50' },
-            { value: () => width(columnC), by: 0, msg: 'width of C unchanged' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            {
+              value: () => width(columnA),
+              by: 50,
+              msg: "width of A increased by 50",
+            },
+            {
+              value: () => width(columnB),
+              by: -50,
+              msg: "width of B decreased by 50",
+            },
+            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
 
         assertSizes([
@@ -676,7 +837,7 @@ module('Plugins | resizing', function (hooks) {
           [columnD, 250],
         ]);
 
-        await click('#B-right');
+        await click("#B-right");
         await requestAnimationFrameSettled();
 
         // Sizes don't change
@@ -690,11 +851,19 @@ module('Plugins | resizing', function (hooks) {
         await assertChanges(
           () => dragLeft(columnB, 10),
           [
-            { value: () => width(columnA), by: 0, msg: 'width of A unchanged' },
-            { value: () => width(columnC), by: -10, msg: 'width of C decreased by 10' },
-            { value: () => width(columnB), by: 10, msg: 'width of B increased by 10' },
-            { value: () => width(columnD), by: 0, msg: 'width of D unchanged' },
-          ]
+            { value: () => width(columnA), by: 0, msg: "width of A unchanged" },
+            {
+              value: () => width(columnC),
+              by: -10,
+              msg: "width of C decreased by 10",
+            },
+            {
+              value: () => width(columnB),
+              by: 10,
+              msg: "width of B increased by 10",
+            },
+            { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
+          ],
         );
       });
     });

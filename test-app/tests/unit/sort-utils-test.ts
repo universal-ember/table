@@ -51,25 +51,38 @@ module('Unit | Utils | sort utils', function () {
     test('options.transform', function (assert) {
       let output = [{ property: 'foo_bar', direction: 'descending' }] as Sort[];
       let input = 'fooBar|desc';
-      let actual = deserializeSorts(input, { separator: '|', transform: 'underscore' });
+      let actual = deserializeSorts(input, {
+        separator: '|',
+        transform: 'underscore',
+      });
 
       assert.deepEqual(
         actual,
         output,
-        'custom underscore transform is used and separator is used '
+        'custom underscore transform is used and separator is used ',
       );
 
       output = [{ property: 'fooBar', direction: 'ascending' }] as Sort[];
       input = 'foo_bar|asc';
-      actual = deserializeSorts(input, { separator: '|', transform: 'camelize' });
+      actual = deserializeSorts(input, {
+        separator: '|',
+        transform: 'camelize',
+      });
 
       assert.deepEqual(actual, output, 'custom transform is used');
 
       output = [{ property: 'foo_bar', direction: 'descending' }] as Sort[];
       input = 'fooBar.desc';
-      actual = deserializeSorts(input, { separator: '.', transform: 'underscore' });
+      actual = deserializeSorts(input, {
+        separator: '.',
+        transform: 'underscore',
+      });
 
-      assert.deepEqual(actual, output, 'custom underscore transform and separator "." is used');
+      assert.deepEqual(
+        actual,
+        output,
+        'custom underscore transform and separator "." is used',
+      );
     });
   });
 
@@ -119,12 +132,15 @@ module('Unit | Utils | sort utils', function () {
     test('options.transform', function (assert) {
       let input = [{ property: 'fooBar', direction: 'descending' }] as Sort[];
       let output = 'foo_bar|desc';
-      let actual = serializeSorts(input, { separator: '|', transform: 'underscore' });
+      let actual = serializeSorts(input, {
+        separator: '|',
+        transform: 'underscore',
+      });
 
       assert.strictEqual(
         actual,
         output,
-        'custom underscore transform is used and separator is used '
+        'custom underscore transform is used and separator is used ',
       );
 
       input = [{ property: 'foo_bar', direction: 'ascending' }] as Sort[];
@@ -135,9 +151,16 @@ module('Unit | Utils | sort utils', function () {
 
       input = [{ property: 'fooBar', direction: 'descending' }] as Sort[];
       output = 'foo_bar.desc';
-      actual = serializeSorts(input, { separator: '.', transform: 'underscore' });
+      actual = serializeSorts(input, {
+        separator: '.',
+        transform: 'underscore',
+      });
 
-      assert.strictEqual(actual, output, 'custom underscore transform and separator "." is used');
+      assert.strictEqual(
+        actual,
+        output,
+        'custom underscore transform and separator "." is used',
+      );
     });
   });
 });

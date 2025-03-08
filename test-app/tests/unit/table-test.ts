@@ -5,12 +5,19 @@ import { setupTest } from 'ember-qunit';
 import { headlessTable } from '@universal-ember/table';
 import { use } from 'ember-resources';
 
-import type { ColumnConfig, TableConfig, TableMeta } from '@universal-ember/table';
+import type {
+  ColumnConfig,
+  TableConfig,
+  TableMeta,
+} from '@universal-ember/table';
 
 type Args = Omit<TableConfig<unknown>, 'meta' | 'preferences'> &
   TableMeta & { preferencesKey?: string; title?: string };
 
-function withTestDefaults(args: Args, extra: Partial<TableConfig<unknown>> = {}) {
+function withTestDefaults(
+  args: Args,
+  extra: Partial<TableConfig<unknown>> = {},
+) {
   return {
     columns: args.columns,
     data: args.data,
@@ -71,9 +78,11 @@ module('Unit | -private | table', function (hooks) {
 
     assert.expect(4);
 
-    ['firstName', 'lastName', 'role', 'favouritePet'].forEach((key, position) => {
-      assert.strictEqual(table.columns[position]?.key, key);
-    });
+    ['firstName', 'lastName', 'role', 'favouritePet'].forEach(
+      (key, position) => {
+        assert.strictEqual(table.columns[position]?.key, key);
+      },
+    );
   });
 
   test('columns: each key must be unique', async function (assert) {
@@ -93,7 +102,7 @@ module('Unit | -private | table', function (hooks) {
         table.columns.values();
       },
       /Every column key in the table's column config must be unique. Found duplicate entry: firstName/,
-      'expected error received'
+      'expected error received',
     );
   });
 });

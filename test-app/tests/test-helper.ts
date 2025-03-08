@@ -1,4 +1,9 @@
-import { currentURL, getSettledState, resetOnerror, setApplication } from '@ember/test-helpers';
+import {
+  currentURL,
+  getSettledState,
+  resetOnerror,
+  setApplication,
+} from '@ember/test-helpers';
 import { getPendingWaiterState } from '@ember/test-waiters';
 import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';

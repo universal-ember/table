@@ -21,7 +21,12 @@ module('Public API', function () {
 
     assert.deepEqual(
       exports.sort(),
-      ['headlessTable', 'TablePreferences', 'deserializeSorts', 'serializeSorts'].sort()
+      [
+        'headlessTable',
+        'TablePreferences',
+        'deserializeSorts',
+        'serializeSorts',
+      ].sort(),
     );
   });
 
@@ -42,7 +47,7 @@ module('Public API', function () {
         'preferences',
         'applyStyles',
         'removeStyles',
-      ].sort()
+      ].sort(),
     );
   });
 });

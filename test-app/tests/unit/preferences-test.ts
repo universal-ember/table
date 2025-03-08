@@ -1,4 +1,3 @@
- 
 import { render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';
@@ -18,7 +17,7 @@ module('Unit | -private | table-preferences', function (hooks) {
 
       let preferences = new TablePreferences('preferences-key', {
         // Deliberately testing incorrect type
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
         // @ts-ignore
         restore: () => ({
           columns: {
@@ -76,7 +75,7 @@ module('Unit | -private | table-preferences', function (hooks) {
 
       let preferences = new TablePreferences('preferences-key', {
         // Deliberately testing incorrect type
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
         // @ts-ignore
         restore: () => data,
         persist: (key, toPersist) => {
@@ -123,17 +122,28 @@ module('Unit | -private | table-preferences', function (hooks) {
         },
       });
 
-      let foo = preferences.storage.forPlugin('column-visibility').table.get('foo');
-      let woop = preferences.storage.forPlugin('column-visibility').forColumn('foo').get('woop');
+      let foo = preferences.storage
+        .forPlugin('column-visibility')
+        .table.get('foo');
+      let woop = preferences.storage
+        .forPlugin('column-visibility')
+        .forColumn('foo')
+        .get('woop');
 
       assert.strictEqual(foo, 2);
       assert.false(woop);
 
-      preferences.storage.forPlugin('column-visibility').forColumn('foo').set('woop', true);
+      preferences.storage
+        .forPlugin('column-visibility')
+        .forColumn('foo')
+        .set('woop', true);
       preferences.storage.forPlugin('column-visibility').table.set('foo', 3);
 
       foo = preferences.storage.forPlugin('column-visibility').table.get('foo');
-      woop = preferences.storage.forPlugin('column-visibility').forColumn('foo').get('woop');
+      woop = preferences.storage
+        .forPlugin('column-visibility')
+        .forColumn('foo')
+        .get('woop');
 
       assert.strictEqual(foo, 3);
       assert.true(woop);
@@ -174,10 +184,18 @@ module('Unit | -private | table-preferences', function (hooks) {
       });
 
       preferences.storage.forPlugin('column-visibility').table.delete('foo');
-      preferences.storage.forPlugin('column-visibility').forColumn('foo').delete('woop');
+      preferences.storage
+        .forPlugin('column-visibility')
+        .forColumn('foo')
+        .delete('woop');
 
-      let foo = preferences.storage.forPlugin('column-visibility').table.get('foo');
-      let woop = preferences.storage.forPlugin('column-visibility').forColumn('foo').get('woop');
+      let foo = preferences.storage
+        .forPlugin('column-visibility')
+        .table.get('foo');
+      let woop = preferences.storage
+        .forPlugin('column-visibility')
+        .forColumn('foo')
+        .get('woop');
 
       assert.strictEqual(foo, undefined);
       assert.strictEqual(woop, undefined);
@@ -234,9 +252,18 @@ module('Unit | -private | table-preferences', function (hooks) {
         },
       });
 
-      preferences.storage.forPlugin('column-visibility').forColumn('foo').set('woop', true);
-      preferences.storage.forPlugin('test-plugin').forColumn('foo').set('woop', '1');
-      preferences.storage.forPlugin('old-plugin').forColumn('foo').set('woop', 2);
+      preferences.storage
+        .forPlugin('column-visibility')
+        .forColumn('foo')
+        .set('woop', true);
+      preferences.storage
+        .forPlugin('test-plugin')
+        .forColumn('foo')
+        .set('woop', '1');
+      preferences.storage
+        .forPlugin('old-plugin')
+        .forColumn('foo')
+        .set('woop', 2);
       preferences.persist();
     });
   });
@@ -266,11 +293,16 @@ module('Preferences | rendering', function (hooks) {
 
     class Context {
       get tableInfo() {
-        return preferences.storage.forPlugin('column-visibility').table.get('foo');
+        return preferences.storage
+          .forPlugin('column-visibility')
+          .table.get('foo');
       }
 
       get columnInfo() {
-        return preferences.storage.forPlugin('column-visibility').forColumn('foo').get('woop');
+        return preferences.storage
+          .forPlugin('column-visibility')
+          .forColumn('foo')
+          .get('woop');
       }
     }
 
@@ -279,20 +311,22 @@ module('Preferences | rendering', function (hooks) {
     this.setProperties({ ctx });
 
     await render(
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       hbs`
       {{! @glint-ignore }}
       <out id="table">{{this.ctx.tableInfo}}</out>
       {{! @glint-ignore }}
       <out id="column">{{this.ctx.columnInfo}}</out>
-    `
+    `,
     );
 
     assert.dom('#table').hasText('2');
     assert.dom('#column').hasText('false');
 
-    preferences.storage.forPlugin('column-visibility').forColumn('foo').set('woop', true);
+    preferences.storage
+      .forPlugin('column-visibility')
+      .forColumn('foo')
+      .set('woop', true);
     preferences.storage.forPlugin('column-visibility').table.set('foo', 3);
 
     await settled();

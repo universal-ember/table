@@ -3,7 +3,11 @@ import { assert as debugAssert } from '@ember/debug';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-import { type ColumnConfig, type Table, headlessTable } from '@universal-ember/table';
+import {
+  type ColumnConfig,
+  type Table,
+  headlessTable,
+} from '@universal-ember/table';
 import { columns, meta } from '@universal-ember/table/plugins';
 import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
 import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
@@ -75,7 +79,9 @@ module('Plugins | Queries | columns', function (hooks) {
     });
   }
 
-  const ONE_PLUGIN_EXPECTED_VISIBLE = ONE_HIDDEN_COLUMN.filter((column) => column.key !== 'D');
+  const ONE_PLUGIN_EXPECTED_VISIBLE = ONE_HIDDEN_COLUMN.filter(
+    (column) => column.key !== 'D',
+  );
 
   module('columns.for', function () {
     /**
@@ -94,7 +100,11 @@ module('Plugins | Queries | columns', function (hooks) {
         let result = columns.for(context.table);
 
         assert.strictEqual(result.length, ALL_COLUMNS.length);
-        assert.deepEqual(keysOf(result), keysOf(ALL_COLUMNS), 'order is preserved');
+        assert.deepEqual(
+          keysOf(result),
+          keysOf(ALL_COLUMNS),
+          'order is preserved',
+        );
       });
 
       test('with a requesting plugin, an error is thrown', async function (assert) {
@@ -105,7 +115,7 @@ module('Plugins | Queries | columns', function (hooks) {
             columns.for(context.table, ColumnResizing);
           },
           /\[ColumnResizing\] requested columns from the table, but the plugin, ColumnResizing, is not used in this table/,
-          'correct error message is used'
+          'correct error message is used',
         );
       });
     });
@@ -116,11 +126,15 @@ module('Plugins | Queries | columns', function (hooks) {
         let result = columns.for(context.table);
 
         assert.strictEqual(result.length, ONE_PLUGIN_EXPECTED_VISIBLE.length);
-        assert.strictEqual(result.length, ONE_HIDDEN_COLUMN.length - 1, 'one column is hidden');
+        assert.strictEqual(
+          result.length,
+          ONE_HIDDEN_COLUMN.length - 1,
+          'one column is hidden',
+        );
         assert.deepEqual(
           keysOf(result),
           keysOf(ONE_PLUGIN_EXPECTED_VISIBLE),
-          'columns from ColumnVisibility are used'
+          'columns from ColumnVisibility are used',
         );
       });
 
@@ -128,7 +142,11 @@ module('Plugins | Queries | columns', function (hooks) {
         let context = create(OnePlugin, this.owner);
         let result = columns.for(context.table, ColumnVisibility);
 
-        assert.strictEqual(result.length, ALL_COLUMNS.length, 'one column is hidden');
+        assert.strictEqual(
+          result.length,
+          ALL_COLUMNS.length,
+          'one column is hidden',
+        );
         assert.deepEqual(keysOf(result), keysOf(ALL_COLUMNS));
       });
 
@@ -140,124 +158,154 @@ module('Plugins | Queries | columns', function (hooks) {
             columns.for(context.table, ColumnResizing);
           },
           /\[ColumnResizing\] requested columns from the table, but the plugin, ColumnResizing, is not used in this table/,
-          'correct error message is used'
+          'correct error message is used',
         );
       });
     });
 
-    module('Using many of the plugins provided by @universal-ember/table', function (hooks) {
-      /**
-       * SCENARIO: with plugins
-       * This plugin graph looks like:
-       *
-       * [raw table columns]
-       *       ^
-       *       |
-       *  ColumnVisibility
-       *      ^
-       *      |
-       *  ColumnReordering
-       *      ^          /-------> columns requests with no requirements get shoved to the bottom of the graph
-       *      \ > ------/
-       *      ^\           ---- ColumnResizing
-       *      | \        /      ^
-       *      |  ^------       / via `requires`
-       *     |    \           /
-       *    |      StickyColumns
-       *   |
-       *  DataSorting -- does not define requirements, so it gets shoved to the bottom of the graph
-       */
-      class Plugins {
-        table = headlessTable(this, {
-          columns: () => ALL_COLUMNS,
-          data: () => DATA,
-          plugins: [ColumnReordering, ColumnVisibility, ColumnResizing, StickyColumns, DataSorting],
-        });
-      }
-
-      let table: Table;
-
-      hooks.beforeEach(function (assert) {
-        table = create(Plugins, this.owner).table;
-
+    module(
+      'Using many of the plugins provided by @universal-ember/table',
+      function (hooks) {
         /**
-         * Perform some operations on the columns so that we can know
-         * which set of columns we're getting
+         * SCENARIO: with plugins
+         * This plugin graph looks like:
+         *
+         * [raw table columns]
+         *       ^
+         *       |
+         *  ColumnVisibility
+         *      ^
+         *      |
+         *  ColumnReordering
+         *      ^          /-------> columns requests with no requirements get shoved to the bottom of the graph
+         *      \ > ------/
+         *      ^\           ---- ColumnResizing
+         *      | \        /      ^
+         *      |  ^------       / via `requires`
+         *     |    \           /
+         *    |      StickyColumns
+         *   |
+         *  DataSorting -- does not define requirements, so it gets shoved to the bottom of the graph
          */
-        let [first, second, third] = table.columns;
+        class Plugins {
+          table = headlessTable(this, {
+            columns: () => ALL_COLUMNS,
+            data: () => DATA,
+            plugins: [
+              ColumnReordering,
+              ColumnVisibility,
+              ColumnResizing,
+              StickyColumns,
+              DataSorting,
+            ],
+          });
+        }
 
-        debugAssert(`Missing columns`, first && second && third);
+        let table: Table;
 
-        meta.forColumn(first, ColumnVisibility).hide();
+        hooks.beforeEach(function (assert) {
+          table = create(Plugins, this.owner).table;
 
-        assert.deepEqual(
-          keysOf(meta.forTable(table, ColumnVisibility).visibleColumns),
-          ['B', 'C', 'D', 'E', 'F', 'G'],
-          'setup: the first column is hidden'
-        );
-        meta.forColumn(third, ColumnReordering).moveLeft();
+          /**
+           * Perform some operations on the columns so that we can know
+           * which set of columns we're getting
+           */
+          let [first, second, third] = table.columns;
 
-        assert.deepEqual(
-          keysOf(meta.forTable(table, ColumnReordering).columns),
-          ['C', 'B', 'D', 'E', 'F', 'G'],
-          'setup: column C (the third), has moved to the left'
-        );
+          debugAssert(`Missing columns`, first && second && third);
 
-        meta.forColumn(second, ColumnReordering).moveRight();
+          meta.forColumn(first, ColumnVisibility).hide();
 
-        assert.deepEqual(
-          keysOf(meta.forTable(table, ColumnReordering).columns),
-          ['C', 'D', 'B', 'E', 'F', 'G'],
-          'setup: column B (the second, originally), has moved to the right'
-        );
-      });
+          assert.deepEqual(
+            keysOf(meta.forTable(table, ColumnVisibility).visibleColumns),
+            ['B', 'C', 'D', 'E', 'F', 'G'],
+            'setup: the first column is hidden',
+          );
+          meta.forColumn(third, ColumnReordering).moveLeft();
 
-      test(`the root plugin gets the table's columns`, function (assert) {
-        assert.deepEqual(keysOf(columns.for(table, ColumnVisibility)), [
-          'A',
-          'B',
-          'C',
-          'D',
-          'E',
-          'F',
-          'G',
-        ]);
-      });
+          assert.deepEqual(
+            keysOf(meta.forTable(table, ColumnReordering).columns),
+            ['C', 'B', 'D', 'E', 'F', 'G'],
+            'setup: column C (the third), has moved to the left',
+          );
 
-      test(`The second plugin in the hierarchy gets the columns from the root Plugin`, function (assert) {
-        assert.deepEqual(keysOf(columns.for(table, ColumnReordering)), [
-          'B',
-          'C',
-          'D',
-          'E',
-          'F',
-          'G',
-        ]);
-      });
+          meta.forColumn(second, ColumnReordering).moveRight();
 
-      test('ColumnResizing: all other plugins get the same column set', function (assert) {
-        assert.deepEqual(keysOf(columns.for(table, ColumnResizing)), [
-          'C',
-          'D',
-          'B',
-          'E',
-          'F',
-          'G',
-        ]);
-      });
+          assert.deepEqual(
+            keysOf(meta.forTable(table, ColumnReordering).columns),
+            ['C', 'D', 'B', 'E', 'F', 'G'],
+            'setup: column B (the second, originally), has moved to the right',
+          );
+        });
 
-      test('DataSorting: all other plugins get the same column set', function (assert) {
-        assert.deepEqual(keysOf(columns.for(table, DataSorting)), ['C', 'D', 'B', 'E', 'F', 'G']);
-      });
+        test(`the root plugin gets the table's columns`, function (assert) {
+          assert.deepEqual(keysOf(columns.for(table, ColumnVisibility)), [
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+            'G',
+          ]);
+        });
 
-      test('StickyColumns: all other plugins get the same column set', function (assert) {
-        assert.deepEqual(keysOf(columns.for(table, StickyColumns)), ['C', 'D', 'B', 'E', 'F', 'G']);
-      });
+        test(`The second plugin in the hierarchy gets the columns from the root Plugin`, function (assert) {
+          assert.deepEqual(keysOf(columns.for(table, ColumnReordering)), [
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+            'G',
+          ]);
+        });
 
-      test(`Without a requesting plugin, the columns are the same as the leaf-plugins' columns`, function (assert) {
-        assert.deepEqual(keysOf(columns.for(table)), ['C', 'D', 'B', 'E', 'F', 'G']);
-      });
-    });
+        test('ColumnResizing: all other plugins get the same column set', function (assert) {
+          assert.deepEqual(keysOf(columns.for(table, ColumnResizing)), [
+            'C',
+            'D',
+            'B',
+            'E',
+            'F',
+            'G',
+          ]);
+        });
+
+        test('DataSorting: all other plugins get the same column set', function (assert) {
+          assert.deepEqual(keysOf(columns.for(table, DataSorting)), [
+            'C',
+            'D',
+            'B',
+            'E',
+            'F',
+            'G',
+          ]);
+        });
+
+        test('StickyColumns: all other plugins get the same column set', function (assert) {
+          assert.deepEqual(keysOf(columns.for(table, StickyColumns)), [
+            'C',
+            'D',
+            'B',
+            'E',
+            'F',
+            'G',
+          ]);
+        });
+
+        test(`Without a requesting plugin, the columns are the same as the leaf-plugins' columns`, function (assert) {
+          assert.deepEqual(keysOf(columns.for(table)), [
+            'C',
+            'D',
+            'B',
+            'E',
+            'F',
+            'G',
+          ]);
+        });
+      },
+    );
   });
 
   module('columns.next', function (hooks) {
@@ -330,7 +378,10 @@ module('Plugins | Queries | columns', function (hooks) {
     test('second to last column is returned when the reference column is the last column', function (assert) {
       let [last, secondToLast] = table.columns.values().reverse();
 
-      debugAssert('last and/or second to last columns are missing', last && secondToLast);
+      debugAssert(
+        'last and/or second to last columns are missing',
+        last && secondToLast,
+      );
 
       let result = columns.previous(last);
 
@@ -409,7 +460,11 @@ module('Plugins | Queries | columns', function (hooks) {
 
       let result = columns.before(fifth, ColumnVisibility);
 
-      assert.deepEqual(keysOf(result), ['A', 'B', 'C', 'D'], 'column D is included');
+      assert.deepEqual(
+        keysOf(result),
+        ['A', 'B', 'C', 'D'],
+        'column D is included',
+      );
     });
 
     test('all but the last column is returned when the reference column is the last column', function (assert) {
@@ -454,7 +509,11 @@ module('Plugins | Queries | columns', function (hooks) {
 
       let result = columns.after(third);
 
-      assert.deepEqual(keysOf(result), ['E', 'F', 'G'], 'column D is skipped, due to plugins');
+      assert.deepEqual(
+        keysOf(result),
+        ['E', 'F', 'G'],
+        'column D is skipped, due to plugins',
+      );
     });
 
     test('for a requesting plugin, columns to the right/after of the reference column are returned', function (assert) {
@@ -464,7 +523,11 @@ module('Plugins | Queries | columns', function (hooks) {
 
       let result = columns.after(third, ColumnVisibility);
 
-      assert.deepEqual(keysOf(result), ['D', 'E', 'F', 'G'], 'column D is included');
+      assert.deepEqual(
+        keysOf(result),
+        ['D', 'E', 'F', 'G'],
+        'column D is included',
+      );
     });
 
     test('all but the first column is returned when the reference column is the first column', function (assert) {
