@@ -9,8 +9,8 @@ import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';
 import { start as qunitStart, setupEmberOnerrorValidation } from 'ember-qunit';
 
-import Application from '#src/app';
-import config from '#config';
+import Application from '#src/app.ts';
+import config, { enterTestMode } from '#config';
 
 // Prevent tests from re-ordering on refresh
 // (use seed query param to deliberately re-order)
