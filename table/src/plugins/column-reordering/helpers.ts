@@ -8,13 +8,15 @@ import type { Column, Table } from '[public-types]';
  * Move the column one position to the left.
  * If the column is first, nothing will happen.
  */
-export const moveLeft = (column: Column) => meta.forColumn(column, ColumnReordering).moveLeft();
+export const moveLeft = (column: Column) =>
+  meta.forColumn(column, ColumnReordering).moveLeft();
 
 /**
  * Move the column one position to the right.
  * If the column is last, nothing will happen.
  */
-export const moveRight = (column: Column) => meta.forColumn(column, ColumnReordering).moveRight();
+export const moveRight = (column: Column) =>
+  meta.forColumn(column, ColumnReordering).moveRight();
 
 /**
  * Override all column positions at once.

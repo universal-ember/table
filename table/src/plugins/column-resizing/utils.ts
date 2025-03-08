@@ -18,7 +18,8 @@
 **/
 export const getAccurateClientWidth = (element: HTMLElement) => {
   const style = getComputedStyle(element);
-  const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+  const padding =
+    parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
   const scrollbarWidth = element.offsetWidth - element.clientWidth;
 
   return element.getBoundingClientRect().width - padding - scrollbarWidth;
@@ -29,13 +30,16 @@ export const totalGapOf = (element?: Element | null) => {
 
   const style = getComputedStyle(element);
   const gapSize = parseFloat(style.columnGap);
-  const cells = element.querySelectorAll('[role="cell"], [role="columnheader"]');
+  const cells = element.querySelectorAll(
+    '[role="cell"], [role="columnheader"]',
+  );
 
   let totalCellPadding = 0;
 
   for (const cell of cells) {
     const style = getComputedStyle(cell);
-    const padding = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    const padding =
+      parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
 
     totalCellPadding += padding;
   }

@@ -12,5 +12,9 @@ const x = 0 as unknown as Table<{ x: number }>;
 //////////////////////////////
 // <Table>#pluginOf
 expectTypeOf(x.pluginOf(DataSorting)).toEqualTypeOf<DataSorting | undefined>();
-expectTypeOf(x.pluginOf(ColumnReordering)).toEqualTypeOf<ColumnReordering | undefined>();
-expectTypeOf(x.pluginOf(ColumnResizing)).toEqualTypeOf<ColumnResizing | undefined>();
+expectTypeOf(x.pluginOf(ColumnReordering)).toEqualTypeOf<
+  ColumnReordering | undefined
+>();
+expectTypeOf(x.pluginOf(ColumnResizing)).toEqualTypeOf<
+  ColumnResizing | undefined
+>();

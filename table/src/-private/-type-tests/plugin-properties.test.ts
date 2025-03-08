@@ -13,7 +13,9 @@ class ColumnMeta {
 class RowMeta {
   c = 'c';
 }
-class A extends BasePlugin<{ Meta: { Table: TableMeta; Column: ColumnMeta; Row: RowMeta } }> {
+class A extends BasePlugin<{
+  Meta: { Table: TableMeta; Column: ColumnMeta; Row: RowMeta };
+}> {
   name = 'a plugin';
 }
 

@@ -49,7 +49,8 @@ export type PluginPreferenceFor<PluginName> = PluginName extends keyof Registry
   ? Registry[PluginName] & PluginPreferences
   : PluginPreferences;
 
-export type PreferencesTableKey<PluginName> = keyof PluginPreferenceFor<PluginName>['table'];
+export type PreferencesTableKey<PluginName> =
+  keyof PluginPreferenceFor<PluginName>['table'];
 
 export type PreferencesTableValues<PluginName> =
   PluginPreferenceFor<PluginName>['table'][PreferencesTableKey<PluginName>];

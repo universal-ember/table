@@ -42,7 +42,10 @@ export interface Signature {
   };
 }
 
-export class ColumnVisibility extends BasePlugin<Signature> implements Plugin<Signature> {
+export class ColumnVisibility
+  extends BasePlugin<Signature>
+  implements Plugin<Signature>
+{
   name = 'column-visibility';
   static features = ['columnVisibility'];
 
@@ -64,10 +67,15 @@ export class ColumnMeta<Data = unknown> {
   constructor(private column: Column<Data>) {}
 
   get isVisible(): boolean {
-    const columnPreferences = preferences.forColumn(this.column, ColumnVisibility);
+    const columnPreferences = preferences.forColumn(
+      this.column,
+      ColumnVisibility,
+    );
     const columnOptions = options.forColumn(this.column, ColumnVisibility);
 
-    return Boolean(columnPreferences.get('isVisible') ?? columnOptions?.isVisible ?? true);
+    return Boolean(
+      columnPreferences.get('isVisible') ?? columnOptions?.isVisible ?? true,
+    );
   }
 
   get isHidden(): boolean {

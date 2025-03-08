@@ -4,13 +4,17 @@ import type { BasePlugin } from './base';
 import type { Constructor } from '[private-types]';
 import type { Plugin } from '[public-plugin-types]';
 
-type PluginOption = Constructor<Plugin<any>> | [Constructor<Plugin<any>>, () => any];
+type PluginOption =
+  | Constructor<Plugin<any>>
+  | [Constructor<Plugin<any>>, () => any];
 
 type ExpandedPluginOption = [Constructor<Plugin<any>>, () => any];
 
 export type Plugins = PluginOption[];
 
-export function normalizePluginsConfig(plugins?: Plugins): ExpandedPluginOption[] {
+export function normalizePluginsConfig(
+  plugins?: Plugins,
+): ExpandedPluginOption[] {
   if (!plugins) return [];
 
   const result: ExpandedPluginOption[] = [];
@@ -33,7 +37,10 @@ export function normalizePluginsConfig(plugins?: Plugins): ExpandedPluginOption[
 
   assert(
     `Every entry in the plugins config must be invokable`,
-    result.every((tuple) => typeof tuple[0] === 'function' && typeof tuple[1] === 'function')
+    result.every(
+      (tuple) =>
+        typeof tuple[0] === 'function' && typeof tuple[1] === 'function',
+    ),
   );
 
   return result;
@@ -47,7 +54,8 @@ function collectFeatures(plugins: ExpandedPluginOption[]) {
 
   for (const [plugin] of plugins) {
     if ('features' in plugin) {
-      for (const feature of (plugin as unknown as typeof BasePlugin).features || []) {
+      for (const feature of (plugin as unknown as typeof BasePlugin).features ||
+        []) {
         result[feature] = [...(result[feature] || []), plugin];
       }
     }
@@ -64,7 +72,8 @@ function collectRequirements(plugins: ExpandedPluginOption[]) {
 
   for (const [plugin] of plugins) {
     if ('requires' in plugin) {
-      for (const requirement of (plugin as unknown as typeof BasePlugin).requires || []) {
+      for (const requirement of (plugin as unknown as typeof BasePlugin)
+        .requires || []) {
         result[requirement] = [...(result[requirement] || []), plugin];
       }
     }
@@ -84,7 +93,7 @@ export function verifyPlugins(plugins: ExpandedPluginOption[]) {
     if (providingPlugins.length > 1) {
       errors.push(
         `More than one plugin is providing the feature: ${feature}. ` +
-          `Please remove one of ${providingPlugins.map((p) => p.name).join(', ')}`
+          `Please remove one of ${providingPlugins.map((p) => p.name).join(', ')}`,
       );
     }
   }
@@ -94,7 +103,7 @@ export function verifyPlugins(plugins: ExpandedPluginOption[]) {
       errors.push(
         `Configuration is missing requirement: ${requirement}, ` +
           `And is requested by ${requestingPlugins.map((p) => p.name).join(', ')}. ` +
-          `Please add a plugin with the ${requirement} feature`
+          `Please add a plugin with the ${requirement} feature`,
       );
     }
   }
@@ -111,26 +120,28 @@ type AssignableStyles = Omit<CSSStyleDeclaration, 'length' | 'parentRule'>;
  *
  * Utility that helps safely apply styles to an element
  */
-export function applyStyles(element: HTMLElement | SVGElement, styles: Partial<AssignableStyles>) {
+export function applyStyles(
+  element: HTMLElement | SVGElement,
+  styles: Partial<AssignableStyles>,
+) {
   for (const [name, value] of Object.entries(styles)) {
     if (name in element.style) {
       assignStyle(
         element,
         name as keyof CSSStyleDeclaration,
-        value as CSSStyleDeclaration[keyof CSSStyleDeclaration]
+        value as CSSStyleDeclaration[keyof CSSStyleDeclaration],
       );
     }
   }
 }
 
-type StyleDeclarationFor<MaybeStyle> = MaybeStyle extends keyof CSSStyleDeclaration
-  ? MaybeStyle
-  : never;
+type StyleDeclarationFor<MaybeStyle> =
+  MaybeStyle extends keyof CSSStyleDeclaration ? MaybeStyle : never;
 
 function assignStyle<StyleName>(
   element: HTMLElement | SVGElement,
   styleName: StyleDeclarationFor<StyleName>,
-  value: CSSStyleDeclaration[StyleDeclarationFor<StyleName>]
+  value: CSSStyleDeclaration[StyleDeclarationFor<StyleName>],
 ) {
   element.style[styleName] = value;
 }
@@ -146,7 +157,7 @@ function removeStyle(element: HTMLElement | SVGElement, styleName: string) {
  */
 export function removeStyles(
   element: HTMLElement | SVGElement,
-  styles: Array<keyof AssignableStyles>
+  styles: Array<keyof AssignableStyles>,
 ) {
   for (const name of styles) {
     if (typeof name !== 'string') continue;

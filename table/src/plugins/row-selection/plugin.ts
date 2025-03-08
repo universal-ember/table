@@ -6,7 +6,8 @@ import { BasePlugin, meta, options } from '../-private/base.ts';
 import type { Row, Table } from '[public-types]';
 import type { PluginSignature, RowApi } from '#interfaces';
 
-export interface Signature<DataType = any, Key = DataType> extends PluginSignature {
+export interface Signature<DataType = any, Key = DataType>
+  extends PluginSignature {
   Meta: {
     Table: TableMeta;
     Row: RowMeta;
@@ -80,7 +81,9 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
     assert(
       `selection, onSelect, and onDeselect are all required arguments for the RowSelection plugin. ` +
         `Specify these options via \`RowSelection.with(() => ({ selection, onSelect, onDeselect }))\``,
-      pluginOptions.selection && pluginOptions.onSelect && pluginOptions.onDeselect
+      pluginOptions.selection &&
+        pluginOptions.onSelect &&
+        pluginOptions.onDeselect,
     );
   }
 
@@ -99,14 +102,15 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
   #clickHandler = (row: Row, event: Event) => {
     assert(
       `expected event.target to be an instance of HTMLElement`,
-      event.target instanceof HTMLElement || event.target instanceof SVGElement
+      event.target instanceof HTMLElement || event.target instanceof SVGElement,
     );
 
     const selection = document.getSelection();
 
     if (selection) {
       const { type, anchorNode } = selection;
-      const isSelectingText = type === 'Range' && event.target?.contains(anchorNode);
+      const isSelectingText =
+        type === 'Range' && event.target?.contains(anchorNode);
 
       if (isSelectingText) {
         event.stopPropagation();
@@ -137,7 +141,10 @@ class TableMeta {
 
   @cached
   get selection(): Set<unknown> {
-    const passedSelection = options.forTable(this.#table, RowSelection).selection;
+    const passedSelection = options.forTable(
+      this.#table,
+      RowSelection,
+    ).selection;
 
     assert(`Cannot access selection because it is undefined`, passedSelection);
 

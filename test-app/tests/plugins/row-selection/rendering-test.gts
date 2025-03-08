@@ -193,8 +193,8 @@ module('Plugins | RowSelection', function (hooks) {
           <TestStyles />
           <TestComponent @ctx={{ctx}} />
 
-          <button id="the-helper-1" {{on 'click' (fn toggle first)}}>click me</button>
-          <button id="the-helper-2" {{on 'click' (fn toggle second)}}>click me</button>
+          <button id="the-helper-1" type="button" {{on 'click' (fn toggle first)}}>click me</button>
+          <button id="the-helper-2" type="button" {{on 'click' (fn toggle second)}}>click me</button>
         </template>);
 
 
@@ -276,10 +276,10 @@ module('Plugins | RowSelection', function (hooks) {
           <TestStyles />
           <TestComponent @ctx={{ctx}} />
 
-          <button id="select-1" {{on 'click' (fn select first)}}>click me</button>
-          <button id="select-2" {{on 'click' (fn select second)}}>click me</button>
-          <button id="deselect-1" {{on 'click' (fn deselect first)}}>click me</button>
-          <button id="deselect-2" {{on 'click' (fn deselect second)}}>click me</button>
+          <button id="select-1" type="button" {{on 'click' (fn select first)}}>click me</button>
+          <button id="select-2" type="button" {{on 'click' (fn select second)}}>click me</button>
+          <button id="deselect-1" type="button" {{on 'click' (fn deselect first)}}>click me</button>
+          <button id="deselect-2" type="button" {{on 'click' (fn deselect second)}}>click me</button>
         </template>);
 
 

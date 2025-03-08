@@ -6,27 +6,32 @@ import type { Column } from '[public-types]';
 /**
  * Query a specific column's current sort direction
  */
-export const sortDirection = (column: Column) => meta.forColumn(column, Sorting).sortDirection;
+export const sortDirection = (column: Column) =>
+  meta.forColumn(column, Sorting).sortDirection;
 
 /**
  * Ask if a column is sortable
  */
-export const isSortable = (column: Column) => meta.forColumn(column, Sorting).isSortable;
+export const isSortable = (column: Column) =>
+  meta.forColumn(column, Sorting).isSortable;
 
 /**
  * Ask if a column is ascending
  */
-export const isAscending = (column: Column) => meta.forColumn(column, Sorting).isAscending;
+export const isAscending = (column: Column) =>
+  meta.forColumn(column, Sorting).isAscending;
 
 /**
  * Ask if a column is sorted descending
  */
-export const isDescending = (column: Column) => meta.forColumn(column, Sorting).isDescending;
+export const isDescending = (column: Column) =>
+  meta.forColumn(column, Sorting).isDescending;
 
 /**
  * Ask if a column is not sorted
  */
-export const isUnsorted = (column: Column) => meta.forColumn(column, Sorting).isUnsorted;
+export const isUnsorted = (column: Column) =>
+  meta.forColumn(column, Sorting).isUnsorted;
 
 /**
  * Sort the specified column's data using a tri-toggle.
@@ -35,7 +40,8 @@ export const isUnsorted = (column: Column) => meta.forColumn(column, Sorting).is
  *   Ascending => None => Descending
  *    ⬑ ---------- <= ---------- ↲
  */
-export const sort = (column: Column) => meta.forTable(column.table, Sorting).handleSort(column);
+export const sort = (column: Column) =>
+  meta.forTable(column.table, Sorting).handleSort(column);
 
 /**
  * Toggle a column between descending and not unsorted states

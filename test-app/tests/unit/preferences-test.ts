@@ -1,4 +1,4 @@
-/* eslint-disable qunit/no-commented-tests */
+ 
 import { render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import { module, test } from 'qunit';

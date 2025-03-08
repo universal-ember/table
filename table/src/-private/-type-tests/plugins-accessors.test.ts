@@ -1,4 +1,9 @@
-import { BasePlugin, meta, options, preferences } from '@universal-ember/table/plugins';
+import {
+  BasePlugin,
+  meta,
+  options,
+  preferences,
+} from '@universal-ember/table/plugins';
 import { expectTypeOf } from 'expect-type';
 
 import type { Column, Table } from '[public-types]';
@@ -44,7 +49,9 @@ class SimplePlugin<Signature = SignatureA> extends BasePlugin<Signature> {
 
 // Options
 expectTypeOf(options.forTable(x, SimplePlugin)).toEqualTypeOf<AOptions>();
-expectTypeOf(options.forColumn(y, SimplePlugin)).toEqualTypeOf<AColumnOptions>();
+expectTypeOf(
+  options.forColumn(y, SimplePlugin),
+).toEqualTypeOf<AColumnOptions>();
 
 // Meta
 expectTypeOf(meta.forTable(x, SimplePlugin)).toEqualTypeOf<ATableMeta>();
@@ -76,7 +83,9 @@ expectTypeOf(options.forColumn(y, DataSorting)).toEqualTypeOf<
 >();
 
 // Meta
-expectTypeOf(meta.forTable(x, DataSorting)).toEqualTypeOf<DataSortingSignature['Meta']['Table']>();
+expectTypeOf(meta.forTable(x, DataSorting)).toEqualTypeOf<
+  DataSortingSignature['Meta']['Table']
+>();
 expectTypeOf(meta.forColumn(y, DataSorting)).toEqualTypeOf<
   DataSortingSignature['Meta']['Column']
 >();

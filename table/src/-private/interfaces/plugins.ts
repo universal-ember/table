@@ -55,9 +55,8 @@ export interface RowApi<T extends Table = Table> {
  * - inference will work
  * - we avoid infinite recursive type definitions
  */
-export type SignatureFrom<Klass extends Plugin<any>> = Klass extends Plugin<infer Signature>
-  ? Signature
-  : never;
+export type SignatureFrom<Klass extends Plugin<any>> =
+  Klass extends Plugin<infer Signature> ? Signature : never;
 
 /**
  * @public
@@ -154,7 +153,10 @@ export interface Plugin<Signature = unknown> {
    *
    * Can be used to add / remove attributes, event listeners, etc
    */
-  rowModifier?: (element: HTMLElement, ...args: [RowApi<Table<any>>]) => void | Destructor;
+  rowModifier?: (
+    element: HTMLElement,
+    ...args: [RowApi<Table<any>>]
+  ) => void | Destructor;
 
   /**
    * @public
@@ -162,7 +164,10 @@ export interface Plugin<Signature = unknown> {
    *
    * Specify a modifier setup/teardown function to attach to the table's containing element
    */
-  containerModifier?: (element: HTMLElement, ...args: [Table<any>]) => void | Destructor;
+  containerModifier?: (
+    element: HTMLElement,
+    ...args: [Table<any>]
+  ) => void | Destructor;
 
   /**
    * @public
@@ -287,14 +292,18 @@ export interface DefaultPluginSignature {
 /**
  * @private utility type
  */
-export type TableMetaFor<Signature> = Signature extends { Meta: { Table: unknown } }
+export type TableMetaFor<Signature> = Signature extends {
+  Meta: { Table: unknown };
+}
   ? GetOrElse<Signature['Meta'], 'Table', never>
   : never;
 
 /**
  * @private utility type
  */
-export type ColumnMetaFor<Signature> = Signature extends { Meta: { Column: unknown } }
+export type ColumnMetaFor<Signature> = Signature extends {
+  Meta: { Column: unknown };
+}
   ? GetOrElse<Signature['Meta'], 'Column', never>
   : never;
 

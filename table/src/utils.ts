@@ -19,7 +19,7 @@ import type { Sort, SortsOptions } from './plugins/data-sorting/types.ts';
 
 export const deserializeSorts = (
   sortString: string,
-  options: SortsOptions = { separator: '.', transform: 'camelize' }
+  options: SortsOptions = { separator: '.', transform: 'camelize' },
 ): Sort[] => {
   if (!sortString) {
     return [];
@@ -28,7 +28,10 @@ export const deserializeSorts = (
   const { transform, separator } = options;
   let [key, direction] = sortString.split(separator);
 
-  assert(`No key found for input: \`${sortString}\` using \`${separator}\` as a separator`, key);
+  assert(
+    `No key found for input: \`${sortString}\` using \`${separator}\` as a separator`,
+    key,
+  );
 
   if (transform === 'camelize') {
     key = camelize(key);
@@ -39,7 +42,10 @@ export const deserializeSorts = (
   return [
     {
       property: key,
-      direction: direction === 'asc' ? SortDirection.Ascending : SortDirection.Descending,
+      direction:
+        direction === 'asc'
+          ? SortDirection.Ascending
+          : SortDirection.Descending,
     },
   ];
 };
@@ -57,7 +63,7 @@ export const deserializeSorts = (
  */
 export function serializeSorts(
   sorts: Sort[],
-  options: SortsOptions = { separator: '.', transform: 'underscore' }
+  options: SortsOptions = { separator: '.', transform: 'underscore' },
 ): string {
   const { transform, separator } = options;
 

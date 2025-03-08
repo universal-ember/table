@@ -76,7 +76,9 @@ interface ColumnOptions {
  *
  * This plugin is for *conveying* what the current sorts are, rather than _doing_ the sorting.
  */
-export class Sorting<DataType = unknown> extends BasePlugin<Signature<DataType>> {
+export class Sorting<DataType = unknown> extends BasePlugin<
+  Signature<DataType>
+> {
   name = 'data-sorting';
 
   meta = {
@@ -109,7 +111,9 @@ export class ColumnMeta {
   }
 
   get sortDirection() {
-    const sort = this.tableMeta.sorts.find((sort) => sort.property === this.sortProperty);
+    const sort = this.tableMeta.sorts.find(
+      (sort) => sort.property === this.sortProperty,
+    );
 
     return sort?.direction ?? SortDirection.None;
   }
@@ -162,9 +166,19 @@ export class TableMeta {
     if (columnMeta.sortDirection === SortDirection.Ascending) {
       this.onSort?.([]);
     } else if (columnMeta.sortDirection === SortDirection.Descending) {
-      this.onSort?.([{ direction: SortDirection.Ascending, property: columnMeta.sortProperty }]);
+      this.onSort?.([
+        {
+          direction: SortDirection.Ascending,
+          property: columnMeta.sortProperty,
+        },
+      ]);
     } else {
-      this.onSort?.([{ direction: SortDirection.Descending, property: columnMeta.sortProperty }]);
+      this.onSort?.([
+        {
+          direction: SortDirection.Descending,
+          property: columnMeta.sortProperty,
+        },
+      ]);
     }
   }
 
@@ -180,7 +194,9 @@ export class TableMeta {
       return this.onSort?.([]);
     }
 
-    this.onSort?.([{ direction: SortDirection.Ascending, property: columnMeta.sortProperty }]);
+    this.onSort?.([
+      { direction: SortDirection.Ascending, property: columnMeta.sortProperty },
+    ]);
   }
 
   @action
@@ -195,6 +211,11 @@ export class TableMeta {
       return this.onSort?.([]);
     }
 
-    this.onSort?.([{ direction: SortDirection.Descending, property: columnMeta.sortProperty }]);
+    this.onSort?.([
+      {
+        direction: SortDirection.Descending,
+        property: columnMeta.sortProperty,
+      },
+    ]);
   }
 }

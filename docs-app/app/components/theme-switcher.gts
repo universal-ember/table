@@ -1,15 +1,15 @@
-import { on } from '@ember/modifier';
+import { on } from "@ember/modifier";
 
-import service from 'docs-app/helpers/service';
+import service from "docs-app/helpers/service";
 
-import type { TOC } from '@ember/component/template-only';
+import type { TOC } from "@ember/component/template-only";
 
 const eq = (a: string, b: string) => a === b;
 
 const ThemeSwitcher: TOC<{
   Element: HTMLButtonElement;
 }> = <template>
-  {{#let (service 'theme-manager') as |themeManager|}}
+  {{#let (service "theme-manager") as |themeManager|}}
     <button
       type="button"
       class="focusable duration-150 ease-out rounded-sm transition interactive-quiet px-3"
@@ -50,6 +50,6 @@ const ThemeSwitcher: TOC<{
     </button>
 
   {{/let}}
-</template>
+</template>;
 
 export default ThemeSwitcher;

@@ -2,7 +2,9 @@ import { Table } from './table.ts';
 
 import type { TableConfig } from '#interfaces';
 
-type Args<T> = [destroyable: object, options: TableConfig<T>] | [options: TableConfig<T>];
+type Args<T> =
+  | [destroyable: object, options: TableConfig<T>]
+  | [options: TableConfig<T>];
 
 /**
  * Represents a UI-less version of a table
@@ -40,7 +42,10 @@ export function headlessTable<T = unknown>(options: TableConfig<T>): Table<T>;
  * ```
  *
  */
-export function headlessTable<T = unknown>(destroyable: object, options: TableConfig<T>): Table<T>;
+export function headlessTable<T = unknown>(
+  destroyable: object,
+  options: TableConfig<T>,
+): Table<T>;
 
 export function headlessTable<T = unknown>(...args: Args<T>): Table<T> {
   if (args.length === 2) {
