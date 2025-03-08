@@ -134,20 +134,15 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
    * These are all no-use, no-cost utilities
    */
   modifiers = {
-    container: modifier(
-      (element: HTMLElement): Destructor => {
-        const modifiers = this.plugins.map(
-          (plugin) => plugin.containerModifier,
-        );
-        const composed = composeFunctionModifiers([
-          attachContainer,
-          ...modifiers,
-        ]);
+    container: modifier((element: HTMLElement): Destructor => {
+      const modifiers = this.plugins.map((plugin) => plugin.containerModifier);
+      const composed = composeFunctionModifiers([
+        attachContainer,
+        ...modifiers,
+      ]);
 
-        return composed(element, this as Table<DataType>);
-      },
-      { eager: false },
-    ),
+      return composed(element, this as Table<unknown>);
+    }),
 
     // resize: ResizeModifier,
     // TODO: switch to composing real modifiers once "curry" and "compose"
@@ -167,7 +162,6 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
         return composed(element, { column, table: this });
       },
-      { eager: false },
     ),
 
     row: modifier(
@@ -177,7 +171,6 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
         return composed(element, { row, table: this });
       },
-      { eager: false },
     ),
   };
 

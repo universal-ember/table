@@ -46,7 +46,8 @@
       "ember-auto-import": "^2.6.2"
     },
     "patchedDependencies": {
-      "github-changelog": "patches/github-changelog.patch"
+      "github-changelog": "patches/github-changelog.patch",
+      "@embroider/addon-dev": "patches/@embroider__addon-dev.patch"
     }
   }
 }
