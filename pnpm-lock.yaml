@@ -28,8 +28,8 @@ importers:
         specifier: ^0.13.1
         version: 0.13.1
       turbo:
-        specifier: ^2.4.2
-        version: 2.4.2
+        specifier: ^2.4.4
+        version: 2.4.4
 
   docs-api:
     devDependencies:
@@ -77,13 +77,13 @@ importers:
         version: 4.0.4
       ember-cached-decorator-polyfill:
         specifier: ^1.0.1
-        version: 1.0.2(707f1f229045735f8f85ee1b334b1679)
+        version: 1.0.2(345c5bc7c3bf9dd59e005a93623cc8ae)
       ember-modifier:
         specifier: ^4.1.0
         version: 4.2.0(a320026dee749fbe8c10c413a2810064)
       ember-resources:
         specifier: ^7.0.2
-        version: 7.0.3(72be9683a6d611ac2bbc3c005b0ce785)
+        version: 7.0.3(d738fa20d66a3546abf4e77ba9a438c5)
       highlight.js:
         specifier: ^11.7.0
         version: 11.11.1
@@ -291,7 +291,7 @@ importers:
         version: 1.1.1(96f1907c78814dc2fe8757dcb24f19f7)
       ember-resources:
         specifier: ^7.0.2
-        version: 7.0.3(72be9683a6d611ac2bbc3c005b0ce785)
+        version: 7.0.3(d738fa20d66a3546abf4e77ba9a438c5)
       ember-tracked-storage-polyfill:
         specifier: ^1.0.0
         version: 1.0.0
@@ -333,8 +333,8 @@ importers:
         specifier: ^3.0.0
         version: 3.1.0
       '@embroider/addon-dev':
-        specifier: ^7.0.0
-        version: 7.1.1(@glint/template@1.5.2)(rollup@4.34.8)
+        specifier: ^7.1.2
+        version: 7.1.2(@glint/template@1.5.2)(rollup@4.34.8)
       '@glimmer/component':
         specifier: ^1.1.2
         version: 1.1.2(@babel/core@7.26.9)
@@ -364,7 +364,7 @@ importers:
         version: 9.1.2
       ember-cached-decorator-polyfill:
         specifier: ^1.0.1
-        version: 1.0.2(707f1f229045735f8f85ee1b334b1679)
+        version: 1.0.2(345c5bc7c3bf9dd59e005a93623cc8ae)
       ember-eslint:
         specifier: ^0.1.2
         version: 0.1.2(cd761fa357376337b70cd6ed9ec3b9fc)
@@ -1227,19 +1227,19 @@ packages:
     resolution: {integrity: sha512-43B4MO3tpIxpLoQiCm8WhQmx14NVD5PDCUa2m0mW9y1+Ij8WoKxz6MjvT7V4+Vh50PL/lJisUbVFRHq7XE27Tg==}
     engines: {node: '>=14.15.0'}
 
-  '@csstools/color-helpers@5.0.1':
-    resolution: {integrity: sha512-MKtmkA0BX87PKaO1NFRTFH+UnkgnmySQOvNxJubsadusqPEC2aJ9MOQiMceZJJ6oitUl/i0L6u0M1IrmAOmgBA==}
+  '@csstools/color-helpers@5.0.2':
+    resolution: {integrity: sha512-JqWH1vsgdGcw2RR6VliXXdA0/59LttzlU8UlRT/iUUsEeWfYq8I+K0yhihEUTTHLRm1EXvpsCx3083EU15ecsA==}
     engines: {node: '>=18'}
 
-  '@csstools/css-calc@2.1.1':
-    resolution: {integrity: sha512-rL7kaUnTkL9K+Cvo2pnCieqNpTKgQzy5f+N+5Iuko9HAoasP+xgprVh7KN/MaJVvVL1l0EzQq2MoqBHKSrDrag==}
+  '@csstools/css-calc@2.1.2':
+    resolution: {integrity: sha512-TklMyb3uBB28b5uQdxjReG4L80NxAqgrECqLZFQbyLekwwlcDDS8r3f07DKqeo8C4926Br0gf/ZDe17Zv4wIuw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@csstools/css-parser-algorithms': ^3.0.4
       '@csstools/css-tokenizer': ^3.0.3
 
-  '@csstools/css-color-parser@3.0.7':
-    resolution: {integrity: sha512-nkMp2mTICw32uE5NN+EsJ4f5N+IGFeCFu4bGpiKgb2Pq/7J/MpyLBeQ5ry4KKtRFZaYs6sTmcMYrSRIyj5DFKA==}
+  '@csstools/css-color-parser@3.0.8':
+    resolution: {integrity: sha512-pdwotQjCCnRPuNi06jFuP68cykU1f3ZWExLe/8MQ1LOs8Xq+fTkYgd+2V8mWUWMrOn9iS2HftPVaMZDaXzGbhQ==}
     engines: {node: '>=18'}
     peerDependencies:
       '@csstools/css-parser-algorithms': ^3.0.4
@@ -1287,8 +1287,8 @@ packages:
     resolution: {integrity: sha512-bb9h95ktG2wKY9+ja1sdsFBdOms2lB19VWs8wmNpzgHv1NCetonBoV5jHBV4DHt0uS1tg9z66cZqhUVlYs96KQ==}
     engines: {node: 10.* || 12.* || >= 14.*}
 
-  '@embroider/addon-dev@7.1.1':
-    resolution: {integrity: sha512-81xGvfvIULEvZTZIswdF4X2Ag7dRKfiUfIQsQ9s11ScozexVj7gyBsMZ4iIwpPmv9iz7WZdBu+ptyJjOdx+HgA==}
+  '@embroider/addon-dev@7.1.2':
+    resolution: {integrity: sha512-hR1NTjoQ3BR3OGH0Ldl8I6N9YX59e4dFmFapUTi3ZNrKSp0WMIeFTThyGKDmMOzjLZZRAi1VUWAF5qUQ+xbkDA==}
     engines: {node: 12.* || 14.* || >= 16}
     hasBin: true
     peerDependencies:
@@ -6541,6 +6541,9 @@ packages:
   nwsapi@2.2.16:
     resolution: {integrity: sha512-F1I/bimDpj3ncaNDhfyMWuFqmQDBwDB0Fogc2qpL3BWvkQteFD/8BzWuIRl83rq0DXfm8SGt/HFhLXZyljTXcQ==}
 
+  nwsapi@2.2.18:
+    resolution: {integrity: sha512-p1TRH/edngVEHVbwqWnxUViEmq5znDvyB+Sik5cmuLpGOIfDf/39zLiq3swPF8Vakqn+gvNiOQAZu8djYlQILA==}
+
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
@@ -8265,11 +8268,11 @@ packages:
   tiny-readdir@2.7.4:
     resolution: {integrity: sha512-721U+zsYwDirjr8IM6jqpesD/McpZooeFi3Zc6mcjy1pse2C+v19eHPFRqz4chGXZFw7C3KITDjAtHETc2wj7Q==}
 
-  tldts-core@6.1.78:
-    resolution: {integrity: sha512-jS0svNsB99jR6AJBmfmEWuKIgz91Haya91Z43PATaeHJ24BkMoNRb/jlaD37VYjb0mYf6gRL/HOnvS1zEnYBiw==}
+  tldts-core@6.1.83:
+    resolution: {integrity: sha512-I2wb9OJc6rXyh9d4aInhSNWChNI+ra6qDnFEGEwe9OoA68lE4Temw29bOkf1Uvwt8VZS079t1BFZdXVBmmB4dw==}
 
-  tldts@6.1.78:
-    resolution: {integrity: sha512-fSgYrW0ITH0SR/CqKMXIruYIPpNu5aDgUp22UhYoSrnUQwc7SBqifEBFNce7AAcygUPBo6a/gbtcguWdmko4RQ==}
+  tldts@6.1.83:
+    resolution: {integrity: sha512-FHxxNJJ0WNsEBPHyC1oesQb3rRoxpuho/z2g3zIIAhw1WHJeQsUzK1jYK8TI1/iClaa4fS3Z2TCA9mtxXsENSg==}
     hasBin: true
 
   tmp@0.0.28:
@@ -8326,8 +8329,8 @@ packages:
     resolution: {integrity: sha512-Loo5UUvLD9ScZ6jh8beX1T6sO1w2/MpCRpEP7V280GKMVUQ0Jzar2U3UJPsrdbziLEMMhu3Ujnq//rhiFuIeag==}
     engines: {node: '>=6'}
 
-  tough-cookie@5.1.1:
-    resolution: {integrity: sha512-Ek7HndSVkp10hmHP9V4qZO1u+pn1RU5sI0Fw+jCU3lyvuMZcgqsNgc6CmJJZyByK4Vm/qotGRJlfgAX8q+4JiA==}
+  tough-cookie@5.1.2:
+    resolution: {integrity: sha512-FVDYdxtnj0G6Qm/DhNPSb8Ju59ULcup3tuJxkFb5K8Bv2pUXILbf0xZWU8PX8Ov19OXljbUyveOFwRMwkXzO+A==}
     engines: {node: '>=16'}
 
   tr46@0.0.3:
@@ -8373,38 +8376,38 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  turbo-darwin-64@2.4.2:
-    resolution: {integrity: sha512-HFfemyWB60CJtEvVQj9yby5rkkWw9fLAdLtAPGtPQoU3tKh8t/uzCAZKso2aPVbib9vGUuGbPGoGpaRXdVhj5g==}
+  turbo-darwin-64@2.4.4:
+    resolution: {integrity: sha512-5kPvRkLAfmWI0MH96D+/THnDMGXlFNmjeqNRj5grLKiry+M9pKj3pRuScddAXPdlxjO5Ptz06UNaOQrrYGTx1g==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.4.2:
-    resolution: {integrity: sha512-uwSx1dsBSSFeEC0nxyx2O219FEsS/haiESaWwE9JI8mHkQK61s6w6fN2G586krKxyNam4AIxRltleL+O2Em94g==}
+  turbo-darwin-arm64@2.4.4:
+    resolution: {integrity: sha512-/gtHPqbGQXDFhrmy+Q/MFW2HUTUlThJ97WLLSe4bxkDrKHecDYhAjbZ4rN3MM93RV9STQb3Tqy4pZBtsd4DfCw==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.4.2:
-    resolution: {integrity: sha512-Fy/uL8z/LAYcPbm7a1LwFnTY9pIi5FAi12iuHsgB7zHjdh4eeIKS2NIg4nroAmTcUTUZ0/cVTo4bDOCUcS3aKw==}
+  turbo-linux-64@2.4.4:
+    resolution: {integrity: sha512-SR0gri4k0bda56hw5u9VgDXLKb1Q+jrw4lM7WAhnNdXvVoep4d6LmnzgMHQQR12Wxl3KyWPbkz9d1whL6NTm2Q==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.4.2:
-    resolution: {integrity: sha512-AEA0d8h5W/K6iiXfEgiNwWt0yqRL1NpBs8zQCLdc4/L7WeYeJW3sORWX8zt7xhutF/KW9gTm8ehKpiK6cCIsAA==}
+  turbo-linux-arm64@2.4.4:
+    resolution: {integrity: sha512-COXXwzRd3vslQIfJhXUklgEqlwq35uFUZ7hnN+AUyXx7hUOLIiD5NblL+ETrHnhY4TzWszrbwUMfe2BYWtaPQg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.4.2:
-    resolution: {integrity: sha512-CybtIZ9wRgnnNFVN9En9G+rxsO+mwU81fvW4RpE8BWyNEkhQ8J28qYf4PaimueMxGHHp/28i/G7Kcdn2GAWG0g==}
+  turbo-windows-64@2.4.4:
+    resolution: {integrity: sha512-PV9rYNouGz4Ff3fd6sIfQy5L7HT9a4fcZoEv8PKRavU9O75G7PoDtm8scpHU10QnK0QQNLbE9qNxOAeRvF0fJg==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.4.2:
-    resolution: {integrity: sha512-7V0yneVPL8Y3TgrkUIjw7Odmwu1tHnyIiPHFM7eFcA7U+H6hPXyCxge7nC3wOKfjhKCQqUm+Vf/k6kjmLz5G4g==}
+  turbo-windows-arm64@2.4.4:
+    resolution: {integrity: sha512-403sqp9t5sx6YGEC32IfZTVWkRAixOQomGYB8kEc6ZD+//LirSxzeCHCnM8EmSXw7l57U1G+Fb0kxgTcKPU/Lg==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.4.2:
-    resolution: {integrity: sha512-Qxi0ioQCxMRUCcHKHZkTnYH8e7XCpNfg9QiJcyfWIc+ZXeaCjzV5rCGlbQlTXMAtI8qgfP8fZADv3CFtPwqdPQ==}
+  turbo@2.4.4:
+    resolution: {integrity: sha512-N9FDOVaY3yz0YCOhYIgOGYad7+m2ptvinXygw27WPLQvcZDl3+0Sa77KGVlLSiuPDChOUEnTKE9VJwLSi9BPGQ==}
     hasBin: true
 
   type-check@0.4.0:
@@ -9035,8 +9038,8 @@ snapshots:
 
   '@asamuzakjp/css-color@2.8.3':
     dependencies:
-      '@csstools/css-calc': 2.1.1(c34895f76d88506bae462547752fc0af)
-      '@csstools/css-color-parser': 3.0.7(c34895f76d88506bae462547752fc0af)
+      '@csstools/css-calc': 2.1.2(c34895f76d88506bae462547752fc0af)
+      '@csstools/css-color-parser': 3.0.8(c34895f76d88506bae462547752fc0af)
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-tokenizer': 3.0.3
       lru-cache: 10.4.3
@@ -9950,17 +9953,17 @@ snapshots:
       - postcss
       - ts-node
 
-  '@csstools/color-helpers@5.0.1': {}
+  '@csstools/color-helpers@5.0.2': {}
 
-  '@csstools/css-calc@2.1.1(c34895f76d88506bae462547752fc0af)':
+  '@csstools/css-calc@2.1.2(c34895f76d88506bae462547752fc0af)':
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-tokenizer': 3.0.3
 
-  '@csstools/css-color-parser@3.0.7(c34895f76d88506bae462547752fc0af)':
+  '@csstools/css-color-parser@3.0.8(c34895f76d88506bae462547752fc0af)':
     dependencies:
-      '@csstools/color-helpers': 5.0.1
-      '@csstools/css-calc': 2.1.1(c34895f76d88506bae462547752fc0af)
+      '@csstools/color-helpers': 5.0.2
+      '@csstools/css-calc': 2.1.2(c34895f76d88506bae462547752fc0af)
       '@csstools/css-parser-algorithms': 3.0.4(@csstools/css-tokenizer@3.0.3)
       '@csstools/css-tokenizer': 3.0.3
 
@@ -10102,7 +10105,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/addon-dev@7.1.1(@glint/template@1.5.2)(rollup@4.34.8)':
+  '@embroider/addon-dev@7.1.2(@glint/template@1.5.2)(rollup@4.34.8)':
     dependencies:
       '@embroider/core': 3.5.2(@glint/template@1.5.2)
       '@rollup/pluginutils': 4.2.1
@@ -16832,12 +16835,12 @@ snapshots:
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       is-potential-custom-element-name: 1.0.1
-      nwsapi: 2.2.16
+      nwsapi: 2.2.18
       parse5: 7.2.1
       rrweb-cssom: 0.7.1
       saxes: 6.0.0
       symbol-tree: 3.2.4
-      tough-cookie: 5.1.1
+      tough-cookie: 5.1.2
       w3c-xmlserializer: 5.0.0
       webidl-conversions: 7.0.0
       whatwg-encoding: 3.1.1
@@ -17714,6 +17717,8 @@ snapshots:
       boolbase: 1.0.0
 
   nwsapi@2.2.16: {}
+
+  nwsapi@2.2.18: {}
 
   object-assign@4.1.1: {}
 
@@ -19746,11 +19751,11 @@ snapshots:
     dependencies:
       promise-make-counter: 1.0.2
 
-  tldts-core@6.1.78: {}
+  tldts-core@6.1.83: {}
 
-  tldts@6.1.78:
+  tldts@6.1.83:
     dependencies:
-      tldts-core: 6.1.78
+      tldts-core: 6.1.83
 
   tmp@0.0.28:
     dependencies:
@@ -19806,9 +19811,9 @@ snapshots:
       universalify: 0.2.0
       url-parse: 1.5.10
 
-  tough-cookie@5.1.1:
+  tough-cookie@5.1.2:
     dependencies:
-      tldts: 6.1.78
+      tldts: 6.1.83
 
   tr46@0.0.3: {}
 
@@ -19863,32 +19868,32 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  turbo-darwin-64@2.4.2:
+  turbo-darwin-64@2.4.4:
     optional: true
 
-  turbo-darwin-arm64@2.4.2:
+  turbo-darwin-arm64@2.4.4:
     optional: true
 
-  turbo-linux-64@2.4.2:
+  turbo-linux-64@2.4.4:
     optional: true
 
-  turbo-linux-arm64@2.4.2:
+  turbo-linux-arm64@2.4.4:
     optional: true
 
-  turbo-windows-64@2.4.2:
+  turbo-windows-64@2.4.4:
     optional: true
 
-  turbo-windows-arm64@2.4.2:
+  turbo-windows-arm64@2.4.4:
     optional: true
 
-  turbo@2.4.2:
+  turbo@2.4.4:
     optionalDependencies:
-      turbo-darwin-64: 2.4.2
-      turbo-darwin-arm64: 2.4.2
-      turbo-linux-64: 2.4.2
-      turbo-linux-arm64: 2.4.2
-      turbo-windows-64: 2.4.2
-      turbo-windows-arm64: 2.4.2
+      turbo-darwin-64: 2.4.4
+      turbo-darwin-arm64: 2.4.4
+      turbo-linux-64: 2.4.4
+      turbo-linux-arm64: 2.4.4
+      turbo-windows-64: 2.4.4
+      turbo-windows-arm64: 2.4.4
 
   type-check@0.4.0:
     dependencies:

@@ -8,12 +8,6 @@ const addon = new Addon({
 });
 
 export default defineConfig({
-  // https://github.com/rollup/rollup/issues/1828
-  watch: {
-    chokidar: {
-      usePolling: true,
-    },
-  },
   external: ['expect-type'],
   output: addon.output(),
   plugins: [
