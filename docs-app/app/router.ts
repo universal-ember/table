@@ -1,7 +1,6 @@
 import { registerDestructor } from '@ember/destroyable';
 import EmberRouter from '@embroider/router';
 
-import { addDocfyRoutes } from '@docfy/ember';
 import config from 'docs-app/config/environment';
 
 export default class Router extends EmberRouter {
@@ -21,5 +20,4 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  addDocfyRoutes(this);
 });

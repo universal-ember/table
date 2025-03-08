@@ -32,10 +32,7 @@ module.exports = function (defaults) {
     staticAddonTrees: true,
     staticHelpers: true,
     staticModifiers: true,
-    /**
-     * Docfy does not allow us to use staticComponents
-     */
-    staticComponents: false,
+    staticComponents: true,
     splitAtRoutes: ['/', '/docs'],
     skipBabel: [
       {

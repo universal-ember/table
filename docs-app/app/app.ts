@@ -1,6 +1,3 @@
-// import our applications style entrypoint
-import './assets/styles.css';
-
 import Application from '@ember/application';
 
 import config from 'docs-app/config/environment';
