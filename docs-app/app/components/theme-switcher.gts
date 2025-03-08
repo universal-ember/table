@@ -1,6 +1,5 @@
 import { on } from '@ember/modifier';
 
-import { DARK } from '@crowdstrike/ember-toucan-styles';
 import service from 'docs-app/helpers/service';
 
 import type { TOC } from '@ember/component/template-only';

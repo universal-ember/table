@@ -20,7 +20,7 @@ If any bugs (or confusion) are encountered with the type inference, whether in J
 [gh-expect-type]: https://github.com/mmkal/expect-type
 [docs-semver]: https://semver.org/
 [docs-glint]: https://typed-ember.gitbook.io/glint/
-[self-issue]: https://github.com/CrowdStrike/@universal-ember/table/issues
+[self-issue]: https://github.com/universal-ember/table/issues
 
 ## In JavaScript and TypeScript
 

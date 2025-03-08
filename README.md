@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/@universal-ember/table.svg)](https://badge.fury.io/js/@universal-ember/table)
-[![CI](https://github.com/CrowdStrike/@universal-ember/table/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CrowdStrike/@universal-ember/table/actions/workflows/ci.yml)
+[![CI](https://github.com/universal-ember/table/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CrowdStrike/@universal-ember/table/actions/workflows/ci.yml)
 
 A headless table implementation that supports all the major product-level features needed for feature-rich tables.
 Bring your own markup and styles without the need to implement any of the table behaviors.
