@@ -16,5 +16,5 @@ export type {
   Plugin,
   PluginPreferences,
   Registry,
-} from '#interfaces';
-export type { PluginSignature } from '#interfaces/plugins';
+} from '../-private/interfaces';
+export type { PluginSignature } from '../-private/interfaces/plugins';

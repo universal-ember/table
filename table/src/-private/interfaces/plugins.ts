@@ -3,9 +3,9 @@
  *  Empty, EmptyObject, and GetOrElse are copied from @glimmer/component
  */
 
-import type { Constructor } from '[private-types]';
-import type { Column, Row, Table } from '[public-types]';
-import type { Destructor } from '#interfaces';
+import type { Constructor } from '../../-private/private-types.ts';
+import type { Column, Row, Table } from '../../index.ts';
+import type { Destructor } from '../../-private/interfaces';
 
 type DataTypeOf<T> = T extends Table<infer DataType> ? DataType : T;
 

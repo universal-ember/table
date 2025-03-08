@@ -7,7 +7,7 @@ import { meta } from '../-private/base.ts';
 import { ColumnResizing } from './plugin.ts';
 
 import type { ColumnMeta } from './plugin.ts';
-import type { Column } from '#/column';
+import type { Column } from '../../-private/column.ts';
 
 const waiter = buildWaiter('ColumnResizing#ResizeHandle');
 

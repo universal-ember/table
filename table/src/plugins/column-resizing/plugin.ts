@@ -3,7 +3,7 @@ import { assert } from '@ember/debug';
 import { isDestroyed, isDestroying } from '@ember/destroyable';
 import { action } from '@ember/object';
 
-import { preferences } from '[public-plugin-types]';
+import { preferences } from '../../plugins/index.ts';
 
 import { BasePlugin, columns, meta, options } from '../-private/base.ts';
 import { applyStyles } from '../-private/utils.ts';
@@ -13,8 +13,8 @@ import {
   totalGapOf,
 } from './utils.ts';
 
-import type { ColumnApi, PluginPreferences } from '[public-plugin-types]';
-import type { Column, Table } from '[public-types]';
+import type { ColumnApi, PluginPreferences } from '../../plugins/index.ts';
+import type { Column, Table } from '../../index.ts';
 
 interface ColumnResizePreferences extends PluginPreferences {
   columns: {

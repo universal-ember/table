@@ -1,12 +1,7 @@
-import {
-  BasePlugin,
-  meta,
-  options,
-  preferences,
-} from '@universal-ember/table/plugins';
+import { BasePlugin, meta, options, preferences } from '../../plugins/index.ts';
 import { expectTypeOf } from 'expect-type';
 
-import type { Column, Table } from '[public-types]';
+import type { Column, Table } from '../../index.ts';
 
 // This value is irrelevant for the tests it's used in
 const x = 0 as unknown as Table<unknown>;

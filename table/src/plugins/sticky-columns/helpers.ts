@@ -3,7 +3,7 @@ import { htmlSafe } from '@ember/template';
 import { meta } from '../-private/base.ts';
 import { StickyColumns } from './plugin.ts';
 
-import type { Column } from '[public-types]';
+import type { Column } from '../../index.ts';
 
 export const isSticky = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, StickyColumns).isSticky;

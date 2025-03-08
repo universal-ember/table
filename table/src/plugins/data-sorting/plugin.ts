@@ -5,8 +5,8 @@ import { BasePlugin, meta, options } from '../-private/base.ts';
 import { SortDirection } from './types.ts';
 
 import type { Sort, SortItem } from './types.ts';
-import type { ColumnApi, PluginPreferences } from '[public-plugin-types]';
-import type { Column, Table } from '[public-types]';
+import type { ColumnApi, PluginPreferences } from '../../plugins/index.ts';
+import type { Column, Table } from '../../index.ts';
 
 interface SortingPreferences extends PluginPreferences {
   table: {

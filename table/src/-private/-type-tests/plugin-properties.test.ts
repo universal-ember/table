@@ -2,7 +2,7 @@ import { expectTypeOf } from 'expect-type';
 
 import { BasePlugin } from '../../plugins/index.ts';
 
-import type { Table } from '[public-types]';
+import type { Table } from '../../index.ts';
 
 class TableMeta {
   a = 'a';

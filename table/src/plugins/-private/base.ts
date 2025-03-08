@@ -11,8 +11,8 @@ import { normalizePluginsConfig } from './utils.ts';
 import type { Table } from '../../-private/table.ts';
 import type { ColumnReordering } from '../column-reordering';
 import type { ColumnVisibility } from '../column-visibility';
-import type { Class, Constructor } from '[private-types]';
-import type { Column, Row } from '[public-types]';
+import type { Class, Constructor } from '../../-private/private-types.ts';
+import type { Column, Row } from '../../index.ts';
 import type {
   ColumnMetaFor,
   ColumnOptionsFor,
@@ -20,7 +20,7 @@ import type {
   Plugin,
   RowMetaFor,
   TableMetaFor,
-} from '#interfaces';
+} from '../../-private/interfaces';
 
 type InstanceOf<T> = T extends Class<infer Instance> ? Instance : T;
 

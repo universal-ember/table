@@ -1,7 +1,7 @@
 import { meta } from '../-private/base.ts';
 import { ColumnReordering } from './plugin.ts';
 
-import type { Column } from '[public-types]';
+import type { Column } from '../../index.ts';
 
 type ColumnOrder = { key: string; position: number | undefined }[];
 

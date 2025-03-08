@@ -4,12 +4,12 @@ import { action } from '@ember/object';
 
 import { TrackedMap } from 'tracked-built-ins';
 
-import { preferences } from '[public-plugin-types]';
+import { preferences } from '../../plugins/index.ts';
 
 import { BasePlugin, columns, meta } from '../-private/base.ts';
 
-import type { PluginPreferences } from '[public-plugin-types]';
-import type { Column, Table } from '[public-types]';
+import type { PluginPreferences } from '../../plugins/index.ts';
+import type { Column, Table } from '../../index.ts';
 
 interface ColumnReorderingPreferences extends PluginPreferences {
   table: {

@@ -46,18 +46,8 @@
     */
     "allowImportingTsExtensions": true,
     "paths": {
-      // Shorthand for private stuff
-      "#*": ["./src/-private/*"],
-
-      "@universal-ember/table/plugins": ["./src/plugins/"],
-
-      // Shorthand for type-imports only, but to denote public API
-      // Type-imports are removed at build-time, so importing values from this
-      // import *will* error during build because rollup is not setup to re-write these.
-      // (maybe on purpose?)
-      "[public-types]": ["./src/"],
-      "[public-plugin-types]": ["./src/plugins/"],
-      "[private-types]": ["./src/-private/private-types.ts"]
+      // The plugin registry
+      "@universal-ember/table/plugins": ["./src/plugins/"]
     },
     "types": ["ember-source/types"]
   },

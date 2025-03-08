@@ -6,7 +6,7 @@ import type {
   PreferencesAdapter as Adapter,
   PreferencesTableValues,
   TablePreferencesData,
-} from '#interfaces';
+} from './interfaces';
 
 export class TablePreferences {
   storage = new TrackedPreferences();

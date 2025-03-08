@@ -8,7 +8,7 @@ import type {
   PluginSignature,
   RowMetaFor,
   TableMetaFor,
-} from '#interfaces/plugins';
+} from '../interfaces/plugins';
 
 class ATableMeta {
   a = 1;

@@ -4,7 +4,7 @@ import { isEmpty } from '@ember/utils';
 import type { Row } from './row';
 import type { Table } from './table';
 import type { ContentValue } from '@glint/template';
-import type { ColumnConfig } from '#interfaces';
+import type { ColumnConfig } from './interfaces';
 
 const DEFAULT_VALUE = '--';
 const DEFAULT_VALUE_KEY = 'defaultValue';

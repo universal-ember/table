@@ -2,7 +2,7 @@ import type { BasePlugin, Plugin } from '../../plugins';
 import type { Column } from '../column';
 import type { Row } from '../row';
 import type { ColumnOptionsFor, SignatureFrom } from './plugins';
-import type { Constructor } from '[private-types]';
+import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
 
 export interface CellContext<T> {
