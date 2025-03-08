@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 // @ts-expect-error
 import { on } from "@ember/modifier";
 // @ts-expect-error

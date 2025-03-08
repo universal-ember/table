@@ -4,7 +4,7 @@ import { htmlSafe } from "@ember/template";
 import { render, findAll } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 
 import { headlessTable } from "@universal-ember/table";
 import {

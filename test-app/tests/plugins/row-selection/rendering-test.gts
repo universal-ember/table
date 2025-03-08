@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { assert as debugAssert } from "@ember/debug";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 import {
   findAll,
   click,

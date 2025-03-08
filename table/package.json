@@ -16,16 +16,46 @@
     "dist"
   ],
   "exports": {
-    ".": "./dist/index.js",
-    "./plugins": "./dist/plugins/index.js",
-    "./plugins/data-sorting": "./dist/plugins/data-sorting/index.js",
-    "./plugins/column-reordering": "./dist/plugins/column-reordering/index.js",
-    "./plugins/column-resizing": "./dist/plugins/column-resizing/index.js",
-    "./plugins/column-visibility": "./dist/plugins/column-visibility/index.js",
-    "./plugins/sticky-columns": "./dist/plugins/sticky-columns/index.js",
-    "./plugins/row-selection": "./dist/plugins/row-selection/index.js",
-    "./plugins/metadata": "./dist/plugins/metadata/index.js",
-    "./test-support": "./dist/test-support/index.js",
+    ".": {
+      "types": "./declarations/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./plugins": {
+      "types": "./declarations/plugins/index.d.ts",
+      "default": "./dist/plugins/index.js"
+    },
+    "./plugins/data-sorting": {
+      "types": "./declarations/plugins/data-sorting/index.d.ts",
+      "default": "./dist/plugins/data-sorting/index.js"
+    },
+    "./plugins/column-reordering": {
+      "types": "./declarations/plugins/column-reordering/index.d.ts",
+      "default": "./dist/plugins/column-reordering/index.js"
+    },
+    "./plugins/column-resizing": {
+      "types": "./declarations/plugins/column-resizing/index.d.ts",
+      "default": "./dist/plugins/column-resizing/index.js"
+    },
+    "./plugins/column-visibility": {
+      "types": "./declarations/plugins/column-visibility/index.d.ts",
+      "default": "./dist/plugins/column-visibility/index.js"
+    },
+    "./plugins/sticky-columns": {
+      "types": "./declarations/plugins/sticky-columns/index.d.ts",
+      "default": "./dist/plugins/sticky-columns/index.js"
+    },
+    "./plugins/row-selection": {
+      "types": "./declarations/plugins/row-selection/index.d.ts",
+      "default": "./dist/plugins/row-selection/index.js"
+    },
+    "./plugins/metadata": {
+      "types": "./declarations/plugins/metadata/index.d.ts",
+      "default": "./dist/plugins/metadata/index.js"
+    },
+    "./test-support": {
+      "types": "./declarations/test-support/index.d.ts",
+      "default": "./dist/test-support/index.js"
+    },
     "./addon-main.js": "./addon-main.js"
   },
   "typesVersions": {

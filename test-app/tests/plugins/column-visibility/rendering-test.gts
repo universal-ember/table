@@ -23,7 +23,7 @@ import {
 
 import { DATA } from "test-app/data";
 import type { Table, PreferencesData } from "@universal-ember/table";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 
 module("Plugins | columnVisibility", function (hooks) {
   setupRenderingTest(hooks);

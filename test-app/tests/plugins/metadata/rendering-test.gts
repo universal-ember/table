@@ -10,7 +10,7 @@ import {
   forTable,
 } from "@universal-ember/table/plugins/metadata";
 
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 import { DATA } from "test-app/data";
 
 module("Plugins | metadata", function (hooks) {

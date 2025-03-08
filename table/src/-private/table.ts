@@ -1,5 +1,4 @@
 import { cached, tracked } from '@glimmer/tracking';
-import { getOwner, setOwner } from '@ember/application';
 import { assert } from '@ember/debug';
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
@@ -21,6 +20,10 @@ import { composeFunctionModifiers } from './utils.ts';
 import type { BasePlugin, Plugin } from '../plugins/index.ts';
 import type { Class } from './private-types.ts';
 import type { Destructor, TableConfig } from './interfaces';
+import { compatOwner } from './ember-compat.ts';
+
+const getOwner = compatOwner.getOwner;
+const setOwner = compatOwner.setOwner;
 
 const DEFAULT_COLUMN_CONFIG = {
   isVisible: true,
