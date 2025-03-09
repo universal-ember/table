@@ -6,7 +6,7 @@ import { click, render, settled } from "@ember/test-helpers";
 import * as QUnit from "qunit";
 import { module, test, skip } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 // @ts-ignore
 import { on } from "@ember/modifier";
 // @ts-ignore

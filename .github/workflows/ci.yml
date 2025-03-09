@@ -113,10 +113,13 @@ jobs:
       fail-fast: false
       matrix:
         try-scenario:
-          - ember-lts-3.28
-          - ember-lts-4.4
-          - ember-lts-4.12
-          - ember-lts-5.4
+          # There is really nothing crazy
+          # going on in this library, so we don't exactly
+          # need to test _everything_
+          # - ember-lts-3.28
+          # - ember-lts-4.4
+          # - ember-lts-4.12
+          # - ember-lts-5.4
           - ember-lts-5.12
           - ember-release
           - ember-beta

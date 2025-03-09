@@ -1,0 +1,25 @@
+diff --git a/lib/utils/config.js b/lib/utils/config.js
+index b1e2ee452afa3de5b11e2f54a999ce570a73ae24..8451eb967154f8f99f109e024d675baa5169f09b 100644
+--- a/lib/utils/config.js
++++ b/lib/utils/config.js
+@@ -10,7 +10,7 @@ function getConfigPath(cwd) {
+   let possibleConfigPath;
+ 
+   if (packageFile['ember-addon']?.['configPath']) {
+-    possibleConfigPath = path.join(packageFile['ember-addon']['configPath'], 'ember-try.js');
++    possibleConfigPath = path.join(packageFile['ember-addon']['configPath'], 'ember-try.cjs');
+   }
+ 
+   if (fs.existsSync(possibleConfigPath)) {
+@@ -19,9 +19,9 @@ function getConfigPath(cwd) {
+     return possibleConfigPath;
+   }
+ 
+-  debug('using config from config/ember-try.js');
++  debug('using config from config/ember-try.cjs');
+ 
+-  return path.join('config', 'ember-try.js');
++  return path.join('config', 'ember-try.cjs');
+ }
+ 
+ async function getBaseConfig(options) {

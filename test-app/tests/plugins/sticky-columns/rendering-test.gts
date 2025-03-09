@@ -1,5 +1,5 @@
 import Component from "@glimmer/component";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { render, find } from "@ember/test-helpers";
 import { module, test } from "qunit";

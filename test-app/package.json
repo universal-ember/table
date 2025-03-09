@@ -1,25 +1,36 @@
 {
   "name": "test-app",
   "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#src/*": "./src/*",
+    "#config": "./src/config.ts",
+    "#components/*": "./src/components/*"
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./src/*"
+  },
   "private": true,
   "description": "Test app for the @universal-ember/table addon",
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "NullVoxPopuli",
   "scripts": {
-    "build:prod": "ember build --environment=production",
-    "format": "prettier . --cache --write",
+    "build:prod": "vite build",
+    "build:test": "NODE_ENV=development vite build --mode test",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "format": "prettier . --write",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
     "lint:format": "prettier . --cache --check",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test": "npm-run-all lint \"test:!(watch)\"",
-    "test:ember": "ember test",
-    "test:watch": "ember test --server",
+    "start": "vite",
+    "test": "pnpm test:ember",
+    "test:ember": "pnpm build:test && pnpm dist:ember:test",
+    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "dependencies": {
@@ -44,7 +55,6 @@
     "@embroider/macros": "alpha",
     "@embroider/vite": "alpha",
     "@glimmer/component": "^2.0.0",
-    "@glimmer/tracking": "^1.1.2",
     "@glint/core": "unstable",
     "@glint/environment-ember-loose": "unstable",
     "@glint/environment-ember-template-imports": "unstable",
@@ -69,12 +79,16 @@
     "prettier": "^3.5.3",
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.19.1",
-    "qunit-dom": "^2.0.0",
+    "qunit-dom": "^3.4.0",
     "typescript": "~5.8.2",
     "vite": "6.2.1"
   },
   "ember": {
     "edition": "octane"
+  },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
   },
   "volta": {
     "extends": "../package.json"
