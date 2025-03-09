@@ -47,7 +47,8 @@
     },
     "patchedDependencies": {
       "github-changelog": "patches/github-changelog.patch",
-      "@embroider/addon-dev": "patches/@embroider__addon-dev.patch"
+      "@embroider/addon-dev": "patches/@embroider__addon-dev.patch",
+      "ember-try": "patches/ember-try.patch"
     }
   }
 }

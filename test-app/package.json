@@ -88,8 +88,7 @@
   },
   "ember-addon": {
     "type": "app",
-    "version": 2,
-    "configPath": "./config/ember-try.cjs"
+    "version": 2
   },
   "volta": {
     "extends": "../package.json"

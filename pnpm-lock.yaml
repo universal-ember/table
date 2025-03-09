@@ -14,6 +14,9 @@ patchedDependencies:
   '@embroider/addon-dev':
     hash: ce3886c053211a564bf45e0be554dba47efde56061c6f3e5ef98b1d59d7c761d
     path: patches/@embroider__addon-dev.patch
+  ember-try:
+    hash: f88381cddad1fa5809c6c3b875e6375cbc94adeb6b31877cc4046cc1668e1a7f
+    path: patches/ember-try.patch
   github-changelog:
     hash: 1b0c1c3e293f732a0b8fc667a1067626ed734d4726c32e6e8a58fc18df6c4d18
     path: patches/github-changelog.patch
@@ -432,7 +435,7 @@ importers:
         version: 7.0.1(@babel/core@7.26.9)
       ember-try:
         specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        version: 4.0.0(patch_hash=f88381cddad1fa5809c6c3b875e6375cbc94adeb6b31877cc4046cc1668e1a7f)(encoding@0.1.13)
       eslint:
         specifier: ^9.21.0
         version: 9.22.0(jiti@1.21.7)
@@ -12243,7 +12246,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  ember-try@4.0.0(encoding@0.1.13):
+  ember-try@4.0.0(patch_hash=f88381cddad1fa5809c6c3b875e6375cbc94adeb6b31877cc4046cc1668e1a7f)(encoding@0.1.13):
     dependencies:
       chalk: 4.1.2
       cli-table3: 0.6.5
