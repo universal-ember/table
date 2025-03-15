@@ -1,9 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { setOwner } from "@ember/owner";
-// @ts-expect-error
 import { on } from "@ember/modifier";
-// @ts-expect-error
 import { fn } from "@ember/helper";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { click, findAll, render, settled } from "@ember/test-helpers";
