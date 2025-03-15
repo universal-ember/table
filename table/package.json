@@ -142,7 +142,7 @@
     "@embroider/addon-dev": "^7.1.2",
     "@glimmer/component": "^2.0.0",
     "@glimmer/tracking": "^1.1.2",
-    "@glint/core": "1.5.2",
+    "@glint/core": "unstable",
     "@glint/template": "1.5.2",
     "@rollup/plugin-babel": "^6.0.0",
     "@tsconfig/ember": "^3.0.9",
@@ -157,7 +157,7 @@
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "rollup": "^4.35.0",
     "rollup-plugin-copy": "^3.4.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.8.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
