@@ -21,7 +21,7 @@
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.26.10",
     "@ember/test-helpers": "^5.1.0",
     "@embroider/compat": "alpha",
     "@embroider/core": "alpha",
@@ -65,7 +65,7 @@
     "edition": "octane"
   },
   "dependencies": {
-    "@ember/test-waiters": "^4.0.0",
+    "@ember/test-waiters": "^4.1.0",
     "@embroider/router": "alpha",
     "@universal-ember/table": "workspace:*",
     "dompurify": "^3.2.4",
