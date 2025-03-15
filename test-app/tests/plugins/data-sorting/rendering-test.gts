@@ -1,8 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-// @ts-ignore
 import { on } from "@ember/modifier";
-// @ts-ignore
 import { fn } from "@ember/helper";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { click, findAll, render } from "@ember/test-helpers";

@@ -1,7 +1,5 @@
 import Component from "@glimmer/component";
-// @ts-ignore
 import { on } from "@ember/modifier";
-// @ts-ignore
 import { fn } from "@ember/helper";
 import { assert } from "@ember/debug";
 import { click, render, findAll, settled } from "@ember/test-helpers";

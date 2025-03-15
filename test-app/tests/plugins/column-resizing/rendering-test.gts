@@ -3,13 +3,10 @@ import { tracked } from "@glimmer/tracking";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { htmlSafe } from "@ember/template";
 import { click, render, settled } from "@ember/test-helpers";
-import * as QUnit from "qunit";
 import { module, test, skip } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { setOwner } from "@ember/owner";
-// @ts-ignore
 import { on } from "@ember/modifier";
-// @ts-ignore
 import { fn } from "@ember/helper";
 
 import {

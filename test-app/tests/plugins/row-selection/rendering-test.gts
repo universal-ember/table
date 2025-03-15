@@ -12,11 +12,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { tracked } from "@glimmer/tracking";
 import { TrackedSet } from "tracked-built-ins";
-// typed-ember hasn't shipped types for these yet
-// @ts-ignore
 import { on } from "@ember/modifier";
-// typed-ember hasn't shipped types for these yet
-// @ts-ignore
 import { fn } from "@ember/helper";
 
 import { headlessTable } from "@universal-ember/table";
