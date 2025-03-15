@@ -22,7 +22,7 @@ import {
   hide,
   show,
 } from "@universal-ember/table/plugins/column-visibility";
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 
 import type { Column, PreferencesData } from "@universal-ember/table";
 

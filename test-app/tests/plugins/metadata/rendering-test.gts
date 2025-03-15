@@ -11,7 +11,7 @@ import {
 } from "@universal-ember/table/plugins/metadata";
 
 import { setOwner } from "@ember/owner";
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 
 module("Plugins | metadata", function (hooks) {
   setupRenderingTest(hooks);
