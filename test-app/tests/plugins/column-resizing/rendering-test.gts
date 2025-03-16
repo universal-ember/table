@@ -30,7 +30,7 @@ import {
   requestAnimationFrameSettled,
 } from "@universal-ember/table/test-support";
 
-import { TestStyles, getColumns, assertChanges, width } from "./utils";
+import { TestStyles, getColumns, assertChanges, width } from "./utils.gts";
 
 module("Plugins | resizing", function (hooks) {
   setupRenderingTest(hooks);
@@ -229,16 +229,16 @@ module("Plugins | resizing", function (hooks) {
                   ColumnResizing: {
                     columns: {
                       A: {
-                        width: "300",
+                        width: 300,
                       },
                       B: {
-                        width: "250",
+                        width: 250,
                       },
                       C: {
-                        width: "250",
+                        width: 250,
                       },
                       D: {
-                        width: "200",
+                        width: 200,
                       },
                     },
                     table: {},
@@ -381,16 +381,16 @@ module("Plugins | resizing", function (hooks) {
             ColumnResizing: {
               columns: {
                 A: {
-                  width: "500",
+                  width: 500,
                 },
                 B: {
-                  width: "128",
+                  width: 128,
                 },
                 C: {
-                  width: "172",
+                  width: 172,
                 },
                 D: {
-                  width: "200",
+                  width: 200,
                 },
               },
               table: {},

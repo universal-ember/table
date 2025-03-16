@@ -26,7 +26,7 @@ interface ColumnResizePreferences extends PluginPreferences {
 
 declare module '@universal-ember/table/plugins' {
   interface Registry {
-    ColumnResize?: ColumnResizePreferences;
+    ColumnResizing?: ColumnResizePreferences;
   }
 }
 
