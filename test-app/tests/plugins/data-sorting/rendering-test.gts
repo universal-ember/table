@@ -17,7 +17,7 @@ import {
 import type { Column } from "@universal-ember/table";
 import type { SortItem } from "@universal-ember/table/plugins/data-sorting";
 import { setOwner } from "@ember/owner";
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 
 module("Plugins | dataSorting", function (hooks) {
   setupRenderingTest(hooks);

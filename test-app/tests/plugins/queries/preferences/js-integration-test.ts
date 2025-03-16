@@ -57,6 +57,7 @@ module('Plugins | Queries | preferences', function (hooks) {
           onPersist: (key, _data) => {
             assert.step(`persist: ${key}`);
           },
+          // @ts-expect-error Sorting plugin doesn't have an option called "some-key"
           restoreFrom: (key) => {
             assert.step(`restore: ${key}`);
 

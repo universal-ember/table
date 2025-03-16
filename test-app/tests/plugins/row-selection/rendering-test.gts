@@ -23,7 +23,7 @@ import {
   select,
   deselect,
 } from "@universal-ember/table/plugins/row-selection";
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 
 module("Plugins | RowSelection", function (hooks) {
   setupRenderingTest(hooks);

@@ -7,7 +7,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 
 import { headlessTable } from "@universal-ember/table";
-import { meta, columns } from "@universal-ember/table/plugins";
+import { columns } from "@universal-ember/table/plugins";
 import {
   ColumnVisibility,
   hide,
@@ -19,7 +19,7 @@ import {
   moveRight,
 } from "@universal-ember/table/plugins/column-reordering";
 
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 import type { Table, PreferencesData } from "@universal-ember/table";
 import { setOwner } from "@ember/owner";
 
