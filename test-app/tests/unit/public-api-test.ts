@@ -23,6 +23,7 @@ module('Public API', function () {
       exports.sort(),
       [
         'headlessTable',
+        'table',
         'TablePreferences',
         'deserializeSorts',
         'serializeSorts',
