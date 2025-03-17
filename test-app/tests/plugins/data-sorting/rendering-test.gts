@@ -1,8 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-// @ts-ignore
 import { on } from "@ember/modifier";
-// @ts-ignore
 import { fn } from "@ember/helper";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { click, findAll, render } from "@ember/test-helpers";
@@ -18,8 +16,8 @@ import {
 
 import type { Column } from "@universal-ember/table";
 import type { SortItem } from "@universal-ember/table/plugins/data-sorting";
-import { setOwner } from "@ember/application";
-import { DATA } from "test-app/data";
+import { setOwner } from "@ember/owner";
+import { DATA } from "#data";
 
 module("Plugins | dataSorting", function (hooks) {
   setupRenderingTest(hooks);

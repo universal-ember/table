@@ -1,4 +1,4 @@
-import { setOwner } from '@ember/application';
+import { setOwner } from '@ember/owner';
 import { assert as debugAssert } from '@ember/debug';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
@@ -14,7 +14,7 @@ import { ColumnResizing } from '@universal-ember/table/plugins/column-resizing';
 import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
 import { DataSorting } from '@universal-ember/table/plugins/data-sorting';
 import { StickyColumns } from '@universal-ember/table/plugins/sticky-columns';
-import { DATA } from 'test-app/data';
+import { DATA } from '#data';
 
 import type Owner from '@ember/owner';
 
@@ -45,7 +45,7 @@ module('Plugins | Queries | columns', function (hooks) {
   function create<T>(Klass: Constructable<T>, owner: Owner) {
     let instance = new Klass();
 
-    setOwner(instance, owner);
+    setOwner(instance as object, owner);
 
     return instance;
   }

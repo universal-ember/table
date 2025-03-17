@@ -20,6 +20,7 @@ interface ColumnReorderingPreferences extends PluginPreferences {
 declare module '@universal-ember/table/plugins' {
   interface Registry {
     ColumnReordering?: ColumnReorderingPreferences;
+    'column-reordering'?: ColumnReorderingPreferences;
   }
 }
 

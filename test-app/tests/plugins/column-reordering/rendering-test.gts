@@ -1,9 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { setOwner } from "@ember/application";
-// @ts-expect-error
+import { setOwner } from "@ember/owner";
 import { on } from "@ember/modifier";
-// @ts-expect-error
 import { fn } from "@ember/helper";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { click, findAll, render, settled } from "@ember/test-helpers";
@@ -24,7 +22,7 @@ import {
   hide,
   show,
 } from "@universal-ember/table/plugins/column-visibility";
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 
 import type { Column, PreferencesData } from "@universal-ember/table";
 

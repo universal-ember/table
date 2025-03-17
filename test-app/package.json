@@ -1,30 +1,43 @@
 {
   "name": "test-app",
   "version": "0.0.0",
+  "type": "module",
+  "imports": {
+    "#src/*": "./src/*",
+    "#data": "./src/data.ts",
+    "#config": "./src/config.ts",
+    "#components/*": "./src/components/*"
+  },
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./src/*"
+  },
   "private": true,
   "description": "Test app for the @universal-ember/table addon",
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "NullVoxPopuli",
   "scripts": {
-    "build:prod": "ember build --environment=production",
-    "format": "prettier . --cache --write",
+    "build:prod": "vite build",
+    "build:test": "NODE_ENV=development vite build --mode test",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
+    "format": "prettier . --write",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
     "lint:format": "prettier . --cache --check",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
+    "lint:types": "glint",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test": "npm-run-all lint \"test:!(watch)\"",
-    "test:ember": "ember test",
-    "test:watch": "ember test --server",
+    "start": "vite",
+    "test": "pnpm test:ember",
+    "test:ember": "pnpm build:test && pnpm dist:ember:test",
+    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "dependencies": {
     "@ember/test-helpers": "^5.1.0",
-    "@ember/test-waiters": "^4.0.0",
+    "@ember/test-waiters": "^4.1.0",
     "@universal-ember/table": "workspace:*",
     "ember-auto-import": "^2.6.2",
     "ember-functions-as-helper-polyfill": "^2.1.1",
@@ -37,18 +50,17 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.17.0",
+    "@babel/core": "^7.26.10",
     "@ember/optional-features": "^2.0.0",
     "@embroider/compat": "alpha",
     "@embroider/core": "alpha",
     "@embroider/macros": "alpha",
     "@embroider/vite": "alpha",
     "@glimmer/component": "^2.0.0",
-    "@glimmer/tracking": "^1.1.2",
-    "@glint/core": "unstable",
-    "@glint/environment-ember-loose": "unstable",
-    "@glint/environment-ember-template-imports": "unstable",
-    "@glint/template": "unstable",
+    "@glint/core": "1.4.1-unstable.0e0d936",
+    "@glint/environment-ember-loose": "1.4.1-unstable.0e0d936",
+    "@glint/environment-ember-template-imports": "1.4.1-unstable.0e0d936",
+    "@glint/template": "1.5.2",
     "@rollup/plugin-babel": "^6.0.4",
     "@tsconfig/ember": "^3.0.9",
     "@types/qunit": "^2.19.2",
@@ -69,12 +81,16 @@
     "prettier": "^3.5.3",
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.19.1",
-    "qunit-dom": "^2.0.0",
-    "typescript": "~5.8.2",
+    "qunit-dom": "^3.4.0",
+    "typescript": "~5.7.2",
     "vite": "6.2.1"
   },
   "ember": {
     "edition": "octane"
+  },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
   },
   "volta": {
     "extends": "../package.json"

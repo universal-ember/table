@@ -1,7 +1,5 @@
 import Component from "@glimmer/component";
-// @ts-ignore
 import { on } from "@ember/modifier";
-// @ts-ignore
 import { fn } from "@ember/helper";
 import { assert } from "@ember/debug";
 import { click, render, findAll, settled } from "@ember/test-helpers";
@@ -9,7 +7,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 
 import { headlessTable } from "@universal-ember/table";
-import { meta, columns } from "@universal-ember/table/plugins";
+import { columns } from "@universal-ember/table/plugins";
 import {
   ColumnVisibility,
   hide,
@@ -21,9 +19,9 @@ import {
   moveRight,
 } from "@universal-ember/table/plugins/column-reordering";
 
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 import type { Table, PreferencesData } from "@universal-ember/table";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 
 module("Plugins | columnVisibility", function (hooks) {
   setupRenderingTest(hooks);

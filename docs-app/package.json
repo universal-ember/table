@@ -21,18 +21,17 @@
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.26.10",
     "@ember/test-helpers": "^5.1.0",
     "@embroider/compat": "alpha",
     "@embroider/core": "alpha",
     "@embroider/macros": "alpha",
     "@embroider/vite": "alpha",
     "@glimmer/component": "^2.0.0",
-    "@glimmer/tracking": "^1.1.2",
-    "@glint/core": "unstable",
-    "@glint/environment-ember-loose": "unstable",
-    "@glint/environment-ember-template-imports": "unstable",
-    "@glint/template": "unstable",
+    "@glint/core": "1.5.2",
+    "@glint/environment-ember-loose": "1.5.2",
+    "@glint/environment-ember-template-imports": "1.5.2",
+    "@glint/template": "1.5.2",
     "@html-next/vertical-collection": "^4.0.2",
     "@rollup/plugin-babel": "^6.0.4",
     "@tailwindcss/typography": "^0.5.9",
@@ -59,14 +58,14 @@
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
     "tailwindcss": "^3.3.2",
-    "typescript": "~5.8.2",
+    "typescript": "~5.5.2",
     "vite": "6.2.1"
   },
   "ember": {
     "edition": "octane"
   },
   "dependencies": {
-    "@ember/test-waiters": "^4.0.0",
+    "@ember/test-waiters": "^4.1.0",
     "@embroider/router": "alpha",
     "@universal-ember/table": "workspace:*",
     "dompurify": "^3.2.4",

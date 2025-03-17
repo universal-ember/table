@@ -17,6 +17,7 @@ interface SortingPreferences extends PluginPreferences {
 declare module '@universal-ember/table/plugins' {
   interface Registry {
     Sorting?: SortingPreferences;
+    sorting?: SortingPreferences;
   }
 }
 

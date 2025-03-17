@@ -1,3 +1,4 @@
+import type { TOC } from "@ember/component/template-only";
 import { findAll, settled } from "@ember/test-helpers";
 import { tracked } from "@glimmer/tracking";
 
@@ -79,7 +80,7 @@ export class Context {
 // everything needs to be cut in half to account for it.
 //
 // See https://github.com/emberjs/ember-qunit/issues/521
-export const TestStyles = <template>
+export const TestStyles: TOC<{ Element: null }> = <template>
   <style>
     #ember-testing {
       width: initial;

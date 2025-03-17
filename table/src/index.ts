@@ -1,8 +1,7 @@
 /********************************
  * Public API
  *******************************/
-// The main export, the headlessTable resource
-export { headlessTable } from './-private/js-helper.ts';
+export { headlessTable, headlessTable as table } from './-private/js-helper.ts';
 
 // Utilities
 export { TablePreferences } from './-private/preferences.ts';

@@ -3,13 +3,10 @@ import { tracked } from "@glimmer/tracking";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { htmlSafe } from "@ember/template";
 import { click, render, settled } from "@ember/test-helpers";
-import * as QUnit from "qunit";
 import { module, test, skip } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { setOwner } from "@ember/application";
-// @ts-ignore
+import { setOwner } from "@ember/owner";
 import { on } from "@ember/modifier";
-// @ts-ignore
 import { fn } from "@ember/helper";
 
 import {
@@ -33,7 +30,7 @@ import {
   requestAnimationFrameSettled,
 } from "@universal-ember/table/test-support";
 
-import { TestStyles, getColumns, assertChanges, width } from "./utils";
+import { TestStyles, getColumns, assertChanges, width } from "./utils.gts";
 
 module("Plugins | resizing", function (hooks) {
   setupRenderingTest(hooks);
@@ -232,16 +229,16 @@ module("Plugins | resizing", function (hooks) {
                   ColumnResizing: {
                     columns: {
                       A: {
-                        width: "300",
+                        width: 300,
                       },
                       B: {
-                        width: "250",
+                        width: 250,
                       },
                       C: {
-                        width: "250",
+                        width: 250,
                       },
                       D: {
-                        width: "200",
+                        width: 200,
                       },
                     },
                     table: {},
@@ -377,31 +374,16 @@ module("Plugins | resizing", function (hooks) {
         "col D has expected width after resize",
       );
 
-      assert.deepEqual(
-        preferences,
-        {
-          plugins: {
-            ColumnResizing: {
-              columns: {
-                A: {
-                  width: "500",
-                },
-                B: {
-                  width: "128",
-                },
-                C: {
-                  width: "172",
-                },
-                D: {
-                  width: "200",
-                },
-              },
-              table: {},
-            },
-          },
-        },
-        "column widths saved in preferences",
+      assert.strictEqual(
+        Object.keys(preferences?.plugins ?? {})[0],
+        "ColumnResizing",
       );
+
+      let columns = preferences?.plugins?.ColumnResizing?.columns;
+      assert.equal(columns?.A?.width, 500, "Column A");
+      assert.equal(columns?.B?.width, 128, "Column B");
+      assert.equal(columns?.C?.width, 172, "Column C");
+      assert.equal(columns?.D?.width, 200, "Column D");
     });
   });
 

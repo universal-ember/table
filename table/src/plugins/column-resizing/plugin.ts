@@ -26,7 +26,7 @@ interface ColumnResizePreferences extends PluginPreferences {
 
 declare module '@universal-ember/table/plugins' {
   interface Registry {
-    ColumnResize?: ColumnResizePreferences;
+    ColumnResizing?: ColumnResizePreferences;
   }
 }
 
@@ -174,7 +174,13 @@ export class ColumnMeta {
       return this.options.width;
     }
 
-    assert('saved width must be a string', typeof savedWidth === 'string');
+    if (typeof savedWidth !== 'string') {
+      assert(
+        'saved width must be a number or string',
+        typeof savedWidth === 'number',
+      );
+      return savedWidth;
+    }
 
     return parseInt(savedWidth, 10);
   }

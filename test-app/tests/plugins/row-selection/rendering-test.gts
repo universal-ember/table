@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { assert as debugAssert } from "@ember/debug";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 import {
   findAll,
   click,
@@ -12,11 +12,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { tracked } from "@glimmer/tracking";
 import { TrackedSet } from "tracked-built-ins";
-// typed-ember hasn't shipped types for these yet
-// @ts-ignore
 import { on } from "@ember/modifier";
-// typed-ember hasn't shipped types for these yet
-// @ts-ignore
 import { fn } from "@ember/helper";
 
 import { headlessTable } from "@universal-ember/table";
@@ -27,7 +23,7 @@ import {
   select,
   deselect,
 } from "@universal-ember/table/plugins/row-selection";
-import { DATA } from "test-app/data";
+import { DATA } from "#data";
 
 module("Plugins | RowSelection", function (hooks) {
   setupRenderingTest(hooks);

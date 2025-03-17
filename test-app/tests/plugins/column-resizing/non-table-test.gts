@@ -4,7 +4,7 @@ import { htmlSafe } from "@ember/template";
 import { render, findAll } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 
 import { headlessTable } from "@universal-ember/table";
 import {
@@ -18,7 +18,7 @@ import {
   requestAnimationFrameSettled,
 } from "@universal-ember/table/test-support";
 
-import { Context, TestStyles, assertChanges, width } from "./utils";
+import { Context, TestStyles, assertChanges, width } from "./utils.gts";
 
 module("Plugins | resizing | non-tables", function (hooks) {
   setupRenderingTest(hooks);

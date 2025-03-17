@@ -2,11 +2,10 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { htmlSafe } from "@ember/template";
-import { click, render, settled } from "@ember/test-helpers";
-import * as QUnit from "qunit";
-import { module, test, skip } from "qunit";
+import { render } from "@ember/test-helpers";
+import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { setOwner } from "@ember/application";
+import { setOwner } from "@ember/owner";
 
 import { headlessTable, type ColumnConfig } from "@universal-ember/table";
 import { meta } from "@universal-ember/table/plugins";
@@ -20,7 +19,7 @@ import {
   requestAnimationFrameSettled,
 } from "@universal-ember/table/test-support";
 
-import { TestStyles, getColumns, assertChanges, width } from "./utils";
+import { TestStyles, getColumns, assertChanges, width } from "./utils.gts";
 
 module("Plugins | resizing | column options", function (hooks) {
   setupRenderingTest(hooks);
