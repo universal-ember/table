@@ -86,7 +86,7 @@ module("Rendering | Plugins | Queries | preferences", function (hooks) {
         let prefs = preferences.forTable(table, DataSorting);
 
         await render(
-          <template>{{(ignoreTypeErrorOf (prefs.get "some-key"))}}</template>,
+          <template>{{ignoreTypeErrorOf (prefs.get "some-key")}}</template>,
         );
 
         assert.dom().hasText("2", `some-key's value is correct`);
@@ -103,7 +103,7 @@ module("Rendering | Plugins | Queries | preferences", function (hooks) {
         let prefs = preferences.forTable(table, DataSorting);
 
         await render(
-          <template>{{(ignoreTypeErrorOf (prefs.get "some-key"))}}</template>,
+          <template>{{ignoreTypeErrorOf (prefs.get "some-key")}}</template>,
         );
 
         assert.dom().hasNoText(`some-key has no value`);
@@ -150,9 +150,9 @@ module("Rendering | Plugins | Queries | preferences", function (hooks) {
       await render(
         <template>
           <out id="a">
-            {{(ignoreTypeErrorOf (prefs.get "some-preference"))}}
+            {{ignoreTypeErrorOf (prefs.get "some-preference")}}
           </out>
-          <out id="b">{{(ignoreTypeErrorOf (prefs.get "some-key"))}}</out>
+          <out id="b">{{ignoreTypeErrorOf (prefs.get "some-key")}}</out>
         </template>,
       );
 
