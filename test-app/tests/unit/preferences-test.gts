@@ -46,7 +46,9 @@ module("Unit | -private | table-preferences", function (hooks) {
               foo: 2,
             },
             columns: {
+              // @ts-expect-error deliberate typo
               foo: { isVilable: true },
+              // @ts-expect-error deliberate typo
               bar: { isVilable: true },
             },
           },
@@ -98,7 +100,9 @@ module("Unit | -private | table-preferences", function (hooks) {
               foo: 2,
             },
             columns: {
+              // @ts-expect-error deliberate non-existent
               foo: { woop: false },
+              // @ts-expect-error deliberate non-existent
               bar: { woop: true },
             },
           },
@@ -112,7 +116,9 @@ module("Unit | -private | table-preferences", function (hooks) {
               "column-visibility": {
                 table: { foo: 3 },
                 columns: {
+                  // @ts-expect-error deliberate non-existent
                   bar: { woop: true },
+                  // @ts-expect-error deliberate non-existent
                   foo: { woop: true },
                 },
               },
@@ -159,7 +165,9 @@ module("Unit | -private | table-preferences", function (hooks) {
               foo: 2,
             },
             columns: {
+              // @ts-expect-error deliberate non-existent
               foo: { woop: false },
+              // @ts-expect-error deliberate non-existent
               bar: { woop: true },
             },
           },
@@ -174,6 +182,7 @@ module("Unit | -private | table-preferences", function (hooks) {
                 table: {},
                 columns: {
                   foo: {},
+                  // @ts-expect-error deliberate non-existent
                   bar: { woop: true },
                 },
               },
@@ -211,7 +220,9 @@ module("Unit | -private | table-preferences", function (hooks) {
               foo: 2,
             },
             columns: {
+              // @ts-expect-error deliberate non-existent
               foo: { woop: false },
+              // @ts-expect-error deliberate non-existent
               bar: { woop: true },
             },
           },
@@ -226,7 +237,9 @@ module("Unit | -private | table-preferences", function (hooks) {
               "column-visibility": {
                 table: { foo: 2 },
                 columns: {
+                  // @ts-expect-error deliberate non-existent
                   bar: { woop: true },
+                  // @ts-expect-error deliberate non-existent
                   foo: { woop: true },
                 },
               },
@@ -279,7 +292,9 @@ module("Preferences | rendering", function (hooks) {
             foo: 2,
           },
           columns: {
+            // @ts-expect-error deliberate non-existent
             foo: { woop: false },
+            // @ts-expect-error deliberate non-existent
             bar: { woop: true },
           },
         },
@@ -292,12 +307,14 @@ module("Preferences | rendering", function (hooks) {
 
     class Context {
       get tableInfo(): string {
+        // @ts-expect-error deliberate type mismatch
         return preferences.storage
           .forPlugin("column-visibility")
           .table.get("foo");
       }
 
       get columnInfo(): string {
+        // @ts-expect-error deliberate type mismatch
         return preferences.storage
           .forPlugin("column-visibility")
           .forColumn("foo")

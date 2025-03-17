@@ -17,6 +17,7 @@ interface ColumnVisibilityPreferences extends PluginPreferences {
 declare module '@universal-ember/table/plugins' {
   interface Registry {
     ColumnVisibility?: ColumnVisibilityPreferences;
+    'column-visibility'?: ColumnVisibilityPreferences;
   }
 }
 
