@@ -20,6 +20,9 @@ export default defineConfig({
       '@embroider/util': eUtil,
     },
   },
+  optimizeDeps: {
+    exclude: ['@universal-ember/table'],
+  },
   plugins: [
     ember(),
     babel({
