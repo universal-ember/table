@@ -50,9 +50,6 @@
     "ember-template-lint": "^7.0.1",
     "eslint": "^9.21.0",
     "pnpm-sync-dependencies-meta-injected": "^0.0.14",
-    "postcss": "^8.4.24",
-    "postcss-import": "^15.1.0",
-    "postcss-loader": "^7.3.3",
     "prettier": "^3.5.3",
     "prettier-plugin-ember-template-tag": "^2.0.4",
     "qunit": "^2.19.4",
@@ -65,15 +62,19 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@shikijs/rehype": "^1.22.2",
     "@ember/test-waiters": "^4.1.0",
     "@embroider/router": "alpha",
     "@universal-ember/table": "workspace:*",
+    "@universal-ember/docs-support": "^0.6.0",
+    "content-tag": "^3.0.0",
+    "kolay": "^3.2.0",
+    "ember-repl": "^6.0.0",
     "dompurify": "^3.2.4",
-    "ember-browser-services": "^5.0.1",
+    "ember-primitives": "^0.28.1",
     "ember-modifier": "^4.2.0",
     "ember-resources": "^7.0.2",
-    "highlight.js": "^11.7.0",
-    "highlightjs-glimmer": "^2.0.1",
+    "shiki": "^1.22.2",
     "tracked-built-ins": "^4.0.0"
   },
   "dependenciesMeta": {

@@ -1,13 +1,18 @@
 import { registerDestructor } from '@ember/destroyable';
 import EmberRouter from '@embroider/router';
 
+import { properLinks } from 'ember-primitives/proper-links';
 import config from 'docs-app/config/environment';
+import { addRoutes } from 'kolay';
 
+@properLinks({
+  ignore: ['/tests'],
+})
 export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
 
-  constructor(...args: [object]) {
+  constructor(...args: any[]) {
     super(...args);
 
     let scroll = () => window.scrollTo(0, 0);
@@ -19,4 +24,6 @@ export default class Router extends EmberRouter {
   }
 }
 
-Router.map(function () {});
+Router.map(function () {
+  addRoutes(this);
+});
