@@ -1,4 +1,4 @@
-import { GitHubLink, TestsLink } from "docs-app/components/header";
+import { GitHubLink, TestsLink } from "#components/header.gts";
 import { ExternalLink } from "ember-primitives/components/external-link";
 
 import {

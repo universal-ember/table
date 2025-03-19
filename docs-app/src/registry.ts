@@ -1,5 +1,10 @@
 import Router from './router.ts';
 import config from '#config';
+import PageTitle from 'ember-page-title/services/page-title';
+import APIDocs from 'kolay/services/kolay/api-docs';
+import Compiler from 'kolay/services/kolay/compiler';
+import Docs from 'kolay/services/kolay/docs';
+import Selected from 'kolay/services/kolay/selected';
 
 function formatAsResolverEntries(imports: Record<string, unknown>) {
   return Object.fromEntries(
@@ -26,6 +31,11 @@ const resolverRegistry = {
     import.meta.glob('./routes/**/*.{js,ts}', { eager: true }),
   ),
   [`${config.modulePrefix}/router`]: Router,
+  [`${config.modulePrefix}/services/kolay/api-docs`]: APIDocs,
+  [`${config.modulePrefix}/services/kolay/compiler`]: Compiler,
+  [`${config.modulePrefix}/services/kolay/docs`]: Docs,
+  [`${config.modulePrefix}/services/kolay/selected`]: Selected,
+  [`${config.modulePrefix}/services/page-title`]: PageTitle,
 };
 
 export const registry = {

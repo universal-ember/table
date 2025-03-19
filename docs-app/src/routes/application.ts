@@ -8,7 +8,7 @@ import getWasm from 'shiki/wasm';
 
 import { Callout } from '@universal-ember/docs-support';
 
-import { APIDocs, ComponentSignature, ModifierSignature } from './api-docs';
+import { APIDocs, ComponentSignature, ModifierSignature } from './api-docs.gts';
 
 export default class Application extends Route {
   async model() {
