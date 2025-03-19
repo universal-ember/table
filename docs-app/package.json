@@ -1,13 +1,25 @@
 {
   "name": "docs-app",
   "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./tests/*": "./tests/*",
+    "./*": "./src/*"
+  },
+  "imports": {
+    "#src/*": "./src/*",
+    "#data": "./src/sample-data/index.ts",
+    "#config": "./src/config.ts",
+    "#components/*": "./src/components/*"
+  },
   "private": true,
   "description": "Documentation for the @universal-ember/table addon",
   "repository": "https://github.com/universal-ember/table",
   "license": "MIT",
   "author": "NullVoxPopuli",
   "scripts": {
-    "build:prod": "ember build --environment=production",
+    "build:prod": "vite build",
+    "build:test": "NODE_ENV=development vite build --mode test",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\" --prefixColors auto && npm run format",
@@ -16,12 +28,16 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
-    "start": "ember serve",
-    "test:ember": "ember test",
+    "lint:types": "glint",
+    "start": "vite",
+    "test": "pnpm test:ember",
+    "test:ember": "pnpm build:test && pnpm dist:ember:test",
+    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs",
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
+    "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^5.1.0",
     "@embroider/compat": "alpha",
     "@embroider/core": "alpha",
@@ -39,6 +55,7 @@
     "@types/dompurify": "^3.2.0",
     "@types/qunit": "^2.19.3",
     "@types/rsvp": "^4.0.4",
+    "autoprefixer": "^10.4.21",
     "concurrently": "^9.1.2",
     "ember-auto-import": "^2.6.2",
     "ember-cli": "~6.2.3",
@@ -61,19 +78,23 @@
   "ember": {
     "edition": "octane"
   },
+  "ember-addon": {
+    "type": "app",
+    "version": 2
+  },
   "dependencies": {
-    "@shikijs/rehype": "^1.22.2",
     "@ember/test-waiters": "^4.1.0",
     "@embroider/router": "alpha",
-    "@universal-ember/table": "workspace:*",
+    "@shikijs/rehype": "^1.22.2",
     "@universal-ember/docs-support": "^0.6.0",
+    "@universal-ember/table": "workspace:*",
     "content-tag": "^3.0.0",
-    "kolay": "^3.2.0",
-    "ember-repl": "^6.0.0",
     "dompurify": "^3.2.4",
-    "ember-primitives": "^0.28.1",
     "ember-modifier": "^4.2.0",
+    "ember-primitives": "^0.28.1",
+    "ember-repl": "^6.0.0",
     "ember-resources": "^7.0.2",
+    "kolay": "^3.2.0",
     "shiki": "^1.22.2",
     "tracked-built-ins": "^4.0.0"
   },

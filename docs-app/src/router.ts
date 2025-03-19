@@ -2,7 +2,7 @@ import { registerDestructor } from '@ember/destroyable';
 import EmberRouter from '@embroider/router';
 
 import { properLinks } from 'ember-primitives/proper-links';
-import config from 'docs-app/config/environment';
+import config from '#config';
 import { addRoutes } from 'kolay';
 
 @properLinks({

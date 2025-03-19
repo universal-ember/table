@@ -1,5 +1,4 @@
-import { GitHubLink, TestsLink } from "docs-app/components/header";
-import { Logo, Logomark } from "docs-app/components/icons";
+import { GitHubLink, TestsLink } from "#components/header.gts";
 import { ExternalLink, service } from "ember-primitives";
 
 import { OopsError, PageLayout } from "@universal-ember/docs-support";
@@ -7,10 +6,7 @@ import { OopsError, PageLayout } from "@universal-ember/docs-support";
 <template>
   <PageLayout>
     <:logoLink>
-      <Logomark class="h-9 w-28 lg:hidden" />
-      <Logo
-        class="hidden w-auto h-9 fill-slate-700 lg:block dark:fill-sky-100"
-      />
+      Table
     </:logoLink>
     <:topRight>
       <TestsLink />

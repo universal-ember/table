@@ -49,7 +49,6 @@ export default class Application extends Route {
           // community libraries
           'ember-resources': import('ember-resources'),
           'ember-primitives': import('ember-primitives'),
-          'reactiveweb/remote-data': import('reactiveweb/remote-data'),
           kolay: import('kolay'),
         },
         rehypePlugins: [
