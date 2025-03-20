@@ -9,6 +9,7 @@ import getWasm from 'shiki/wasm';
 import { Callout } from '@universal-ember/docs-support';
 
 import { APIDocs, ComponentSignature, ModifierSignature } from './api-docs.gts';
+import { DATA } from '../sample-data';
 
 export default class Application extends Route {
   async model() {
@@ -45,6 +46,24 @@ export default class Application extends Route {
         resolve: {
           // this library
           '@universal-ember/table': import('@universal-ember/table'),
+          '@universal-ember/table/plugins': import(
+            '@universal-ember/table/plugins'
+          ),
+          '@universal-ember/table/plugins/column-resizing': import(
+            '@universal-ember/table/plugins/column-resizing'
+          ),
+          '@universal-ember/table/plugins/column-reordering': import(
+            '@universal-ember/table/plugins/column-reordering'
+          ),
+          '@universal-ember/table/plugins/column-visibility': import(
+            '@universal-ember/table/plugins/column-visibility'
+          ),
+          '@universal-ember/table/plugins/data-sorting': import(
+            '@universal-ember/table/plugins/data-sorting'
+          ),
+
+          '#sample-data': Promise.resolve({ DATA }),
+          'docs-app/sample-data': Promise.resolve({ DATA }),
 
           // community libraries
           'ember-resources': import('ember-resources'),
