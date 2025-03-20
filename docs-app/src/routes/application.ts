@@ -50,12 +50,14 @@ export default class Application extends Route {
           '@universal-ember/table/plugins/column-visibility': import('@universal-ember/table/plugins/column-visibility'),
           '@universal-ember/table/plugins/data-sorting': import('@universal-ember/table/plugins/data-sorting'),
           '@universal-ember/table/plugins/sticky-columns': import('@universal-ember/table/plugins/sticky-columns'),
+          '@universal-ember/table/plugins/row-selection': import('@universal-ember/table/plugins/row-selection'),
 
           '#sample-data': Promise.resolve({ DATA }),
           'docs-app/sample-data': Promise.resolve({ DATA }),
 
           // community libraries
           'ember-resources': import('ember-resources'),
+          'tracked-built-ins': import('tracked-built-ins'),
           'ember-primitives': import('ember-primitives'),
           kolay: import('kolay'),
         },
