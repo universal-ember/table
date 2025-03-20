@@ -135,29 +135,3 @@ None
 
 If making sticky-columns a user-configurable feature,
 it's recommended to use `<button>`s or radio inputs for configuring if a column sticks at all, or to the left or right side.
-
-### Helpers + StrictMode
-
-There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
-
-```gjs
-import {
-  StickyColumns,
-  isSticky,
-} from "@universal-ember/table/plugins/sticky-columns";
-
-export const THead = <template>
-  <thead>
-    <tr>
-      {{#each @columns as |column|}}
-        <th
-          data-sticky="{{isSticky column}}"
-          {{this.table.modifiers.columnHeader column}}
-        >
-          <span>{{column.name}}</span><br />
-        </th>
-      {{/each}}
-    </tr>
-  </thead>
-</template>;
-```
