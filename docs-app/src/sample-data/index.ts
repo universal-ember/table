@@ -5,7 +5,7 @@ export const DATA = [
     B: 'Blood Orange',
     C: 'Cranberry',
     D: 'Dragonfruit',
-    E: 'Pomegranate',
+    E: 'Early Girl Tomato',
     F: 'Fig',
     G: 'Goji Berry',
   },
