@@ -1,4 +1,4 @@
-import { GitHubLink, TestsLink } from "#components/header.gts";
+import { GitHubLink } from "#components/header.gts";
 import { ExternalLink, service } from "ember-primitives";
 
 import { OopsError, PageLayout } from "@universal-ember/docs-support";
@@ -6,10 +6,9 @@ import { OopsError, PageLayout } from "@universal-ember/docs-support";
 <template>
   <PageLayout>
     <:logoLink>
-      Table
+      <span class="dark:text-sky-400">Table</span>
     </:logoLink>
     <:topRight>
-      <TestsLink />
       <GitHubLink />
     </:topRight>
     <:error as |error|>

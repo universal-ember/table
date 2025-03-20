@@ -1,4 +1,4 @@
-import { GitHubLink, TestsLink } from "#components/header.gts";
+import { GitHubLink } from "#components/header.gts";
 import { ExternalLink } from "ember-primitives/components/external-link";
 
 import {
@@ -21,12 +21,8 @@ import {
 
 <template>
   <IndexPage>
-    <:logo>
-      @universal-ember/table
-    </:logo>
     <:header>
       <TopRight>
-        <TestsLink />
         <GitHubLink />
       </TopRight>
     </:header>
@@ -38,7 +34,6 @@ import {
         behaviors.
       </p>
 
-      <GetStarted />
     </:tagline>
     <:callToAction>
       <InternalLink
