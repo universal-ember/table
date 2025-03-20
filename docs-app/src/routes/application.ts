@@ -14,10 +14,7 @@ import { DATA } from '../sample-data';
 export default class Application extends Route {
   async model() {
     const highlighter = await getHighlighterCore({
-      themes: [
-        import('shiki/themes/github-dark.mjs'),
-        import('shiki/themes/github-light.mjs'),
-      ],
+      themes: [import('shiki/themes/github-dark.mjs'), import('shiki/themes/github-light.mjs')],
       langs: [
         import('shiki/langs/javascript.mjs'),
         import('shiki/langs/typescript.mjs'),
@@ -46,21 +43,13 @@ export default class Application extends Route {
         resolve: {
           // this library
           '@universal-ember/table': import('@universal-ember/table'),
-          '@universal-ember/table/plugins': import(
-            '@universal-ember/table/plugins'
-          ),
-          '@universal-ember/table/plugins/column-resizing': import(
-            '@universal-ember/table/plugins/column-resizing'
-          ),
-          '@universal-ember/table/plugins/column-reordering': import(
-            '@universal-ember/table/plugins/column-reordering'
-          ),
-          '@universal-ember/table/plugins/column-visibility': import(
-            '@universal-ember/table/plugins/column-visibility'
-          ),
-          '@universal-ember/table/plugins/data-sorting': import(
-            '@universal-ember/table/plugins/data-sorting'
-          ),
+          '@universal-ember/table/plugins': import('@universal-ember/table/plugins'),
+          '@universal-ember/table/plugins/metadata': import('@universal-ember/table/plugins/metadata'),
+          '@universal-ember/table/plugins/column-resizing': import('@universal-ember/table/plugins/column-resizing'),
+          '@universal-ember/table/plugins/column-reordering': import('@universal-ember/table/plugins/column-reordering'),
+          '@universal-ember/table/plugins/column-visibility': import('@universal-ember/table/plugins/column-visibility'),
+          '@universal-ember/table/plugins/data-sorting': import('@universal-ember/table/plugins/data-sorting'),
+          '@universal-ember/table/plugins/sticky-columns': import('@universal-ember/table/plugins/sticky-columns'),
 
           '#sample-data': Promise.resolve({ DATA }),
           'docs-app/sample-data': Promise.resolve({ DATA }),

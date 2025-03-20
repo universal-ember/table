@@ -4,9 +4,6 @@
   th {
     color: white;
     font-weight: bold;
-    .name {
-      padding: 0 0.5rem;
-    }
   }
 
   button {
