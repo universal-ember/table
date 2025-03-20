@@ -7,32 +7,59 @@ See the individual plugin pages for more scoped-down examples.
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { htmlSafe } from '@ember/template';
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { htmlSafe } from "@ember/template";
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta, columns } from '@universal-ember/table/plugins';
-import { ColumnResizing, isResizing, resizeHandle } from '@universal-ember/table/plugins/column-resizing';
-import { ColumnReordering, moveLeft, moveRight, cannotMoveLeft, cannotMoveRight } from '@universal-ember/table/plugins/column-reordering';
-import { ColumnVisibility, hide, show, isVisible, isHidden } from '@universal-ember/table/plugins/column-visibility';
-import { DataSorting, sort, isAscending, isDescending } from '@universal-ember/table/plugins/data-sorting';
+import { headlessTable } from "@universal-ember/table";
+import { meta, columns } from "@universal-ember/table/plugins";
+import {
+  ColumnResizing,
+  isResizing,
+  resizeHandle,
+} from "@universal-ember/table/plugins/column-resizing";
+import {
+  ColumnReordering,
+  moveLeft,
+  moveRight,
+  cannotMoveLeft,
+  cannotMoveRight,
+} from "@universal-ember/table/plugins/column-reordering";
+import {
+  ColumnVisibility,
+  hide,
+  show,
+  isVisible,
+  isHidden,
+} from "@universal-ember/table/plugins/column-visibility";
+import {
+  DataSorting,
+  sort,
+  isAscending,
+  isDescending,
+} from "@universal-ember/table/plugins/data-sorting";
 
-import { DATA } from '#sample-data';
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
-      { name: 'column A', key: 'A',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))]
+      {
+        name: "column A",
+        key: "A",
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))],
       },
-      { name: 'column B', key: 'B',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))]
+      {
+        name: "column B",
+        key: "B",
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))],
       },
-      { name: 'column C', key: 'C',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))]
+      {
+        name: "column C",
+        key: "C",
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))],
       },
     ],
     data: () => this.data,
@@ -42,7 +69,7 @@ export default class extends Component {
       ColumnResizing,
       DataSorting.with(() => ({
         sorts: this.sorts,
-        onSort: (sorts) => this.sorts = sorts,
+        onSort: (sorts) => (this.sorts = sorts),
       })),
     ],
   });
@@ -58,7 +85,7 @@ export default class extends Component {
   }
 
   get resizeHeight() {
-    return htmlSafe(`${this.table.scrollContainerElement.clientHeight - 32}px`)
+    return htmlSafe(`${this.table.scrollContainerElement.clientHeight - 32}px`);
   }
 
   <template>
@@ -66,10 +93,10 @@ export default class extends Component {
       {{#each this.table.columns as |column|}}
         <span>
           {{column.name}}:
-          <button {{on 'click' (fn hide column)}} disabled={{isHidden column}}>
+          <button {{on "click" (fn hide column)}} disabled={{isHidden column}}>
             Hide
           </button>
-          <button {{on 'click' (fn show column)}} disabled={{isVisible column}}>
+          <button {{on "click" (fn show column)}} disabled={{isVisible column}}>
             Show
           </button>
         </span>
@@ -80,30 +107,46 @@ export default class extends Component {
         <thead>
           <tr>
             {{#each this.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
-                <button {{resizeHandle column}} class="z-10 reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden">
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="relative group"
+              >
+                <button
+                  {{resizeHandle column}}
+                  class="z-10 reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden"
+                >
                   ↔
                 </button>
                 {{#if (isResizing column)}}
                   <div
                     class="absolute -left-3 -top-4 bg-focus w-0.5 transition duration-150"
-                    style="height: {{this.resizeHeight}}"></div>
+                    style="height: {{this.resizeHeight}}"
+                  ></div>
                 {{/if}}
 
-                <span class="name">{{column.name}}</span><br>
-                <button {{on 'click' (fn moveLeft column)}} disabled={{cannotMoveLeft column}}>
+                <span class="name">{{column.name}}</span><br />
+                <button
+                  {{on "click" (fn moveLeft column)}}
+                  disabled={{cannotMoveLeft column}}
+                >
                   ⇦
                 </button>
-                <button {{on 'click' (fn moveRight column)}} disabled={{cannotMoveRight column}}>
+                <button
+                  {{on "click" (fn moveRight column)}}
+                  disabled={{cannotMoveRight column}}
+                >
                   ⇨
                 </button>
-                <button {{on 'click' (fn sort column)}}>
+                <button {{on "click" (fn sort column)}}>
                   {{#if (isAscending column)}}
-                    × <span visually-hidden>remove sort</span>
+                    ×
+                    <span visually-hidden>remove sort</span>
                   {{else if (isDescending column)}}
-                    ⇧ <span visually-hidden>switch to ascending sort</span>
+                    ⇧
+                    <span visually-hidden>switch to ascending sort</span>
                   {{else}}
-                    ⇩ <span visually-hidden>switch to ascending sort</span>
+                    ⇩
+                    <span visually-hidden>switch to ascending sort</span>
                   {{/if}}
                 </button>
               </th>
@@ -134,7 +177,7 @@ export default class extends Component {
  * but sorting does need to be handled by you.
  */
 
-import { compare } from '@ember/utils';
+import { compare } from "@ember/utils";
 
 function hasOwnProperty(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
@@ -158,7 +201,7 @@ export function localSort(data, sorts) {
       let result = compare(valueA, valueB);
 
       if (result) {
-        return direction === 'descending' ? -result : result;
+        return direction === "descending" ? -result : result;
       }
     }
 
@@ -183,14 +226,12 @@ npm install @universal-ember/table
 ember install @universal-ember/table
 ```
 
-
 ## Compatibility
 
-* ember-auto-import >= v2
-* ember-source >= 3.28
-* embroider safe + optimized
-* typescript >= 5.4
-* Glint >= 1.3
+- ember-auto-import >= v2
+- ember-source >= 3.28
+- embroider safe + optimized
+- typescript >= 5.4
+- Glint >= 1.3
 
   All Glint changes will be considered bugfixes until Glint 1.0 is released.
-

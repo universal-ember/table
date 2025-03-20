@@ -4,7 +4,6 @@ API Documentation available [here][api-docs]
 
 [api-docs]: /api/modules/plugins_column_reordering
 
-
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
@@ -78,18 +77,20 @@ export default class extends Component {
 ## Usage
 
 ```js
-import { headlessTable } from '@universal-ember/table';
-import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
+import { headlessTable } from "@universal-ember/table";
+import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
 
 // ...
 // in a class
-  table = headlessTable(this, {
-    columns: () => [ /* ... */ ],
-    data: () => [ /* ... */ ],
-    plugins: [
-      ColumnReordering,
-    ],
-  })
+table = headlessTable(this, {
+  columns: () => [
+    /* ... */
+  ],
+  data: () => [
+    /* ... */
+  ],
+  plugins: [ColumnReordering],
+});
 ```
 
 ### ColumnOptions
@@ -133,27 +134,36 @@ but the important things to make sure exist are:
 There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
 
 ```gjs
-import { fn } from '@ember/helper';
-import { on } from '@ember/modifier';
+import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 import {
-  moveLeft, moveRight, cannotMoveLeft, cannotMoveRight
-} from '@universal-ember/table/plugins/column-reordering';
+  moveLeft,
+  moveRight,
+  cannotMoveLeft,
+  cannotMoveRight,
+} from "@universal-ember/table/plugins/column-reordering";
 
 export const THead = <template>
   <thead>
     <tr>
       {{#each @columns as |column|}}
         <th {{@table.modifiers.columnHeader column}}>
-          <span>{{column.name}}</span><br>
-          <button {{on 'click' (fn moveLeft column)}} disabled={{cannotMoveLeft column}}>
+          <span>{{column.name}}</span><br />
+          <button
+            {{on "click" (fn moveLeft column)}}
+            disabled={{cannotMoveLeft column}}
+          >
             ⇦
           </button>
-          <button {{on 'click' (fn moveRight column)}} disabled={{cannotMoveRight column}}>
+          <button
+            {{on "click" (fn moveRight column)}}
+            disabled={{cannotMoveRight column}}
+          >
             ⇨
           </button>
         </th>
       {{/each}}
     </tr>
   </thead>
-</template>
+</template>;
 ```

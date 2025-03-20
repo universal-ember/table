@@ -17,5 +17,11 @@ module.exports = {
         printWidth: 160,
       },
     },
+    {
+      files: ['public/'],
+      options: {
+        printWidth: 100,
+      },
+    },
   ],
 };

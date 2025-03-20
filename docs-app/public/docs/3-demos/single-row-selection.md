@@ -5,26 +5,30 @@ Using the RowSelection plugin, we can select a single row at a time, rather than
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
+import Component from "@glimmer/component";
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta } from '@universal-ember/table/plugins';
-import { TrackedSet } from 'tracked-built-ins';
-import { RowSelection, toggle, isSelected } from '@universal-ember/table/plugins/row-selection';
+import { headlessTable } from "@universal-ember/table";
+import { meta } from "@universal-ember/table/plugins";
+import { TrackedSet } from "tracked-built-ins";
+import {
+  RowSelection,
+  toggle,
+  isSelected,
+} from "@universal-ember/table/plugins/row-selection";
 
-import { DATA } from 'docs-app/sample-data';
+import { DATA } from "docs-app/sample-data";
 
 export default class extends Component {
   selection = new TrackedSet();
 
   table = headlessTable(this, {
     columns: () => [
-      { name: 'column A', key: 'A' },
-      { name: 'column B', key: 'B' },
-      { name: 'column C', key: 'C' },
-      { name: 'column D', key: 'D' },
+      { name: "column A", key: "A" },
+      { name: "column B", key: "B" },
+      { name: "column C", key: "C" },
+      { name: "column D", key: "D" },
     ],
     data: () => DATA,
     plugins: [
@@ -48,7 +52,10 @@ export default class extends Component {
           <tr>
             <td></td>
             {{#each this.table.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="relative group"
+              >
                 {{column.name}}
               </th>
             {{else}}
@@ -60,9 +67,12 @@ export default class extends Component {
         </thead>
         <tbody>
           {{#each this.table.rows as |row|}}
-            <tr {{this.table.modifiers.row row}} class="{{if (isSelected row) 'bg-[#338]'}}">
+            <tr
+              {{this.table.modifiers.row row}}
+              class="{{if (isSelected row) 'bg-[#338]'}}"
+            >
               <td>
-                <button {{on 'click' (fn toggle row)}}>Toggle</button>
+                <button {{on "click" (fn toggle row)}}>Toggle</button>
               </td>
               {{#each this.table.columns as |column|}}
                 <td>

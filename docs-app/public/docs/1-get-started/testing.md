@@ -7,7 +7,6 @@ API Documentation available [here][api-docs]
 
 [api-docs]: /api/modules/test_support
 
-
 ## Helpers
 
 There are two available helpers, `createHelpers` (which provides some more helpers), and `requestAnimationFrameSettled`, which is like `settled` from `@ember/test-helpers`, but waits for the next available animation frame in the browser,
@@ -17,27 +16,25 @@ to reduce impact on the browser as much as possible.
 ```js
 import {
   createHelpers,
-  requestAnimationFrameSettled
-} from '@universal-ember/table/test-support';
-
+  requestAnimationFrameSettled,
+} from "@universal-ember/table/test-support";
 ```
 
 ### `createHelpers`
 
 `createHelpers` takes custom selectors, depending on how you've implemented your table.
 
-
 ```js
 let helpers = createHelpers({
-  resizeHandle: 'your-css-selector-used-for-all-resize-handles', // optional
+  resizeHandle: "your-css-selector-used-for-all-resize-handles", // optional
   // example:
   // resizeHandle: '[data-resize-handle]',
-  scrollContainer: 'your-css-selector-used-for-the-scroll-container-or-wrapping-div', // optional
+  scrollContainer:
+    "your-css-selector-used-for-the-scroll-container-or-wrapping-div", // optional
   // example:
   // scrollContainer: '[data-scroll-container]',
 });
 ```
-
 
 While both of these arguments are optional, the subsequent helpers will error if the needed selector is missing.
 

@@ -1,8 +1,7 @@
 ---
-
 title: TypeScript/Glint
-
 ---
+
 # Using with TypeScript/Glint
 
 This library is written in TypeScript, but it is still new and the shape of the types may only improve with time as we add type tests using [expect-type][gh-expect-type].
@@ -30,27 +29,26 @@ but all relavant types are available manual usage for creating reactive data wit
 For example
 
 ```ts
-import {
-  headlessTable,
-  type ColumnConfig,
-} from '@universal-ember/table';
+import { headlessTable, type ColumnConfig } from "@universal-ember/table";
 
 class Demo {
   table = headlessTable(this, {
-    columns: () => [ /* ... */ ], // ColumnConfig<DataType>[]
-    data: () => [ /* ... */ ], // DataType[] - generic, inferred from whatever is passed here
+    columns: () => [
+      /* ... */
+    ], // ColumnConfig<DataType>[]
+    data: () => [
+      /* ... */
+    ], // DataType[] - generic, inferred from whatever is passed here
   });
 }
 ```
+
 could be written as (for swapping out both columns and data)
 
 ```ts
-import { tracked } from '@glimmer/tracking';
+import { tracked } from "@glimmer/tracking";
 
-import {
-  headlessTable,
-  type ColumnConfig,
-} from '@universal-ember/table';
+import { headlessTable, type ColumnConfig } from "@universal-ember/table";
 
 interface MyData {
   foo: string;
@@ -58,9 +56,13 @@ interface MyData {
 }
 
 class Demo {
-  @tracked columns: ColumnConfig<MyData>[] = [ /* ... */ ]
+  @tracked columns: ColumnConfig<MyData>[] = [
+    /* ... */
+  ];
 
-  @tracked data: MyData[] = [ /* ... */ ];
+  @tracked data: MyData[] = [
+    /* ... */
+  ];
 
   table = headlessTable(this, {
     columns: () => this.columns,
@@ -68,7 +70,6 @@ class Demo {
   });
 }
 ```
-
 
 ## In Templates
 
@@ -88,7 +89,6 @@ The Glint [getting started docs][docs-glint-start] cover some of this, but for q
 - Glint [VS Code Extension][glint-ext-vscode]
 - Glint [Language Server][glint-ls]
 - Example usage with native LSP w/ [neovim][example-neovim-lsp]
-
 
 [example-neovim-lsp]: https://github.com/NullVoxPopuli/dotfiles/blob/0df85d633f978cf67c7df9d36d21ce6820d4b419/home/.config/nvim/lua/plugin-config/lsp.lua#L25
 [glint-ls]: https://typed-ember.gitbook.io/glint/getting-started

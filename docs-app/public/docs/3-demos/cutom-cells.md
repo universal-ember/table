@@ -7,17 +7,21 @@ Custom components may be used for each column via the [`ColumnConfig`'s `Cell` p
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
+import Component from "@glimmer/component";
 
-import { headlessTable } from '@universal-ember/table';
-import { DATA } from '#sample-data';
+import { headlessTable } from "@universal-ember/table";
+import { DATA } from "#sample-data";
 
 // or import a component from elsewhere
 class MyCustomComponent extends Component {
   // For demonstration only, converts a string to a color
   get color() {
     let key = this.args.data[this.args.column.key];
-    let color = key.split('').map(char => char.charCodeAt(0).toString(16)).join('').slice(0, 6);
+    let color = key
+      .split("")
+      .map((char) => char.charCodeAt(0).toString(16))
+      .join("")
+      .slice(0, 6);
 
     return `#${color}`;
   }
@@ -30,16 +34,16 @@ class MyCustomComponent extends Component {
       {{this.color}}
     </span>
   </template>
-};
+}
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
-      { name: 'Custom Cell', key: 'A', Cell: MyCustomComponent },
-      { name: 'column B', key: 'B' },
-      { name: 'column C', key: 'C' },
-      { name: 'column D', key: 'D' },
-      { name: 'column E', key: 'E' },
+      { name: "Custom Cell", key: "A", Cell: MyCustomComponent },
+      { name: "column B", key: "B" },
+      { name: "column C", key: "C" },
+      { name: "column D", key: "D" },
+      { name: "column E", key: "E" },
     ],
     data: () => DATA,
   });
@@ -51,7 +55,7 @@ export default class extends Component {
           <tr>
             {{#each this.table.columns as |column|}}
               <th {{this.table.modifiers.columnHeader column}}>
-                <span class="name">{{column.name}}</span><br>
+                <span class="name">{{column.name}}</span><br />
               </th>
             {{/each}}
           </tr>
@@ -78,4 +82,3 @@ export default class extends Component {
 ```
 
 </div>
-

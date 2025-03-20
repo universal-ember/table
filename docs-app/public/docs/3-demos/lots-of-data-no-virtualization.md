@@ -10,24 +10,24 @@ In this demo, 6 columns x 40 rows are updating as quickly as requestAnimationFra
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { tracked, cached } from '@glimmer/tracking';
-import { cell, use, resource } from 'ember-resources';
-import { map } from 'reactiveweb/map';
-import { UpdateFrequency, FrameRate } from 'reactiveweb/fps';
+import Component from "@glimmer/component";
+import { tracked, cached } from "@glimmer/tracking";
+import { cell, use, resource } from "ember-resources";
+import { map } from "reactiveweb/map";
+import { UpdateFrequency, FrameRate } from "reactiveweb/fps";
 
-import { headlessTable } from '@universal-ember/table';
+import { headlessTable } from "@universal-ember/table";
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
-      { name: 'dbname', key: 'db.id' },
-      { name: 'query count', key: 'queries.length', Cell: QueryStatus },
-      { name: '', key: 'topFiveQueries.0.elapsed' },
-      { name: '', key: 'topFiveQueries.1.elapsed' },
-      { name: '', key: 'topFiveQueries.2.elapsed' },
-      { name: '', key: 'topFiveQueries.3.elapsed' },
-      { name: '', key: 'topFiveQueries.4.elapsed' },
+      { name: "dbname", key: "db.id" },
+      { name: "query count", key: "queries.length", Cell: QueryStatus },
+      { name: "", key: "topFiveQueries.0.elapsed" },
+      { name: "", key: "topFiveQueries.1.elapsed" },
+      { name: "", key: "topFiveQueries.2.elapsed" },
+      { name: "", key: "topFiveQueries.3.elapsed" },
+      { name: "", key: "topFiveQueries.4.elapsed" },
     ],
     data: () => this.data,
   });
@@ -46,9 +46,17 @@ export default class extends Component {
   });
 
   <template>
-    {{this.fps}} UpdateFrequency <br>
-    FPS: {{FrameRate}} <br>
-    <div data-container class="h-full overflow-auto" {{this.table.modifiers.container}}>
+    {{this.fps}}
+    UpdateFrequency
+    <br />
+    FPS:
+    {{FrameRate}}
+    <br />
+    <div
+      data-container
+      class="h-full overflow-auto"
+      {{this.table.modifiers.container}}
+    >
       <table>
         <thead>
           <tr>
@@ -100,9 +108,15 @@ export default class extends Component {
       [data-container] th:first-child {
         min-width: 190px;
       }
-      [data-container] .label-success { background-color: #5cb85c; }
-      [data-container] .label-warning { background-color:#f0ad4e; }
-      [data-container] .label-danger  { background-color:#d9534f; }
+      [data-container] .label-success {
+        background-color: #5cb85c;
+      }
+      [data-container] .label-warning {
+        background-color: #f0ad4e;
+      }
+      [data-container] .label-danger {
+        background-color: #d9534f;
+      }
     </style>
   </template>
 }
@@ -116,7 +130,7 @@ const DBMonitor = resource(({ on }) => {
       value.current = getData(20);
       generateData();
     });
-  }
+  };
 
   on.cleanup(() => cancelAnimationFrame(frame));
 
@@ -141,15 +155,15 @@ class Database {
     let topFiveQueries = queries.slice(0, 5);
 
     while (topFiveQueries.length < 5) {
-      topFiveQueries.push({ query: '' });
+      topFiveQueries.push({ query: "" });
     }
 
-    return topFiveQueries.map(function(query, index) {
+    return topFiveQueries.map(function (query, index) {
       return {
         key: String(index),
         query: query.query,
-        elapsed: query.elapsed ? formatElapsed(query.elapsed) : '',
-        className: elapsedClass(query.elapsed)
+        elapsed: query.elapsed ? formatElapsed(query.elapsed) : "",
+        className: elapsedClass(query.elapsed),
       };
     });
   }
@@ -157,43 +171,41 @@ class Database {
   @cached
   get countClassName() {
     let queries = this.queries || [];
-    let countClassName = 'label';
+    let countClassName = "label";
 
     if (queries.length >= 20) {
-      countClassName += ' label-important';
+      countClassName += " label-important";
     } else if (queries.length >= 10) {
-      countClassName += ' label-warning';
+      countClassName += " label-warning";
     } else {
-      countClassName += ' label-success';
+      countClassName += " label-success";
     }
 
     return countClassName;
   }
-
-
 }
 
 function elapsedClass(elapsed) {
   if (elapsed >= 10.0) {
-    return 'elapsed warn_long';
+    return "elapsed warn_long";
   } else if (elapsed >= 1.0) {
-    return 'elapsed warn';
+    return "elapsed warn";
   } else {
-    return 'elapsed short';
+    return "elapsed short";
   }
 }
 
 function leftPad(str, padding, toLength) {
   return padding.repeat((toLength - str.length) / padding.length).concat(str);
-};
+}
 
 function formatElapsed(value) {
   let str = parseFloat(value).toFixed(2);
 
   if (value > 60) {
     const minutes = Math.floor(value / 60);
-    const comps = (value % 60).toFixed(2).split('.');
-    const seconds = leftPad(comps[0], '0', 2);
+    const comps = (value % 60).toFixed(2).split(".");
+    const seconds = leftPad(comps[0], "0", 2);
     str = `${minutes}:${seconds}.${comps[1]}`;
   }
 
@@ -220,25 +232,23 @@ function getData(ROWS) {
   // generate some dummy data
   const data = {
     start_at: new Date().getTime() / 1000,
-    databases: []
+    databases: [],
   };
 
   for (let i = 1; i <= ROWS; i++) {
-
     data.databases.push({
       id: `cluster${i}`,
-      queries: []
+      queries: [],
     });
 
     data.databases.push({
       id: ` ↳ cluster${i}-secondary`,
-      queries: []
+      queries: [],
     });
-
   }
 
-  data.databases.forEach(function(info) {
-    const r = Math.floor((Math.random() * 10) + 1);
+  data.databases.forEach(function (info) {
+    const r = Math.floor(Math.random() * 10 + 1);
 
     for (let i = 0; i < r; i++) {
       const q = {
@@ -249,22 +259,22 @@ function getData(ROWS) {
         canvas_job_tag: null,
         canvas_pid: null,
         elapsed: Math.random() * 15,
-        query: 'SELECT blah FROM something',
-        waiting: Math.random() < 0.5
+        query: "SELECT blah FROM something",
+        waiting: Math.random() < 0.5,
       };
 
       if (Math.random() < 0.2) {
-        q.query = '<IDLE> in transaction';
+        q.query = "<IDLE> in transaction";
       }
 
       if (Math.random() < 0.1) {
-        q.query = 'vacuum';
+        q.query = "vacuum";
       }
 
       info.queries.push(q);
     }
 
-    info.queries = info.queries.sort(function(a, b) {
+    info.queries = info.queries.sort(function (a, b) {
       return b.elapsed - a.elapsed;
     });
   });

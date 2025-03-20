@@ -12,26 +12,30 @@ To select a row, click it. To deselect a row, click it again.
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
+import Component from "@glimmer/component";
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta } from '@universal-ember/table/plugins';
-import { TrackedSet } from 'tracked-built-ins';
-import { RowSelection, toggle, isSelected } from '@universal-ember/table/plugins/row-selection';
+import { headlessTable } from "@universal-ember/table";
+import { meta } from "@universal-ember/table/plugins";
+import { TrackedSet } from "tracked-built-ins";
+import {
+  RowSelection,
+  toggle,
+  isSelected,
+} from "@universal-ember/table/plugins/row-selection";
 
-import { DATA } from '#sample-data';
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   selection = new TrackedSet();
 
   table = headlessTable(this, {
     columns: () => [
-      { name: 'column A', key: 'A' },
-      { name: 'column B', key: 'B' },
-      { name: 'column C', key: 'C' },
-      { name: 'column D', key: 'D' },
+      { name: "column A", key: "A" },
+      { name: "column B", key: "B" },
+      { name: "column C", key: "C" },
+      { name: "column D", key: "D" },
     ],
     data: () => DATA,
     plugins: [
@@ -52,7 +56,10 @@ export default class extends Component {
           <tr>
             <td></td>
             {{#each this.table.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="relative group"
+              >
                 {{column.name}}
               </th>
             {{else}}
@@ -64,9 +71,12 @@ export default class extends Component {
         </thead>
         <tbody>
           {{#each this.table.rows as |row|}}
-            <tr {{this.table.modifiers.row row}} class="{{if (isSelected row) 'bg-[#338]'}}">
+            <tr
+              {{this.table.modifiers.row row}}
+              class="{{if (isSelected row) 'bg-[#338]'}}"
+            >
               <td>
-                <button {{on 'click' (fn toggle row)}}>Toggle</button>
+                <button {{on "click" (fn toggle row)}}>Toggle</button>
               </td>
               {{#each this.table.columns as |column|}}
                 <td>
@@ -93,17 +103,17 @@ This plugin provides helpful utilities and automatically wires up event listener
 
 None
 
-
 ### TableOptions
 
 Required:
- - `selection` - a collection of what is already selected
- - `onSelect` - event handler for when a row is selected
- - `onDeselect` - event handler for when a row is deselected
+
+- `selection` - a collection of what is already selected
+- `onSelect` - event handler for when a row is selected
+- `onDeselect` - event handler for when a row is deselected
 
 Optional:
-  - `key` - a function which will be passed to `onSelect` and `onDeselect` for helping manage "what" is selected. This should be the same data type as the individual elements within the `selection`
 
+- `key` - a function which will be passed to `onSelect` and `onDeselect` for helping manage "what" is selected. This should be the same data type as the individual elements within the `selection`
 
 See the API Documentation [here][api-docs] for the full list of options and descriptions.
 
@@ -122,17 +132,22 @@ When using this plugin, ensure that each row has a focusable element that intera
 There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
 
 ```gjs
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
-import { toggle, isSelected } from '@universal-ember/table/plugins/row-selection';
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
+import {
+  toggle,
+  isSelected,
+} from "@universal-ember/table/plugins/row-selection";
 
-export const Rows =
-<template>
+export const Rows = <template>
   <tbody>
     {{#each @table.rows as |row|}}
-      <tr {{@table.modifiers.row row}} class="{{if (isSelected row) 'bg-surface-inner'}}">
+      <tr
+        {{@table.modifiers.row row}}
+        class="{{if (isSelected row) 'bg-surface-inner'}}"
+      >
         <td>
-          <button {{on 'click' (fn toggle row)}}>Toggle</button>
+          <button {{on "click" (fn toggle row)}}>Toggle</button>
         </td>
         {{#each @table.columns as |column|}}
           <td>
@@ -142,5 +157,5 @@ export const Rows =
       </tr>
     {{/each}}
   </tbody>
-</template>
+</template>;
 ```

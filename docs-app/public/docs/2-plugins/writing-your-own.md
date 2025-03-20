@@ -3,9 +3,7 @@
 Plugins are a good way to provide functionality to every part of a table without needing to add branching logic to a particular table's implementation.
 `@universal-ember/table` provides hooks in to the plugin system in a way that allows for unlimited plugin use without any changes to the template markup.
 
-
 This document is an overview of the plugin system. For details, see the _[Plugin API Documentation][docs-plugins]_.
-
 
 [docs-plugins]: /api/modules/plugins
 [docs-table-option-plugins]: /api/interfaces/index.TableConfig#plugins
@@ -46,13 +44,14 @@ With these capabilities, features for tables may be built in a way that relieves
 
 A plugin may manage state for the whole table and/or for each column.
 The state managed by your plugin must be declared as a class on the [`meta`][docs-plugin-meta] property:
+
 ```js
 class MyPlugin {
   meta = {
     table: MyTableMeta,
     column: MyColumnMeta,
     row: MyRowMeta,
-  }
+  };
 }
 
 class MyTableMeta {}
@@ -75,15 +74,14 @@ The easiest way to do this is to use the [meta][docs-plugin-api-meta] accessor t
 For example:
 
 ```js
-import { meta } from '@universal-ember/table/plugins';
+import { meta } from "@universal-ember/table/plugins";
 
 // ...
 
-meta.withFeature('columnVisibility').forColumn(columnInstance);
+meta.withFeature("columnVisibility").forColumn(columnInstance);
 ```
 
 Note that this requires that the plugin you're trying to access declares [`features`][docs-plugin-features]
-
 
 ## Overriding behavior of an existing plugin
 
@@ -97,12 +95,16 @@ Instead, working with a [`CSSStyleSheet`][mdn-CSSStylesheet] and setting specifi
 and can be done safely through some helper utilities provided by the plugin module:
 
 ```js
-import { applyStyles, removeStyles } from '@universal-ember/table/plugins';
+import { applyStyles, removeStyles } from "@universal-ember/table/plugins";
 
 // ...
 
-applyStyles(element, { /* ... styles ... */ });
-removeStyles(element, [ /* style property names */ ]);
+applyStyles(element, {
+  /* ... styles ... */
+});
+removeStyles(element, [
+  /* style property names */
+]);
 ```
 
 ## Supporting preferences
@@ -116,48 +118,48 @@ but not as useful if a synchronous storage was used, such as `localStorage`.
 As a plugin author, interaction with the consumer's preferences adapter is abstracted for you in a way that you can rely on auto-tracking and can be accessed via the [`preferences`][docs-plugin-api-preferences] accessor tool. This tool mimics the API of [`Map`][mdn-Map].
 
 An example:
+
 ```js
-import { preferences } from '@universal-ember/table/plugins';
+import { preferences } from "@universal-ember/table/plugins";
 
 // ...
 
 let columnPreferences = preferences.forColumn(columnInstance, MyPlugin);
 
-columnPreferences.get('some-key');
-columnPreferences.set('some-key', 'someValue');
-columnPreferences.delete('some-key');
+columnPreferences.get("some-key");
+columnPreferences.set("some-key", "someValue");
+columnPreferences.delete("some-key");
 
 let tablePreferences = preferences.forTable(tableInstance, MyPlugin);
 
-tablePreferences.get('some-key');
-tablePreferences.set('some-key', 'someValue');
-tablePreferences.delete('some-key');
+tablePreferences.get("some-key");
+tablePreferences.set("some-key", "someValue");
+tablePreferences.delete("some-key");
 ```
 
 Note that the data in preferences must be serializable to JSON
 via JSON.stringify -- so sticking to vanilla objects and arrays will result in the best compatibility between serialization and de-serialization.
-
 
 ## Recommended plugin file / project Layout
 
 Ultimately, you can do whatever you want, but this is the structure that `@universal-ember/table` uses for each plugin.
 
 - `/{plugin-name}/` - folder named after your plugin
+
   - `plugin.ts` - defines the actual plugin, `Meta`, `Options`, and other related structures.
-      The name of the plugin class should be a PascalCased version of the folder name.
+    The name of the plugin class should be a PascalCased version of the folder name.
   - `helpers.ts` - helpers aimed at public API, but not directly imported -- pre-wires usage of meta (or the other base utilities) along with the plugin exported from `plugin.ts`.
   - `index.ts` - re-exports the public APIs of other files.
-      Example:
-      ```ts
-      export * from './helpers';
-      export { ColumnVisibility } from './plugin';
+    Example:
 
-      // Types
-      export type { ColumnOptions, TableOptions } from './plugin';
-      ```
+    ```ts
+    export * from "./helpers";
+    export { ColumnVisibility } from "./plugin";
 
+    // Types
+    export type { ColumnOptions, TableOptions } from "./plugin";
+    ```
 
------------------------------------------------
-
+---
 
 <small>Note that the documentation generation tool includes the internal file path of each module, which is useful for finding where to contribute, but this file path does not represent the public/private visibility of the APIs within (the import paths would though)</small>

@@ -3,7 +3,6 @@
 This demo shows how to set the order of columns before _committing_ those changes to the actual table.
 This pattern could be used for configuration UIs where a person interacting with the table may want to configure and save their configuration before applying changes.
 
-
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow

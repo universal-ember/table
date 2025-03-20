@@ -7,33 +7,35 @@ API Documentation available [here][api-docs]
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { tracked } from '@glimmer/tracking';
-import { fn } from '@ember/helper';
-import { on } from '@ember/modifier';
+import Component from "@glimmer/component";
+import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
+import { on } from "@ember/modifier";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta } from '@universal-ember/table/plugins';
+import { headlessTable } from "@universal-ember/table";
+import { meta } from "@universal-ember/table/plugins";
 import {
   DataSorting,
-  sortDescending, sortAscending, sortDirection
-} from '@universal-ember/table/plugins/data-sorting';
+  sortDescending,
+  sortAscending,
+  sortDirection,
+} from "@universal-ember/table/plugins/data-sorting";
 
-import { DATA } from 'docs-app/sample-data';
+import { DATA } from "docs-app/sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
-      { name: 'column A', key: 'A' },
-      { name: 'column B', key: 'B' },
-      { name: 'column C', key: 'C' },
-      { name: 'column D', key: 'D' },
+      { name: "column A", key: "A" },
+      { name: "column B", key: "B" },
+      { name: "column C", key: "C" },
+      { name: "column D", key: "D" },
     ],
     data: () => this.data,
     plugins: [
       DataSorting.with(() => ({
         sorts: this.sorts,
-        onSort: (sorts) => this.sorts = sorts,
+        onSort: (sorts) => (this.sorts = sorts),
       })),
     ],
   });
@@ -50,12 +52,15 @@ export default class extends Component {
         <thead>
           <tr>
             {{#each this.table.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
-                <span class="name">{{column.name}}</span><br>
-                <button {{on 'click' (fn sortAscending column)}}>
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="relative group"
+              >
+                <span class="name">{{column.name}}</span><br />
+                <button {{on "click" (fn sortAscending column)}}>
                   ⇧
                 </button>
-                <button {{on 'click' (fn sortDescending column)}}>
+                <button {{on "click" (fn sortDescending column)}}>
                   ⇩
                 </button>
               </th>
@@ -83,7 +88,7 @@ export default class extends Component {
  * but sorting does need to be handled by you.
  */
 
-import { compare } from '@ember/utils';
+import { compare } from "@ember/utils";
 
 function hasOwnProperty(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
@@ -107,7 +112,7 @@ export function sort(data, sorts) {
       let result = compare(valueA, valueB);
 
       if (result) {
-        return direction === 'descending' ? -result : result;
+        return direction === "descending" ? -result : result;
       }
     }
 
@@ -148,29 +153,33 @@ will be added and updated for you, via the `columnHeader` modifiers.
 There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
 
 ```gjs
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
-import { sortAscending, sortDescending, sort } from '@universal-ember/table/plugins/data-sorting';
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
+import {
+  sortAscending,
+  sortDescending,
+  sort,
+} from "@universal-ember/table/plugins/data-sorting";
 
 export const THead = <template>
   <thead>
     <tr>
       {{#each @columns as |column|}}
         <th {{@table.modifiers.columnHeader column}}>
-          <span>{{column.name}}</span><br>
+          <span>{{column.name}}</span><br />
 
-          <button {{on 'click' (fn sortAscending column)}}>
+          <button {{on "click" (fn sortAscending column)}}>
             ⇧
           </button>
-          <button {{on 'click' (fn sortDescending column)}}>
+          <button {{on "click" (fn sortDescending column)}}>
             ⇩
           </button>
-          <button {{on 'click' (fn sort column)}}>
+          <button {{on "click" (fn sort column)}}>
             Toggle Sort
           </button>
         </th>
       {{/each}}
     </tr>
   </thead>
-</template>
+</template>;
 ```

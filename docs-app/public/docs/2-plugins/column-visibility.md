@@ -7,28 +7,30 @@ API Documentation available [here][api-docs]
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
+import Component from "@glimmer/component";
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta, columns } from '@universal-ember/table/plugins';
-import { ColumnVisibility, hide, show } from '@universal-ember/table/plugins/column-visibility';
+import { headlessTable } from "@universal-ember/table";
+import { meta, columns } from "@universal-ember/table/plugins";
+import {
+  ColumnVisibility,
+  hide,
+  show,
+} from "@universal-ember/table/plugins/column-visibility";
 
-import { DATA } from 'docs-app/sample-data';
+import { DATA } from "docs-app/sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
-      { name: 'column A', key: 'A' },
-      { name: 'column B', key: 'B' },
-      { name: 'column C', key: 'C' },
-      { name: 'column D', key: 'D' },
+      { name: "column A", key: "A" },
+      { name: "column B", key: "B" },
+      { name: "column C", key: "C" },
+      { name: "column D", key: "D" },
     ],
     data: () => DATA,
-    plugins: [
-      ColumnVisibility,
-    ],
+    plugins: [ColumnVisibility],
   });
 
   get columns() {
@@ -40,10 +42,10 @@ export default class extends Component {
       {{#each this.table.columns as |column|}}
         <div>
           {{column.name}}:
-          <button {{on 'click' (fn hide column)}}>
+          <button {{on "click" (fn hide column)}}>
             Hide
           </button>
-          <button {{on 'click' (fn show column)}}>
+          <button {{on "click" (fn show column)}}>
             Show
           </button>
         </div>
@@ -54,7 +56,10 @@ export default class extends Component {
         <thead>
           <tr>
             {{#each this.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="relative group"
+              >
                 {{column.name}}
               </th>
             {{else}}
@@ -93,16 +98,14 @@ Columns can be individually configured
 table = headlessTable(this, {
   columns: () => [
     {
-      name: 'column A',
-      key: 'A',
-      pluginOptions: [
-        ColumnVisibility.forColumn(() => ({ isVisible: false }))
-      ]
+      name: "column A",
+      key: "A",
+      pluginOptions: [ColumnVisibility.forColumn(() => ({ isVisible: false }))],
     },
     /* ... */
   ],
   /* ... */
-})
+});
 ```
 
 See the API Documentation [here][api-docs] for the full list of options and descriptions.
@@ -130,21 +133,26 @@ but the important things to make sure exist are:
 There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
 
 ```gjs
-import { on } from '@ember/modifier';
-import { fn } from '@ember/helper';
-import { hide, show, isHidden, isVisible } from '@universal-ember/table/plugins/column-visibility';
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
+import {
+  hide,
+  show,
+  isHidden,
+  isVisible,
+} from "@universal-ember/table/plugins/column-visibility";
 
 export const VisibilityMenu = <template>
   {{#each @table.columns as |column|}}
     <span>
       {{column.name}}:
-      <button {{on 'click' (fn hide column)}} disabled={{isHidden column}}>
+      <button {{on "click" (fn hide column)}} disabled={{isHidden column}}>
         Hide
       </button>
-      <button {{on 'click' (fn show column)}} disabled={{isVisible column}}>
+      <button {{on "click" (fn show column)}} disabled={{isVisible column}}>
         Show
       </button>
     </span>
   {{/each}}
-</template>
+</template>;
 ```

@@ -4,7 +4,6 @@ API Documentation available [here][api-docs]
 
 [api-docs]: /api/modules/plugins_metadata
 
-
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
@@ -72,7 +71,6 @@ export default class extends Component {
 
 </div>
 
-
 ## Usage
 
 Allows arbitrary data to be stored for each column as well as the whole table.
@@ -82,17 +80,17 @@ headlessTable.
 For example, setting up the table can be done like:
 
 ```js
-import { headlessTable } from '@universal-ember/table';
+import { headlessTable } from "@universal-ember/table";
 
 class Example {
   /* ... */
 
   table = headlessTable(this, {
     columns: () => [
-      { name: 'A', key: 'A' },
+      { name: "A", key: "A" },
       {
-        name: 'B',
-        key: 'B',
+        name: "B",
+        key: "B",
         pluginOptions: [
           Metadata.forColumn(() => ({
             isBulkSelectable: false,
@@ -100,8 +98,8 @@ class Example {
         ],
       },
       {
-        name: 'D',
-        key: 'D',
+        name: "D",
+        key: "D",
         pluginOptions: [Metadata.forColumn(() => ({ isRad: this.dRed }))],
       },
     ],
@@ -122,9 +120,11 @@ For example: rows may be their own component
 
 ```gjs
 // Two helpers are provided for accessing your Metadata
-import { forColumn /*, forTable */ } from '@universal-ember/table/plugins/metadata';
+import {
+  forColumn /*, forTable */,
+} from "@universal-ember/table/plugins/metadata";
 
-const isBulkSelectable = (column) => forColumn(column, 'isBulkSelectable');
+const isBulkSelectable = (column) => forColumn(column, "isBulkSelectable");
 
 export const Row = <template>
   <tr>
@@ -146,7 +146,6 @@ export const Row = <template>
 ### ColumnOptions
 
 Any / user-defined.
-
 
 ### TableOptions
 

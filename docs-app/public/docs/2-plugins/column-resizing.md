@@ -7,38 +7,46 @@ API Documentation available [here][api-docs]
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
 ```gjs live preview no-shadow
-import Component from '@glimmer/component';
-import { htmlSafe } from '@ember/template';
+import Component from "@glimmer/component";
+import { htmlSafe } from "@ember/template";
 
-import { headlessTable } from '@universal-ember/table';
-import { meta } from '@universal-ember/table/plugins';
-import { ColumnVisibility } from '@universal-ember/table/plugins/column-visibility';
-import { ColumnReordering } from '@universal-ember/table/plugins/column-reordering';
-import { ColumnResizing, resizeHandle, isResizing } from '@universal-ember/table/plugins/column-resizing';
+import { headlessTable } from "@universal-ember/table";
+import { meta } from "@universal-ember/table/plugins";
+import { ColumnVisibility } from "@universal-ember/table/plugins/column-visibility";
+import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
+import {
+  ColumnResizing,
+  resizeHandle,
+  isResizing,
+} from "@universal-ember/table/plugins/column-resizing";
 
-import { DATA } from '#sample-data';
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
-      { name: 'column A', key: 'A',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 100 }))]
+      {
+        name: "column A",
+        key: "A",
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 100 }))],
       },
-      { name: 'column B', key: 'B',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 100 }))]
+      {
+        name: "column B",
+        key: "B",
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 100 }))],
       },
-      { name: 'column C', key: 'C',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 100 }))]
+      {
+        name: "column C",
+        key: "C",
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 100 }))],
       },
     ],
     data: () => DATA,
-    plugins: [
-      ColumnResizing,
-    ],
+    plugins: [ColumnResizing],
   });
 
   get resizeHeight() {
-    return htmlSafe(`${this.table.scrollContainerElement.clientHeight - 32}px`)
+    return htmlSafe(`${this.table.scrollContainerElement.clientHeight - 32}px`);
   }
 
   <template>
@@ -47,17 +55,24 @@ export default class extends Component {
         <thead>
           <tr>
             {{#each this.table.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
-                <button {{resizeHandle column}} class="z-10 reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden">
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="relative group"
+              >
+                <button
+                  {{resizeHandle column}}
+                  class="z-10 reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden"
+                >
                   ↔
                 </button>
                 {{#if (isResizing column)}}
                   <div
                     class="absolute -left-3 -top-4 bg-focus w-0.5 transition duration-150"
-                    style="height: {{this.resizeHeight}}"></div>
+                    style="height: {{this.resizeHeight}}"
+                  ></div>
                 {{/if}}
 
-                <span class="name">{{column.name}}</span><br>
+                <span class="name">{{column.name}}</span><br />
               </th>
             {{/each}}
           </tr>
@@ -84,20 +99,24 @@ export default class extends Component {
 ## Usage
 
 ```js
-import { headlessTable } from '@universal-ember/table';
-import { ColumnResizing, resizeHandle } from '@universal-ember/table/plugins/column-resizing';
+import { headlessTable } from "@universal-ember/table";
+import {
+  ColumnResizing,
+  resizeHandle,
+} from "@universal-ember/table/plugins/column-resizing";
 
 // ...
 // in a class
-  table = headlessTable(this, {
-    columns: () => [ /* ... */ ],
-    data: () => [ /* ... */ ],
-    plugins: [
-      ColumnResizing,
-    ],
-  })
+table = headlessTable(this, {
+  columns: () => [
+    /* ... */
+  ],
+  data: () => [
+    /* ... */
+  ],
+  plugins: [ColumnResizing],
+});
 ```
-
 
 ### ColumnOptions
 
@@ -107,16 +126,14 @@ Columns can be individually configured
 table = headlessTable(this, {
   columns: () => [
     {
-      name: 'column A',
-      key: 'A',
-      pluginOptions: [
-        ColumnResizing.forColumn(() => ({ minWidth: 200 }))
-      ]
+      name: "column A",
+      key: "A",
+      pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))],
     },
     /* ... */
   ],
   /* ... */
-})
+});
 ```
 
 See the API Documentation [here][api-docs] for the full list of options and descriptions.
@@ -125,11 +142,11 @@ See the API Documentation [here][api-docs] for the full list of options and desc
 
 ```js
 table = headlessTable(this, {
-  columns: () => [ /* ... */ ],
-  plugins: [
-    ColumnResizing.with(() => ({ handlePosition: 'right' })),
+  columns: () => [
+    /* ... */
   ],
-})
+  plugins: [ColumnResizing.with(() => ({ handlePosition: "right" }))],
+});
 ```
 
 See the API Documentation [here][api-docs] for the full list of options and descriptions.
@@ -148,5 +165,3 @@ but it'll be most important to ensure that tab-order makes sense.
 - buttons can be navigated to and pressed via keyboard
 
 This will ensure that keyboard users, as well as mouse users can resize their columns.
-
-
