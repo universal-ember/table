@@ -1,8 +1,11 @@
-# Usage
+# Kitchen sink
 
-In this example, the column reordering, visibility, resizing, and data sorting plugins are in use.
+This demo shows how all of the plugins integrate together.
+This could be useful for building a Table for a design system
+and maybe where further abstractions or defaults may be desired.
 
-See the individual plugin pages for more scoped-down examples.
+Note that for smaller or more focused demos,
+please see the pages for individual plugins.
 
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
@@ -15,24 +18,47 @@ import { fn } from '@ember/helper';
 
 import { headlessTable } from '@universal-ember/table';
 import { meta, columns } from '@universal-ember/table/plugins';
-import { ColumnResizing, isResizing, resizeHandle } from '@universal-ember/table/plugins/column-resizing';
-import { ColumnReordering, moveLeft, moveRight, cannotMoveLeft, cannotMoveRight } from '@universal-ember/table/plugins/column-reordering';
-import { ColumnVisibility, hide, show, isVisible, isHidden } from '@universal-ember/table/plugins/column-visibility';
-import { DataSorting, sort, isAscending, isDescending } from '@universal-ember/table/plugins/data-sorting';
+import {
+  ColumnResizing,
+  isResizing, resizeHandle
+} from '@universal-ember/table/plugins/column-resizing';
+import {
+  ColumnReordering,
+  moveLeft, moveRight, cannotMoveLeft, cannotMoveRight
+} from '@universal-ember/table/plugins/column-reordering';
+import {
+  ColumnVisibility,
+  hide, show, isVisible, isHidden
+} from '@universal-ember/table/plugins/column-visibility';
+import {
+  DataSorting, sort, isAscending, isDescending
+} from '@universal-ember/table/plugins/data-sorting';
+import {
+  StickyColumns, isSticky
+} from '@universal-ember/table/plugins/sticky-columns';
 
-import { DATA } from '#sample-data';
+import { DATA } from 'docs-app/sample-data';
 
 export default class extends Component {
   table = headlessTable(this, {
     columns: () => [
       { name: 'column A', key: 'A',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))]
+        pluginOptions: [
+          ColumnResizing.forColumn(() => ({ minWidth: 150 })),
+          StickyColumns.forColumn(() => ({ sticky: 'left' })),
+        ]
       },
       { name: 'column B', key: 'B',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))]
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 150 }))]
       },
       { name: 'column C', key: 'C',
-        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 200 }))]
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 150 }))]
+      },
+      { name: 'column D', key: 'D',
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 150 }))]
+      },
+      { name: 'column E', key: 'E',
+        pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 150 }))]
       },
     ],
     data: () => this.data,
@@ -40,6 +66,7 @@ export default class extends Component {
       ColumnReordering,
       ColumnVisibility,
       ColumnResizing,
+      StickyColumns,
       DataSorting.with(() => ({
         sorts: this.sorts,
         onSort: (sorts) => this.sorts = sorts,
@@ -62,7 +89,7 @@ export default class extends Component {
   }
 
   <template>
-    <div class="flex gap-2 text-sm">
+    <div class="flex gap-2 flex-wrap">
       {{#each this.table.columns as |column|}}
         <span>
           {{column.name}}:
@@ -76,12 +103,15 @@ export default class extends Component {
       {{/each}}
     </div>
     <div class="h-full overflow-auto" {{this.table.modifiers.container}}>
-      <table>
+      <table class="w-[150%]">
         <thead>
           <tr>
             {{#each this.columns as |column|}}
-              <th {{this.table.modifiers.columnHeader column}} class="relative group">
-                <button {{resizeHandle column}} class="z-10 reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden">
+              <th
+                {{this.table.modifiers.columnHeader column}}
+                class="{{if (isSticky column) 'bg-basement' 'bg-ground-floor'}} relative group"
+              >
+                <button {{resizeHandle column}} class="reset-styles absolute -left-4 z-10 cursor-col-resize focusable group-first:hidden">
                   ↔
                 </button>
                 {{#if (isResizing column)}}
@@ -99,11 +129,11 @@ export default class extends Component {
                 </button>
                 <button {{on 'click' (fn sort column)}}>
                   {{#if (isAscending column)}}
-                    × <span visually-hidden>remove sort</span>
+                    × <span class="sr-only">remove sort</span>
                   {{else if (isDescending column)}}
-                    ⇧ <span visually-hidden>switch to ascending sort</span>
+                    ⇧ <span class="sr-only">switch to ascending sort</span>
                   {{else}}
-                    ⇩ <span visually-hidden>switch to ascending sort</span>
+                    ⇩ <span class="sr-only">switch to ascending sort</span>
                   {{/if}}
                 </button>
               </th>
@@ -118,7 +148,10 @@ export default class extends Component {
           {{#each this.table.rows as |row|}}
             <tr>
               {{#each this.columns as |column|}}
-                <td>
+                <td
+                  {{this.table.modifiers.columnHeader column}}
+                  class="{{if (isSticky column) 'bg-basement' 'bg-ground-floor'}}"
+                >
                   {{column.getValueForRow row}}</td>
               {{/each}}
             </tr>
@@ -168,29 +201,3 @@ export function localSort(data, sorts) {
 ```
 
 </div>
-
-## Installation
-
-Use your favorite package manager / installation tool -- the library is called `@universal-ember/table`.
-
-```bash
-pnpm add @universal-ember/table
-# or
-yarn add @universal-ember/table
-# or
-npm install @universal-ember/table
-# or
-ember install @universal-ember/table
-```
-
-
-## Compatibility
-
-* ember-auto-import >= v2
-* ember-source >= 3.28
-* embroider safe + optimized
-* typescript >= 5.4
-* Glint >= 1.3
-
-  All Glint changes will be considered bugfixes until Glint 1.0 is released.
-

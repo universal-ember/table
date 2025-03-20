@@ -19,8 +19,6 @@ import { ColumnResizing, resizeHandle, isResizing } from '@universal-ember/table
 import { DATA } from '#sample-data';
 
 export default class extends Component {
-  resizeHandle = resizeHandle;
-
   table = headlessTable(this, {
     columns: () => [
       { name: 'column A', key: 'A',
@@ -50,7 +48,7 @@ export default class extends Component {
           <tr>
             {{#each this.table.columns as |column|}}
               <th {{this.table.modifiers.columnHeader column}} class="relative group">
-                <button {{this.resizeHandle column}} class="reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden">
+                <button {{resizeHandle column}} class="z-10 reset-styles absolute -left-4 cursor-col-resize focusable group-first:hidden">
                   ↔
                 </button>
                 {{#if (isResizing column)}}
@@ -152,29 +150,3 @@ but it'll be most important to ensure that tab-order makes sense.
 This will ensure that keyboard users, as well as mouse users can resize their columns.
 
 
-### Helpers + StrictMode
-
-There are convenience helpers for aiding in more ergonomic template usage when using this plugin.
-
-```gjs
-import { isResizing, resizeHandle } from '@universal-ember/table/plugins/column-resizing';
-
-export const THead = <template>
-  <thead>
-    <tr>
-      {{#each @columns as |column|}}
-        <th {{@table.modifiers.columnHeader column}}>
-          <button {{resizeHandle column}} class="resize-handle-styles">
-            ↔
-          </button>
-          {{#if (isResizing column)}}
-            <div class="resize-indicator-styles"></div>
-          {{/if}}
-
-          <span>{{column.name}}</span><br>
-        </th>
-      {{/each}}
-    </tr>
-  </thead>
-</template>
-```
