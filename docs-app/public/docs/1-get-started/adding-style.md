@@ -125,7 +125,7 @@ All demos throughout the these docs will include the tailwind version of how to 
 For example, in the [column resizing demo](/docs/plugins/column-resizing),
 the way the resizing indicator is done requires a couple tricks:
 
-```glimmer
+```hbs
 <button
   {{! resizeHandle is provided by the column-resizing plugin }}
   {{resizeHandle column}}
