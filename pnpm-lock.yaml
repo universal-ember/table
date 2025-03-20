@@ -209,9 +209,6 @@ importers:
       eslint:
         specifier: ^9.21.0
         version: 9.22.0(jiti@1.21.7)
-      pnpm-sync-dependencies-meta-injected:
-        specifier: ^0.0.14
-        version: 0.0.14
       postcss:
         specifier: ^8.5.3
         version: 8.5.3

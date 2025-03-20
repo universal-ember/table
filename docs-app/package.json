@@ -32,8 +32,7 @@
     "start": "vite",
     "test": "pnpm test:ember",
     "test:ember": "pnpm build:test && pnpm dist:ember:test",
-    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs",
-    "_syncPnpm": "pnpm sync-dependencies-meta-injected"
+    "dist:ember:test": "ember test --path dist --config-file ./testem.cjs"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
@@ -67,7 +66,6 @@
     "ember-source": "~6.3.0",
     "ember-template-lint": "^7.0.1",
     "eslint": "^9.21.0",
-    "pnpm-sync-dependencies-meta-injected": "^0.0.14",
     "postcss": "^8.5.3",
     "postcss-import": "^16.1.0",
     "prettier": "^3.5.3",
