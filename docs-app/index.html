@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>@universal-ember/table</title>
+    <meta
+      name="description"
+      content="
+        A headless table implementation that supports all the major product-level features needed for feature-rich tables.
+        Bring your own markup and styles without the need to implement any of the table behaviors.
+      "
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend:wght@100..900&display=swap"
+      as="font"
+      rel="font/woff2"
+    />
+  </head>
+  <body class="bg-white dark:bg-slate-900">
+    <script src="/@embroider/virtual/vendor.js"></script>
+    <script type="module">
+      import Application from "./src/app";
+      import environment from "./src/config";
+
+      Application.create(environment.APP);
+    </script>
+  </body>
+</html>

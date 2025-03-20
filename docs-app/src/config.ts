@@ -1,5 +1,5 @@
 const ENV = {
-  modulePrefix: 'test-app',
+  modulePrefix: 'docs-app',
   environment: import.meta.env.DEV ? 'development' : 'production',
   rootURL: '/',
   locationType: 'history',
