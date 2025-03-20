@@ -2,22 +2,22 @@ export const DATA = [
   {
     // Red stuff
     A: 'Apple',
-    B: 'Berry',
+    B: 'Blood Orange',
     C: 'Cranberry',
-    D: 'Da Chile Pepper',
+    D: 'Dragonfruit',
     E: 'Pomegranate',
     F: 'Cherry',
-    G: 'Watermelon',
+    G: 'Goji Berry',
   },
   {
     // Green stuff
     A: 'Avocado',
-    B: 'Plantain',
+    B: 'Broccoli',
     C: 'Cucumber',
     D: 'Dill',
-    E: 'Kiwi',
-    F: 'Broccoli',
-    G: 'Spinach',
+    E: 'Edamame',
+    F: 'Fennel',
+    G: 'Green Tea',
   },
   {
     // Yellow stuff
@@ -25,8 +25,8 @@ export const DATA = [
     B: 'Banana',
     C: 'Corn',
     D: 'Durian',
-    E: 'Pineapple',
-    F: 'Lemon',
-    G: 'Jackfruit',
+    E: 'Egg Yolk',
+    F: 'French Fries',
+    G: 'Ginger',
   },
 ];
