@@ -98,6 +98,7 @@
     "ember-repl": "^6.0.0",
     "ember-resources": "^7.0.2",
     "kolay": "^3.2.0",
+    "reactiveweb": "^1.3.0",
     "shiki": "^1.22.2",
     "tracked-built-ins": "^4.0.0"
   },

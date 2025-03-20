@@ -1,68 +1,20 @@
-```hbs template
+# Lots of data (no virtualization)
 
-FPS: {{this.fps}}<br>
-<div data-container class="h-full overflow-auto" {{this.table.modifiers.container}}>
-  <table>
-    <thead>
-      <tr>
-        {{#each this.table.columns as |column|}}
-          <th {{this.table.modifiers.columnHeader column}}>
-            {{column.name}}
-          </th>
-        {{/each}}
-      </tr>
-    </thead>
-    <tbody>
-      {{#each this.table.rows as |row|}}
-        <tr class="{{row.countClassName}}">
-          {{#each this.table.columns as |column|}}
-            <td>
-              {{#if column.Cell}}
-                <column.Cell @row={{row}} @column={{column}} />
-              {{else}}
-                {{column.getValueForRow row}}
-              {{/if}}
-            </td>
-          {{/each}}
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
-<style>
-  [data-container] {
-    height: 500px;
-    overflow: scroll;
-    position: relative;
-  }
-  [data-container] thead {
-    position: sticky;
-    top: 0;
-    background: var(--basement);
-  }
-  [data-container] .label {
-    padding: 0.2rem 0.6rem 0.3rem;
-    font-size: 75%;
-    color: white;
-    border-radius: 0.25rem;
-  }
-  [data-container] th {
-    /* styling the table isn't the focus of this demo (perf is the focus) */
-    width: calc(100% / 7);
-  }
-  [data-container] th:first-child {
-    min-width: 190px;
-  }
-  [data-container] .label-success { background-color: #5cb85c; }
-  [data-container] .label-warning { background-color:#f0ad4e; }
-  [data-container] .label-danger  { background-color:#d9534f; }
-</style>
-```
-```js component
+This demo is the same as "[Lots of Data](/docs/demos/lots-of-data)",
+but without virtualization and no use of [@html-next/vertical-collection][gh-vc]
+
+[gh-vc]: https://github.com/html-next/vertical-collection
+
+In this demo, 6 columns x 40 rows are updating as quickly as requestAnimationFrame allows.
+
+<div class="featured-demo" data-demo-fit data-demo-tight>
+
+```gjs live preview no-shadow
 import Component from '@glimmer/component';
 import { tracked, cached } from '@glimmer/tracking';
-import { cell, use, resource, resourceFactory } from 'ember-resources';
-import { map } from 'ember-resources/util/map';
+import { cell, use, resource } from 'ember-resources';
+import { map } from 'reactiveweb/map';
+import { UpdateFrequency, FrameRate } from 'reactiveweb/fps';
 
 import { headlessTable } from '@universal-ember/table';
 
@@ -82,7 +34,7 @@ export default class extends Component {
 
   @use dbData = DBMonitor;
 
-  @use fps = FPS.of(() => this.dbData.databases);
+  @use fps = UpdateFrequency(() => this.dbData.databases);
 
   get data() {
     return this.mappedData.values();
@@ -91,32 +43,68 @@ export default class extends Component {
   mappedData = map(this, {
     data: () => this.dbData.databases,
     map: (databaseData) => new Database(databaseData),
-  })
-}
+  });
 
-const FPS = {
-  of: resourceFactory((ofWhat) => {
-    let updateInterval = 500; // ms
-    let multiplier = 1000 / updateInterval;
-    let framesSinceUpdate = 0;
-
-    return resource(({ on }) => {
-      let value = cell(0);
-      let interval = setInterval(() => {
-        value.current = framesSinceUpdate * multiplier;
-        framesSinceUpdate = 0;
-      }, updateInterval);
-
-      on.cleanup(() => clearInterval(interval));
-
-      return () => {
-        ofWhat();
-        framesSinceUpdate++;
-
-        return value.current;
+  <template>
+    {{this.fps}} UpdateFrequency <br>
+    FPS: {{FrameRate}} <br>
+    <div data-container class="h-full overflow-auto" {{this.table.modifiers.container}}>
+      <table>
+        <thead>
+          <tr>
+            {{#each this.table.columns as |column|}}
+              <th {{this.table.modifiers.columnHeader column}}>
+                {{column.name}}
+              </th>
+            {{/each}}
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this.table.rows as |row|}}
+            <tr class="{{row.countClassName}}">
+              {{#each this.table.columns as |column|}}
+                <td>
+                  {{#if column.Cell}}
+                    <column.Cell @row={{row}} @column={{column}} />
+                  {{else}}
+                    {{column.getValueForRow row}}
+                  {{/if}}
+                </td>
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <style>
+      [data-container] {
+        height: 500px;
+        overflow: scroll;
+        position: relative;
       }
-    });
-  })
+      [data-container] thead {
+        position: sticky;
+        top: 0;
+        background: var(--basement);
+      }
+      [data-container] .label {
+        padding: 0.2rem 0.6rem 0.3rem;
+        font-size: 75%;
+        color: white;
+        border-radius: 0.25rem;
+      }
+      [data-container] th {
+        /* styling the table isn't the focus of this demo (perf is the focus) */
+        width: calc(100% / 7);
+      }
+      [data-container] th:first-child {
+        min-width: 190px;
+      }
+      [data-container] .label-success { background-color: #5cb85c; }
+      [data-container] .label-warning { background-color:#f0ad4e; }
+      [data-container] .label-danger  { background-color:#d9534f; }
+    </style>
+  </template>
 }
 
 const DBMonitor = resource(({ on }) => {
@@ -212,21 +200,13 @@ function formatElapsed(value) {
   return str;
 }
 
-/**
- * Temporary work-around because docfy.dev doesn't support gjs
- */
-import { setComponentTemplate } from '@ember/component';
-import templateOnly from '@ember/component/template-only';
-import { hbs } from 'ember-cli-htmlbars';
-
-const QueryStatus = templateOnly();
-setComponentTemplate(hbs`
+const QueryStatus = <template>
   <td>
     <span class="{{@row.data.countClassName}}">
       {{@row.data.queries.length}}
     </span>
   </td>
-`, QueryStatus);
+</template>;
 
 /**
  * dbmon code copied from
@@ -293,3 +273,4 @@ function getData(ROWS) {
 }
 ```
 
+</div>
