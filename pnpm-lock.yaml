@@ -395,7 +395,7 @@ importers:
         specifier: 4.0.0-alpha.9
         version: 4.0.0-alpha.9(@glint/template@1.5.2)
       '@embroider/macros':
-        specifier: 1.17.0-alpha.7
+        specifier: alpha
         version: 1.17.0-alpha.7(@glint/template@1.5.2)
       '@embroider/vite':
         specifier: 1.0.0-alpha.11
