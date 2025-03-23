@@ -20,9 +20,6 @@
     "start:tests": "pnpm turbo --filter test-app start",
     "test": "pnpm turbo --filter test-app test"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
     "@glint/core": "1.5.2",
     "concurrently": "^9.1.2",
