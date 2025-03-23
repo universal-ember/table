@@ -27,7 +27,8 @@ import {
       </TopRight>
     </:header>
     <:tagline>
-      <p class="type-lg">
+      <h1 class="text-3xl mb-4">Table</h1>
+      <p>
         A headless table implementation that supports all the major
         product-level features needed for feature-rich tables. Bring your own
         markup and styles without the need to implement any of the table
@@ -44,20 +45,20 @@ import {
       </InternalLink>
     </:callToAction>
     <:content>
-      <span>
+      <div class="text-2xl w-[50%] mx-auto p-8">
         The
-        <em>headless</em>
+        <em>headless or styleless</em>
         table is markup and style agostic, so you can use tailwind, bootstrap,
-        MaterialUI, etc
-      </span>
+        MaterialUI, etc and bring your own DOM.
+      </div>
 
       <br /><br />
 
       <div class="mx-auto" style="width: 66%">
         <Article class="flex flex-wrap gap-12 justify-around">
 
-          <div>
-            <H2>Plugin Architecture</H2>
+          <div class="max-w-[300px]">
+            <H2>Plugin Architecture</H2><br />
 
             <Text>
               Pay for only what you use. With plugins, you only ship the bytes
@@ -66,8 +67,8 @@ import {
             </Text>
           </div>
 
-          <div>
-            <H2>Native preferences</H2>
+          <div class="max-w-[300px]">
+            <H2>Native preferences</H2><br />
 
             <Text>
               Every plugin has safe, namespaced, segmentation for persisting
@@ -75,31 +76,31 @@ import {
             </Text>
           </div>
 
-          <div>
-            <H2>Reordering columns</H2>
+          <div class="max-w-[300px]">
+            <H2>Reordering columns</H2><br />
 
             <Text>
               Change the order of columns.
             </Text>
           </div>
 
-          <div>
-            <H2>Resizable columns</H2>
+          <div class="max-w-[300px]">
+            <H2>Resizable columns</H2><br />
 
             <Text>
               Accessibly change the width of columns with the mouse or keyboard.
             </Text>
           </div>
-          <div>
-            <H2>Data sorting</H2>
+          <div class="max-w-[300px]">
+            <H2>Data sorting</H2><br />
 
             <Text>
               Change the order of data. Integrate with your existing sorting
               APIs.
             </Text>
           </div>
-          <div>
-            <H2>Sticky sorting</H2>
+          <div class="max-w-[300px]">
+            <H2>Sticky columns</H2><br />
 
             <Text>
               Pin columns to the left or right side of the table so that they
