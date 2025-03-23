@@ -22,7 +22,7 @@
     },
     "build:prod": {
       "outputs": ["dist/**"],
-      "dependsOn": ["_syncPnpm", "^build"]
+      "dependsOn": ["_syncPnpm", "^build", "^docs:build"]
     },
     "docs:build" : {
       "outputs": ["dist/**"],

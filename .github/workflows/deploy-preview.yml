@@ -69,11 +69,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
-      - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: wyvox/action-setup-pnpm@v3
+      - run: pnpm build
       - run: pnpm turbo build:prod
       - uses: actions/upload-artifact@v4
         with:
