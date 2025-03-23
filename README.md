@@ -1,3 +1,4 @@
+
 [![npm version](https://badge.fury.io/js/@universal-ember/table.svg)](https://badge.fury.io/js/@universal-ember/table)
 [![CI](https://github.com/universal-ember/table/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/CrowdStrike/@universal-ember/table/actions/workflows/ci.yml)
 
