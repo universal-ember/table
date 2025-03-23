@@ -18,7 +18,7 @@
   "license": "MIT",
   "author": "NullVoxPopuli",
   "scripts": {
-    "build:prod": "vite build",
+    "build:prod": "vite build && cp -r ../docs-api/dist ./dist/api",
     "build:test": "NODE_ENV=development vite build --mode test",
     "format": "prettier . --cache --write",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\" --prefixColors auto",
