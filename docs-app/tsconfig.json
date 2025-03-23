@@ -15,6 +15,11 @@
     // layout, which is not resolvable with the Node resolution algorithm, to
     // work with TypeScript.
     "baseUrl": ".",
-    "types": ["vite/client", "@embroider/core/virtual", "ember-source/types"]
+    "types": [
+      "vite/client",
+      "@embroider/core/virtual",
+      "ember-source/types",
+      "kolay/virtual"
+    ]
   }
 }
