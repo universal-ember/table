@@ -71,7 +71,7 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(@glint/template@1.5.2)
       '@embroider/router':
-        specifier: alpha
+        specifier: 3.0.0-alpha.2
         version: 3.0.0-alpha.2(89e85f608f4871596d5a879e8d48e230)
       '@shikijs/rehype':
         specifier: ^1.22.2
@@ -126,16 +126,16 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(3e19f2035d43818ebc6c0c9bc5644861)
       '@embroider/compat':
-        specifier: alpha
+        specifier: 4.0.0-alpha.14
         version: 4.0.0-alpha.14(811abbe1891d6a7897b59697b8853cee)
       '@embroider/core':
-        specifier: alpha
+        specifier: 4.0.0-alpha.9
         version: 4.0.0-alpha.9(@glint/template@1.5.2)
       '@embroider/macros':
-        specifier: alpha
+        specifier: 1.17.0-alpha.7
         version: 1.17.0-alpha.7(@glint/template@1.5.2)
       '@embroider/vite':
-        specifier: alpha
+        specifier: 1.0.0-alpha.11
         version: 1.0.0-alpha.11(59f3a5779a93ebec761be371cd04d099)
       '@glimmer/component':
         specifier: ^2.0.0
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 1.4.1-unstable.8b3f5e9(typescript@5.8.2)
+        version: 1.4.1-unstable.66abd90(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1550,8 +1550,8 @@ packages:
     peerDependencies:
       typescript: '>=5.6.0'
 
-  '@glint/core@1.4.1-unstable.8b3f5e9':
-    resolution: {integrity: sha512-BOMj5/YIs/U5zdoStDOzlJyNyeztqTO9kvrcjqhpMjwuXocNPRaDstxGpuEJK/jealOQJPl3uMB4cN69FLfOqg==}
+  '@glint/core@1.4.1-unstable.66abd90':
+    resolution: {integrity: sha512-7RVp5ugpk56fVAyzF5a3eVFAN0NGxgB0q9i03UlgVkjWDkJ6fbvERqlsGRExtNqvOyS1Bb8YTVrKKT//A1flKw==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -9524,7 +9524,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@1.4.1-unstable.8b3f5e9(typescript@5.8.2)':
+  '@glint/core@1.4.1-unstable.66abd90(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.84.3
       '@volar/kit': 2.4.12(typescript@5.8.2)
