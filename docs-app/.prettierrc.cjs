@@ -11,5 +11,17 @@ module.exports = {
         templateSingleQuote: false,
       },
     },
+    {
+      files: ['src/routes/application.ts'],
+      options: {
+        printWidth: 160,
+      },
+    },
+    {
+      files: ['public/'],
+      options: {
+        printWidth: 100,
+      },
+    },
   ],
 };
