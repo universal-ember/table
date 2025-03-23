@@ -36,6 +36,6 @@ See the [Documentation][docs-app] for examples.
 
 [API Reference][docs-api] can be found [here][docs-api].
 
-[docs-app]: https://@universal-ember/table.pages.dev/
+[docs-app]: https://ue-table.pages.dev/
 [docs-api]: https://@universal-ember/table.pages.dev/api/modules/
 
