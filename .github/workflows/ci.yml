@@ -139,5 +139,33 @@ jobs:
           fi
 
 
+  DeployProduction:
+    name: "Deploy: Production"
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [setup]
+    strategy:
+      matrix:
+        app:
+        - { path: "./docs-app/dist", cloudflareName: "ue-table", name: "docs" }
 
 
+    permissions:
+      contents: read
+      deployments: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wyvox/action-setup-pnpm@v3
+      - uses: ./.github/actions/download-built-package
+      - run: pnpm build:prod
+        working-directory: docs-app
+      - name: Publish ${{ matrix.app.id }}
+        uses: cloudflare/pages-action@v1.5.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ matrix.app.cloudflareName }}
+          directory: ${{ matrix.app.path }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
