@@ -132,7 +132,7 @@ importers:
         specifier: 4.0.0-alpha.9
         version: 4.0.0-alpha.9(@glint/template@1.5.2)
       '@embroider/macros':
-        specifier: 1.17.0-alpha.7
+        specifier: alpha
         version: 1.17.0-alpha.7(@glint/template@1.5.2)
       '@embroider/vite':
         specifier: 1.0.0-alpha.11
@@ -389,16 +389,16 @@ importers:
         specifier: ^2.0.0
         version: 2.2.0
       '@embroider/compat':
-        specifier: alpha
+        specifier: 4.0.0-alpha.14
         version: 4.0.0-alpha.14(811abbe1891d6a7897b59697b8853cee)
       '@embroider/core':
-        specifier: alpha
+        specifier: 4.0.0-alpha.9
         version: 4.0.0-alpha.9(@glint/template@1.5.2)
       '@embroider/macros':
-        specifier: alpha
+        specifier: 1.17.0-alpha.7
         version: 1.17.0-alpha.7(@glint/template@1.5.2)
       '@embroider/vite':
-        specifier: alpha
+        specifier: 1.0.0-alpha.11
         version: 1.0.0-alpha.11(59f3a5779a93ebec761be371cd04d099)
       '@glimmer/component':
         specifier: ^2.0.0
