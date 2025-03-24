@@ -2,7 +2,7 @@
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/plugins_column_reordering
+[api-docs]: /api/modules/plugins_column-reordering
 
 <div class="featured-demo" data-demo-fit data-demo-tight>
 

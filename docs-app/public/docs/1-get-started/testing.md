@@ -5,7 +5,7 @@ But some behaviors are a non-trivial to simulate in a test environment -- for th
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/test_support
+[api-docs]: /api/modules/test-support
 
 ## Helpers
 

@@ -2,7 +2,7 @@
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/plugins_column_visibility
+[api-docs]: /api/modules/plugins_column-visibility
 
 <div class="featured-demo" data-demo-fit data-demo-tight>
 

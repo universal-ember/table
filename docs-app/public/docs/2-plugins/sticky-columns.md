@@ -2,7 +2,7 @@
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/plugins_sticky_columns
+[api-docs]: /api/modules/plugins_sticky-columns
 
 <div class="featured-demo" data-demo-fit data-demo-tight>
 

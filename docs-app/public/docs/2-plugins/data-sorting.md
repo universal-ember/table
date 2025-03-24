@@ -2,7 +2,7 @@
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/plugins_data_sorting
+[api-docs]: /api/modules/plugins_data-sorting
 
 <div class="featured-demo" data-demo-fit data-demo-tight>
 

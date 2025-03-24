@@ -2,7 +2,7 @@
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/plugins_row_selection
+[api-docs]: /api/modules/plugins_row-selection
 
 This demonstrates how to use the RowSelection plugin to enable multiple row selection.
 If single-row selection is desired, that can be handled in userspace, by managing the selection data differently (see the "[single-row-selection](/docs/demos/single-row-selection)" demo).

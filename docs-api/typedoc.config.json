@@ -4,6 +4,7 @@
     "../table/src/index.ts",
     "../table/src/test-support/index.ts",
     "../table/src/plugins/index.ts",
+    "../table/src/plugins/metadata/index.ts",
     "../table/src/plugins/column-reordering/index.ts",
     "../table/src/plugins/column-resizing/index.ts",
     "../table/src/plugins/column-visibility/index.ts",

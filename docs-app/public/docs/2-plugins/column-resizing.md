@@ -2,7 +2,7 @@
 
 API Documentation available [here][api-docs]
 
-[api-docs]: /api/modules/plugins_column_resizing
+[api-docs]: /api/modules/plugins_column-resizing
 
 <div class="featured-demo" data-demo-fit data-demo-tight>
 
