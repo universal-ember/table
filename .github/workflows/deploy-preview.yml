@@ -71,7 +71,10 @@ jobs:
           ref: ${{ github.event.workflow_run.head_branch }}
       - uses: wyvox/action-setup-pnpm@v3
       - run: pnpm build
-      - run: pnpm turbo build:prod
+      - run: pnpm docs:build
+        working-directory: docs-api
+      - run: pnpm build:prod
+        working-directory: docs-app
       - uses: actions/upload-artifact@v4
         with:
           name: deploy-prep-dist
