@@ -1,5 +1,23 @@
 # Changelog
 
+## Release (2025-03-27)
+
+@universal-ember/table 3.0.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#62](https://github.com/universal-ember/table/pull/62) Fix publish ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* Other
+  * [#54](https://github.com/universal-ember/table/pull/54) Update README.md with link to docs-app ([@johanrd](https://github.com/johanrd))
+* `docs-app`
+  * [#55](https://github.com/universal-ember/table/pull/55) Fix api docs (typedocs) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-03-23)
 
 @universal-ember/table 3.0.0 (major)
