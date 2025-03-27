@@ -2,6 +2,17 @@
 
 ## Release (2025-03-27)
 
+@universal-ember/table 3.0.3 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#66](https://github.com/universal-ember/table/pull/66) Include declarations ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2025-03-27)
+
 @universal-ember/table 3.0.2 (patch)
 
 #### :bug: Bug Fix
