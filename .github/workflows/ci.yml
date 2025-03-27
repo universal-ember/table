@@ -159,6 +159,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: wyvox/action-setup-pnpm@v3
       - uses: ./.github/actions/download-built-package
+      - run: pnpm docs:build
+        working-directory: docs-api
       - run: pnpm build:prod
         working-directory: docs-app
       - name: Publish ${{ matrix.app.id }}
