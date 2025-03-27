@@ -2,8 +2,8 @@
   "solution": {
     "@universal-ember/table": {
       "impact": "patch",
-      "oldVersion": "3.0.0",
-      "newVersion": "3.0.1",
+      "oldVersion": "3.0.1",
+      "newVersion": "3.0.2",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2025-03-27)\n\n@universal-ember/table 3.0.1 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#62](https://github.com/universal-ember/table/pull/62) Fix publish ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :memo: Documentation\n* Other\n  * [#54](https://github.com/universal-ember/table/pull/54) Update README.md with link to docs-app ([@johanrd](https://github.com/johanrd))\n* `docs-app`\n  * [#55](https://github.com/universal-ember/table/pull/55) Fix api docs (typedocs) ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 2\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-03-27)\n\n@universal-ember/table 3.0.2 (patch)\n\n#### :bug: Bug Fix\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#63](https://github.com/universal-ember/table/pull/63) Upgrade addon-dev to fix declaration output ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :memo: Documentation\n* [#64](https://github.com/universal-ember/table/pull/64) Fix docs deploy ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
