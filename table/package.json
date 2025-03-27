@@ -13,7 +13,8 @@
   "author": "NullVoxPopuli",
   "files": [
     "addon-main.js",
-    "dist"
+    "dist",
+    "src"
   ],
   "exports": {
     ".": {
