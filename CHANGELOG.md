@@ -2,6 +2,20 @@
 
 ## Release (2025-03-27)
 
+@universal-ember/table 3.0.2 (patch)
+
+#### :bug: Bug Fix
+* `docs-app`, `@universal-ember/table`, `test-app`
+  * [#63](https://github.com/universal-ember/table/pull/63) Upgrade addon-dev to fix declaration output ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :memo: Documentation
+* [#64](https://github.com/universal-ember/table/pull/64) Fix docs deploy ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
+## Release (2025-03-27)
+
 @universal-ember/table 3.0.1 (patch)
 
 #### :bug: Bug Fix
