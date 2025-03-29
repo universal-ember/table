@@ -68,7 +68,7 @@ export default class extends Component {
           </tr>
         </thead>
         <tbody>
-          {{#each this.table.rows key='data.db.id' as |row|}}
+          {{#each this.table.rows key="data.db.id" as |row|}}
             <tr class="{{row.countClassName}}">
               {{#each this.table.columns as |column|}}
                 <td>
