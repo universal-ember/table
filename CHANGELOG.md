@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2025-03-27)
 
 @universal-ember/table 3.0.3 (patch)
