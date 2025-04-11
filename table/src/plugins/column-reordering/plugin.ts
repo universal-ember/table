@@ -284,8 +284,6 @@ export class ColumnOrder {
   }
 
   setAll = (map: Map<string, number>) => {
-    // TODO: Verify that the passed `map` has consectuive values set?
-
     let allColumns = this.args.allColumns();
 
     addMissingColumnsToMap(allColumns, map);
