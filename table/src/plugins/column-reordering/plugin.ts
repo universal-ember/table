@@ -246,13 +246,14 @@ export class ColumnOrder {
    */
   @action
   moveLeft(key: string) {
+    const orderedColumns = this.orderedColumns;
     if (this.map.get(key) === 0) {
       return;
     }
 
     let found = false;
 
-    for (const column of this.orderedColumns.reverse()) {
+    for (const column of orderedColumns.reverse()) {
       if (found) {
         // Shift moved column left
         let currentPosition = this.map.get(key);
