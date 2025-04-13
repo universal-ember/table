@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 1.4.1-unstable.6e222ff(typescript@5.8.2)
+        version: 1.4.1-unstable.afcad36(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1583,8 +1583,8 @@ packages:
     peerDependencies:
       typescript: '>=5.6.0'
 
-  '@glint/core@1.4.1-unstable.6e222ff':
-    resolution: {integrity: sha512-EP1QDqh0VNwlHdpPRkhON+zCgVSF1lGv6AUaLQycC6S52tUF4ZwpVhQY8zndap+OV98XwDFlzQcYoFo/cvA4pw==}
+  '@glint/core@1.4.1-unstable.afcad36':
+    resolution: {integrity: sha512-+CiJOkrwfAshLVfh7cDfwHzHIjaRyTUdnFcogPkuyFEOkbmKvPm6efVxiutrpkQ1WQSVEZRQnnl9pcztP2hUEQ==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -9705,7 +9705,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@1.4.1-unstable.6e222ff(typescript@5.8.2)':
+  '@glint/core@1.4.1-unstable.afcad36(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.94.9
       '@volar/kit': 2.4.12(typescript@5.8.2)
