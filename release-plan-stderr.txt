@@ -1,0 +1,7 @@
+# Unlabeled Changes
+
+* `docs-app`
+  * [#68](https://github.com/universal-ember/table/pull/68) double FPS in "Lots of data (no virtualization)" when utilising key in #each ([@johanrd](https://github.com/johanrd))
+
+
+*Cannot plan release until the above changes are labeled*.
