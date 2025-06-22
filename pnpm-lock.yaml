@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 1.4.1-unstable.d17c1f1(typescript@5.8.2)
+        version: 2.0.1-unstable.ab0ac20(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1583,17 +1583,17 @@ packages:
     peerDependencies:
       typescript: '>=5.6.0'
 
-  '@glint/core@1.4.1-unstable.d17c1f1':
-    resolution: {integrity: sha512-UmGqWB+rQUXdDy0rIIdnL2bMZeQPrH/k8k24SaEZNPL97+CeoEo8oi+gyGab/cwNBf+/plwqlesLnLYSVWuSTA==}
-    hasBin: true
-    peerDependencies:
-      typescript: '>=5.6.0'
-
   '@glint/core@1.5.2':
     resolution: {integrity: sha512-kbEt8jBEkH65yDB20tBq/rnZl+iigmAenKQcgu1cqex6/eT6LrQ5E9QxyKtqe9S18qZv0c/LNa0qE7jwbAEKMA==}
     hasBin: true
     peerDependencies:
       typescript: '>=4.8.0'
+
+  '@glint/core@2.0.1-unstable.ab0ac20':
+    resolution: {integrity: sha512-lhSVjQ6bNgsxzfi4FX+MpYQlmHEvEn0WF6dgfss8jeHrzD73/QwDE8ixs2srf7nbnlwGegLu6iAxWF2AOyOqdA==}
+    hasBin: true
+    peerDependencies:
+      typescript: '>=5.6.0'
 
   '@glint/environment-ember-loose@1.4.1-unstable.0e0d936':
     resolution: {integrity: sha512-+g/gUVCFxSjGM7VWVxRTXhAJz8y07gjF69YOJVQeh8B7b2H/tHF2oYEpR23yhk0+1NfcmkS1J6vs8lgo5IrIsA==}
@@ -6866,6 +6866,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.7.2:
+    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   send@0.18.0:
     resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
     engines: {node: '>= 0.8.0'}
@@ -7507,8 +7512,8 @@ packages:
   typesafe-path@0.2.2:
     resolution: {integrity: sha512-OJabfkAg1WLZSqJAJ0Z6Sdt3utnbzr/jh+NAHoyWHJe8CMSy79Gm085094M9nvTPy22KzTVn5Zq5mbapCI/hPA==}
 
-  typescript-auto-import-cache@0.3.5:
-    resolution: {integrity: sha512-fAIveQKsoYj55CozUiBoj4b/7WpN0i4o74wiGY5JVUEoD0XiqDk1tJqTEjgzL2/AizKQrXxyRosSebyDzBZKjw==}
+  typescript-auto-import-cache@0.3.6:
+    resolution: {integrity: sha512-RpuHXrknHdVdK7wv/8ug3Fr0WNsNi5l5aB8MYYuXhq2UH5lnEB1htJ1smhtD5VeCsGr2p8mUDtd83LCQDFVgjQ==}
 
   typescript-eslint@8.26.0:
     resolution: {integrity: sha512-PtVz9nAnuNJuAVeUFvwztjuUgSnJInODAUx47VDwWPXzd5vismPOtPtt83tzNXyOjVQbPRp786D6WFW/M2koIA==}
@@ -7832,8 +7837,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  vscode-html-languageservice@5.4.0:
-    resolution: {integrity: sha512-9/cbc90BSYCghmHI7/VbWettHZdC7WYpz2g5gBK6UDUI1MkZbM773Q12uAYJx9jzAiNHPpyo6KzcwmcnugncAQ==}
+  vscode-html-languageservice@5.5.0:
+    resolution: {integrity: sha512-No6Er2P2L8IsXDnUFlp0bP4f2sdkJv+zJLZYFhtEQIp+2xNfxY8WYkhSxLJ/7bZhuV/aU55lmGSSHBVxSGer3Q==}
 
   vscode-jsonrpc@8.1.0:
     resolution: {integrity: sha512-6TDy/abTQk+zDGYazgbIPc+4JoXdwC8NHU9Pbn4UJP1fehUyZmM4RHp5IthX7A6L5KS30PRui+j+tbbMMMafdw==}
@@ -9705,31 +9710,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@1.4.1-unstable.d17c1f1(typescript@5.8.2)':
-    dependencies:
-      '@glimmer/syntax': 0.94.9
-      '@volar/kit': 2.4.12(typescript@5.8.2)
-      '@volar/language-core': 2.4.12
-      '@volar/language-server': 2.4.12
-      '@volar/language-service': 2.4.12
-      '@volar/source-map': 2.4.12
-      '@volar/test-utils': 2.4.12
-      '@volar/typescript': 2.4.12
-      computeds: 0.0.1
-      escape-string-regexp: 4.0.0
-      semver: 7.7.1
-      silent-error: 1.1.1
-      typescript: 5.8.2
-      uuid: 8.3.2
-      volar-service-html: 0.0.64(@volar/language-service@2.4.12)
-      volar-service-typescript: 0.0.64(@volar/language-service@2.4.12)
-      vscode-languageserver-protocol: 3.17.5
-      vscode-languageserver-textdocument: 1.0.12
-      vscode-uri: 3.1.0
-      yargs: 17.7.2
-    transitivePeerDependencies:
-      - supports-color
-
   '@glint/core@1.5.2(typescript@5.5.4)':
     dependencies:
       '@glimmer/syntax': 0.84.3
@@ -9754,6 +9734,31 @@ snapshots:
       typescript: 5.8.2
       uuid: 8.3.2
       vscode-languageserver: 8.1.0
+      vscode-languageserver-textdocument: 1.0.12
+      vscode-uri: 3.1.0
+      yargs: 17.7.2
+    transitivePeerDependencies:
+      - supports-color
+
+  '@glint/core@2.0.1-unstable.ab0ac20(typescript@5.8.2)':
+    dependencies:
+      '@glimmer/syntax': 0.94.9
+      '@volar/kit': 2.4.12(typescript@5.8.2)
+      '@volar/language-core': 2.4.12
+      '@volar/language-server': 2.4.12
+      '@volar/language-service': 2.4.12
+      '@volar/source-map': 2.4.12
+      '@volar/test-utils': 2.4.12
+      '@volar/typescript': 2.4.12
+      computeds: 0.0.1
+      escape-string-regexp: 4.0.0
+      semver: 7.7.1
+      silent-error: 1.1.1
+      typescript: 5.8.2
+      uuid: 8.3.2
+      volar-service-html: 0.0.64(@volar/language-service@2.4.12)
+      volar-service-typescript: 0.0.64(@volar/language-service@2.4.12)
+      vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
       yargs: 17.7.2
@@ -10453,7 +10458,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.1
+      semver: 7.7.2
       ts-api-utils: 2.0.1(typescript@5.5.4)
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10467,7 +10472,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.1
+      semver: 7.7.2
       ts-api-utils: 2.0.1(typescript@5.7.3)
       typescript: 5.7.3
     transitivePeerDependencies:
@@ -10481,7 +10486,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.1
+      semver: 7.7.2
       ts-api-utils: 2.0.1(typescript@5.8.2)
       typescript: 5.8.2
     transitivePeerDependencies:
@@ -15786,7 +15791,7 @@ snapshots:
   normalize-package-data@6.0.2:
     dependencies:
       hosted-git-info: 7.0.2
-      semver: 7.7.1
+      semver: 7.7.2
       validate-npm-package-license: 3.0.4
 
   normalize-path@2.1.1:
@@ -16815,6 +16820,8 @@ snapshots:
 
   semver@7.7.1: {}
 
+  semver@7.7.2: {}
+
   send@0.18.0:
     dependencies:
       debug: 2.6.9
@@ -17729,7 +17736,7 @@ snapshots:
 
   typesafe-path@0.2.2: {}
 
-  typescript-auto-import-cache@0.3.5:
+  typescript-auto-import-cache@0.3.6:
     dependencies:
       semver: 7.7.1
 
@@ -18015,7 +18022,7 @@ snapshots:
 
   volar-service-html@0.0.64(@volar/language-service@2.4.12):
     dependencies:
-      vscode-html-languageservice: 5.4.0
+      vscode-html-languageservice: 5.5.0
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
     optionalDependencies:
@@ -18025,7 +18032,7 @@ snapshots:
     dependencies:
       path-browserify: 1.0.1
       semver: 7.7.1
-      typescript-auto-import-cache: 0.3.5
+      typescript-auto-import-cache: 0.3.6
       vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
       vscode-uri: 3.1.0
@@ -18036,14 +18043,14 @@ snapshots:
     dependencies:
       path-browserify: 1.0.1
       semver: 7.7.1
-      typescript-auto-import-cache: 0.3.5
+      typescript-auto-import-cache: 0.3.6
       vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
       vscode-uri: 3.1.0
     optionalDependencies:
       '@volar/language-service': 2.4.12
 
-  vscode-html-languageservice@5.4.0:
+  vscode-html-languageservice@5.5.0:
     dependencies:
       '@vscode/l10n': 0.0.18
       vscode-languageserver-textdocument: 1.0.12
