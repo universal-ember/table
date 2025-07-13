@@ -247,7 +247,7 @@ importers:
         version: 4.0.1
       '@embroider/addon-shim':
         specifier: ^1.0.0
-        version: 1.9.0
+        version: 1.10.0
       '@embroider/macros':
         specifier: alpha
         version: 1.17.0-alpha.8(@glint/template@1.5.2)
@@ -365,7 +365,7 @@ importers:
         version: 4.1.0(@glint/template@1.5.2)
       '@universal-ember/table':
         specifier: workspace:*
-        version: link:../table
+        version: file:table(8547d0af3743a6b5fa095f7dab136f49)
       ember-auto-import:
         specifier: ^2.6.2
         version: 2.10.0(@glint/template@1.5.2)
@@ -10630,6 +10630,29 @@ snapshots:
       - '@glimmer/tracking'
       - supports-color
 
+  '@universal-ember/table@file:table(8547d0af3743a6b5fa095f7dab136f49)':
+    dependencies:
+      '@babel/runtime': 7.26.10
+      '@ember/string': 4.0.1
+      '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
+      '@embroider/addon-shim': 1.9.0
+      '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
+      '@glint/template': 1.5.2
+      ember-modifier: 4.2.0(ede0954441bb30b975c0b3dc1dcf7dea)
+      ember-modify-based-class-resource: 1.1.1(25e5b5e85a419b6741ca8185bfff03f9)
+      ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
+      ember-source: 6.2.0(87f2f8131cb021da8904be85a2b2cd16)
+      ember-tracked-storage-polyfill: 1.0.0
+      reactiveweb: 1.4.0(762129d4301748549f06b8febf578c13)
+      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+    optionalDependencies:
+      '@ember/test-helpers': 5.1.0(0f236f8d4f265fed70743e150f597c31)
+      '@glimmer/component': 2.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glimmer/tracking'
+      - supports-color
+
   '@volar/kit@2.4.11(typescript@5.7.3)':
     dependencies:
       '@volar/language-service': 2.4.11
@@ -12713,7 +12736,7 @@ snapshots:
   ember-modify-based-class-resource@1.1.1(1135a596c7eff2fb2535ad8c4e314a8a):
     dependencies:
       '@babel/runtime': 7.26.10
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
       ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -12727,7 +12750,7 @@ snapshots:
   ember-modify-based-class-resource@1.1.1(25e5b5e85a419b6741ca8185bfff03f9):
     dependencies:
       '@babel/runtime': 7.26.10
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
       ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -13028,7 +13051,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.10
       '@ember/edition-utils': 1.2.0
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       '@glimmer/compiler': 0.92.4
       '@glimmer/component': 2.0.0
       '@glimmer/destroyable': 0.92.3
