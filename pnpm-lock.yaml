@@ -241,7 +241,7 @@ importers:
     dependencies:
       '@babel/runtime':
         specifier: ^7.26.10
-        version: 7.27.6
+        version: 7.28.2
       '@ember/string':
         specifier: ^4.0.1
         version: 4.0.1
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 2.0.1-unstable.d09756d(typescript@5.8.2)
+        version: 2.0.1-unstable.7033d26(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1078,8 +1078,8 @@ packages:
     resolution: {integrity: sha512-aA63XwOkcl4xxQa3HjPMqOP6LiK0ZDv3mUPYEFXkpHbaFjtGggE1A61FjFzJnB+p7/oy2gA8E+rcBNl/zC1tMg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@7.27.6':
-    resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
+  '@babel/runtime@7.28.2':
+    resolution: {integrity: sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/standalone@7.26.10':
@@ -1601,8 +1601,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.1-unstable.d09756d':
-    resolution: {integrity: sha512-pUe5DjC8Z/NLDDXcOoA3YFYU8vTigkyupW0RPGSsskQDNlCzxKtpal93+51gG/bSOPkI9or3D1j7kjwZCTX+cA==}
+  '@glint/core@2.0.1-unstable.7033d26':
+    resolution: {integrity: sha512-0MNOLejgYYWLY6wTBPSvqjJQCOad26GGtNmgRZd+usaGw9gVkQxgoCnxw4XBi91reFyvNd/vn7jKLd4rxJfFhA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -8887,7 +8887,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.27.6': {}
+  '@babel/runtime@7.28.2': {}
 
   '@babel/standalone@7.26.10': {}
 
@@ -9788,7 +9788,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.1-unstable.d09756d(typescript@5.8.2)':
+  '@glint/core@2.0.1-unstable.7033d26(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.94.9
       '@volar/kit': 2.4.12(typescript@5.8.2)
@@ -12741,7 +12741,7 @@ snapshots:
 
   ember-modify-based-class-resource@1.1.1(1135a596c7eff2fb2535ad8c4e314a8a):
     dependencies:
-      '@babel/runtime': 7.27.6
+      '@babel/runtime': 7.28.2
       '@embroider/addon-shim': 1.10.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
@@ -12755,7 +12755,7 @@ snapshots:
 
   ember-modify-based-class-resource@1.1.1(25e5b5e85a419b6741ca8185bfff03f9):
     dependencies:
-      '@babel/runtime': 7.27.6
+      '@babel/runtime': 7.28.2
       '@embroider/addon-shim': 1.10.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
@@ -12799,7 +12799,7 @@ snapshots:
 
   ember-primitives@0.27.2(294530701b5750aa58169b3687a67d63):
     dependencies:
-      '@babel/runtime': 7.27.6
+      '@babel/runtime': 7.28.2
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
@@ -12827,7 +12827,7 @@ snapshots:
 
   ember-primitives@0.28.1(294530701b5750aa58169b3687a67d63):
     dependencies:
-      '@babel/runtime': 7.27.6
+      '@babel/runtime': 7.28.2
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
@@ -14770,7 +14770,7 @@ snapshots:
 
   is-language-code@3.1.0:
     dependencies:
-      '@babel/runtime': 7.27.6
+      '@babel/runtime': 7.28.2
 
   is-map@2.0.3: {}
 
