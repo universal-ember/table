@@ -247,7 +247,7 @@ importers:
         version: 4.0.1
       '@embroider/addon-shim':
         specifier: ^1.0.0
-        version: 1.9.0
+        version: 1.10.0
       '@embroider/macros':
         specifier: alpha
         version: 1.17.0-alpha.8(@glint/template@1.5.2)
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 2.0.1-unstable.f415a3e(typescript@5.8.2)
+        version: 2.0.1-unstable.d09756d(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1601,8 +1601,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.1-unstable.f415a3e':
-    resolution: {integrity: sha512-V9bWH7tMyWKc+sofW69As473dQ5bo78eW3fPkwbqGJHIn/kHaAEvtb7gRWgkvGV/ToZ/NfWUNaDxX/f2vxU87g==}
+  '@glint/core@2.0.1-unstable.d09756d':
+    resolution: {integrity: sha512-pUe5DjC8Z/NLDDXcOoA3YFYU8vTigkyupW0RPGSsskQDNlCzxKtpal93+51gG/bSOPkI9or3D1j7kjwZCTX+cA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -7848,8 +7848,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  volar-service-typescript@0.0.64:
-    resolution: {integrity: sha512-FN2H97iqjR1id8AM4fH7lTXuTx2on9zD6QlUFllaiHKqgNrEITlQwm/9Ujrd9ST7MUzhgIKyUsa2WlanX9kkMg==}
+  volar-service-typescript@0.0.65:
+    resolution: {integrity: sha512-zPJuLIMs7lkQCvL+Rza8+3/EIoXEIkX8+DL7bNNfPgnbalbvRDhqWLVMJ6Zk3pINjLJafDqyhSbw8srfkUv97w==}
     peerDependencies:
       '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
@@ -9750,7 +9750,7 @@ snapshots:
       silent-error: 1.1.1
       typescript: 5.7.3
       uuid: 8.3.2
-      volar-service-typescript: 0.0.64(@volar/language-service@2.4.11)
+      volar-service-typescript: 0.0.65(@volar/language-service@2.4.11)
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
@@ -9788,7 +9788,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.1-unstable.f415a3e(typescript@5.8.2)':
+  '@glint/core@2.0.1-unstable.d09756d(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.94.9
       '@volar/kit': 2.4.12(typescript@5.8.2)
@@ -9805,7 +9805,7 @@ snapshots:
       typescript: 5.8.2
       uuid: 8.3.2
       volar-service-html: 0.0.64(@volar/language-service@2.4.12)
-      volar-service-typescript: 0.0.64(@volar/language-service@2.4.12)
+      volar-service-typescript: 0.0.65(@volar/language-service@2.4.12)
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
@@ -10428,7 +10428,7 @@ snapshots:
       '@typescript-eslint/types': 8.26.0
       '@typescript-eslint/typescript-estree': 8.26.0(typescript@5.5.4)
       '@typescript-eslint/visitor-keys': 8.26.0
-      debug: 4.4.0
+      debug: 4.4.1
       eslint: 9.22.0(jiti@1.21.7)
       typescript: 5.5.4
     transitivePeerDependencies:
@@ -10440,7 +10440,7 @@ snapshots:
       '@typescript-eslint/types': 8.26.0
       '@typescript-eslint/typescript-estree': 8.26.0(typescript@5.8.2)
       '@typescript-eslint/visitor-keys': 8.26.0
-      debug: 4.4.0
+      debug: 4.4.1
       eslint: 9.22.0(jiti@1.21.7)
       typescript: 5.8.2
     transitivePeerDependencies:
@@ -10452,7 +10452,7 @@ snapshots:
       '@typescript-eslint/types': 8.26.0
       '@typescript-eslint/typescript-estree': 8.26.0(typescript@5.7.3)
       '@typescript-eslint/visitor-keys': 8.26.0
-      debug: 4.4.0
+      debug: 4.4.1
       eslint: 9.22.0(jiti@1.21.7)
       typescript: 5.7.3
     transitivePeerDependencies:
@@ -12361,7 +12361,7 @@ snapshots:
       fs-extra: 9.1.0
       resolve: 1.22.10
       rsvp: 4.8.5
-      semver: 7.7.1
+      semver: 7.7.2
       stagehand: 1.0.1
       walk-sync: 2.2.0
     transitivePeerDependencies:
@@ -12742,7 +12742,7 @@ snapshots:
   ember-modify-based-class-resource@1.1.1(1135a596c7eff2fb2535ad8c4e314a8a):
     dependencies:
       '@babel/runtime': 7.27.6
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
       ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -12756,7 +12756,7 @@ snapshots:
   ember-modify-based-class-resource@1.1.1(25e5b5e85a419b6741ca8185bfff03f9):
     dependencies:
       '@babel/runtime': 7.27.6
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
       ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -13057,7 +13057,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.10
       '@ember/edition-utils': 1.2.0
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.0
       '@glimmer/compiler': 0.92.4
       '@glimmer/component': 2.0.0
       '@glimmer/destroyable': 0.92.3
@@ -18085,7 +18085,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.12
 
-  volar-service-typescript@0.0.64(@volar/language-service@2.4.11):
+  volar-service-typescript@0.0.65(@volar/language-service@2.4.11):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.7.1
@@ -18096,7 +18096,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.11
 
-  volar-service-typescript@0.0.64(@volar/language-service@2.4.12):
+  volar-service-typescript@0.0.65(@volar/language-service@2.4.12):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.7.1
