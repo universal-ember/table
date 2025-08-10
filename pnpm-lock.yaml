@@ -256,7 +256,7 @@ importers:
         version: 4.2.0(ede0954441bb30b975c0b3dc1dcf7dea)
       ember-modify-based-class-resource:
         specifier: ^1.1.0
-        version: 1.1.1(25e5b5e85a419b6741ca8185bfff03f9)
+        version: 1.1.2(7c6664bded591a03f87f10d5855b691e)
       ember-resources:
         specifier: ^7.0.2
         version: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 2.0.1-unstable.7033d26(typescript@5.8.2)
+        version: 2.0.1-unstable.8b0442e(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1601,8 +1601,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.1-unstable.7033d26':
-    resolution: {integrity: sha512-0MNOLejgYYWLY6wTBPSvqjJQCOad26GGtNmgRZd+usaGw9gVkQxgoCnxw4XBi91reFyvNd/vn7jKLd4rxJfFhA==}
+  '@glint/core@2.0.1-unstable.8b0442e':
+    resolution: {integrity: sha512-uGz3b7UMKd4n17BQZxssYvQ93HD/BcOVQjWSvfnGN1Y/lQvNErtNR8DnYA7JmTbINISD5UpEo73iseLZr49UZA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -3766,6 +3766,15 @@ packages:
       '@glimmer/tracking': ^1.1.2
       ember-resources: '>= 6.4.0'
       ember-source: ^3.28.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    peerDependenciesMeta:
+      '@glimmer/component':
+        optional: true
+
+  ember-modify-based-class-resource@1.1.2:
+    resolution: {integrity: sha512-eruTLd+aMzrXaLDInQSYv3zTcG5+0Ttn69W31JtOp6nSR3T22ET3q+6zZjCVNxmlDufSAu6lSFd9EAtKaazCdA==}
+    peerDependencies:
+      '@glimmer/component': ^1.1.2 || >= 2.0.0
+      ember-resources: '>= 6.4.0'
     peerDependenciesMeta:
       '@glimmer/component':
         optional: true
@@ -9788,7 +9797,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.1-unstable.7033d26(typescript@5.8.2)':
+  '@glint/core@2.0.1-unstable.8b0442e(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.94.9
       '@volar/kit': 2.4.12(typescript@5.8.2)
@@ -12761,6 +12770,18 @@ snapshots:
       '@glimmer/tracking': 1.1.2
       ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
       ember-source: 6.2.0(87f2f8131cb021da8904be85a2b2cd16)
+    optionalDependencies:
+      '@glimmer/component': 2.0.0
+    transitivePeerDependencies:
+      - '@glint/template'
+      - supports-color
+
+  ember-modify-based-class-resource@1.1.2(7c6664bded591a03f87f10d5855b691e):
+    dependencies:
+      '@babel/runtime': 7.28.2
+      '@embroider/addon-shim': 1.10.0
+      '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
+      ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
     optionalDependencies:
       '@glimmer/component': 2.0.0
     transitivePeerDependencies:
