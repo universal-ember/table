@@ -256,7 +256,7 @@ importers:
         version: 4.2.0(ede0954441bb30b975c0b3dc1dcf7dea)
       ember-modify-based-class-resource:
         specifier: ^1.1.0
-        version: 1.1.1(25e5b5e85a419b6741ca8185bfff03f9)
+        version: 1.1.2(7c6664bded591a03f87f10d5855b691e)
       ember-resources:
         specifier: ^7.0.2
         version: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 2.0.1-unstable.7033d26(typescript@5.8.2)
+        version: 2.0.1-unstable.bd76fd7(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1082,6 +1082,10 @@ packages:
     resolution: {integrity: sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/runtime@7.28.3':
+    resolution: {integrity: sha512-9uIQ10o0WGdpP6GDhXcdOJPJuDgFtIDtN/9+ArJQ2NAfAmiuhTQdzkaTGR33v43GYS2UrSA0eX2pPPHoFVvpxA==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/standalone@7.26.10':
     resolution: {integrity: sha512-AYXK0hLWfEaK9WAePJqs30qro09a8w7X3YZzjukqtLXreE7xBZYdi5EMrP87T4UrVqmQ9tIX6L6SeTu5LDh3zw==}
     engines: {node: '>=6.9.0'}
@@ -1601,8 +1605,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.1-unstable.7033d26':
-    resolution: {integrity: sha512-0MNOLejgYYWLY6wTBPSvqjJQCOad26GGtNmgRZd+usaGw9gVkQxgoCnxw4XBi91reFyvNd/vn7jKLd4rxJfFhA==}
+  '@glint/core@2.0.1-unstable.bd76fd7':
+    resolution: {integrity: sha512-ACZeLOQSJ8F4KFZZSHugNZ8jwGzXUPWOb1mADRNSkMQgG96QYcqYG1kYimiNkjr0g3ktQQ0TtcOrkUaILoORIA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -3766,6 +3770,15 @@ packages:
       '@glimmer/tracking': ^1.1.2
       ember-resources: '>= 6.4.0'
       ember-source: ^3.28.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    peerDependenciesMeta:
+      '@glimmer/component':
+        optional: true
+
+  ember-modify-based-class-resource@1.1.2:
+    resolution: {integrity: sha512-eruTLd+aMzrXaLDInQSYv3zTcG5+0Ttn69W31JtOp6nSR3T22ET3q+6zZjCVNxmlDufSAu6lSFd9EAtKaazCdA==}
+    peerDependencies:
+      '@glimmer/component': ^1.1.2 || >= 2.0.0
+      ember-resources: '>= 6.4.0'
     peerDependenciesMeta:
       '@glimmer/component':
         optional: true
@@ -8889,6 +8902,8 @@ snapshots:
 
   '@babel/runtime@7.28.2': {}
 
+  '@babel/runtime@7.28.3': {}
+
   '@babel/standalone@7.26.10': {}
 
   '@babel/template@7.26.9':
@@ -9788,7 +9803,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.1-unstable.7033d26(typescript@5.8.2)':
+  '@glint/core@2.0.1-unstable.bd76fd7(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.94.9
       '@volar/kit': 2.4.12(typescript@5.8.2)
@@ -12767,6 +12782,18 @@ snapshots:
       - '@glint/template'
       - supports-color
 
+  ember-modify-based-class-resource@1.1.2(7c6664bded591a03f87f10d5855b691e):
+    dependencies:
+      '@babel/runtime': 7.28.2
+      '@embroider/addon-shim': 1.10.0
+      '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
+      ember-resources: 7.0.6(807cfcd3020ea8ad8edb1795de9ad08f)
+    optionalDependencies:
+      '@glimmer/component': 2.0.0
+    transitivePeerDependencies:
+      - '@glint/template'
+      - supports-color
+
   ember-on-resize-modifier@2.0.2(3e19f2035d43818ebc6c0c9bc5644861):
     dependencies:
       ember-auto-import: 2.10.0(@glint/template@1.5.2)
@@ -12799,7 +12826,7 @@ snapshots:
 
   ember-primitives@0.27.2(294530701b5750aa58169b3687a67d63):
     dependencies:
-      '@babel/runtime': 7.28.2
+      '@babel/runtime': 7.28.3
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
