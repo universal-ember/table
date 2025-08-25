@@ -402,7 +402,7 @@ export class TableMeta {
    * Simple column resizing for table-layout: fixed
    * Only affects the target column and respects minimum width
    */
-  #resizeColumnFixed(column: Column, delta: number) {
+  #resizeColumnFixed<DataType = unknown>(column: Column<DataType>, delta: number) {
     const columnMeta = meta.forColumn(column, ColumnResizing);
     const newWidth = columnMeta.width + delta;
 
@@ -415,7 +415,7 @@ export class TableMeta {
    * Complex column resizing with redistribution logic
    * Preserves existing behavior for table-layout: auto
    */
-  #resizeColumnAuto(column: Column, delta: number) {
+  #resizeColumnAuto<DataType = unknown>(column: Column<DataType>, delta: number) {
     /**
      * When the delta is negative, we are dragging to the next
      * when positive, we are dragging to the right
