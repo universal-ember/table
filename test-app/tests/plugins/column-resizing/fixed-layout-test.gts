@@ -32,10 +32,10 @@ module("Plugins | resizing | fixed layout", function (hooks) {
     @tracked containerWidth = 1000;
 
     columns: ColumnConfig[] = [
-      { name: "A", key: "A" },
-      { name: "B", key: "B" },
-      { name: "C", key: "C" },
-      { name: "D", key: "D" },
+      { name: "A", key: "A", pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 128 }))],},
+      { name: "B", key: "B", pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 128 }))] },
+      { name: "C", key: "C", pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 128 }))] },
+      { name: "D", key: "D", pluginOptions: [ColumnResizing.forColumn(() => ({ minWidth: 128 }))] },
     ];
 
     table = headlessTable(this, {
