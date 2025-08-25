@@ -6,31 +6,31 @@ import type { Column } from '../../index.ts';
 /**
  * Query a specific column's current sort direction
  */
-export const sortDirection = (column: Column) =>
+export const sortDirection = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, Sorting).sortDirection;
 
 /**
  * Ask if a column is sortable
  */
-export const isSortable = (column: Column) =>
+export const isSortable = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, Sorting).isSortable;
 
 /**
  * Ask if a column is ascending
  */
-export const isAscending = (column: Column) =>
+export const isAscending = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, Sorting).isAscending;
 
 /**
  * Ask if a column is sorted descending
  */
-export const isDescending = (column: Column) =>
+export const isDescending = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, Sorting).isDescending;
 
 /**
  * Ask if a column is not sorted
  */
-export const isUnsorted = (column: Column) =>
+export const isUnsorted = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, Sorting).isUnsorted;
 
 /**
@@ -40,17 +40,17 @@ export const isUnsorted = (column: Column) =>
  *   Ascending => None => Descending
  *    ⬑ ---------- <= ---------- ↲
  */
-export const sort = (column: Column) =>
+export const sort = <DataType = unknown>(column: Column<DataType>) =>
   meta.forTable(column.table, Sorting).handleSort(column);
 
 /**
  * Toggle a column between descending and not unsorted states
  */
-export const sortDescending = (column: Column) =>
+export const sortDescending = <DataType = unknown>(column: Column<DataType>) =>
   meta.forTable(column.table, Sorting).toggleDescending(column);
 
 /**
  * Toggle a column between ascending and not unsorted states
  */
-export const sortAscending = (column: Column) =>
+export const sortAscending = <DataType = unknown>(column: Column<DataType>) =>
   meta.forTable(column.table, Sorting).toggleAscending(column);
