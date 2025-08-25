@@ -75,9 +75,11 @@ export interface TableOptions {
    *   affects neighboring columns (default, preserves existing behavior)
    * - 'fixed': Simple per-column resizing suitable for CSS table-layout: fixed
    *
+   * Valid values are 'auto' or 'fixed'
+   *
    * default: 'auto'
    */
-  tableLayout?: 'auto' | 'fixed';
+  tableLayout?: string;
 }
 
 interface Signature {
