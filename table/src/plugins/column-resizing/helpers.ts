@@ -15,13 +15,13 @@ import type { Column } from '../../index.ts';
  * be marked as isResizing, because this is a user-scoped question:
  *   "Is the user directly resizing this column?"
  */
-export const isResizing = (column: Column) =>
+export const isResizing = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, ColumnResizing).isResizing;
 
 /**
  * Does the column have room to shrink?
  */
-export const canShrink = (column: Column) =>
+export const canShrink = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, ColumnResizing).canShrink;
 
 /**
@@ -31,7 +31,7 @@ export const canShrink = (column: Column) =>
  *   - if resizing is enabled for the whole table
  *   - or if we're asking about the first column (resize handles may only be "between" columns)
  */
-export const hasResizeHandle = (column: Column) =>
+export const hasResizeHandle = <DataType = unknown>(column: Column<DataType>) =>
   meta.forColumn(column, ColumnResizing).hasResizeHandle;
 
 /**

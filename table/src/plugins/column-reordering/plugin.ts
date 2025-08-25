@@ -122,7 +122,7 @@ export class TableMeta {
    * Get the curret order/position of a column
    */
   @action
-  getPosition(column: Column) {
+  getPosition<DataType = unknown>(column: Column<DataType>) {
     return this.columnOrder.get(column.key);
   }
 
@@ -130,7 +130,10 @@ export class TableMeta {
    * Swap the column with the column at `newPosition`
    */
   @action
-  setPosition(column: Column, newPosition: number) {
+  setPosition<DataType = unknown>(
+    column: Column<DataType>,
+    newPosition: number,
+  ) {
     return this.columnOrder.swapWith(column.key, newPosition);
   }
 

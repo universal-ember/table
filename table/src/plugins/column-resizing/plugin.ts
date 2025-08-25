@@ -386,7 +386,7 @@ export class TableMeta {
   }
 
   @action
-  resizeColumn(column: Column, delta: number) {
+  resizeColumn<DataType = unknown>(column: Column<DataType>, delta: number) {
     if (delta === 0) return;
 
     const tableLayout = this.options?.tableLayout ?? 'auto';
@@ -435,7 +435,7 @@ export class TableMeta {
     const isDraggingRight = delta > 0;
     const position = this.options?.handlePosition ?? 'left';
 
-    let growingColumn: Column | null | undefined;
+    let growingColumn: Column<DataType> | null | undefined;
 
     if (position === 'right') {
       growingColumn = isDraggingRight ? columns.next(column) : column;
