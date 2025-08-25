@@ -1,17 +1,17 @@
 {
   "solution": {
     "@universal-ember/table": {
-      "impact": "patch",
-      "oldVersion": "3.0.3",
-      "newVersion": "3.0.4",
+      "impact": "minor",
+      "oldVersion": "3.0.4",
+      "newVersion": "3.1.0",
       "constraints": [
         {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "impact": "minor",
+          "reason": "Appears in changelog section :rocket: Enhancement"
         }
       ],
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2025-08-25)\n\n@universal-ember/table 3.0.4 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`, `test-app`\n  * [#95](https://github.com/universal-ember/table/pull/95) Make sure generics are passed into helpers ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* `docs-app`\n  * [#68](https://github.com/universal-ember/table/pull/68) double FPS in \"Lots of data (no virtualization)\" when utilising key in #each ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-08-25)\n\n@universal-ember/table 3.1.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#97](https://github.com/universal-ember/table/pull/97) Simple column resizing setting with `tableLayout: 'fixed'` ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
 }

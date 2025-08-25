@@ -2,6 +2,17 @@
 
 ## Release (2025-08-25)
 
+@universal-ember/table 3.1.0 (minor)
+
+#### :rocket: Enhancement
+* `docs-app`, `@universal-ember/table`, `test-app`
+  * [#97](https://github.com/universal-ember/table/pull/97) Simple column resizing setting with `tableLayout: 'fixed'` ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2025-08-25)
+
 @universal-ember/table 3.0.4 (patch)
 
 #### :bug: Bug Fix
