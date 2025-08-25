@@ -67,6 +67,19 @@ export interface TableOptions {
    * Valid values are 'left' or 'right'
    */
   handlePosition?: string;
+
+  /**
+   * Specify the table layout strategy for column resizing.
+   *
+   * - 'auto': Uses complex redistribution logic where resizing one column
+   *   affects neighboring columns (default, preserves existing behavior)
+   * - 'fixed': Simple per-column resizing suitable for CSS table-layout: fixed
+   *
+   * Valid values are 'auto' or 'fixed'
+   *
+   * default: 'auto'
+   */
+  tableLayout?: string;
 }
 
 interface Signature {
@@ -378,6 +391,39 @@ export class TableMeta {
   resizeColumn<DataType = unknown>(column: Column<DataType>, delta: number) {
     if (delta === 0) return;
 
+    const tableLayout = this.options?.tableLayout ?? 'auto';
+
+    if (tableLayout === 'fixed') {
+      this.#resizeColumnFixed(column, delta);
+    } else {
+      this.#resizeColumnAuto(column, delta);
+    }
+  }
+
+  /**
+   * Simple column resizing for table-layout: fixed
+   * Only affects the target column and respects minimum width
+   */
+  #resizeColumnFixed<DataType = unknown>(
+    column: Column<DataType>,
+    delta: number,
+  ) {
+    const columnMeta = meta.forColumn(column, ColumnResizing);
+    const newWidth = columnMeta.width + delta;
+
+    if (newWidth >= columnMeta.minWidth) {
+      columnMeta.width = newWidth;
+    }
+  }
+
+  /**
+   * Complex column resizing with redistribution logic
+   * Preserves existing behavior for table-layout: auto
+   */
+  #resizeColumnAuto<DataType = unknown>(
+    column: Column<DataType>,
+    delta: number,
+  ) {
     /**
      * When the delta is negative, we are dragging to the next
      * when positive, we are dragging to the right
