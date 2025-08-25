@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2025-08-25)
+
+@universal-ember/table 3.0.4 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`, `test-app`
+  * [#95](https://github.com/universal-ember/table/pull/95) Make sure generics are passed into helpers ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* `docs-app`
+  * [#68](https://github.com/universal-ember/table/pull/68) double FPS in "Lots of data (no virtualization)" when utilising key in #each ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-03-27)
 
 @universal-ember/table 3.0.3 (patch)
