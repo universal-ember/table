@@ -44,7 +44,7 @@ export interface ColumnConfig<T = unknown> {
    * Out-of-the-box, this property isn't used, but the provided type may be
    * a convenience for consumers of the headless table
    */
-  Cell?: ComponentLike;
+  Cell?: ComponentLike<CellContext<T>>;
 
   /**
    * The name or title of the column, shown in the column heading / th
