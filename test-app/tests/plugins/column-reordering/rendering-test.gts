@@ -624,7 +624,6 @@ module("Plugins | columnReordering", function (hooks) {
         ]),
       });
 
-      // @ts-expect-error
       setColumnOrder(ctx.table, order);
 
       assert.deepEqual(preferences, {
