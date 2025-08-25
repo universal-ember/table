@@ -157,7 +157,7 @@ export class TableMeta {
   }
 
   @action
-  handleSort(column: Column) {
+  handleSort<T>(column: Column<T>) {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -184,7 +184,7 @@ export class TableMeta {
   }
 
   @action
-  toggleAscending(column: Column) {
+  toggleAscending<T>(column: Column<T>) {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -201,7 +201,7 @@ export class TableMeta {
   }
 
   @action
-  toggleDescending(column: Column) {
+  toggleDescending<T>(column: Column<T>) {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
