@@ -2,6 +2,17 @@
 
 ## Release (2025-08-25)
 
+@universal-ember/table 3.1.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#99](https://github.com/universal-ember/table/pull/99) Pass through generics to `ComponentLike<CellContext<T>>` ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2025-08-25)
+
 @universal-ember/table 3.1.0 (minor)
 
 #### :rocket: Enhancement
