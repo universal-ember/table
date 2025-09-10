@@ -136,7 +136,7 @@ importers:
         version: 1.17.0-alpha.8(@glint/template@1.5.2)
       '@embroider/vite':
         specifier: 1.0.0-alpha.11
-        version: 1.0.0-alpha.11(9a35add00f86c0daeafb88f1b2844711)
+        version: 1.0.0-alpha.11(b1a8bb5ef4a181adc39543f627abf6c5)
       '@glimmer/component':
         specifier: ^2.0.0
         version: 2.0.0
@@ -234,8 +234,8 @@ importers:
         specifier: ~5.5.2
         version: 5.5.4
       vite:
-        specifier: 6.2.7
-        version: 6.2.7(98b25bd744f9e96531838d4f65c7f33c)
+        specifier: 6.3.6
+        version: 6.3.6(98b25bd744f9e96531838d4f65c7f33c)
 
   table:
     dependencies:
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 2.0.1-unstable.7033d26(typescript@5.8.2)
+        version: 2.0.1-unstable.69db300(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1601,8 +1601,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.1-unstable.7033d26':
-    resolution: {integrity: sha512-0MNOLejgYYWLY6wTBPSvqjJQCOad26GGtNmgRZd+usaGw9gVkQxgoCnxw4XBi91reFyvNd/vn7jKLd4rxJfFhA==}
+  '@glint/core@2.0.1-unstable.69db300':
+    resolution: {integrity: sha512-tAbP4Y9IObKCblmuyHGvOyuzvsaQx8bL5SU+n9akmmAmWop5qfQay69k+eHxwOrHT+QVrBMAaNNdYPVj2xr+aA==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -1703,6 +1703,9 @@ packages:
 
   '@glint/template@1.5.2':
     resolution: {integrity: sha512-fA9FoHCmWsWkoOKWshsOQlS0WCAM7NwwoaeSTHuz5yHvBZmmtkgx3t2SPOTJs85/hWTNVzYC/Gthw7xDUR3BlQ==}
+
+  '@glint/template@1.6.1-unstable.69db300':
+    resolution: {integrity: sha512-Fb7+mU0x/CuNL1EIK06mIE4vvTrXHdNRFXSTlA+XU42MZph3O0Y/jn0p+386oSKxRtTjFbUZXnM8us6qVCJubA==}
 
   '@handlebars/parser@2.0.0':
     resolution: {integrity: sha512-EP9uEDZv/L5Qh9IWuMUGJRfwhXJ4h1dqKTT4/3+tY0eu7sPis7xh23j61SYUnNF4vqCQvvUXpDo9Bh/+q1zASA==}
@@ -4288,6 +4291,15 @@ packages:
       picomatch:
         optional: true
 
+  fdir@6.5.0:
+    resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
   figures@2.0.0:
     resolution: {integrity: sha512-Oa2M9atig69ZkfwiApY8F2Yy+tzMbazyvqv21R0NsSC8floSOC09BbT1ITWAdoMGQvJ/aZnR1KMwdx9tvHnTNA==}
     engines: {node: '>=4'}
@@ -6253,6 +6265,10 @@ packages:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
 
+  picomatch@4.0.3:
+    resolution: {integrity: sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q==}
+    engines: {node: '>=12'}
+
   pify@2.3.0:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
@@ -7312,6 +7328,10 @@ packages:
     resolution: {integrity: sha512-qkf4trmKSIiMTs/E63cxH+ojC2unam7rJ0WrauAzpT3ECNTxGRMlaXxVbfxMUC/w0LaYk6jQ4y/nGR9uBO3tww==}
     engines: {node: '>=12.0.0'}
 
+  tinyglobby@0.2.15:
+    resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
+    engines: {node: '>=12.0.0'}
+
   tldts-core@6.1.83:
     resolution: {integrity: sha512-I2wb9OJc6rXyh9d4aInhSNWChNI+ra6qDnFEGEwe9OoA68lE4Temw29bOkf1Uvwt8VZS079t1BFZdXVBmmB4dw==}
 
@@ -7800,8 +7820,8 @@ packages:
       yaml:
         optional: true
 
-  vite@6.2.7:
-    resolution: {integrity: sha512-qg3LkeuinTrZoJHHF94coSaTfIPyBYoywp+ys4qu20oSJFbKMYoIJo0FWJT9q6Vp49l6z9IsJRbHdcGtiKbGoQ==}
+  vite@6.3.6:
+    resolution: {integrity: sha512-0msEVHJEScQbhkbVTb/4iHZdJ6SXp/AvxL2sjwYQFfBqleHtnCqv1J3sa9zbWz/6kW1m9Tfzn92vW+kZ1WV6QA==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -9358,7 +9378,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@embroider/vite@1.0.0-alpha.11(9a35add00f86c0daeafb88f1b2844711)':
+  '@embroider/vite@1.0.0-alpha.11(b1a8bb5ef4a181adc39543f627abf6c5)':
     dependencies:
       '@babel/core': 7.26.10
       '@embroider/core': 4.0.0-alpha.9(@glint/template@1.5.2)
@@ -9376,7 +9396,7 @@ snapshots:
       send: 0.18.0
       source-map-url: 0.4.1
       terser: 5.39.0
-      vite: 6.2.7(98b25bd744f9e96531838d4f65c7f33c)
+      vite: 6.3.6(98b25bd744f9e96531838d4f65c7f33c)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -9788,9 +9808,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.1-unstable.7033d26(typescript@5.8.2)':
+  '@glint/core@2.0.1-unstable.69db300(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.94.9
+      '@glint/template': 1.6.1-unstable.69db300
       '@volar/kit': 2.4.12(typescript@5.8.2)
       '@volar/language-core': 2.4.12
       '@volar/language-server': 2.4.12
@@ -9799,6 +9820,7 @@ snapshots:
       '@volar/test-utils': 2.4.12
       '@volar/typescript': 2.4.12
       computeds: 0.0.1
+      content-tag: 3.1.2
       escape-string-regexp: 4.0.0
       semver: 7.7.1
       silent-error: 1.1.1
@@ -9842,6 +9864,8 @@ snapshots:
       content-tag: 2.0.3
 
   '@glint/template@1.5.2': {}
+
+  '@glint/template@1.6.1-unstable.69db300': {}
 
   '@handlebars/parser@2.0.0': {}
 
@@ -9948,7 +9972,7 @@ snapshots:
   '@npmcli/fs@1.1.1':
     dependencies:
       '@gar/promisify': 1.1.3
-      semver: 7.7.1
+      semver: 7.7.2
 
   '@npmcli/git@6.0.3':
     dependencies:
@@ -13414,7 +13438,7 @@ snapshots:
   eslint-compat-utils@0.5.1(eslint@9.22.0(jiti@1.21.7)):
     dependencies:
       eslint: 9.22.0(jiti@1.21.7)
-      semver: 7.7.1
+      semver: 7.7.2
 
   eslint-config-prettier@10.1.1(eslint@9.22.0(jiti@1.21.7)):
     dependencies:
@@ -13781,6 +13805,14 @@ snapshots:
   fdir@6.4.3(picomatch@4.0.2):
     optionalDependencies:
       picomatch: 4.0.2
+
+  fdir@6.5.0(picomatch@4.0.2):
+    optionalDependencies:
+      picomatch: 4.0.2
+
+  fdir@6.5.0(picomatch@4.0.3):
+    optionalDependencies:
+      picomatch: 4.0.3
 
   figures@2.0.0:
     dependencies:
@@ -15865,7 +15897,7 @@ snapshots:
 
   npm-install-checks@7.1.1:
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   npm-normalize-package-bin@4.0.0: {}
 
@@ -15881,7 +15913,7 @@ snapshots:
       npm-install-checks: 7.1.1
       npm-normalize-package-bin: 4.0.0
       npm-package-arg: 12.0.2
-      semver: 7.7.1
+      semver: 7.7.2
 
   npm-run-path@2.0.2:
     dependencies:
@@ -16155,6 +16187,8 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
+
+  picomatch@4.0.3: {}
 
   pify@2.3.0: {}
 
@@ -17546,6 +17580,11 @@ snapshots:
       fdir: 6.4.3(picomatch@4.0.2)
       picomatch: 4.0.2
 
+  tinyglobby@0.2.15:
+    dependencies:
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
+
   tldts-core@6.1.83: {}
 
   tldts@6.1.83:
@@ -17795,7 +17834,7 @@ snapshots:
 
   typescript-auto-import-cache@0.3.6:
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   typescript-eslint@8.26.0(0d610c2ae5ba6dd1e37460ee5948a8f9):
     dependencies:
@@ -18065,11 +18104,14 @@ snapshots:
       terser: 5.39.0
       yaml: 2.7.0
 
-  vite@6.2.7(98b25bd744f9e96531838d4f65c7f33c):
+  vite@6.3.6(98b25bd744f9e96531838d4f65c7f33c):
     dependencies:
       esbuild: 0.25.0
+      fdir: 6.5.0(picomatch@4.0.2)
+      picomatch: 4.0.2
       postcss: 8.5.3
       rollup: 4.35.0
+      tinyglobby: 0.2.15
     optionalDependencies:
       '@types/node': 22.13.9
       fsevents: 2.3.3
@@ -18088,7 +18130,7 @@ snapshots:
   volar-service-typescript@0.0.65(@volar/language-service@2.4.11):
     dependencies:
       path-browserify: 1.0.1
-      semver: 7.7.1
+      semver: 7.7.2
       typescript-auto-import-cache: 0.3.6
       vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
@@ -18099,7 +18141,7 @@ snapshots:
   volar-service-typescript@0.0.65(@volar/language-service@2.4.12):
     dependencies:
       path-browserify: 1.0.1
-      semver: 7.7.1
+      semver: 7.7.2
       typescript-auto-import-cache: 0.3.6
       vscode-languageserver-textdocument: 1.0.12
       vscode-nls: 5.2.0
