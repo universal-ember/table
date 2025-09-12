@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-09-12)
+
+
+
+#### :memo: Documentation
+* `docs-app`
+  * [#105](https://github.com/universal-ember/table/pull/105) docs: Single row selection link ([@MichalBryxi](https://github.com/MichalBryxi))
+
+#### Committers: 1
+- Michal Bryxí ([@MichalBryxi](https://github.com/MichalBryxi))
+
 ## Release (2025-08-25)
 
 @universal-ember/table 3.1.1 (patch)
