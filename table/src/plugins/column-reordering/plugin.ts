@@ -285,10 +285,13 @@ export class ColumnOrder {
     }
 
     // Default: all columns are visible
-    return this.args.columns().reduce((acc, col) => {
-      acc[col.key] = true;
-      return acc;
-    }, {} as Record<string, boolean>);
+    return this.args.columns().reduce(
+      (acc, col) => {
+        acc[col.key] = true;
+        return acc;
+      },
+      {} as Record<string, boolean>,
+    );
   }
 
   /**
