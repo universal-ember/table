@@ -1,5 +1,27 @@
 # Changelog
 
+## Release (2025-10-03)
+
+@universal-ember/table 3.2.0 (minor)
+
+#### :rocket: Enhancement
+* `docs-app`, `@universal-ember/table`, `test-app`
+  * [#74](https://github.com/universal-ember/table/pull/74) Reordering hidden columns ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `docs-app`, `@universal-ember/table`, `test-app`
+  * [#74](https://github.com/universal-ember/table/pull/74) Reordering hidden columns ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* `docs-app`
+  * [#109](https://github.com/universal-ember/table/pull/109) chore: Fix file name spelling ([@jayden-leuciuc](https://github.com/jayden-leuciuc))
+  * [#105](https://github.com/universal-ember/table/pull/105) docs: Single row selection link ([@MichalBryxi](https://github.com/MichalBryxi))
+
+#### Committers: 3
+- Jayden Leuciuc ([@jayden-leuciuc](https://github.com/jayden-leuciuc))
+- Michal Bryxí ([@MichalBryxi](https://github.com/MichalBryxi))
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-08-25)
 
 @universal-ember/table 3.1.1 (patch)
