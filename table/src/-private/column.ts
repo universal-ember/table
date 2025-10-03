@@ -4,7 +4,7 @@ import { isEmpty } from '@ember/utils';
 import type { Row } from './row';
 import type { Table } from './table';
 import type { ContentValue } from '@glint/template';
-import type { ColumnConfig } from './interfaces';
+import type { ColumnConfig, CellOptions, CellConfigContext } from './interfaces';
 
 const DEFAULT_VALUE = '--';
 const DEFAULT_VALUE_KEY = 'defaultValue';
@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS = {
   [DEFAULT_VALUE_KEY]: DEFAULT_VALUE,
 };
 
-export class Column<T = unknown> {
+export class Column<T = unknown, OptionsType = any, CellArgs = any> {
   get Cell() {
     return this.config.Cell;
   }
@@ -27,7 +27,7 @@ export class Column<T = unknown> {
 
   constructor(
     public table: Table<T>,
-    public config: ColumnConfig<T>,
+    public config: ColumnConfig<T, OptionsType, CellArgs>,
   ) {}
 
   @action
@@ -52,16 +52,17 @@ export class Column<T = unknown> {
   }
 
   private getDefaultValue(row: Row<T>) {
-    return this.getOptionsForRow(row)[DEFAULT_VALUE_KEY];
+    const options = this.getOptionsForRow(row) as any;
+    return options[DEFAULT_VALUE_KEY];
   }
 
   @action
-  getOptionsForRow(row: Row<T>) {
+  getOptionsForRow(row?: Row<T>): OptionsType & CellOptions {
     const defaults = DEFAULT_OPTIONS;
 
     return {
       ...defaults,
       ...this.config.options?.({ column: this, row }),
-    };
+    } as OptionsType & CellOptions;
   }
 }
