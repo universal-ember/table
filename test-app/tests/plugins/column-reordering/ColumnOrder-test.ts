@@ -11,21 +11,28 @@ module('Plugin | column-reordering | ColumnOrder', function () {
     let order: ColumnOrder;
 
     hooks.beforeEach(function (assert) {
+      const COLUMNS = [
+        { key: 'A' },
+        { key: 'B' },
+        { key: 'C' },
+        { key: 'D' },
+        { key: 'E' },
+        { key: 'F' },
+        /**
+         * This cast is a lie, but a useful one, as these #set
+         * tests don't actually care about the Column structure
+         * of this data -- only that a key exists
+         */
+      ] as Column[];
+
       order = new ColumnOrder({
-        columns: () =>
-          [
-            { key: 'A' },
-            { key: 'B' },
-            { key: 'C' },
-            { key: 'D' },
-            { key: 'E' },
-            { key: 'F' },
-            /**
-             * This cast is a lie, but a useful one, as these #set
-             * tests don't actually care about the Column structure
-             * of this data -- only that a key exists
-             */
-          ] as Column[],
+        columns: () => COLUMNS,
+        visibleColumns: () =>
+          COLUMNS.reduce<Record<string, boolean>>((acc, c) => {
+            acc[c.key] = true;
+
+            return acc;
+          }, {}),
       });
 
       assert.deepEqual(
@@ -73,21 +80,28 @@ module('Plugin | column-reordering | ColumnOrder', function () {
     let order: ColumnOrder;
 
     hooks.beforeEach(function (assert) {
+      const COLUMNS = [
+        { key: 'A' },
+        { key: 'B' },
+        { key: 'C' },
+        { key: 'D' },
+        { key: 'E' },
+        { key: 'F' },
+        /**
+         * This cast is a lie, but a useful one, as these #set
+         * tests don't actually care about the Column structure
+         * of this data -- only that a key exists
+         */
+      ] as Column[];
+
       order = new ColumnOrder({
-        columns: () =>
-          [
-            { key: 'A' },
-            { key: 'B' },
-            { key: 'C' },
-            { key: 'D' },
-            { key: 'E' },
-            { key: 'F' },
-            /**
-             * This cast is a lie, but a useful one, as these #set
-             * tests don't actually care about the Column structure
-             * of this data -- only that a key exists
-             */
-          ] as Column[],
+        columns: () => COLUMNS,
+        visibleColumns: () =>
+          COLUMNS.reduce<Record<string, boolean>>((acc, c) => {
+            acc[c.key] = true;
+
+            return acc;
+          }, {}),
       });
 
       assert.deepEqual(
@@ -135,22 +149,29 @@ module('Plugin | column-reordering | ColumnOrder', function () {
     let order: ColumnOrder;
 
     hooks.beforeEach(function (assert) {
+      const COLUMNS = [
+        { key: 'A' },
+        { key: 'B' },
+        { key: 'C' },
+        { key: 'D' },
+        { key: 'E' },
+        { key: 'F' },
+        /**
+         * This cast is a lie, but a useful one, as these #set
+         * tests don't actually care about the Column structure
+         * of this data -- only that a key exists
+         */
+      ] as Column[];
+
       order = new ColumnOrder({
+        columns: () => COLUMNS,
+        visibleColumns: () =>
+          COLUMNS.reduce<Record<string, boolean>>((acc, c) => {
+            acc[c.key] = true;
+
+            return acc;
+          }, {}),
         save: () => {},
-        columns: () =>
-          [
-            { key: 'A' },
-            { key: 'B' },
-            { key: 'C' },
-            { key: 'D' },
-            { key: 'E' },
-            { key: 'F' },
-            /**
-             * This cast is a lie, but a useful one, as these #set
-             * tests don't actually care about the Column structure
-             * of this data -- only that a key exists
-             */
-          ] as Column[],
       });
 
       assert.deepEqual(
@@ -198,22 +219,29 @@ module('Plugin | column-reordering | ColumnOrder', function () {
     let order: ColumnOrder;
 
     hooks.beforeEach(function (assert) {
+      const COLUMNS = [
+        { key: 'A' },
+        { key: 'B' },
+        { key: 'C' },
+        { key: 'D' },
+        { key: 'E' },
+        { key: 'F' },
+        /**
+         * This cast is a lie, but a useful one, as these #set
+         * tests don't actually care about the Column structure
+         * of this data -- only that a key exists
+         */
+      ] as Column[];
+
       order = new ColumnOrder({
+        columns: () => COLUMNS,
+        visibleColumns: () =>
+          COLUMNS.reduce<Record<string, boolean>>((acc, c) => {
+            acc[c.key] = true;
+
+            return acc;
+          }, {}),
         save: () => {},
-        columns: () =>
-          [
-            { key: 'A' },
-            { key: 'B' },
-            { key: 'C' },
-            { key: 'D' },
-            { key: 'E' },
-            { key: 'F' },
-            /**
-             * This cast is a lie, but a useful one, as these #set
-             * tests don't actually care about the Column structure
-             * of this data -- only that a key exists
-             */
-          ] as Column[],
       });
 
       assert.deepEqual(
@@ -331,6 +359,132 @@ module('Plugin | column-reordering | ColumnOrder', function () {
           ['E', 5],
         ]);
       });
+    });
+  });
+
+  module('Backwards compatibility', function () {
+    test('without visibleColumns parameter, all columns are treated as visible', function (assert) {
+      const COLUMNS = [{ key: 'A' }, { key: 'B' }, { key: 'C' }] as Column[];
+
+      // Old usage - no visibleColumns parameter
+      const order = new ColumnOrder({
+        columns: () => COLUMNS,
+      });
+
+      assert.deepEqual(
+        toEntries(order.orderedMap),
+        [
+          ['A', 0],
+          ['B', 1],
+          ['C', 2],
+        ],
+        'columns are in default order',
+      );
+
+      // moveRight should work normally
+      order.moveRight('A');
+
+      assert.deepEqual(
+        toEntries(order.orderedMap),
+        [
+          ['B', 0],
+          ['A', 1],
+          ['C', 2],
+        ],
+        'column A moved right',
+      );
+    });
+
+    test('with visibleColumns parameter, hidden columns are tracked but skipped', function (assert) {
+      const COLUMNS = [
+        { key: 'A' },
+        { key: 'B' },
+        { key: 'C' },
+        { key: 'D' },
+      ] as Column[];
+
+      // New usage - with visibleColumns (C is hidden)
+      const order = new ColumnOrder({
+        columns: () => COLUMNS,
+        visibleColumns: () => ({
+          A: true,
+          B: true,
+          C: false, // hidden
+          D: true,
+        }),
+      });
+
+      assert.deepEqual(
+        toEntries(order.orderedMap),
+        [
+          ['A', 0],
+          ['B', 1],
+          ['C', 2],
+          ['D', 3],
+        ],
+        'all columns are tracked in order',
+      );
+
+      // moveRight on A should skip hidden C and land on D
+      order.moveRight('A');
+
+      assert.deepEqual(
+        toEntries(order.orderedMap),
+        [
+          ['B', 0],
+          ['A', 1],
+          ['C', 2],
+          ['D', 3],
+        ],
+        'A moved to B position, B moved left',
+      );
+
+      // Move A right again - should swap with C, then continue to D
+      order.moveRight('A');
+
+      assert.deepEqual(
+        toEntries(order.orderedMap),
+        [
+          ['B', 0],
+          ['C', 1],
+          ['D', 2],
+          ['A', 3],
+        ],
+        'A swapped with hidden C (1->2), then swapped with visible D (2->3), ending at position 3',
+      );
+    });
+
+    test('hidden columns maintain position when columns are reordered', function (assert) {
+      const COLUMNS = [
+        { key: 'A' },
+        { key: 'B' },
+        { key: 'C' },
+        { key: 'D' },
+      ] as Column[];
+
+      const order = new ColumnOrder({
+        columns: () => COLUMNS,
+        visibleColumns: () => ({
+          A: true,
+          B: false, // hidden
+          C: true,
+          D: true,
+        }),
+      });
+
+      // Move D to the left (should skip hidden B)
+      order.moveLeft('D');
+
+      assert.deepEqual(
+        toEntries(order.orderedMap),
+        [
+          ['A', 0],
+          ['B', 1], // B stays at position 1 (hidden)
+          ['D', 2], // D moved from 3 to 2
+          ['C', 3], // C moved from 2 to 3
+        ],
+        'hidden column B maintained its position',
+      );
     });
   });
 });

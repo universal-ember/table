@@ -26,9 +26,21 @@ export default class extends Component {
   @tracked pendingColumnOrder;
 
   changeColumnOrder = () => {
+    // Basic usage (backwards compatible):
+    // Pass your columns and they're all treated as visible
     this.pendingColumnOrder = new ColumnOrder({
       columns: () => this.columns,
     });
+
+    // Advanced usage (with ColumnVisibility plugin):
+    // Pass ALL columns and provide a visibleColumns map
+    // this.pendingColumnOrder = new ColumnOrder({
+    //   columns: () => this.table.columns.values(),  // All columns (including hidden)
+    //   visibleColumns: () => this.columns.reduce((acc, col) => {
+    //     acc[col.key] = meta(col).ColumnVisibility?.isVisible !== false;
+    //     return acc;
+    //   }, {}),
+    // });
   }
 
   handleReconfigure = () => {

@@ -62,6 +62,7 @@ export class ColumnMeta {
     return this.#tableMeta.getPosition(this.column);
   }
 
+  // Swaps this column with the column in the new position
   set position(value: number) {
     this.#tableMeta.setPosition(this.column, value);
   }
@@ -113,7 +114,8 @@ export class TableMeta {
    */
   @tracked
   columnOrder = new ColumnOrder({
-    columns: () => this.availableColumns,
+    columns: () => this.allColumns,
+    visibleColumns: () => this.visibleColumns,
     save: this.save,
     existingOrder: this.read(),
   });
@@ -152,7 +154,8 @@ export class TableMeta {
   reset() {
     preferences.forTable(this.table, ColumnReordering).delete('order');
     this.columnOrder = new ColumnOrder({
-      columns: () => this.availableColumns,
+      columns: () => this.allColumns,
+      visibleColumns: () => this.visibleColumns,
       save: this.save,
     });
   }
@@ -186,15 +189,27 @@ export class TableMeta {
   }
 
   get columns() {
-    return this.columnOrder.orderedColumns;
+    return this.columnOrder.orderedColumns.filter(
+      (column) => this.visibleColumns[column.key],
+    );
   }
 
   /**
    * @private
    * This isn't our data to expose, but it is useful to alias
    */
-  private get availableColumns() {
-    return columns.for(this.table, ColumnReordering);
+  private get visibleColumns() {
+    return columns
+      .for(this.table, ColumnReordering)
+      .reduce<Record<string, boolean>>((acc, column) => {
+        acc[column.key] = true;
+
+        return acc;
+      }, {});
+  }
+
+  private get allColumns() {
+    return this.table.columns.values();
   }
 }
 
@@ -210,14 +225,73 @@ export class ColumnOrder {
 
   constructor(
     private args: {
+      /**
+       * All columns to track in the ordering.
+       *
+       * Backwards compatible usage (without ColumnVisibility):
+       * - Pass only the columns you want to display
+       * - All columns are treated as visible
+       *
+       * New usage (with ColumnVisibility):
+       * - Pass ALL columns (including hidden ones)
+       * - Provide `visibleColumns` to indicate which are visible
+       * - Hidden columns maintain their position when toggled
+       */
       columns: () => Column[];
+      /**
+       * Optional: Record of which columns are currently visible.
+       * When provided, moveLeft/moveRight will skip over hidden columns.
+       * When omitted, all columns from `columns` are treated as visible (backwards compatible).
+       *
+       * Example when using ColumnVisibility:
+       * ```ts
+       * visibleColumns: () => columns.reduce((acc, col) => {
+       *   acc[col.key] = meta(col).ColumnVisibility?.isVisible !== false;
+       *   return acc;
+       * }, {})
+       * ```
+       */
+      visibleColumns?: () => Record<string, boolean>;
+      /**
+       * Optional: Callback to persist the column order (e.g., to localStorage).
+       */
       save?: (order: Map<string, number>) => void;
+      /**
+       * Optional: Previously saved column order to restore.
+       */
       existingOrder?: Map<string, number>;
     },
   ) {
+    let allColumns = this.args.columns();
+
     if (args.existingOrder) {
-      this.map = new TrackedMap(args.existingOrder);
+      let newOrder = new Map(args.existingOrder.entries());
+
+      addMissingColumnsToMap(allColumns, newOrder);
+      removeExtraColumnsFromMap(allColumns, newOrder);
+      this.map = new TrackedMap(newOrder);
+    } else {
+      this.map = new TrackedMap(allColumns.map((column, i) => [column.key, i]));
     }
+  }
+
+  /**
+   * @private
+   * Helper to get visible columns, defaulting to all columns if not specified
+   */
+  private getVisibleColumns(): Record<string, boolean> {
+    if (this.args.visibleColumns) {
+      return this.args.visibleColumns();
+    }
+
+    // Default: all columns are visible
+    return this.args.columns().reduce(
+      (acc, col) => {
+        acc[col.key] = true;
+        return acc;
+      },
+      {} as Record<string, boolean>,
+    );
   }
 
   /**
@@ -230,15 +304,32 @@ export class ColumnOrder {
   @action
   moveLeft(key: string) {
     const orderedColumns = this.orderedColumns;
+    if (this.map.get(key) === 0) {
+      return;
+    }
 
     let found = false;
-    let nextColumn: { key: string } | undefined;
 
     for (const column of orderedColumns.reverse()) {
       if (found) {
-        nextColumn = column;
+        // Shift moved column left
+        let currentPosition = this.map.get(key);
 
-        break;
+        assert('current key must exist in map', currentPosition !== undefined);
+        this.map.set(key, currentPosition - 1);
+
+        // Shift displayed column right
+        let displayedColumnPosition = this.map.get(column.key);
+
+        assert(
+          'displaced key must exist in map',
+          displayedColumnPosition !== undefined,
+        );
+        this.map.set(column.key, displayedColumnPosition + 1);
+
+        if (this.getVisibleColumns()[column.key]) {
+          break;
+        }
       }
 
       if (column.key === key) {
@@ -246,14 +337,15 @@ export class ColumnOrder {
       }
     }
 
-    if (!nextColumn) return;
-
-    const nextPosition = this.get(nextColumn.key);
-
-    this.swapWith(key, nextPosition);
+    this.args.save?.(this.map);
   }
 
   setAll = (map: Map<string, number>) => {
+    let allColumns = this.args.columns();
+
+    addMissingColumnsToMap(allColumns, map);
+    removeExtraColumnsFromMap(allColumns, map);
+
     this.map.clear();
 
     for (const [key, value] of map.entries()) {
@@ -273,15 +365,28 @@ export class ColumnOrder {
   @action
   moveRight(key: string) {
     const orderedColumns = this.orderedColumns;
-
     let found = false;
-    let nextColumn: { key: string } | undefined;
 
     for (const column of orderedColumns) {
       if (found) {
-        nextColumn = column;
+        // Shift moved column right
+        let currentPosition = this.map.get(key);
 
-        break;
+        assert('current key must exist in map', currentPosition !== undefined);
+        this.map.set(key, currentPosition + 1);
+
+        // Shift displaced column left
+        let displayedColumnPosition = this.map.get(column.key);
+
+        assert(
+          'displaced key must exist in map',
+          displayedColumnPosition !== undefined,
+        );
+        this.map.set(column.key, displayedColumnPosition - 1);
+
+        if (this.getVisibleColumns()[column.key]) {
+          break;
+        }
       }
 
       if (column.key === key) {
@@ -289,11 +394,7 @@ export class ColumnOrder {
       }
     }
 
-    if (!nextColumn) return;
-
-    const nextPosition = this.get(nextColumn.key);
-
-    this.swapWith(key, nextPosition);
+    this.args.save?.(this.map);
   }
 
   /**
@@ -322,11 +423,8 @@ export class ColumnOrder {
         [...this.orderedMap.entries()]
           .map((entry) => entry.join(' => '))
           .join(', ') +
-        ` and the availableColumns are: ` +
-        this.args
-          .columns()
-          .map((column) => column.key)
-          .join(', ') +
+        ` and the visibleColumns are: ` +
+        Object.keys(this.getVisibleColumns()).join(', ') +
         ` and current "map" (${this.map.size}) is: ` +
         [...this.map.entries()].map((entry) => entry.join(' => ')).join(', '),
       undefined !== currentPosition,
@@ -399,21 +497,20 @@ export class ColumnOrder {
 
   @cached
   get orderedColumns(): Column[] {
-    const availableColumns = this.args.columns();
-    const availableByKey = availableColumns.reduce(
+    const allColumns = this.args.columns();
+    const columnsByKey = allColumns.reduce(
       (keyMap, column) => {
         keyMap[column.key] = column;
-
         return keyMap;
       },
       {} as Record<string, Column>,
     );
-    const mergedOrder = orderOf(availableColumns, this.map);
+    const mergedOrder = orderOf(allColumns, this.map);
 
-    const result: Column[] = Array.from({ length: availableColumns.length });
+    const result: Column[] = Array.from({ length: allColumns.length });
 
     for (const [key, position] of mergedOrder.entries()) {
-      const column = availableByKey[key];
+      const column = columnsByKey[key];
 
       assert(`Could not find column for pair: ${key} @ @{position}`, column);
       result[position] = column;
@@ -421,13 +518,13 @@ export class ColumnOrder {
 
     assert(
       `Generated orderedColumns' length (${result.filter(Boolean).length}) ` +
-        `does not match the length of available columns (${availableColumns.length}). ` +
+        `does not match the length of all columns (${allColumns.length}). ` +
         `orderedColumns: ${result
           .filter(Boolean)
           .map((c) => c.key)
           .join(', ')} -- ` +
-        `available columns: ${availableColumns.map((c) => c.key).join(', ')}`,
-      result.filter(Boolean).length === availableColumns.length,
+        `all columns: ${allColumns.map((c) => c.key).join(', ')}`,
+      result.filter(Boolean).length === allColumns.length,
     );
 
     return result.filter(Boolean);
@@ -438,55 +535,91 @@ export class ColumnOrder {
  * @private
  *
  * Utility for helping determine the percieved order of a set of columns
- * given the original (default) ordering, and then user-configurations
+ * given the original (default) ordering, and then user-configurations.
+ *
+ * This function adds missing columns but preserves extra columns in the map
+ * (they might be hidden, not deleted).
  */
 export function orderOf(
   columns: { key: string }[],
   currentOrder: Map<string, number>,
 ): Map<string, number> {
-  const result = new Map<string, number>();
-  const availableColumns = columns.map((column) => column.key);
-  const availableSet = new Set(availableColumns);
-  const current = new Map<number, string>(
-    [...currentOrder.entries()].map(([key, position]) => [position, key]),
+  // Create a copy to avoid mutating the input
+  let workingOrder = new Map(currentOrder);
+
+  // Add any missing columns to the end
+  addMissingColumnsToMap(columns, workingOrder);
+
+  // DON'T remove extra columns - they might be hidden columns, not deleted ones
+  // The ColumnOrder constructor handles removal of truly deleted columns
+
+  // Ensure positions are consecutive and zero based
+  let inOrder = Array.from(workingOrder.entries()).sort(
+    ([_keyA, positionA], [_keyB, positionB]) => positionA - positionB,
   );
 
-  /**
-   * O(n * log(n)) ?
-   */
-  for (let i = 0; i < Math.max(columns.length, current.size); i++) {
-    const orderedKey = current.get(i);
+  let orderedColumns = new Map<string, number>();
 
-    if (orderedKey) {
-      /**
-       * If the currentOrder specifies columns not presently available,
-       * ignore them
-       */
-      if (availableSet.has(orderedKey)) {
-        result.set(orderedKey, i);
-        continue;
-      }
-    }
+  let position = 0;
 
-    let availableKey: string | undefined;
-
-    while ((availableKey = availableColumns.shift())) {
-      if (result.has(availableKey) || currentOrder.has(availableKey)) {
-        continue;
-      }
-
-      break;
-    }
-
-    if (!availableKey) {
-      /**
-       * The rest of our columns likely have their order set
-       */
-      continue;
-    }
-
-    result.set(availableKey, i);
+  for (let [key] of inOrder) {
+    orderedColumns.set(key, position++);
   }
 
-  return result;
+  return orderedColumns;
+}
+
+/**
+ * @private
+ *
+ * Utility to add any missing columns to the position map. By calling this whenever
+ * data is passed in to the system we can simplify the code within the system because
+ * we know we are dealing with a full set of positions.
+ *
+ * @param columns - A list of all columns available to the table
+ * @param map - A Map of `key` to position (as a zero based integer)
+ */
+function addMissingColumnsToMap(
+  columns: { key: string }[],
+  map: Map<string, number>,
+): void {
+  if (map.size < columns.length) {
+    let maxAssignedColumn = Math.max(...map.values());
+
+    for (let column of columns) {
+      if (map.get(column.key) === undefined) {
+        map.set(column.key, ++maxAssignedColumn);
+      }
+    }
+  }
+}
+
+/**
+ * @private
+ *
+ * Utility to remove any extra columns from the position map. By calling this whenever
+ * data is passed in to the system we can simplify the code within the system because
+ * we know we are dealing with a full set of positions.
+ *
+ * @param columns - A list of all columns available to the table
+ * @param map - A Map of `key` to position (as a zero based integer)
+ */
+function removeExtraColumnsFromMap(
+  columns: { key: string }[],
+  map: Map<string, number>,
+): void {
+  let columnsLookup = columns.reduce(
+    function (acc, { key }) {
+      acc[key] = true;
+
+      return acc;
+    },
+    {} as Record<string, boolean>,
+  );
+
+  for (let key of map.keys()) {
+    if (!columnsLookup[key]) {
+      map.delete(key);
+    }
+  }
 }

@@ -3,10 +3,15 @@ import { module, test } from 'qunit';
 import { orderOf } from '@universal-ember/table/plugins/column-reordering';
 
 module('Plugin | column-reordering | orderOf', function () {
-  test('with no customizations, the original order is retained', function (assert) {
+  test('expected order when unchanged', function (assert) {
     let result = orderOf(
       [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
-      new Map<string, number>(),
+      new Map([
+        ['A', 0],
+        ['B', 1],
+        ['C', 2],
+        ['D', 3],
+      ]),
     );
 
     assert.strictEqual(result.size, 4);
@@ -21,115 +26,87 @@ module('Plugin | column-reordering | orderOf', function () {
     );
   });
 
-  test('with 1 custom position, columns are merged appropriately', function (assert) {
-    let customized = new Map<string, number>([['B', 0]]);
-
+  test('expected order when changed', function (assert) {
     let result = orderOf(
       [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
-      customized,
+      new Map([
+        ['A', 3],
+        ['B', 2],
+        ['C', 1],
+        ['D', 0],
+      ]),
     );
 
     assert.strictEqual(result.size, 4);
     assert.deepEqual(
       [...result.entries()],
       [
-        ['B', 0],
+        ['D', 0],
+        ['C', 1],
+        ['B', 2],
+        ['A', 3],
+      ],
+    );
+  });
+
+  test('coerces to zero based', function (assert) {
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
+      new Map([
         ['A', 1],
+        ['B', 2],
+        ['C', 3],
+        ['D', 4],
+      ]),
+    );
+
+    assert.strictEqual(result.size, 4);
+    assert.deepEqual(
+      [...result.entries()],
+      [
+        ['A', 0],
+        ['B', 1],
         ['C', 2],
         ['D', 3],
       ],
     );
   });
 
-  test('with middle columns moved to the outside', function (assert) {
-    let customized = new Map<string, number>([
-      ['B', 0],
-      ['C', 3],
-    ]);
-
+  test('handles extra columns in map (preserves them for hidden columns)', function (assert) {
     let result = orderOf(
-      [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
-      customized,
+      [{ key: 'A' }],
+      new Map([
+        ['A', 0],
+        ['B', 1],
+      ]),
     );
 
-    assert.strictEqual(result.size, 4);
+    assert.strictEqual(
+      result.size,
+      2,
+      'preserves all columns including hidden ones',
+    );
     assert.deepEqual(
       [...result.entries()],
       [
-        ['B', 0],
-        ['A', 1],
-        ['D', 2],
-        ['C', 3],
+        ['A', 0],
+        ['B', 1],
       ],
+      'column B was preserved (might be hidden)',
     );
   });
 
-  test('with outer columns moved inward', function (assert) {
-    let customized = new Map<string, number>([
-      ['A', 1],
-      ['D', 2],
-    ]);
+  test('handles missing columns in map (adds them)', function (assert) {
+    let result = orderOf([{ key: 'A' }, { key: 'B' }], new Map([['A', 0]]));
 
-    let result = orderOf(
-      [{ key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }],
-      customized,
-    );
-
-    assert.strictEqual(result.size, 4);
+    assert.strictEqual(result.size, 2, 'has both columns');
     assert.deepEqual(
       [...result.entries()],
       [
-        ['B', 0],
-        ['A', 1],
-        ['D', 2],
-        ['C', 3],
+        ['A', 0],
+        ['B', 1],
       ],
-    );
-  });
-
-  test('columns specified in the customized map that do not exist are not used', function (assert) {
-    let customized = new Map<string, number>([
-      ['A', 1],
-      ['D', 2],
-    ]);
-
-    let result = orderOf(
-      [{ key: 'A' }, { key: 'B' }, { key: 'C' }],
-      customized,
-    );
-
-    assert.strictEqual(result.size, 3);
-    assert.deepEqual(
-      [...result.entries()],
-      [
-        ['B', 0],
-        ['A', 1],
-        ['C', 2],
-      ],
-    );
-  });
-
-  test('the first column is missing from available columns', function (assert) {
-    let customized = new Map<string, number>([
-      ['A', 1],
-      ['B', 0],
-      ['C', 2],
-      ['D', 3],
-    ]);
-
-    let result = orderOf(
-      [{ key: 'A' }, { key: 'C' }, { key: 'D' }],
-      customized,
-    );
-
-    assert.strictEqual(result.size, 3);
-    assert.deepEqual(
-      [...result.entries()],
-      [
-        ['A', 1],
-        ['C', 2],
-        ['D', 3],
-      ],
+      'column B was added at the end',
     );
   });
 });
