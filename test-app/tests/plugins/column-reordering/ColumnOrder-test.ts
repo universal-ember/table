@@ -364,11 +364,7 @@ module('Plugin | column-reordering | ColumnOrder', function () {
 
   module('Backwards compatibility', function () {
     test('without visibleColumns parameter, all columns are treated as visible', function (assert) {
-      const COLUMNS = [
-        { key: 'A' },
-        { key: 'B' },
-        { key: 'C' },
-      ] as Column[];
+      const COLUMNS = [{ key: 'A' }, { key: 'B' }, { key: 'C' }] as Column[];
 
       // Old usage - no visibleColumns parameter
       const order = new ColumnOrder({
