@@ -81,8 +81,19 @@ module('Plugin | column-reordering | orderOf', function () {
       ]),
     );
 
-    assert.strictEqual(result.size, 2, 'preserves all columns including hidden ones');
-    assert.deepEqual([...result.entries()], [['A', 0], ['B', 1]], 'column B was preserved (might be hidden)');
+    assert.strictEqual(
+      result.size,
+      2,
+      'preserves all columns including hidden ones',
+    );
+    assert.deepEqual(
+      [...result.entries()],
+      [
+        ['A', 0],
+        ['B', 1],
+      ],
+      'column B was preserved (might be hidden)',
+    );
   });
 
   test('handles missing columns in map (adds them)', function (assert) {
