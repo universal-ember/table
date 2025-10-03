@@ -256,7 +256,7 @@ importers:
         version: 4.2.0(ede0954441bb30b975c0b3dc1dcf7dea)
       ember-modify-based-class-resource:
         specifier: ^1.1.0
-        version: 1.1.1(72a2608dfd061b2f05bae9d8fc0f6aa8)
+        version: 1.1.2(183c3113e258155888eb13df50be43f2)
       ember-resources:
         specifier: ^7.0.2
         version: 7.0.7(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -308,7 +308,7 @@ importers:
         version: 1.1.2
       '@glint/core':
         specifier: unstable
-        version: 2.0.1-unstable.98dcc71(typescript@5.8.2)
+        version: 2.0.1-unstable.ca49b21(typescript@5.8.2)
       '@glint/template':
         specifier: 1.5.2
         version: 1.5.2
@@ -1601,8 +1601,8 @@ packages:
     peerDependencies:
       typescript: '>=4.8.0'
 
-  '@glint/core@2.0.1-unstable.98dcc71':
-    resolution: {integrity: sha512-iVZ+ols09RUKfORpn4m71puUegNPIrZwMCON+EV8SvbCrfUmROwRbuJVImjB/cG6kZ/M45OnfrzcHJdSpjI+4g==}
+  '@glint/core@2.0.1-unstable.ca49b21':
+    resolution: {integrity: sha512-QbxjN4+l6f4y74ds83CqEpa1ruP6QF8TFwk3Y4f2Ke5hJnyG8hef/1ZcCAwV6MO3SDpQusLN3v1YM5VwI5ID3w==}
     hasBin: true
     peerDependencies:
       typescript: '>=5.6.0'
@@ -1704,8 +1704,8 @@ packages:
   '@glint/template@1.5.2':
     resolution: {integrity: sha512-fA9FoHCmWsWkoOKWshsOQlS0WCAM7NwwoaeSTHuz5yHvBZmmtkgx3t2SPOTJs85/hWTNVzYC/Gthw7xDUR3BlQ==}
 
-  '@glint/template@1.6.1-unstable.98dcc71':
-    resolution: {integrity: sha512-sym9Et8xrgm9zY9cyJr48H8dMsWhGdutdztXj9ZCrCRrX8rF7eci/d27Ggc8AAXTCQgFmLzz6ByZof6n1hrUjg==}
+  '@glint/template@1.6.1-unstable.ca49b21':
+    resolution: {integrity: sha512-w3DkX2Ho+fHgi7HALCZ8/l7l1w3mrGymAPcbWSsyqe3yg1ATWbF4MiTpWl2uS44pAk1Y6obmawObRFQqH+dd+g==}
 
   '@handlebars/parser@2.0.0':
     resolution: {integrity: sha512-EP9uEDZv/L5Qh9IWuMUGJRfwhXJ4h1dqKTT4/3+tY0eu7sPis7xh23j61SYUnNF4vqCQvvUXpDo9Bh/+q1zASA==}
@@ -3773,6 +3773,15 @@ packages:
       '@glimmer/tracking': ^1.1.2
       ember-resources: '>= 6.4.0'
       ember-source: ^3.28.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    peerDependenciesMeta:
+      '@glimmer/component':
+        optional: true
+
+  ember-modify-based-class-resource@1.1.2:
+    resolution: {integrity: sha512-eruTLd+aMzrXaLDInQSYv3zTcG5+0Ttn69W31JtOp6nSR3T22ET3q+6zZjCVNxmlDufSAu6lSFd9EAtKaazCdA==}
+    peerDependencies:
+      '@glimmer/component': ^1.1.2 || >= 2.0.0
+      ember-resources: '>= 6.4.0'
     peerDependenciesMeta:
       '@glimmer/component':
         optional: true
@@ -9812,10 +9821,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@glint/core@2.0.1-unstable.98dcc71(typescript@5.8.2)':
+  '@glint/core@2.0.1-unstable.ca49b21(typescript@5.8.2)':
     dependencies:
       '@glimmer/syntax': 0.95.0
-      '@glint/template': 1.6.1-unstable.98dcc71
+      '@glint/template': 1.6.1-unstable.ca49b21
       '@volar/kit': 2.4.23(typescript@5.8.2)
       '@volar/language-core': 2.4.23
       '@volar/language-server': 2.4.23
@@ -9869,7 +9878,7 @@ snapshots:
 
   '@glint/template@1.5.2': {}
 
-  '@glint/template@1.6.1-unstable.98dcc71': {}
+  '@glint/template@1.6.1-unstable.ca49b21': {}
 
   '@handlebars/parser@2.0.0': {}
 
@@ -12791,6 +12800,18 @@ snapshots:
       '@glimmer/tracking': 1.1.2
       ember-resources: 7.0.7(807cfcd3020ea8ad8edb1795de9ad08f)
       ember-source: 6.2.0(87f2f8131cb021da8904be85a2b2cd16)
+    optionalDependencies:
+      '@glimmer/component': 2.0.0
+    transitivePeerDependencies:
+      - '@glint/template'
+      - supports-color
+
+  ember-modify-based-class-resource@1.1.2(183c3113e258155888eb13df50be43f2):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      '@embroider/addon-shim': 1.10.0
+      '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
+      ember-resources: 7.0.7(807cfcd3020ea8ad8edb1795de9ad08f)
     optionalDependencies:
       '@glimmer/component': 2.0.0
     transitivePeerDependencies:
