@@ -487,14 +487,15 @@ export function orderOf(
   allColumns: { key: string }[],
   currentOrder: Map<string, number>,
 ): Map<string, number> {
-  assert(
-    'orderOf must be called with order of all columns specified',
-    allColumns.length === currentOrder.size &&
-      allColumns.every(({ key }) => currentOrder.has(key)),
-  );
+  // Create a copy of the order map to avoid mutating the input
+  let workingOrder = new Map(currentOrder);
+
+  // Handle mismatches gracefully by normalizing the map
+  addMissingColumnsToMap(allColumns, workingOrder);
+  removeExtraColumnsFromMap(allColumns, workingOrder);
 
   // Ensure positions are consecutive and zero based
-  let inOrder = Array.from(currentOrder.entries()).sort(
+  let inOrder = Array.from(workingOrder.entries()).sort(
     ([_keyA, positionA], [_keyB, positionB]) => positionA - positionB,
   );
 
