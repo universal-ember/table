@@ -146,9 +146,7 @@ import {
   hide,
   show,
 } from "@universal-ember/table/plugins/column-visibility";
-import {
-  ColumnReordering,
-} from "@universal-ember/table/plugins/column-reordering";
+import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
 
 import { DATA } from "docs-app/sample-data";
 
