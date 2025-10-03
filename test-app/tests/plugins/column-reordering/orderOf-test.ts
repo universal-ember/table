@@ -72,7 +72,7 @@ module('Plugin | column-reordering | orderOf', function () {
     );
   });
 
-  test('handles extra columns in map (removes them)', function (assert) {
+  test('handles extra columns in map (preserves them for hidden columns)', function (assert) {
     let result = orderOf(
       [{ key: 'A' }],
       new Map([
@@ -81,8 +81,8 @@ module('Plugin | column-reordering | orderOf', function () {
       ]),
     );
 
-    assert.strictEqual(result.size, 1, 'only has the available column');
-    assert.deepEqual([...result.entries()], [['A', 0]], 'column B was removed');
+    assert.strictEqual(result.size, 2, 'preserves all columns including hidden ones');
+    assert.deepEqual([...result.entries()], [['A', 0], ['B', 1]], 'column B was preserved (might be hidden)');
   });
 
   test('handles missing columns in map (adds them)', function (assert) {

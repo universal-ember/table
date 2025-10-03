@@ -524,18 +524,23 @@ export class ColumnOrder {
  * @private
  *
  * Utility for helping determine the percieved order of a set of columns
- * given the original (default) ordering, and then user-configurations
+ * given the original (default) ordering, and then user-configurations.
+ *
+ * This function adds missing columns but preserves extra columns in the map
+ * (they might be hidden, not deleted).
  */
 export function orderOf(
   allColumns: { key: string }[],
   currentOrder: Map<string, number>,
 ): Map<string, number> {
-  // Create a copy of the order map to avoid mutating the input
+  // Create a copy to avoid mutating the input
   let workingOrder = new Map(currentOrder);
 
-  // Handle mismatches gracefully by normalizing the map
+  // Add any missing columns to the end
   addMissingColumnsToMap(allColumns, workingOrder);
-  removeExtraColumnsFromMap(allColumns, workingOrder);
+
+  // DON'T remove extra columns - they might be hidden columns, not deleted ones
+  // The ColumnOrder constructor handles removal of truly deleted columns
 
   // Ensure positions are consecutive and zero based
   let inOrder = Array.from(workingOrder.entries()).sort(
