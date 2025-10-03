@@ -39,3 +39,8 @@ See the [Documentation][docs-app] for examples.
 [docs-app]: https://ue-table.pages.dev/
 [docs-api]: https://ue-table.pages.dev/api/modules/
 
+
+## Contributors
+
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
