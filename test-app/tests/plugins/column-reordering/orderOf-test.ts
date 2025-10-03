@@ -72,24 +72,30 @@ module('Plugin | column-reordering | orderOf', function () {
     );
   });
 
-  test('throws with missing column', function (assert) {
-    assert.throws(
-      () =>
-        orderOf(
-          [{ key: 'A' }],
-          new Map([
-            ['A', 0],
-            ['B', 1],
-          ]),
-        ),
-      /orderOf must be called with order of all columns specified/,
+  test('handles extra columns in map (removes them)', function (assert) {
+    let result = orderOf(
+      [{ key: 'A' }],
+      new Map([
+        ['A', 0],
+        ['B', 1],
+      ]),
     );
+
+    assert.strictEqual(result.size, 1, 'only has the available column');
+    assert.deepEqual([...result.entries()], [['A', 0]], 'column B was removed');
   });
 
-  test('throws with missing column', function (assert) {
-    assert.throws(
-      () => orderOf([{ key: 'A' }, { key: 'B' }], new Map([['A', 0]])),
-      /orderOf must be called with order of all columns specified/,
+  test('handles missing columns in map (adds them)', function (assert) {
+    let result = orderOf([{ key: 'A' }, { key: 'B' }], new Map([['A', 0]]));
+
+    assert.strictEqual(result.size, 2, 'has both columns');
+    assert.deepEqual(
+      [...result.entries()],
+      [
+        ['A', 0],
+        ['B', 1],
+      ],
+      'column B was added at the end',
     );
   });
 });

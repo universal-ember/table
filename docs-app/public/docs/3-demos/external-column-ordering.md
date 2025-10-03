@@ -26,12 +26,16 @@ export default class extends Component {
   @tracked pendingColumnOrder;
 
   changeColumnOrder = () => {
+    // ColumnOrder takes allColumns to track the ordering.
+    // availableColumns (optional) is used when combining with ColumnVisibility
+    // to skip over hidden columns during reordering.
     this.pendingColumnOrder = new ColumnOrder({
       allColumns: () => this.columns,
-      availableColumns: () => this.columns.reduce(function(acc, col) {
-        acc[col.key] = true;
-        return acc;
-      }, {}),
+      // If using ColumnVisibility plugin, provide availableColumns to skip hidden columns:
+      // availableColumns: () => this.columns.reduce((acc, col) => {
+      //   acc[col.key] = meta(col).ColumnVisibility?.isVisible !== false;
+      //   return acc;
+      // }, {}),
     });
   }
 
