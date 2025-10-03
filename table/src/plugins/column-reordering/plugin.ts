@@ -194,6 +194,10 @@ export class TableMeta {
     );
   }
 
+  /**
+   * @private
+   * This isn't our data to expose, but it is useful to alias
+   */
   private get availableColumns() {
     return columns
       .for(this.table, ColumnReordering)
