@@ -20,6 +20,7 @@ import { composeFunctionModifiers } from './utils.ts';
 import type { BasePlugin, Plugin } from '../plugins/index.ts';
 import type { Class } from './private-types.ts';
 import type { Destructor, TableConfig } from './interfaces';
+import type { CellOptions, CellContext } from './interfaces/column.ts';
 import { compatOwner } from './ember-compat.ts';
 
 const getOwner = compatOwner.getOwner;
@@ -30,8 +31,8 @@ const DEFAULT_COLUMN_CONFIG = {
   minWidth: 128,
 };
 
-interface Signature<DataType> {
-  Named: TableConfig<DataType>;
+interface Signature<DataType, OptionsType = any, CellArgs = any> {
+  Named: TableConfig<DataType, OptionsType>;
 }
 
 /**
@@ -54,7 +55,7 @@ const attachContainer = (element: Element, table: Table) => {
   table.scrollContainerElement = element;
 };
 
-export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
+export class Table<DataType = unknown, OptionsType = any, CellArgs = any> extends Resource<Signature<DataType, OptionsType, CellArgs>> {
   /**
    * @private
    */
@@ -66,11 +67,11 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
   /**
    * @private
    */
-  [COLUMN_META_KEY] = new WeakMap<Column, Map<Class<unknown>, any>>();
+  [COLUMN_META_KEY] = new WeakMap<Column<DataType, OptionsType, CellArgs>, Map<Class<unknown>, any>>();
   /**
    * @private
    */
-  [ROW_META_KEY] = new WeakMap<Row, Map<Class<unknown>, any>>();
+  [ROW_META_KEY] = new WeakMap<Row<DataType>, Map<Class<unknown>, any>>();
 
   /**
    * @private
@@ -110,7 +111,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
   /**
    * @private
    */
-  modify(_: [] | undefined, named: Signature<DataType>['Named']) {
+  modify(_: [] | undefined, named: Signature<DataType, OptionsType, CellArgs>['Named']) {
     this.args = { named };
 
     // only set the preferences once
@@ -157,7 +158,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
     //       With curried+composed modifiers, only the plugin's headerModifier
     //       that has tracked changes would run, leaving the other modifiers alone
     columnHeader: modifier(
-      (element: HTMLElement, [column]: [Column<DataType>]): Destructor => {
+      (element: HTMLElement, [column]: [Column<DataType, OptionsType, CellArgs>]): Destructor => {
         const modifiers = this.plugins.map(
           (plugin) => plugin.headerCellModifier,
         );
@@ -251,7 +252,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
       return dataFn() ?? [];
     },
-    map: (datum) => new Row(this, datum),
+    map: (datum) => new Row<DataType>(this, datum),
   });
 
   columns = map(this, {
@@ -286,7 +287,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
       return result;
     },
     map: (config) => {
-      return new Column<DataType>(this, {
+      return new Column<DataType, OptionsType, CellArgs>(this, {
         ...DEFAULT_COLUMN_CONFIG,
         ...config,
       });

@@ -296,10 +296,10 @@ export const preferences = {
  * This works recursively up the plugin tree up until a plugin has no requirements, and then
  * all columns from the table are returned.
  */
-function columnsFor<DataType = any>(
-  table: Table<DataType>,
+function columnsFor<DataType = any, OptionsType = any, CellArgs = any>(
+  table: Table<DataType, OptionsType, CellArgs>,
   requester?: Plugin<any>,
-): Column<DataType>[] {
+): Column<DataType, OptionsType, CellArgs>[] {
   assert(
     `First argument passed to columns.for must be an instance of Table`,
     table[TABLE_KEY],
@@ -417,10 +417,10 @@ export const columns = {
    * If a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  next: <Data = unknown>(
-    current: Column<Data>,
+  next: <Data = unknown, OptionsType = any>(
+    current: Column<Data, OptionsType>,
     requester?: Plugin<any>,
-  ): Column<Data> | undefined => {
+  ): Column<Data, OptionsType> | undefined => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -449,10 +449,10 @@ export const columns = {
    * If a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  previous: <Data = unknown>(
-    current: Column<Data>,
+  previous: <Data = unknown, OptionsType = any>(
+    current: Column<Data, OptionsType>,
     requester?: Plugin<any>,
-  ): Column<Data> | undefined => {
+  ): Column<Data, OptionsType> | undefined => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -479,10 +479,10 @@ export const columns = {
    * if a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  before: <Data = unknown>(
-    current: Column<Data>,
+  before: <Data = unknown, OptionsType = any>(
+    current: Column<Data, OptionsType>,
     requester?: Plugin<any>,
-  ): Column<Data>[] => {
+  ): Column<Data, OptionsType>[] => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -498,10 +498,10 @@ export const columns = {
    * if a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  after: <Data = unknown>(
-    current: Column<Data>,
+  after: <Data = unknown, OptionsType = any>(
+    current: Column<Data, OptionsType>,
     requester?: Plugin<any>,
-  ): Column<Data>[] => {
+  ): Column<Data, OptionsType>[] => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -767,7 +767,7 @@ function getPluginInstance<Instance>(
   factory: () => Instance,
 ): Instance;
 function getPluginInstance<RootKey extends Column<any> | Row<any>, Instance>(
-  map: WeakMap<Column | Row, Map<Class<Instance>, Instance>>,
+  map: WeakMap<Column<any> | Row<any>, Map<Class<Instance>, Instance>>,
   rootKey: RootKey,
   mapKey: Class<Instance>,
   factory: () => Instance,
@@ -776,13 +776,13 @@ function getPluginInstance<RootKey extends Column<any> | Row<any>, Instance>(
   ...args:
     | [FactoryMap<Instance>, Class<Instance>, () => Instance]
     | [
-        WeakMap<Column | Row, FactoryMap<Instance>>,
+        WeakMap<Column<any> | Row<any>, FactoryMap<Instance>>,
         RootKey,
         Class<Instance>,
         () => Instance,
       ]
 ): Instance {
-  let map: WeakMap<Column | Row, FactoryMap<Instance>> | FactoryMap<Instance>;
+  let map: WeakMap<Column<any> | Row<any>, FactoryMap<Instance>> | FactoryMap<Instance>;
   let mapKey: Class<Instance>;
   let rootKey: RootKey | undefined;
   let factory: () => Instance;
