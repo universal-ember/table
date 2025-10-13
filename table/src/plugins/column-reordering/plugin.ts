@@ -217,7 +217,7 @@ export class TableMeta {
  * @private
  * Used for keeping track of and updating column order
  */
-export class ColumnOrder {
+export class ColumnOrder<DataType = unknown> {
   /**
    * This map will be empty until we re-order something.
    */
@@ -237,7 +237,7 @@ export class ColumnOrder {
        * - Provide `visibleColumns` to indicate which are visible
        * - Hidden columns maintain their position when toggled
        */
-      columns: () => Column[];
+      columns: () => Column<DataType>[];
       /**
        * Optional: Record of which columns are currently visible.
        * When provided, moveLeft/moveRight will skip over hidden columns.
