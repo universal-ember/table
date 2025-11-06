@@ -91,6 +91,20 @@ export interface TableConfig<DataType> {
   pagination?: Pagination;
 
   /**
+   * Default value to display in cells when the data is empty/missing.
+   * If not specified, defaults to '--'.
+   *
+   * Can be overridden per-column via the column's options.defaultValue.
+   *
+   * @example
+   * ```js
+   * defaultCellValue: '' // show empty string instead of '--'
+   * defaultCellValue: 'N/A' // show 'N/A'
+   * ```
+   */
+  defaultCellValue?: string;
+
+  /**
    * Foundational to tables is how to store settings within them.
    * The `key` is meant to identify a particular kind of table. For example, if
    * you have a table representing "blog posts", your table key may be "blog-posts".
