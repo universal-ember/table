@@ -1,5 +1,30 @@
 # Changelog
 
+## Release (2025-11-06)
+
+@universal-ember/table 3.3.0 (minor)
+
+#### :rocket: Enhancement
+* `@universal-ember/table`
+  * [#122](https://github.com/universal-ember/table/pull/122) Prevent auto-redistributing with tableLayout: 'fixed'  ([@johanrd](https://github.com/johanrd))
+* `docs-app`, `@universal-ember/table`, `test-app`
+  * [#120](https://github.com/universal-ember/table/pull/120) Add table-level defaultCellValue config option ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#121](https://github.com/universal-ember/table/pull/121) Fixes infinite resize loop at non-100% zoom levels caused by subpixel rounding errors. ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* [#112](https://github.com/universal-ember/table/pull/112) Add thank you to the contributors ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### :house: Internal
+* [#113](https://github.com/universal-ember/table/pull/113) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))
+
+#### Committers: 3
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-10-03)
 
 @universal-ember/table 3.2.0 (minor)
