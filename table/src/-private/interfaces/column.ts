@@ -6,16 +6,16 @@ import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
 
 // Configuration context (for defining column options) - optional fields for user convenience
-export interface CellConfigContext<T = unknown, OptionsType = any> {
-  column?: Column<T, OptionsType>;
-  row?: Row<T>;
+export interface CellConfigContext<DataType = unknown, OptionsType = unknown> {
+  column?: Column<DataType, OptionsType>;
+  row?: Row<DataType>;
   options?: OptionsType & CellOptions;
 }
 
 // Runtime context (for Cell components) - required fields since they're always provided
-export interface CellContext<T, OptionsType = any> {
-  column: Column<T, OptionsType>;
-  row: Row<T>;
+export interface CellContext<DataType, OptionsType = unknown> {
+  column: Column<DataType, OptionsType>;
+  row: Row<DataType>;
   options?: OptionsType & CellOptions;
 }
 
@@ -30,7 +30,11 @@ export type CellOptions = {
   defaultValue?: string;
 } & Record<string, unknown>;
 
-export interface ColumnConfig<T = unknown, OptionsType = any, CellArgs = any> {
+export interface ColumnConfig<
+  DataType = unknown,
+  OptionsType = unknown,
+  CellArgs = unknown,
+> {
   /**
    * the `key` is required for preferences storage, as well as
    * managing uniqueness of the columns in an easy-to-understand way.
@@ -46,7 +50,7 @@ export interface ColumnConfig<T = unknown, OptionsType = any, CellArgs = any> {
   /**
    * Optionally provide a function to determine the value of a row at this column
    */
-  value?(context: CellConfigContext<T>): ContentValue;
+  value?(context: CellConfigContext<DataType>): ContentValue;
 
   /**
    * Recommended property to use for custom components for each cell per column.
@@ -63,7 +67,7 @@ export interface ColumnConfig<T = unknown, OptionsType = any, CellArgs = any> {
   /**
    * Bag of extra properties to pass to Cell via `@options`, if desired
    */
-  options?(context: CellConfigContext<T>): OptionsType;
+  options?(context: CellConfigContext<DataType>): OptionsType;
 
   /**
    * Each plugin may provide column options, and provides similar syntax to how
@@ -79,4 +83,4 @@ export interface ColumnConfig<T = unknown, OptionsType = any, CellArgs = any> {
   pluginOptions?: ColumnPluginOption[];
 }
 
-export type ColumnKey<T> = NonNullable<ColumnConfig<T>['key']>;
+export type ColumnKey<DataType> = NonNullable<ColumnConfig<DataType>['key']>;
