@@ -2,9 +2,9 @@ import { Table } from './table.ts';
 
 import type { TableConfig, CellContext } from './interfaces';
 
-type Args<T, OptionsType = any, CellArgs = any> =
-  | [destroyable: object, options: TableConfig<T, OptionsType, CellArgs>]
-  | [options: TableConfig<T, OptionsType, CellArgs>];
+type Args<DataType, OptionsType = any, CellArgs = any> =
+  | [destroyable: object, options: TableConfig<DataType, OptionsType, CellArgs>]
+  | [options: TableConfig<DataType, OptionsType, CellArgs>];
 
 /**
  * Represents a UI-less version of a table
@@ -23,9 +23,9 @@ type Args<T, OptionsType = any, CellArgs = any> =
  * }
  * ```
  */
-export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
-  options: TableConfig<T, OptionsType, CellArgs>,
-): Table<T, OptionsType, CellArgs>;
+export function headlessTable<DataType = unknown, OptionsType = any, CellArgs = any>(
+  options: TableConfig<DataType, OptionsType, CellArgs>,
+): Table<DataType, OptionsType, CellArgs>;
 
 /**
  * Represents a UI-less version of a table
@@ -44,14 +44,14 @@ export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
  * ```
  *
  */
-export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
+export function headlessTable<DataType = unknown, OptionsType = any, CellArgs = any>(
   destroyable: object,
-  options: TableConfig<T, OptionsType, CellArgs>,
-): Table<T, OptionsType, CellArgs>;
+  options: TableConfig<DataType, OptionsType, CellArgs>,
+): Table<DataType, OptionsType, CellArgs>;
 
-export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
-  ...args: Args<T, OptionsType, CellArgs>
-): Table<T, OptionsType, CellArgs> {
+export function headlessTable<DataType = unknown, OptionsType = any, CellArgs = any>(
+  ...args: Args<DataType, OptionsType, CellArgs>
+): Table<DataType, OptionsType, CellArgs> {
   if (args.length === 2) {
     const [destroyable, options] = args;
 
@@ -60,7 +60,7 @@ export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
      * otherwise individual-property reactivity can be managed on a per-property
      * "thunk"-basis
      */
-    return Table.from<Table<T, OptionsType, CellArgs>>(
+    return Table.from<Table<DataType, OptionsType, CellArgs>>(
       destroyable,
       () => options,
     );
@@ -68,5 +68,5 @@ export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
 
   const [options] = args;
 
-  return Table.from<Table<T, OptionsType, CellArgs>>(() => options);
+  return Table.from<Table<DataType, OptionsType, CellArgs>>(() => options);
 }
