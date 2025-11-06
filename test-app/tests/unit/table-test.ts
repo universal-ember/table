@@ -105,4 +105,76 @@ module('Unit | -private | table', function (hooks) {
       'expected error received',
     );
   });
+
+  test('defaultCellValue: uses table-level default when no column default is specified', async function (assert) {
+    const table = headlessTable(this, {
+      columns: () => [
+        { key: 'firstName', name: 'First name' },
+        { key: 'missing', name: 'Missing column' },
+      ],
+      data: () => [{ firstName: 'John' }],
+      defaultCellValue: 'N/A',
+    });
+
+    const row = table.rows[0]!;
+    const firstNameColumn = table.columns[0];
+    const missingColumn = table.columns[1];
+
+    assert.strictEqual(
+      firstNameColumn?.getValueForRow(row),
+      'John',
+      'column with data shows actual value',
+    );
+    assert.strictEqual(
+      missingColumn?.getValueForRow(row),
+      'N/A',
+      'column without data shows table-level default',
+    );
+  });
+
+  test('defaultCellValue: column-level default overrides table-level default', async function (assert) {
+    const table = headlessTable(this, {
+      columns: () => [
+        {
+          key: 'missing1',
+          name: 'Missing 1',
+          options: () => ({ defaultValue: '???' }),
+        },
+        { key: 'missing2', name: 'Missing 2' },
+      ],
+      data: () => [{}],
+      defaultCellValue: 'N/A',
+    });
+
+    const row = table.rows[0]!;
+    const column1 = table.columns[0];
+    const column2 = table.columns[1];
+
+    assert.strictEqual(
+      column1?.getValueForRow(row),
+      '???',
+      'column-level default overrides table-level default',
+    );
+    assert.strictEqual(
+      column2?.getValueForRow(row),
+      'N/A',
+      'column without specific default uses table-level default',
+    );
+  });
+
+  test('defaultCellValue: uses default "--" when no defaults are configured', async function (assert) {
+    const table = headlessTable(this, {
+      columns: () => [{ key: 'missing', name: 'Missing column' }],
+      data: () => [{}],
+    });
+
+    const row = table.rows[0]!;
+    const column = table.columns[0];
+
+    assert.strictEqual(
+      column?.getValueForRow(row),
+      '--',
+      'uses built-in default when no defaults are configured',
+    );
+  });
 });
