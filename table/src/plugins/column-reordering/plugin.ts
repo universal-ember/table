@@ -124,7 +124,7 @@ export class TableMeta {
    * Get the curret order/position of a column
    */
   @action
-  getPosition<DataType = unknown>(column: Column<DataType>) {
+  getPosition<DataType = unknown>(column: Column) {
     return this.columnOrder.get(column.key);
   }
 
@@ -133,7 +133,7 @@ export class TableMeta {
    */
   @action
   setPosition<DataType = unknown>(
-    column: Column<DataType>,
+    column: Column,
     newPosition: number,
   ) {
     return this.columnOrder.swapWith(column.key, newPosition);
@@ -217,7 +217,7 @@ export class TableMeta {
  * @private
  * Used for keeping track of and updating column order
  */
-export class ColumnOrder<DataType = unknown> {
+export class ColumnOrder {
   /**
    * This map will be empty until we re-order something.
    */
@@ -237,7 +237,7 @@ export class ColumnOrder<DataType = unknown> {
        * - Provide `visibleColumns` to indicate which are visible
        * - Hidden columns maintain their position when toggled
        */
-      columns: () => Column<DataType>[];
+      columns: () => Column[];
       /**
        * Optional: Record of which columns are currently visible.
        * When provided, moveLeft/moveRight will skip over hidden columns.
@@ -496,18 +496,18 @@ export class ColumnOrder<DataType = unknown> {
   }
 
   @cached
-  get orderedColumns(): Column<DataType>[] {
+  get orderedColumns(): Column[] {
     const allColumns = this.args.columns();
     const columnsByKey = allColumns.reduce(
       (keyMap, column) => {
         keyMap[column.key] = column;
         return keyMap;
       },
-      {} as Record<string, Column<DataType>>,
+      {} as Record<string, Column>,
     );
     const mergedOrder = orderOf(allColumns, this.map);
 
-    const result: Column<DataType>[] = Array.from({
+    const result: Column[] = Array.from({
       length: allColumns.length,
     });
 
