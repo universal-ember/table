@@ -376,11 +376,6 @@ export class TableMeta {
       entry.target instanceof HTMLElement,
     );
 
-    // For fixed layout, columns have explicit widths and should not be auto-redistributed
-    if (this.options?.tableLayout === 'fixed') {
-      return;
-    }
-
     this.scrollContainerWidth = getAccurateClientWidth(entry.target);
     this.scrollContainerHeight = getAccurateClientHeight(entry.target);
 
