@@ -2,16 +2,20 @@
   "solution": {
     "@universal-ember/table": {
       "impact": "minor",
-      "oldVersion": "3.0.4",
-      "newVersion": "3.1.0",
+      "oldVersion": "3.1.1",
+      "newVersion": "3.2.0",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
+        },
+        {
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2025-08-25)\n\n@universal-ember/table 3.1.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#97](https://github.com/universal-ember/table/pull/97) Simple column resizing setting with `tableLayout: 'fixed'` ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-10-03)\n\n@universal-ember/table 3.2.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#74](https://github.com/universal-ember/table/pull/74) Reordering hidden columns ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#74](https://github.com/universal-ember/table/pull/74) Reordering hidden columns ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* `docs-app`\n  * [#109](https://github.com/universal-ember/table/pull/109) chore: Fix file name spelling ([@jayden-leuciuc](https://github.com/jayden-leuciuc))\n  * [#105](https://github.com/universal-ember/table/pull/105) docs: Single row selection link ([@MichalBryxi](https://github.com/MichalBryxi))\n\n#### Committers: 3\n- Jayden Leuciuc ([@jayden-leuciuc](https://github.com/jayden-leuciuc))\n- Michal Bryxí ([@MichalBryxi](https://github.com/MichalBryxi))\n- [@johanrd](https://github.com/johanrd)\n"
 }

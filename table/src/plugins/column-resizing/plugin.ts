@@ -270,7 +270,9 @@ export class ColumnMeta {
  *   Otherwise the table will infinitely resize itself
  */
 function distributeDelta(delta: number, visibleColumns: Column[]) {
-  if (delta === 0) return;
+  // Use a tolerance threshold to prevent infinite resize loops from subpixel rounding
+  // at different zoom levels. Treat deltas smaller than 0.5px as zero.
+  if (Math.abs(delta) < 0.5) return;
 
   const metas = visibleColumns.map((column) =>
     meta.forColumn(column, ColumnResizing),
@@ -373,6 +375,11 @@ export class TableMeta {
       'scroll container element must be an HTMLElement',
       entry.target instanceof HTMLElement,
     );
+
+    // For fixed layout, columns have explicit widths and should not be auto-redistributed
+    if (this.options?.tableLayout === 'fixed') {
+      return;
+    }
 
     this.scrollContainerWidth = getAccurateClientWidth(entry.target);
     this.scrollContainerHeight = getAccurateClientHeight(entry.target);

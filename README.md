@@ -39,3 +39,93 @@ See the [Documentation][docs-app] for examples.
 [docs-app]: https://ue-table.pages.dev/
 [docs-api]: https://ue-table.pages.dev/api/modules/
 
+
+## Contributors
+
+<!-- readme: contributors -start -->
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/NullVoxPopuli">
+                    <img src="https://avatars.githubusercontent.com/u/199018?v=4" width="100;" alt="NullVoxPopuli"/>
+                    <br />
+                    <sub><b>NullVoxPopuli</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/joelamb">
+                    <img src="https://avatars.githubusercontent.com/u/42837452?v=4" width="100;" alt="joelamb"/>
+                    <br />
+                    <sub><b>Joe Lamb</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/johanrd">
+                    <img src="https://avatars.githubusercontent.com/u/4601554?v=4" width="100;" alt="johanrd"/>
+                    <br />
+                    <sub><b>johanrd</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/vitch">
+                    <img src="https://avatars.githubusercontent.com/u/9898?v=4" width="100;" alt="vitch"/>
+                    <br />
+                    <sub><b>Kelvin Luck</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/ynotdraw">
+                    <img src="https://avatars.githubusercontent.com/u/8069555?v=4" width="100;" alt="ynotdraw"/>
+                    <br />
+                    <sub><b>Tony Ward</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/nicolechung">
+                    <img src="https://avatars.githubusercontent.com/u/771170?v=4" width="100;" alt="nicolechung"/>
+                    <br />
+                    <sub><b>nicole chung</b></sub>
+                </a>
+            </td>
+		</tr>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/semantic-release-bot">
+                    <img src="https://avatars.githubusercontent.com/u/32174276?v=4" width="100;" alt="semantic-release-bot"/>
+                    <br />
+                    <sub><b>Semantic Release Bot</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Dhaulagiri">
+                    <img src="https://avatars.githubusercontent.com/u/1672302?v=4" width="100;" alt="Dhaulagiri"/>
+                    <br />
+                    <sub><b>Brian Runnells</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/jayden-leuciuc">
+                    <img src="https://avatars.githubusercontent.com/u/68298467?v=4" width="100;" alt="jayden-leuciuc"/>
+                    <br />
+                    <sub><b>Jayden Leuciuc</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/MichalBryxi">
+                    <img src="https://avatars.githubusercontent.com/u/847473?v=4" width="100;" alt="MichalBryxi"/>
+                    <br />
+                    <sub><b>Michal Bryxí</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/ember-tomster">
+                    <img src="https://avatars.githubusercontent.com/u/17934356?v=4" width="100;" alt="ember-tomster"/>
+                    <br />
+                    <sub><b>ember-tomster</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
+<!-- readme: contributors -end -->
