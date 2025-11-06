@@ -782,7 +782,9 @@ function getPluginInstance<RootKey extends Column<any> | Row<any>, Instance>(
         () => Instance,
       ]
 ): Instance {
-  let map: WeakMap<Column<any> | Row<any>, FactoryMap<Instance>> | FactoryMap<Instance>;
+  let map:
+    | WeakMap<Column<any> | Row<any>, FactoryMap<Instance>>
+    | FactoryMap<Instance>;
   let mapKey: Class<Instance>;
   let rootKey: RootKey | undefined;
   let factory: () => Instance;

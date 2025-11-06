@@ -55,7 +55,11 @@ const attachContainer = (element: Element, table: Table) => {
   table.scrollContainerElement = element;
 };
 
-export class Table<DataType = unknown, OptionsType = any, CellArgs = any> extends Resource<Signature<DataType, OptionsType, CellArgs>> {
+export class Table<
+  DataType = unknown,
+  OptionsType = any,
+  CellArgs = any,
+> extends Resource<Signature<DataType, OptionsType, CellArgs>> {
   /**
    * @private
    */
@@ -67,7 +71,10 @@ export class Table<DataType = unknown, OptionsType = any, CellArgs = any> extend
   /**
    * @private
    */
-  [COLUMN_META_KEY] = new WeakMap<Column<DataType, OptionsType, CellArgs>, Map<Class<unknown>, any>>();
+  [COLUMN_META_KEY] = new WeakMap<
+    Column<DataType, OptionsType, CellArgs>,
+    Map<Class<unknown>, any>
+  >();
   /**
    * @private
    */
@@ -111,7 +118,10 @@ export class Table<DataType = unknown, OptionsType = any, CellArgs = any> extend
   /**
    * @private
    */
-  modify(_: [] | undefined, named: Signature<DataType, OptionsType, CellArgs>['Named']) {
+  modify(
+    _: [] | undefined,
+    named: Signature<DataType, OptionsType, CellArgs>['Named'],
+  ) {
     this.args = { named };
 
     // only set the preferences once
@@ -158,7 +168,10 @@ export class Table<DataType = unknown, OptionsType = any, CellArgs = any> extend
     //       With curried+composed modifiers, only the plugin's headerModifier
     //       that has tracked changes would run, leaving the other modifiers alone
     columnHeader: modifier(
-      (element: HTMLElement, [column]: [Column<DataType, OptionsType, CellArgs>]): Destructor => {
+      (
+        element: HTMLElement,
+        [column]: [Column<DataType, OptionsType, CellArgs>],
+      ): Destructor => {
         const modifiers = this.plugins.map(
           (plugin) => plugin.headerCellModifier,
         );

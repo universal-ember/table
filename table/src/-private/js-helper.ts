@@ -23,7 +23,9 @@ type Args<T, OptionsType = any, CellArgs = any> =
  * }
  * ```
  */
-export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(options: TableConfig<T, OptionsType, CellArgs>): Table<T, OptionsType, CellArgs>;
+export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
+  options: TableConfig<T, OptionsType, CellArgs>,
+): Table<T, OptionsType, CellArgs>;
 
 /**
  * Represents a UI-less version of a table
@@ -47,7 +49,9 @@ export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
   options: TableConfig<T, OptionsType, CellArgs>,
 ): Table<T, OptionsType, CellArgs>;
 
-export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(...args: Args<T, OptionsType, CellArgs>): Table<T, OptionsType, CellArgs> {
+export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(
+  ...args: Args<T, OptionsType, CellArgs>
+): Table<T, OptionsType, CellArgs> {
   if (args.length === 2) {
     const [destroyable, options] = args;
 
@@ -56,7 +60,10 @@ export function headlessTable<T = unknown, OptionsType = any, CellArgs = any>(..
      * otherwise individual-property reactivity can be managed on a per-property
      * "thunk"-basis
      */
-    return Table.from<Table<T, OptionsType, CellArgs>>(destroyable, () => options);
+    return Table.from<Table<T, OptionsType, CellArgs>>(
+      destroyable,
+      () => options,
+    );
   }
 
   const [options] = args;

@@ -23,7 +23,7 @@ export const moveRight = <DataType = unknown>(column: Column<DataType>) =>
  */
 export const setColumnOrder = <DataType = unknown>(
   table: Table<DataType>,
-  order: ColumnOrder,
+  order: ColumnOrder<DataType>,
 ) => meta.forTable(table, ColumnReordering).setOrder(order);
 
 /**

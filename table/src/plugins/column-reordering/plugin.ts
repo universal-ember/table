@@ -217,7 +217,7 @@ export class TableMeta {
  * @private
  * Used for keeping track of and updating column order
  */
-export class ColumnOrder {
+export class ColumnOrder<DataType = unknown> {
   /**
    * This map will be empty until we re-order something.
    */
@@ -237,7 +237,7 @@ export class ColumnOrder {
        * - Provide `visibleColumns` to indicate which are visible
        * - Hidden columns maintain their position when toggled
        */
-      columns: () => Column[];
+      columns: () => Column<DataType>[];
       /**
        * Optional: Record of which columns are currently visible.
        * When provided, moveLeft/moveRight will skip over hidden columns.
@@ -496,18 +496,20 @@ export class ColumnOrder {
   }
 
   @cached
-  get orderedColumns(): Column[] {
+  get orderedColumns(): Column<DataType>[] {
     const allColumns = this.args.columns();
     const columnsByKey = allColumns.reduce(
       (keyMap, column) => {
         keyMap[column.key] = column;
         return keyMap;
       },
-      {} as Record<string, Column>,
+      {} as Record<string, Column<DataType>>,
     );
     const mergedOrder = orderOf(allColumns, this.map);
 
-    const result: Column[] = Array.from({ length: allColumns.length });
+    const result: Column<DataType>[] = Array.from({
+      length: allColumns.length,
+    });
 
     for (const [key, position] of mergedOrder.entries()) {
       const column = columnsByKey[key];
