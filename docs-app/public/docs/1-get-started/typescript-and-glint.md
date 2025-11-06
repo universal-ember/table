@@ -91,7 +91,11 @@ const table = headlessTable<MyDataType>(this, {
 To get type safety for custom options passed to cells:
 
 ```ts
-import { headlessTable, type ColumnConfig, type CellContext } from '@universal-ember/table';
+import {
+  headlessTable,
+  type ColumnConfig,
+  type CellContext,
+} from "@universal-ember/table";
 
 interface MyData {
   id: string;
@@ -110,11 +114,11 @@ interface MyCellArgs extends CellContext<MyData, MyOptions> {
 const table = headlessTable<MyData, MyOptions, MyCellArgs>(this, {
   columns: () => [
     {
-      key: 'name',
-      name: 'Name',
+      key: "name",
+      name: "Name",
       Cell: MyCustomCell, // fully typed!
       options: ({ row }) => ({
-        highlightColor: row.data.id === 'special' ? 'blue' : 'gray',
+        highlightColor: row.data.id === "special" ? "blue" : "gray",
         showBadge: true,
       }),
     },
