@@ -132,10 +132,7 @@ export class TableMeta {
    * Swap the column with the column at `newPosition`
    */
   @action
-  setPosition<DataType = unknown>(
-    column: Column,
-    newPosition: number,
-  ) {
+  setPosition<DataType = unknown>(column: Column, newPosition: number) {
     return this.columnOrder.swapWith(column.key, newPosition);
   }
 
