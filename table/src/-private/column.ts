@@ -59,7 +59,8 @@ export class Column<T = unknown> {
   getOptionsForRow(row: Row<T>) {
     const configuredDefault = this.table.config.defaultCellValue;
     const defaults = {
-      [DEFAULT_VALUE_KEY]: configuredDefault !== undefined ? configuredDefault : DEFAULT_VALUE,
+      [DEFAULT_VALUE_KEY]:
+        configuredDefault !== undefined ? configuredDefault : DEFAULT_VALUE,
     };
 
     return {
