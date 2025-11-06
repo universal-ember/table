@@ -6,7 +6,7 @@ import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
 
 // Configuration context (for defining column options) - optional fields for user convenience
-export interface CellConfigContext<T, OptionsType = any> {
+export interface CellConfigContext<T = unknown, OptionsType = any> {
   column?: Column<T, OptionsType>;
   row?: Row<T>;
   options?: OptionsType & CellOptions;
@@ -46,7 +46,7 @@ export interface ColumnConfig<T = unknown, OptionsType = any, CellArgs = any> {
   /**
    * Optionally provide a function to determine the value of a row at this column
    */
-  value?: (context: CellConfigContext<T>) => ContentValue;
+  value?(context: CellConfigContext<T>): ContentValue;
 
   /**
    * Recommended property to use for custom components for each cell per column.
@@ -63,7 +63,7 @@ export interface ColumnConfig<T = unknown, OptionsType = any, CellArgs = any> {
   /**
    * Bag of extra properties to pass to Cell via `@options`, if desired
    */
-  options?: (context: CellConfigContext<T>) => OptionsType;
+  options?(context: CellConfigContext<T>): OptionsType;
 
   /**
    * Each plugin may provide column options, and provides similar syntax to how

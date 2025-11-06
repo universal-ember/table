@@ -51,10 +51,10 @@ export const getColumns = () => {
   return ths;
 };
 
-export class Context {
+export class Context<DataType = unknown> {
   @tracked containerWidth = 1000;
 
-  columns: ColumnConfig[] = [
+  columns: ColumnConfig<DataType>[] = [
     { name: "A", key: "A" },
     { name: "B", key: "B" },
     { name: "C", key: "C" },
@@ -66,9 +66,9 @@ export class Context {
     await new Promise((resolve) => requestAnimationFrame(resolve));
   };
 
-  table = headlessTable(this, {
+  table = headlessTable<DataType>(this, {
     columns: () => this.columns,
-    data: () => [] as unknown[],
+    data: () => [] as DataType[],
     plugins: [ColumnResizing],
   });
 }
