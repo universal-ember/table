@@ -116,7 +116,7 @@ module('Unit | -private | table', function (hooks) {
       defaultCellValue: 'N/A',
     });
 
-    const row = table.rows[0];
+    const row = table.rows[0]!;
     const firstNameColumn = table.columns[0];
     const missingColumn = table.columns[1];
 
@@ -146,7 +146,7 @@ module('Unit | -private | table', function (hooks) {
       defaultCellValue: 'N/A',
     });
 
-    const row = table.rows[0];
+    const row = table.rows[0]!;
     const column1 = table.columns[0];
     const column2 = table.columns[1];
 
@@ -168,7 +168,7 @@ module('Unit | -private | table', function (hooks) {
       data: () => [{}],
     });
 
-    const row = table.rows[0];
+    const row = table.rows[0]!;
     const column = table.columns[0];
 
     assert.strictEqual(
