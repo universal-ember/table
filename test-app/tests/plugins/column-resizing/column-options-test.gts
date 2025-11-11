@@ -13,6 +13,7 @@ import {
   ColumnResizing,
   resizeHandle,
   hasResizeHandle,
+  isResizable,
 } from "@universal-ember/table/plugins/column-resizing";
 import {
   createHelpers,
@@ -150,6 +151,36 @@ module("Plugins | resizing | column options", function (hooks) {
       assert.strictEqual(
         meta.forColumn(columns[3], ColumnResizing).isResizable,
         false,
+      );
+    });
+
+    test(`isResizable helper returns correct values`, async function (assert) {
+      let columns = ctx.table.columns;
+
+      debugAssert(
+        `Columns are missing`,
+        columns[0] && columns[1] && columns[2] && columns[3],
+      );
+
+      assert.strictEqual(
+        isResizable(columns[0]),
+        false,
+        "Column A is not resizable",
+      );
+      assert.strictEqual(
+        isResizable(columns[1]),
+        true,
+        "Column B is resizable",
+      );
+      assert.strictEqual(
+        isResizable(columns[2]),
+        true,
+        "Column C is resizable",
+      );
+      assert.strictEqual(
+        isResizable(columns[3]),
+        false,
+        "Column D is not resizable",
       );
     });
 

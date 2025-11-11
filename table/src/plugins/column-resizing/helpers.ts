@@ -6,6 +6,13 @@ import { ColumnResizing } from './plugin.ts';
 import type { Column } from '../../index.ts';
 
 /**
+ * Is the column resizable?
+ * This checks if resizing is enabled for this specific column,
+ */
+export const isResizable = <DataType = unknown>(column: Column<DataType>) =>
+  meta.forColumn(column, ColumnResizing).isResizable;
+
+/**
  * The column actively being resized by the user.
  *
  * Note that during resizing, multiple columns are resized at once,

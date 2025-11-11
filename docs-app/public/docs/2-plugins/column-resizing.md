@@ -103,6 +103,8 @@ import { headlessTable } from "@universal-ember/table";
 import {
   ColumnResizing,
   resizeHandle,
+  isResizable,
+  isResizing,
 } from "@universal-ember/table/plugins/column-resizing";
 
 // ...
@@ -278,6 +280,36 @@ export default class extends Component {
 ### Preferences
 
 The width will be stored in preferences, per column.
+
+### Helpers
+
+#### `isResizable(column)`
+
+Checks if a specific column is resizable. This returns `true` if resizing is enabled for the column, and `false` otherwise.
+
+```js
+import { isResizable } from "@universal-ember/table/plugins/column-resizing";
+
+{{#if (isResizable column)}}
+  <button {{resizeHandle column}}>↔</button>
+{{/if}}
+```
+
+This is useful when you want to conditionally render UI elements (like resize handles) based on whether a column can be resized.
+
+#### `isResizing(column)`
+
+Checks if a specific column is currently being resized by the user. This returns `true` while the user is actively dragging the resize handle for that column.
+
+```js
+import { isResizing } from "@universal-ember/table/plugins/column-resizing";
+
+{{#if (isResizing column)}}
+  <div class="resize-indicator"></div>
+{{/if}}
+```
+
+This is useful for showing visual feedback during the resize operation, such as a vertical line or highlight.
 
 ### Accessibility
 
