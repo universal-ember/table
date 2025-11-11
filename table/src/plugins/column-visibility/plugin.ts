@@ -64,8 +64,8 @@ export class ColumnVisibility
   }
 }
 
-export class ColumnMeta<Data = unknown> {
-  constructor(private column: Column<Data>) {}
+export class ColumnMeta<DataType = unknown> {
+  constructor(private column: Column<DataType>) {}
 
   get isVisible(): boolean {
     const columnPreferences = preferences.forColumn(
@@ -132,11 +132,11 @@ export class ColumnMeta<Data = unknown> {
   };
 }
 
-export class TableMeta<Data = unknown> {
-  constructor(private table: Table<Data>) {}
+export class TableMeta<DataType = unknown> {
+  constructor(private table: Table<DataType>) {}
 
   @cached
-  get visibleColumns(): Column<Data>[] {
+  get visibleColumns(): Column<DataType>[] {
     const allColumns = this.table.columns.values();
 
     return allColumns.filter((column) => {
@@ -147,7 +147,7 @@ export class TableMeta<Data = unknown> {
   }
 
   @action
-  toggleColumnVisibility(column: Column<Data>) {
+  toggleColumnVisibility(column: Column<DataType>) {
     const columnMeta = meta.forColumn(column, ColumnVisibility);
 
     columnMeta.toggle();

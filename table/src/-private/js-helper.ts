@@ -1,10 +1,10 @@
 import { Table } from './table.ts';
 
-import type { TableConfig } from './interfaces';
+import type { TableConfig, CellContext } from './interfaces';
 
-type Args<T> =
-  | [destroyable: object, options: TableConfig<T>]
-  | [options: TableConfig<T>];
+type Args<DataType, OptionsType = any, CellArgs = any> =
+  | [destroyable: object, options: TableConfig<DataType, OptionsType, CellArgs>]
+  | [options: TableConfig<DataType, OptionsType, CellArgs>];
 
 /**
  * Represents a UI-less version of a table
@@ -23,7 +23,9 @@ type Args<T> =
  * }
  * ```
  */
-export function headlessTable<T = unknown>(options: TableConfig<T>): Table<T>;
+export function headlessTable<DataType = unknown, OptionsType = any, CellArgs = any>(
+  options: TableConfig<DataType, OptionsType, CellArgs>,
+): Table<DataType, OptionsType, CellArgs>;
 
 /**
  * Represents a UI-less version of a table
@@ -42,12 +44,14 @@ export function headlessTable<T = unknown>(options: TableConfig<T>): Table<T>;
  * ```
  *
  */
-export function headlessTable<T = unknown>(
+export function headlessTable<DataType = unknown, OptionsType = any, CellArgs = any>(
   destroyable: object,
-  options: TableConfig<T>,
-): Table<T>;
+  options: TableConfig<DataType, OptionsType, CellArgs>,
+): Table<DataType, OptionsType, CellArgs>;
 
-export function headlessTable<T = unknown>(...args: Args<T>): Table<T> {
+export function headlessTable<DataType = unknown, OptionsType = any, CellArgs = any>(
+  ...args: Args<DataType, OptionsType, CellArgs>
+): Table<DataType, OptionsType, CellArgs> {
   if (args.length === 2) {
     const [destroyable, options] = args;
 
@@ -56,10 +60,13 @@ export function headlessTable<T = unknown>(...args: Args<T>): Table<T> {
      * otherwise individual-property reactivity can be managed on a per-property
      * "thunk"-basis
      */
-    return Table.from<Table<T>>(destroyable, () => options);
+    return Table.from<Table<DataType, OptionsType, CellArgs>>(
+      destroyable,
+      () => options,
+    );
   }
 
   const [options] = args;
 
-  return Table.from<Table<T>>(() => options);
+  return Table.from<Table<DataType, OptionsType, CellArgs>>(() => options);
 }

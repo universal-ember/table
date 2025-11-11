@@ -124,7 +124,7 @@ export class TableMeta {
    * Get the curret order/position of a column
    */
   @action
-  getPosition<DataType = unknown>(column: Column<DataType>) {
+  getPosition<DataType = unknown>(column: Column) {
     return this.columnOrder.get(column.key);
   }
 
@@ -132,10 +132,7 @@ export class TableMeta {
    * Swap the column with the column at `newPosition`
    */
   @action
-  setPosition<DataType = unknown>(
-    column: Column<DataType>,
-    newPosition: number,
-  ) {
+  setPosition<DataType = unknown>(column: Column, newPosition: number) {
     return this.columnOrder.swapWith(column.key, newPosition);
   }
 
@@ -507,7 +504,9 @@ export class ColumnOrder {
     );
     const mergedOrder = orderOf(allColumns, this.map);
 
-    const result: Column[] = Array.from({ length: allColumns.length });
+    const result: Column[] = Array.from({
+      length: allColumns.length,
+    });
 
     for (const [key, position] of mergedOrder.entries()) {
       const column = columnsByKey[key];

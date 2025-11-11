@@ -1,5 +1,5 @@
 import type { Plugins } from '../../plugins/-private/utils';
-import type { ColumnConfig } from './column';
+import type { ColumnConfig, CellOptions, CellContext } from './column';
 import type { Pagination } from './pagination';
 import type { PreferencesAdapter } from './preferences';
 import type { Selection } from './selection';
@@ -9,13 +9,13 @@ export interface TableMeta {
   totalRowsSelectedCount?: number;
 }
 
-export interface TableConfig<DataType> {
+export interface TableConfig<DataType, OptionsType = any, CellArgs = any> {
   /**
    * Configuration describing how the table will crawl through `data`
    * and render it. Within this `columns` config, there will also be opportunities
    * to set the behavior of columns when rendered
    */
-  columns: () => ColumnConfig<DataType>[];
+  columns: () => ColumnConfig<DataType, OptionsType, CellArgs>[];
   /**
    * The data to render, as described via the `columns` option.
    *

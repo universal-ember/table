@@ -71,6 +71,88 @@ class Demo {
 }
 ```
 
+## Type-Safe Cell Components and Options
+
+The table library supports generic type parameters for strongly-typed Cell components and custom options. This enables full type inference in Glint templates and prevents common errors.
+
+### Basic Usage
+
+By default, all generic parameters are set to `any` for backward compatibility:
+
+```ts
+const table = headlessTable<MyDataType>(this, {
+  columns: () => [...],
+  data: () => myData
+});
+```
+
+### Advanced: Type-Safe Options
+
+To get type safety for custom options passed to cells:
+
+```ts
+import {
+  headlessTable,
+  type ColumnConfig,
+  type CellContext,
+} from "@universal-ember/table";
+
+interface MyData {
+  id: string;
+  name: string;
+}
+
+interface MyOptions {
+  highlightColor?: string;
+  showBadge?: boolean;
+}
+
+interface MyCellArgs extends CellContext<MyData, MyOptions> {
+  // Cell components receive data, column, row, and options
+}
+
+const table = headlessTable<MyData, MyOptions, MyCellArgs>(this, {
+  columns: () => [
+    {
+      key: "name",
+      name: "Name",
+      Cell: MyCustomCell, // fully typed!
+      options: ({ row }) => ({
+        highlightColor: row.data.id === "special" ? "blue" : "gray",
+        showBadge: true,
+      }),
+    },
+  ],
+  data: () => myData,
+});
+```
+
+Your Cell component will now have full type inference:
+
+```ts
+import Component from '@glimmer/component';
+
+class MyCustomCell extends Component<MyCellArgs> {
+  get color() {
+    return this.args.options?.highlightColor ?? 'gray';
+  }
+
+  <template>
+    <span style="color: {{this.color}}">
+      {{@row.data.name}}
+      {{#if @options.showBadge}}<span class="badge">!</span>{{/if}}
+    </span>
+  </template>
+}
+```
+
+### CellContext Types
+
+The library provides two context types:
+
+- **`CellConfigContext<T, OptionsType>`**: Used when defining column configurations. Has optional fields (`column?`, `row?`, `options?`) for user convenience.
+- **`CellContext<T, OptionsType>`**: Used for Cell component signatures. Has required fields since they're always provided at runtime.
+
 ## In Templates
 
 [Glint][docs-glint] can be a great choice to help ensure that your code is as bug-free as possible.
