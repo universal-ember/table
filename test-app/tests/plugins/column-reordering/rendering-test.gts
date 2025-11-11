@@ -340,7 +340,7 @@ module("Plugins | columnReordering", function (hooks) {
       assert.strictEqual(getColumnOrder(), "A B C D");
     });
 
-    skip("without setting the order of anything, we retain the order of the columns when they are added or removed", async function (assert) {
+    test("without setting the order of anything, we retain the order of the columns when they are added or removed", async function (assert) {
       assert.strictEqual(
         getColumnOrder(),
         "A B C D",
@@ -365,7 +365,7 @@ module("Plugins | columnReordering", function (hooks) {
       );
     });
 
-    skip("we can remove and add a column, and a previously set order is retained", async function (assert) {
+    test("we can remove and add a column, and a previously set order is retained", async function (assert) {
       assert.strictEqual(getColumnOrder(), "A B C D", "pre-test setup");
 
       await click("th.B .left");
@@ -608,8 +608,7 @@ module("Plugins | columnReordering", function (hooks) {
       assert.strictEqual(getColumnOrder(), "B C A D", "pre-test setup");
 
       let order = new ColumnOrder({
-        columns: () =>
-          [{ key: "D" }, { key: "C" }, { key: "B" }, { key: "A" }] as Column[],
+        columns: () => columns.for(ctx.table),
         visibleColumns: () => ({
           A: true,
           B: true,

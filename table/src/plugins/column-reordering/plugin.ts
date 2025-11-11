@@ -51,11 +51,14 @@ export class ColumnReordering extends BasePlugin<Signature> {
   }
 }
 
-export class ColumnMeta {
-  constructor(private column: Column) {}
+export class ColumnMeta<DataType = unknown> {
+  constructor(private column: Column<DataType>) {}
 
-  get #tableMeta() {
-    return meta.forTable(this.column.table, ColumnReordering);
+  get #tableMeta(): TableMeta<DataType> {
+    return meta.forTable(
+      this.column.table,
+      ColumnReordering,
+    ) as TableMeta<DataType>;
   }
 
   get position() {
@@ -101,8 +104,8 @@ export class ColumnMeta {
   };
 }
 
-export class TableMeta {
-  constructor(private table: Table) {}
+export class TableMeta<DataType = unknown> {
+  constructor(private table: Table<DataType>) {}
 
   /**
    * @private
@@ -113,7 +116,7 @@ export class TableMeta {
    * This is also why the order of the columns is maintained via column key
    */
   @tracked
-  columnOrder = new ColumnOrder({
+  columnOrder = new ColumnOrder<DataType>({
     columns: () => this.allColumns,
     visibleColumns: () => this.visibleColumns,
     save: this.save,
@@ -124,7 +127,7 @@ export class TableMeta {
    * Get the curret order/position of a column
    */
   @action
-  getPosition<DataType = unknown>(column: Column<DataType>) {
+  getPosition(column: Column<DataType>) {
     return this.columnOrder.get(column.key);
   }
 
@@ -132,17 +135,14 @@ export class TableMeta {
    * Swap the column with the column at `newPosition`
    */
   @action
-  setPosition<DataType = unknown>(
-    column: Column<DataType>,
-    newPosition: number,
-  ) {
+  setPosition(column: Column<DataType>, newPosition: number) {
     return this.columnOrder.swapWith(column.key, newPosition);
   }
 
   /**
    * Using a `ColumnOrder` instance, set the order of all columns
    */
-  setOrder = (order: ColumnOrder) => {
+  setOrder = (order: ColumnOrder<DataType>) => {
     this.columnOrder.setAll(order.map);
   };
 
@@ -153,7 +153,7 @@ export class TableMeta {
   @action
   reset() {
     preferences.forTable(this.table, ColumnReordering).delete('order');
-    this.columnOrder = new ColumnOrder({
+    this.columnOrder = new ColumnOrder<DataType>({
       columns: () => this.allColumns,
       visibleColumns: () => this.visibleColumns,
       save: this.save,
@@ -217,7 +217,7 @@ export class TableMeta {
  * @private
  * Used for keeping track of and updating column order
  */
-export class ColumnOrder {
+export class ColumnOrder<DataType = unknown> {
   /**
    * This map will be empty until we re-order something.
    */
@@ -237,7 +237,7 @@ export class ColumnOrder {
        * - Provide `visibleColumns` to indicate which are visible
        * - Hidden columns maintain their position when toggled
        */
-      columns: () => Column[];
+      columns: () => Column<DataType>[];
       /**
        * Optional: Record of which columns are currently visible.
        * When provided, moveLeft/moveRight will skip over hidden columns.
@@ -496,37 +496,33 @@ export class ColumnOrder {
   }
 
   @cached
-  get orderedColumns(): Column[] {
+  get orderedColumns(): Column<DataType>[] {
     const allColumns = this.args.columns();
     const columnsByKey = allColumns.reduce(
       (keyMap, column) => {
         keyMap[column.key] = column;
         return keyMap;
       },
-      {} as Record<string, Column>,
+      {} as Record<string, Column<DataType>>,
     );
     const mergedOrder = orderOf(allColumns, this.map);
 
-    const result: Column[] = Array.from({ length: allColumns.length });
+    const result: Column<DataType>[] = Array.from({
+      length: allColumns.length,
+    });
 
     for (const [key, position] of mergedOrder.entries()) {
       const column = columnsByKey[key];
 
-      assert(`Could not find column for pair: ${key} @ @{position}`, column);
+      // Skip columns that no longer exist (they've been removed from the columns array)
+      if (!column) {
+        continue;
+      }
+
       result[position] = column;
     }
 
-    assert(
-      `Generated orderedColumns' length (${result.filter(Boolean).length}) ` +
-        `does not match the length of all columns (${allColumns.length}). ` +
-        `orderedColumns: ${result
-          .filter(Boolean)
-          .map((c) => c.key)
-          .join(', ')} -- ` +
-        `all columns: ${allColumns.map((c) => c.key).join(', ')}`,
-      result.filter(Boolean).length === allColumns.length,
-    );
-
+    // Filter out undefined entries (from removed columns or gaps in positions)
     return result.filter(Boolean);
   }
 }
