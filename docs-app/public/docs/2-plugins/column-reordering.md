@@ -124,7 +124,7 @@ The order of columns will be represented in the preferences.
 The `orderedColumnsFor` helper returns columns in their current display order, accounting for any reordering that has been applied.
 
 ```gjs
-import { orderedColumnsFor } from '@universal-ember/table/plugins/column-reordering';
+import { orderedColumnsFor } from "@universal-ember/table/plugins/column-reordering";
 
 <template>
   {{#each (orderedColumnsFor @table) as |column|}}
