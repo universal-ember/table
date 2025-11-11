@@ -1,7 +1,7 @@
 import { meta } from '../-private/base.ts';
 import { ColumnReordering } from './plugin.ts';
 
-import type { ColumnOrder } from './plugin.ts';
+import type { ColumnOrder, TableMeta } from './plugin.ts';
 import type { Column, Table } from '../../index.ts';
 
 /**
@@ -23,8 +23,16 @@ export const moveRight = <DataType = unknown>(column: Column<DataType>) =>
  */
 export const setColumnOrder = <DataType = unknown>(
   table: Table<DataType>,
-  order: ColumnOrder,
-) => meta.forTable(table, ColumnReordering).setOrder(order);
+  order: ColumnOrder<DataType>,
+) => {
+  // Note: The meta.forTable API doesn't preserve the DataType generic from the table parameter.
+  // We use a type assertion here to match the expected types.
+  const tableMeta = meta.forTable(
+    table,
+    ColumnReordering,
+  ) as TableMeta<DataType>;
+  return tableMeta.setOrder(order);
+};
 
 /**
  * Ask if the column cannot move to the left
@@ -55,3 +63,19 @@ export const canMoveRight = <DataType = unknown>(column: Column<DataType>) =>
   // Prefer this if available:
   // meta.forColumn(column, ColumnReordering).canMoveRight
   !meta.forColumn(column, ColumnReordering).cannotMoveRight;
+
+/**
+ * Get the ordered columns for the table
+ */
+export const orderedColumnsFor = <DataType = unknown>(
+  table: Table<DataType>,
+): Column<DataType>[] => {
+  // Note: The meta.forTable API doesn't preserve the DataType generic from the table parameter.
+  // This is a limitation of the current plugin meta system architecture.
+  // We use a type assertion here because we know the columns come from the same table.
+  const tableMeta = meta.forTable(
+    table,
+    ColumnReordering,
+  ) as TableMeta<DataType>;
+  return tableMeta.columnOrder.orderedColumns;
+};
