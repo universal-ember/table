@@ -108,8 +108,6 @@ module("Plugins | resizing", function (hooks) {
   }
 
   class TestComponentB extends Component<{ ctx: Context }> {
-    resizeHandle = resizeHandle;
-
     get table() {
       return this.args.ctx.table;
     }
@@ -133,7 +131,7 @@ module("Plugins | resizing", function (hooks) {
                   <th {{this.modifiers.columnHeader column}}>
                     <span>{{column.name}}</span>
 
-                    <div data-handle {{this.resizeHandle column}}>|</div>
+                    <div data-handle {{resizeHandle column}}>|</div>
                   </th>
                 {{/each}}
               </tr>
