@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2025-11-11)
+
+@universal-ember/table 3.4.0 (minor)
+
+#### :rocket: Enhancement
+* `docs-app`, `@universal-ember/table`, `test-app`
+  * [#125](https://github.com/universal-ember/table/pull/125) add isResizable helper ([@johanrd](https://github.com/johanrd))
+  * [#124](https://github.com/universal-ember/table/pull/124) feat(column-reordering): add orderedColumnsFor helper + fix two skipped tests ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `@universal-ember/table`, `test-app`
+  * [#126](https://github.com/universal-ember/table/pull/126) fix failing test for handlePosition  ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-11-06)
 
 @universal-ember/table 3.3.0 (minor)
