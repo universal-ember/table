@@ -211,13 +211,21 @@ export class ColumnMeta {
   }
 
   get hasResizeHandle() {
-    const previous = columns.previous(this.column);
+    const position = this.tableMeta.options?.handlePosition ?? 'left';
 
-    if (!previous) return false;
-
-    return (
-      this.isResizable && meta.forColumn(previous, ColumnResizing).isResizable
-    );
+    if (position === 'right') {
+      const next = columns.next(this.column);
+      if (!next) return false;
+      return (
+        this.isResizable && meta.forColumn(next, ColumnResizing).isResizable
+      );
+    } else {
+      const previous = columns.previous(this.column);
+      if (!previous) return false;
+      return (
+        this.isResizable && meta.forColumn(previous, ColumnResizing).isResizable
+      );
+    }
   }
 
   get width() {
@@ -453,7 +461,7 @@ export class TableMeta {
     let growingColumn: Column<DataType> | null | undefined;
 
     if (position === 'right') {
-      growingColumn = isDraggingRight ? columns.next(column) : column;
+      growingColumn = isDraggingRight ? column : columns.next(column);
     } else {
       growingColumn = isDraggingRight ? columns.previous(column) : column;
     }

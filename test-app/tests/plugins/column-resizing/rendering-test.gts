@@ -108,8 +108,6 @@ module("Plugins | resizing", function (hooks) {
   }
 
   class TestComponentB extends Component<{ ctx: Context }> {
-    resizeHandle = resizeHandle;
-
     get table() {
       return this.args.ctx.table;
     }
@@ -133,7 +131,7 @@ module("Plugins | resizing", function (hooks) {
                   <th {{this.modifiers.columnHeader column}}>
                     <span>{{column.name}}</span>
 
-                    <div data-handle {{this.resizeHandle column}}>|</div>
+                    <div data-handle {{resizeHandle column}}>|</div>
                   </th>
                 {{/each}}
               </tr>
@@ -681,7 +679,7 @@ module("Plugins | resizing", function (hooks) {
         setOwner(ctx, this.owner);
       });
 
-      skip("it works", async function () {
+      test("it works", async function () {
         ctx.setContainerWidth(1000);
         await render(<template><TestComponentB @ctx={{ctx}} /></template>);
 
@@ -694,20 +692,21 @@ module("Plugins | resizing", function (hooks) {
 
         await requestAnimationFrameSettled();
 
+        // With handlePosition: 'right', dragging the handle right grows B
         await assertChanges(
           () => dragRight(columnB, 50),
           [
-            {
-              value: () => width(columnA),
-              by: 50,
-              msg: "width of A increased by 50",
-            },
+            { value: () => width(columnA), by: 0, msg: "width of A unchanged" },
             {
               value: () => width(columnB),
-              by: -50,
-              msg: "width of B decreased by 50",
+              by: 50,
+              msg: "width of B increased by 50",
             },
-            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            {
+              value: () => width(columnC),
+              by: -50,
+              msg: "width of C decreased by 50",
+            },
             { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
           ],
         );
@@ -715,17 +714,17 @@ module("Plugins | resizing", function (hooks) {
         await assertChanges(
           () => dragLeft(columnB, 10),
           [
-            {
-              value: () => width(columnA),
-              by: -10,
-              msg: "width of A decreased by 10-",
-            },
+            { value: () => width(columnA), by: 0, msg: "width of A unchanged" },
             {
               value: () => width(columnB),
-              by: 10,
-              msg: "width of B increased by 10",
+              by: -10,
+              msg: "width of B decreased by 10",
             },
-            { value: () => width(columnC), by: 0, msg: "width of C unchanged" },
+            {
+              value: () => width(columnC),
+              by: 10,
+              msg: "width of C increased by 10",
+            },
             { value: () => width(columnD), by: 0, msg: "width of D unchanged" },
           ],
         );
