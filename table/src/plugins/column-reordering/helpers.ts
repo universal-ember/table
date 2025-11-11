@@ -65,7 +65,22 @@ export const canMoveRight = <DataType = unknown>(column: Column<DataType>) =>
   !meta.forColumn(column, ColumnReordering).cannotMoveRight;
 
 /**
- * Get the ordered columns for the table
+ * Get the columns in their current display order.
+ *
+ * This returns an array of columns sorted according to any reordering
+ * that has been applied via the ColumnReordering plugin. If no reordering
+ * has been applied, columns are returned in their original order.
+ *
+ * @param table - The table instance to get ordered columns from
+ * @returns Array of columns in their current display order
+ *
+ * @example
+ * ```ts
+ * import { orderedColumnsFor } from '@universal-ember/table/plugins/column-reordering';
+ *
+ * const columns = orderedColumnsFor(table);
+ * // Use the ordered columns for rendering or other operations
+ * ```
  */
 export const orderedColumnsFor = <DataType = unknown>(
   table: Table<DataType>,

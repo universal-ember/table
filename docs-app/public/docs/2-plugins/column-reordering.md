@@ -119,6 +119,22 @@ The order of columns will be represented in the preferences.
 }
 ```
 
+### Getting Ordered Columns
+
+The `orderedColumnsFor` helper returns columns in their current display order, accounting for any reordering that has been applied.
+
+```gjs
+import { orderedColumnsFor } from '@universal-ember/table/plugins/column-reordering';
+
+<template>
+  {{#each (orderedColumnsFor @table) as |column|}}
+    <th>{{column.name}}</th>
+  {{/each}}
+</template>
+```
+
+This can be useful if you need to display the current column order in a column settings menu or a drag-and-drop reordering interface.
+
 ### Accessibility
 
 It's recommended to use `<button>`s for changing the order of columns.
