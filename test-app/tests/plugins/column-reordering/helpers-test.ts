@@ -31,9 +31,17 @@ module('Plugins | columnReordering | helpers', function (hooks) {
 
     assert.strictEqual(orderedColumns.length, 4, 'Should have 4 columns');
     assert.strictEqual(orderedColumns[0]?.key, 'A', 'First column should be A');
-    assert.strictEqual(orderedColumns[1]?.key, 'B', 'Second column should be B');
+    assert.strictEqual(
+      orderedColumns[1]?.key,
+      'B',
+      'Second column should be B',
+    );
     assert.strictEqual(orderedColumns[2]?.key, 'C', 'Third column should be C');
-    assert.strictEqual(orderedColumns[3]?.key, 'D', 'Fourth column should be D');
+    assert.strictEqual(
+      orderedColumns[3]?.key,
+      'D',
+      'Fourth column should be D',
+    );
   });
 
   test('orderedColumnsFor returns columns in custom order after reordering', function (assert) {
