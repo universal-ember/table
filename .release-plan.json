@@ -2,8 +2,8 @@
   "solution": {
     "@universal-ember/table": {
       "impact": "minor",
-      "oldVersion": "3.2.0",
-      "newVersion": "3.3.0",
+      "oldVersion": "3.3.0",
+      "newVersion": "3.4.0",
       "constraints": [
         {
           "impact": "minor",
@@ -17,5 +17,5 @@
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2025-11-06)\n\n@universal-ember/table 3.3.0 (minor)\n\n#### :rocket: Enhancement\n* `@universal-ember/table`\n  * [#122](https://github.com/universal-ember/table/pull/122) Prevent auto-redistributing with tableLayout: 'fixed'  ([@johanrd](https://github.com/johanrd))\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#120](https://github.com/universal-ember/table/pull/120) Add table-level defaultCellValue config option ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#121](https://github.com/universal-ember/table/pull/121) Fixes infinite resize loop at non-100% zoom levels caused by subpixel rounding errors. ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* [#112](https://github.com/universal-ember/table/pull/112) Add thank you to the contributors ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### :house: Internal\n* [#113](https://github.com/universal-ember/table/pull/113) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))\n\n#### Committers: 3\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-11-11)\n\n@universal-ember/table 3.4.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#125](https://github.com/universal-ember/table/pull/125) add isResizable helper ([@johanrd](https://github.com/johanrd))\n  * [#124](https://github.com/universal-ember/table/pull/124) feat(column-reordering): add orderedColumnsFor helper + fix two skipped tests ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `@universal-ember/table`, `test-app`\n  * [#126](https://github.com/universal-ember/table/pull/126) fix failing test for handlePosition  ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
 }
