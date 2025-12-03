@@ -359,7 +359,7 @@ export class TableMeta {
     const tablePrefs = this.table.preferences;
 
     for (const column of visibleColumnMetas) {
-      const existing = tablePrefs.storage.forPlugin('ColumnResizing');
+      const existing = tablePrefs.storage.forPlugin(ColumnResizing.name);
       const columnPrefs = existing.forColumn(column.key);
 
       columnPrefs.set('width', column.width.toString());
