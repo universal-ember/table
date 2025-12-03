@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2025-12-03)
+
+@universal-ember/table 3.4.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#131](https://github.com/universal-ember/table/pull/131) fix: mark touchstart listener as passive in resize handle ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* [#133](https://github.com/universal-ember/table/pull/133) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))
+
+#### Committers: 2
+- [@github-actions[bot]](https://github.com/apps/github-actions)
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-11-11)
 
 @universal-ember/table 3.4.0 (minor)
