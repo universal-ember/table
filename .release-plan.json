@@ -1,14 +1,10 @@
 {
   "solution": {
     "@universal-ember/table": {
-      "impact": "minor",
-      "oldVersion": "3.3.0",
-      "newVersion": "3.4.0",
+      "impact": "patch",
+      "oldVersion": "3.4.0",
+      "newVersion": "3.4.1",
       "constraints": [
-        {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
-        },
         {
           "impact": "patch",
           "reason": "Appears in changelog section :bug: Bug Fix"
@@ -17,5 +13,5 @@
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2025-11-11)\n\n@universal-ember/table 3.4.0 (minor)\n\n#### :rocket: Enhancement\n* `docs-app`, `@universal-ember/table`, `test-app`\n  * [#125](https://github.com/universal-ember/table/pull/125) add isResizable helper ([@johanrd](https://github.com/johanrd))\n  * [#124](https://github.com/universal-ember/table/pull/124) feat(column-reordering): add orderedColumnsFor helper + fix two skipped tests ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `@universal-ember/table`, `test-app`\n  * [#126](https://github.com/universal-ember/table/pull/126) fix failing test for handlePosition  ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-12-03)\n\n@universal-ember/table 3.4.1 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#131](https://github.com/universal-ember/table/pull/131) fix: mark touchstart listener as passive in resize handle ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* [#133](https://github.com/universal-ember/table/pull/133) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))\n\n#### Committers: 2\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n- [@johanrd](https://github.com/johanrd)\n"
 }
