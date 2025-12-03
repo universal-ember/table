@@ -59,7 +59,9 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
   }
 
   setup = () => {
-    this.dragHandle.addEventListener('touchstart', this.dragStartHandler);
+    this.dragHandle.addEventListener('touchstart', this.dragStartHandler, {
+      passive: true,
+    });
     this.dragHandle.addEventListener('mousedown', this.dragStartHandler);
     this.dragHandle.addEventListener('keydown', this.keyHandler);
 
