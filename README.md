@@ -54,17 +54,17 @@ See the [Documentation][docs-app] for examples.
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/joelamb">
-                    <img src="https://avatars.githubusercontent.com/u/42837452?v=4" width="100;" alt="joelamb"/>
-                    <br />
-                    <sub><b>Joe Lamb</b></sub>
-                </a>
-            </td>
-            <td align="center">
                 <a href="https://github.com/johanrd">
                     <img src="https://avatars.githubusercontent.com/u/4601554?v=4" width="100;" alt="johanrd"/>
                     <br />
                     <sub><b>johanrd</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/joelamb">
+                    <img src="https://avatars.githubusercontent.com/u/42837452?v=4" width="100;" alt="joelamb"/>
+                    <br />
+                    <sub><b>Joe Lamb</b></sub>
                 </a>
             </td>
             <td align="center">
