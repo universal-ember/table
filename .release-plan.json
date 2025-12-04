@@ -2,8 +2,8 @@
   "solution": {
     "@universal-ember/table": {
       "impact": "patch",
-      "oldVersion": "3.4.0",
-      "newVersion": "3.4.1",
+      "oldVersion": "3.4.1",
+      "newVersion": "3.4.2",
       "constraints": [
         {
           "impact": "patch",
@@ -13,5 +13,5 @@
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2025-12-03)\n\n@universal-ember/table 3.4.1 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#131](https://github.com/universal-ember/table/pull/131) fix: mark touchstart listener as passive in resize handle ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* [#133](https://github.com/universal-ember/table/pull/133) docs(contributor): contributors readme action update ([@github-actions[bot]](https://github.com/apps/github-actions))\n\n#### Committers: 2\n- [@github-actions[bot]](https://github.com/apps/github-actions)\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2025-12-04)\n\n@universal-ember/table 3.4.2 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#136](https://github.com/universal-ember/table/pull/136) Fix ColumnResizing preferences not restoring saved widths ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
 }
