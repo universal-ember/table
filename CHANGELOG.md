@@ -1,5 +1,16 @@
 # Changelog
 
+## Release (2025-12-04)
+
+@universal-ember/table 3.4.2 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#136](https://github.com/universal-ember/table/pull/136) Fix ColumnResizing preferences not restoring saved widths ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-12-03)
 
 @universal-ember/table 3.4.1 (patch)
