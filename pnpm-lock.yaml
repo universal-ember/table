@@ -111,7 +111,7 @@ importers:
         version: 1.29.2
       tracked-built-ins:
         specifier: ^4.0.0
-        version: 4.0.0(@babel/core@7.26.10)
+        version: 4.1.0(@babel/core@7.26.10)
     dependenciesMeta:
       '@universal-ember/table':
         injected: true
@@ -268,7 +268,7 @@ importers:
         version: 1.9.0(23a0e03bb0074c2a4a8a73a6f6d16f8a)
       tracked-built-ins:
         specifier: ^4.0.0
-        version: 4.0.0(@babel/core@7.26.10)
+        version: 4.1.0(@babel/core@7.26.10)
     devDependencies:
       '@babel/core':
         specifier: ^7.26.10
@@ -377,7 +377,7 @@ importers:
         version: 7.0.7(807cfcd3020ea8ad8edb1795de9ad08f)
       tracked-built-ins:
         specifier: ^4.0.0
-        version: 4.0.0(@babel/core@7.26.10)
+        version: 4.1.0(@babel/core@7.26.10)
     dependenciesMeta:
       '@universal-ember/table':
         injected: true
@@ -7423,8 +7423,8 @@ packages:
   tracked-built-ins@3.4.0:
     resolution: {integrity: sha512-aRwWQXC3VkY50oYxS7wKZiavkjf3uaN+UYUH30D5gxUqbxDN2LnNsfWyDfckmxHUGw4gJDH5lpRS0jX/tim0vw==}
 
-  tracked-built-ins@4.0.0:
-    resolution: {integrity: sha512-0Jl43A1SDZd+yYCJvXfgDSn4Wk/zcawkyFTBPqOETU5UJRngnVEnQ8oOjawqPRg6qja3sKjIQ8z6X9xJzcUTUA==}
+  tracked-built-ins@4.1.0:
+    resolution: {integrity: sha512-v1+jca3sD3LgbAFVsontSONTv7HsZll3yeUB00L6KPwLilFRrY77gvgptDe35fTalk9ea7mmrM2wABD56pTvuw==}
 
   tracked-toolbox@2.0.0:
     resolution: {integrity: sha512-adZtX+RGN6F+pWs/5JqVuDxLhuia4uhqmQp+UlUaxpykWjDFETtAdQR+LdDJiFPXFAXnS6FBqn/tnSLJQCm3Yw==}
@@ -7903,8 +7903,8 @@ packages:
       '@volar/language-service':
         optional: true
 
-  volar-service-typescript@0.0.67:
-    resolution: {integrity: sha512-rfQBy36Rm1PU9vLWHk8BYJ4r2j/CI024vocJcH4Nb6K2RTc2Irmw6UOVY5DdGiPRV5r+e10wLMK5njj/EcL8sA==}
+  volar-service-typescript@0.0.68:
+    resolution: {integrity: sha512-z7B/7CnJ0+TWWFp/gh2r5/QwMObHNDiQiv4C9pTBNI2Wxuwymd4bjEORzrJ/hJ5Yd5+OzeYK+nFCKevoGEEeKw==}
     peerDependencies:
       '@volar/language-service': ~2.4.0
     peerDependenciesMeta:
@@ -8003,6 +8003,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -9839,7 +9840,7 @@ snapshots:
       silent-error: 1.1.1
       typescript: 5.7.3
       uuid: 8.3.2
-      volar-service-typescript: 0.0.67(@volar/language-service@2.4.11)
+      volar-service-typescript: 0.0.68(@volar/language-service@2.4.11)
       vscode-languageserver-protocol: 3.17.5
       vscode-languageserver-textdocument: 1.0.12
       vscode-uri: 3.1.0
@@ -10722,7 +10723,7 @@ snapshots:
       ember-source: 6.3.0(87f2f8131cb021da8904be85a2b2cd16)
       ember-tracked-storage-polyfill: 1.0.0
       reactiveweb: 1.9.0(23a0e03bb0074c2a4a8a73a6f6d16f8a)
-      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+      tracked-built-ins: 4.1.0(@babel/core@7.26.10)
     optionalDependencies:
       '@ember/test-helpers': 5.1.0(3e19f2035d43818ebc6c0c9bc5644861)
       '@glimmer/component': 2.0.0
@@ -10745,7 +10746,7 @@ snapshots:
       ember-source: 6.2.0(87f2f8131cb021da8904be85a2b2cd16)
       ember-tracked-storage-polyfill: 1.0.0
       reactiveweb: 1.9.0(23a0e03bb0074c2a4a8a73a6f6d16f8a)
-      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+      tracked-built-ins: 4.1.0(@babel/core@7.26.10)
     optionalDependencies:
       '@ember/test-helpers': 5.1.0(0f236f8d4f265fed70743e150f597c31)
       '@glimmer/component': 2.0.0
@@ -12766,7 +12767,7 @@ snapshots:
       ember-on-resize-modifier: 2.0.2(6b9ab74b27cee7278587f29987a61ec9)
       ember-set-body-class: 1.0.2
       ember-source: 6.3.0(87f2f8131cb021da8904be85a2b2cd16)
-      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+      tracked-built-ins: 4.1.0(@babel/core@7.26.10)
       wobble: 1.5.1
     transitivePeerDependencies:
       - '@babel/core'
@@ -12909,7 +12910,7 @@ snapshots:
       reactiveweb: 1.9.0(23a0e03bb0074c2a4a8a73a6f6d16f8a)
       should-handle-link: 1.3.0
       tabster: 8.5.2
-      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+      tracked-built-ins: 4.1.0(@babel/core@7.26.10)
       tracked-toolbox: 2.0.0(c4555bee572256d0b715e05cd257f362)
     optionalDependencies:
       '@ember/test-helpers': 5.1.0(3e19f2035d43818ebc6c0c9bc5644861)
@@ -12937,7 +12938,7 @@ snapshots:
       reactiveweb: 1.9.0(23a0e03bb0074c2a4a8a73a6f6d16f8a)
       should-handle-link: 1.3.0
       tabster: 8.5.2
-      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+      tracked-built-ins: 4.1.0(@babel/core@7.26.10)
       tracked-toolbox: 2.0.0(c4555bee572256d0b715e05cd257f362)
     optionalDependencies:
       '@ember/test-helpers': 5.1.0(3e19f2035d43818ebc6c0c9bc5644861)
@@ -15096,7 +15097,7 @@ snapshots:
       package-up: 5.0.0
       reactiveweb: 1.9.0(23a0e03bb0074c2a4a8a73a6f6d16f8a)
       send: 1.1.0
-      tracked-built-ins: 4.0.0(@babel/core@7.26.10)
+      tracked-built-ins: 4.1.0(@babel/core@7.26.10)
       typedoc: 0.27.9(typescript@5.5.4)
       unplugin: 2.2.0
     transitivePeerDependencies:
@@ -17667,9 +17668,9 @@ snapshots:
       - '@babel/core'
       - supports-color
 
-  tracked-built-ins@4.0.0(@babel/core@7.26.10):
+  tracked-built-ins@4.1.0(@babel/core@7.26.10):
     dependencies:
-      '@embroider/addon-shim': 1.9.0
+      '@embroider/addon-shim': 1.10.2
       decorator-transforms: 2.3.0(@babel/core@7.26.10)
       ember-tracked-storage-polyfill: 1.0.0
     transitivePeerDependencies:
@@ -18155,7 +18156,7 @@ snapshots:
     optionalDependencies:
       '@volar/language-service': 2.4.23
 
-  volar-service-typescript@0.0.67(@volar/language-service@2.4.11):
+  volar-service-typescript@0.0.68(@volar/language-service@2.4.11):
     dependencies:
       path-browserify: 1.0.1
       semver: 7.7.1
