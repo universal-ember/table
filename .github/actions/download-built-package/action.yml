@@ -4,7 +4,7 @@ runs:
   using: "composite"
   steps:
   - name: Download built package from cache
-    uses: actions/download-artifact@v6
+    uses: actions/download-artifact@v7
     with:
       name: bulit-assets
       path: table
