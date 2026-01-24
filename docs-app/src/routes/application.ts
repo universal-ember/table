@@ -61,7 +61,7 @@ export default class Application extends Route {
           'ember-primitives': import('ember-primitives'),
           'reactiveweb/fps': import('reactiveweb/fps'),
           'reactiveweb/map': import('reactiveweb/map'),
-          // '@html-next/vertical-collection': import('@html-next/vertical-collection'),
+          '@html-next/vertical-collection': import('@html-next/vertical-collection'),
           kolay: import('kolay'),
         },
         rehypePlugins: [
