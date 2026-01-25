@@ -241,7 +241,7 @@ importers:
     dependencies:
       '@babel/runtime':
         specifier: ^7.26.10
-        version: 7.28.4
+        version: 7.28.6
       '@ember/string':
         specifier: ^4.0.1
         version: 4.0.1
@@ -1088,8 +1088,8 @@ packages:
     resolution: {integrity: sha512-aA63XwOkcl4xxQa3HjPMqOP6LiK0ZDv3mUPYEFXkpHbaFjtGggE1A61FjFzJnB+p7/oy2gA8E+rcBNl/zC1tMg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/runtime@7.28.4':
-    resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
+  '@babel/runtime@7.28.6':
+    resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
     engines: {node: '>=6.9.0'}
 
   '@babel/standalone@7.26.10':
@@ -7283,6 +7283,7 @@ packages:
   tar@6.2.1:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
+    deprecated: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exhorbitant rates) by contacting i@izs.me
 
   temp-dir@2.0.0:
     resolution: {integrity: sha512-aoBAniQmmwtcKp/7BzsH8Cxzv8OL736p7v1ihGb5e9DJ9kTwGWHrQrVB5+lfVDzfGrdRzXch+ig7LHaY1JTOrg==}
@@ -8924,7 +8925,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/runtime@7.28.4': {}
+  '@babel/runtime@7.28.6': {}
 
   '@babel/standalone@7.26.10': {}
 
@@ -12729,7 +12730,7 @@ snapshots:
 
   ember-modify-based-class-resource@1.1.1(01d2b861dfec16b903b3701e4490e924):
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.26.10
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
@@ -12743,7 +12744,7 @@ snapshots:
 
   ember-modify-based-class-resource@1.1.1(72a2608dfd061b2f05bae9d8fc0f6aa8):
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.26.10
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       '@glimmer/tracking': 1.1.2
@@ -12757,7 +12758,7 @@ snapshots:
 
   ember-modify-based-class-resource@1.1.2(183c3113e258155888eb13df50be43f2):
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.28.6
       '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
       ember-resources: 7.0.7(807cfcd3020ea8ad8edb1795de9ad08f)
@@ -12798,7 +12799,7 @@ snapshots:
 
   ember-primitives@0.27.2(5d10bfd9ffa961f8e5c28940e6638340):
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.28.6
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
@@ -12826,7 +12827,7 @@ snapshots:
 
   ember-primitives@0.28.1(5d10bfd9ffa961f8e5c28940e6638340):
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.28.6
       '@ember/test-waiters': 4.1.0(@glint/template@1.5.2)
       '@embroider/addon-shim': 1.9.0
       '@embroider/macros': 1.17.0-alpha.8(@glint/template@1.5.2)
@@ -14767,7 +14768,7 @@ snapshots:
 
   is-language-code@3.1.0:
     dependencies:
-      '@babel/runtime': 7.28.4
+      '@babel/runtime': 7.28.6
 
   is-map@2.0.3: {}
 
