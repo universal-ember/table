@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-01-26)
+
+@universal-ember/table 3.4.3 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#148](https://github.com/universal-ember/table/pull/148) remove the v1 addon `ember-tracked-storage-polyfill` as dep ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `docs-app`
+  * [#147](https://github.com/universal-ember/table/pull/147) Update vertical collection ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 2
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2025-12-04)
 
 @universal-ember/table 3.4.2 (patch)
