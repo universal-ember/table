@@ -345,4 +345,61 @@ module("Preferences | rendering", function (hooks) {
     assert.dom("#table").hasText("3");
     assert.dom("#column").hasText("true");
   });
+
+  test("calling restore() with new data triggers reactivity", async function (assert) {
+    // Start with initial preferences
+    let initialData: PreferencesData = {
+      plugins: {
+        "test-plugin": {
+          table: {},
+          columns: {
+            "col-a": { isVisible: true },
+          },
+        },
+      },
+    };
+
+    let preferences = new TablePreferences("preferences-key", {
+      restore: () => initialData,
+    });
+
+    class Context {
+      get colAVisible(): string {
+        return String(
+          preferences.storage
+            .forPlugin("test-plugin")
+            .forColumn("col-a")
+            .get("isVisible") ?? "undefined",
+        );
+      }
+    }
+
+    let ctx = new Context();
+
+    await render(
+      <template>
+        <out id="visibility">{{ctx.colAVisible}}</out>
+      </template>,
+    );
+
+    assert.dom("#visibility").hasText("true", "initial value is true");
+
+    // Now restore with NEW data - this should trigger reactivity
+    let newData: PreferencesData = {
+      plugins: {
+        "test-plugin": {
+          table: {},
+          columns: {
+            "col-a": { isVisible: false },
+          },
+        },
+      },
+    };
+
+    preferences.storage.restore(newData);
+
+    await settled();
+
+    assert.dom("#visibility").hasText("false", "value updates after restore()");
+  });
 });

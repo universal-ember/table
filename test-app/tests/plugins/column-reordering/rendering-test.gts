@@ -557,15 +557,6 @@ module("Plugins | columnReordering", function (hooks) {
             columns: {},
             table: {},
           },
-          ColumnVisibility: {
-            columns: {
-              A: {},
-              B: {},
-              C: {},
-              D: {},
-            },
-            table: {},
-          },
         },
       });
     });
@@ -590,15 +581,6 @@ module("Plugins | columnReordering", function (hooks) {
                 D: 3,
               },
             },
-          },
-          ColumnVisibility: {
-            columns: {
-              A: {},
-              B: {},
-              C: {},
-              D: {},
-            },
-            table: {},
           },
         },
       });
@@ -637,15 +619,6 @@ module("Plugins | columnReordering", function (hooks) {
                 D: 0,
               },
             },
-          },
-          ColumnVisibility: {
-            columns: {
-              A: {},
-              B: {},
-              C: {},
-              D: {},
-            },
-            table: {},
           },
         },
       });
