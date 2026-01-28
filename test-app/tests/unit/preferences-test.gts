@@ -1,10 +1,14 @@
+import { tracked } from "@glimmer/tracking";
 import { render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest, setupTest } from "ember-qunit";
 import { setOwner } from "@ember/owner";
 
 import { headlessTable, TablePreferences } from "@universal-ember/table";
-import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
+import {
+  ColumnReordering,
+  moveLeft,
+} from "@universal-ember/table/plugins/column-reordering";
 import { meta } from "@universal-ember/table/plugins";
 
 // import sinon from 'sinon';
@@ -455,5 +459,117 @@ module("Preferences | rendering", function (hooks) {
     await settled();
 
     assert.dom("#order").hasText("B C A", "order updates after restore()");
+  });
+
+  /**
+   * This test demonstrates preferences thunk support for reactivity.
+   *
+   * When multiple tables share the same preferences adapter (using a thunk),
+   * reordering columns in one table causes the other table to also update
+   * since they share the same persisted preferences.
+   *
+   * The key is:
+   * 1. Use a thunk for preferences: `preferences: () => ({ ... })`
+   * 2. The adapter's data should be tracked for reactivity
+   */
+  test("Multiple tables with same adapter should both react to preference changes (thunk support)", async function (assert) {
+    // Shared preferences storage using tracked state for reactivity
+    class SharedPreferencesStorage {
+      @tracked data: PreferencesData | undefined = undefined;
+    }
+
+    const storage = new SharedPreferencesStorage();
+
+    // Both tables share this adapter - changes from one affect the other
+    // The adapter reads from tracked state, enabling reactivity
+    const sharedAdapter = {
+      restore: () => storage.data,
+      persist: (_key: string, data: PreferencesData) => {
+        storage.data = data;
+      },
+    };
+
+    class Table1Ctx {
+      table = headlessTable(this, {
+        columns: () => [{ key: "A" }, { key: "B" }, { key: "C" }],
+        data: () => [],
+        // Using a thunk for preferences enables reactivity
+        preferences: () => ({
+          key: "shared-prefs",
+          adapter: sharedAdapter,
+        }),
+        plugins: [ColumnReordering],
+      });
+
+      get columnOrder() {
+        return meta
+          .forTable(this.table, ColumnReordering)
+          .columns.map((c) => c.key)
+          .join(" ");
+      }
+
+      get columns() {
+        return meta.forTable(this.table, ColumnReordering).columns;
+      }
+    }
+
+    class Table2Ctx {
+      table = headlessTable(this, {
+        columns: () => [{ key: "A" }, { key: "B" }, { key: "C" }],
+        data: () => [],
+        // Using a thunk for preferences enables reactivity
+        preferences: () => ({
+          key: "shared-prefs",
+          adapter: sharedAdapter,
+        }),
+        plugins: [ColumnReordering],
+      });
+
+      get columnOrder() {
+        return meta
+          .forTable(this.table, ColumnReordering)
+          .columns.map((c) => c.key)
+          .join(" ");
+      }
+    }
+
+    let table1 = new Table1Ctx();
+    let table2 = new Table2Ctx();
+    setOwner(table1, this.owner);
+    setOwner(table2, this.owner);
+
+    await render(
+      <template>
+        <out id="table1-order">{{table1.columnOrder}}</out>
+        <out id="table2-order">{{table2.columnOrder}}</out>
+      </template>,
+    );
+
+    // Initially, both tables have default column order
+    assert.dom("#table1-order").hasText("A B C", "table1 initial order");
+    assert.dom("#table2-order").hasText("A B C", "table2 initial order");
+
+    // Move column B to the left in table1 (making order: B A C)
+    // This persists the new order to the shared adapter (tracked storage)
+    const columnB = table1.columns.find((c) => c.key === "B")!;
+    moveLeft(columnB);
+
+    await settled();
+
+    // Table1 should update (it's the one we interacted with)
+    assert
+      .dom("#table1-order")
+      .hasText("B A C", "table1 updates after moveLeft");
+
+    // Table2 should also update since:
+    // 1. preferences is a thunk that gets re-evaluated
+    // 2. The thunk calls adapter.restore() which reads from tracked storage
+    // 3. When storage.data changed (via persist), this invalidates the tracked state
+    assert
+      .dom("#table2-order")
+      .hasText(
+        "B A C",
+        "table2 also reacts to shared preference change via thunk",
+      );
   });
 });

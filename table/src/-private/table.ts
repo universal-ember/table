@@ -113,16 +113,21 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
   modify(_: [] | undefined, named: Signature<DataType>['Named']) {
     this.args = { named };
 
+    const preferences = named?.preferences;
+    const { key = guidFor(this), adapter } =
+      (typeof preferences === 'function' ? preferences() : preferences) ?? {};
+
     // only set the preferences once
     if (!this.preferences) {
-      const { key = guidFor(this), adapter } = named?.preferences ?? {};
-
       // TODO: when no key is present,
       //       use "local-storage" preferences.
       //       it does not make sense to use a guid in a user's preferences
       this.preferences = new TablePreferences(key, adapter);
     } else {
       // subsequent updates to args
+      if (typeof preferences === 'function' && adapter) {
+        this.preferences.restore(adapter);
+      }
       this.resetScrollContainer();
     }
   }
