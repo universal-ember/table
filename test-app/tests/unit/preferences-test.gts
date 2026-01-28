@@ -350,7 +350,7 @@ module("Preferences | rendering", function (hooks) {
     // Start with initial preferences
     let initialData: PreferencesData = {
       plugins: {
-        "test-plugin": {
+        ColumnVisibility: {
           table: {},
           columns: {
             "col-a": { isVisible: true },
@@ -365,12 +365,12 @@ module("Preferences | rendering", function (hooks) {
 
     class Context {
       get colAVisible(): string {
-        return String(
-          preferences.storage
-            .forPlugin("test-plugin")
-            .forColumn("col-a")
-            .get("isVisible") ?? "undefined",
-        );
+        const value = preferences.storage
+          .forPlugin("ColumnVisibility")
+          .forColumn("col-a")
+          .get("isVisible");
+
+        return value === undefined ? "undefined" : `${value as boolean}`;
       }
     }
 
@@ -387,7 +387,7 @@ module("Preferences | rendering", function (hooks) {
     // Now restore with NEW data - this should trigger reactivity
     let newData: PreferencesData = {
       plugins: {
-        "test-plugin": {
+        ColumnVisibility: {
           table: {},
           columns: {
             "col-a": { isVisible: false },
