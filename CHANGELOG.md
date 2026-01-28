@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-01-28)
+
+@universal-ember/table 3.5.0 (minor)
+
+#### :rocket: Enhancement
+* `@universal-ember/table`, `test-app`
+  * [#150](https://github.com/universal-ember/table/pull/150) Fix/column reordering reactive preferences ([@johanrd](https://github.com/johanrd))
+
+#### :bug: Bug Fix
+* `@universal-ember/table`, `test-app`
+  * [#150](https://github.com/universal-ember/table/pull/150) Fix/column reordering reactive preferences ([@johanrd](https://github.com/johanrd))
+  * [#149](https://github.com/universal-ember/table/pull/149) fix(preferences): make restore() reactive by using TrackedMap ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2026-01-26)
 
 @universal-ember/table 3.4.3 (patch)
