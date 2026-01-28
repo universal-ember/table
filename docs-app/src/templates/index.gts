@@ -1,4 +1,4 @@
-import { GitHubLink } from "#components/header.gts";
+import { APIReferenceLink, GitHubLink } from "#components/header.gts";
 import { ExternalLink } from "ember-primitives/components/external-link";
 
 import {
@@ -24,6 +24,7 @@ import {
     <:header>
       <TopRight>
         <GitHubLink />
+        <APIReferenceLink />
       </TopRight>
     </:header>
     <:tagline>

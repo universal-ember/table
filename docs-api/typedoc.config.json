@@ -20,6 +20,10 @@
   "excludeProtected": false,
   "excludeExternals": true,
   "disableSources": false,
+  "navigationLinks": {
+    "Guides": "/",
+    "GitHub": "https://github.com/universal-ember/table"
+  },
   "plugin": [
   ]
 }
