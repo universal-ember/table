@@ -153,8 +153,8 @@ importers:
         specifier: 1.5.2
         version: 1.5.2
       '@html-next/vertical-collection':
-        specifier: ^5.0.1
-        version: 5.0.1
+        specifier: ^5.0.2
+        version: 5.0.2
       '@rollup/plugin-babel':
         specifier: ^6.0.4
         version: 6.0.4(@babel/core@7.26.10)(rollup@4.35.0)
@@ -1729,8 +1729,8 @@ packages:
     resolution: {integrity: sha512-D76vKOZFEGA9v6g0rZTYTQDUXNopCblW1Zeas3EEVrbdeh8gWrCEO9/goocKmcgtqAwv1Md76p58UQp7HeFTEw==}
     engines: {node: ^18 || ^20 || ^22 || >=24}
 
-  '@html-next/vertical-collection@5.0.1':
-    resolution: {integrity: sha512-OzcgY8T7IVNBxZYAUL1Oy7lRo4mJxO/xXMatx0TrTfnRwsU1RF4YCNmhYlh+k05tU3UDi0lEMmM1EsAVRy89EA==}
+  '@html-next/vertical-collection@5.0.2':
+    resolution: {integrity: sha512-JS51MIlKo6VCP9+vWSDJ7XY5F93Szv4tN99b5VhQeWgiofJ1QeO+JvRR7uLtQkktNTiod/1h7CJ7117OU7j96Q==}
     engines: {node: '>= 18'}
 
   '@humanfs/core@0.19.1':
@@ -9910,7 +9910,7 @@ snapshots:
 
   '@handlebars/parser@2.2.1': {}
 
-  '@html-next/vertical-collection@5.0.1':
+  '@html-next/vertical-collection@5.0.2':
     dependencies:
       '@embroider/addon-shim': 1.10.2
       ember-raf-scheduler: 0.3.0
