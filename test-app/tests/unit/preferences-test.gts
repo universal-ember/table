@@ -4,7 +4,10 @@ import { setupRenderingTest, setupTest } from "ember-qunit";
 import { setOwner } from "@ember/owner";
 
 import { headlessTable, TablePreferences } from "@universal-ember/table";
-import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
+import {
+  ColumnReordering,
+  moveLeft,
+} from "@universal-ember/table/plugins/column-reordering";
 import { meta } from "@universal-ember/table/plugins";
 
 // import sinon from 'sinon';
@@ -455,5 +458,107 @@ module("Preferences | rendering", function (hooks) {
     await settled();
 
     assert.dom("#order").hasText("B C A", "order updates after restore()");
+  });
+
+  /**
+   * This test demonstrates the need for preferences to support thunks.
+   *
+   * When multiple tables share the same preferences adapter, reordering columns
+   * in one table should cause the other table to also update (since they share
+   * the same persisted preferences).
+   *
+   * Currently, preferences is only read once at table initialization, so when
+   * one table persists new preferences, the other table doesn't re-read them.
+   *
+   * If preferences supported a thunk (like columns and data do), the adapter
+   * could be re-evaluated and both tables would react to changes.
+   */
+  test("Multiple tables with same adapter should both react to preference changes (thunk support needed)", async function (assert) {
+    // Shared preferences storage - simulates localStorage or an API
+    let storedPreferences: PreferencesData | undefined = undefined;
+
+    // Both tables share this adapter - changes from one should affect the other
+    const sharedAdapter = {
+      restore: () => storedPreferences,
+      persist: (_key: string, data: PreferencesData) => {
+        storedPreferences = data;
+      },
+    };
+
+    class Table1Ctx {
+      table = headlessTable(this, {
+        columns: () => [{ key: "A" }, { key: "B" }, { key: "C" }],
+        data: () => [],
+        preferences: {
+          key: "shared-prefs",
+          adapter: sharedAdapter,
+        },
+        plugins: [ColumnReordering],
+      });
+
+      get columnOrder() {
+        return meta
+          .forTable(this.table, ColumnReordering)
+          .columns.map((c) => c.key)
+          .join(" ");
+      }
+
+      get columns() {
+        return meta.forTable(this.table, ColumnReordering).columns;
+      }
+    }
+
+    class Table2Ctx {
+      table = headlessTable(this, {
+        columns: () => [{ key: "A" }, { key: "B" }, { key: "C" }],
+        data: () => [],
+        preferences: {
+          key: "shared-prefs",
+          adapter: sharedAdapter,
+        },
+        plugins: [ColumnReordering],
+      });
+
+      get columnOrder() {
+        return meta
+          .forTable(this.table, ColumnReordering)
+          .columns.map((c) => c.key)
+          .join(" ");
+      }
+    }
+
+    let table1 = new Table1Ctx();
+    let table2 = new Table2Ctx();
+    setOwner(table1, this.owner);
+    setOwner(table2, this.owner);
+
+    await render(
+      <template>
+        <out id="table1-order">{{table1.columnOrder}}</out>
+        <out id="table2-order">{{table2.columnOrder}}</out>
+      </template>,
+    );
+
+    // Initially, both tables have default column order
+    assert.dom("#table1-order").hasText("A B C", "table1 initial order");
+    assert.dom("#table2-order").hasText("A B C", "table2 initial order");
+
+    // Move column B to the left in table1 (making order: B A C)
+    // This persists the new order to the shared adapter
+    const columnB = table1.columns.find((c) => c.key === "B")!;
+    moveLeft(columnB);
+
+    await settled();
+
+    // Table1 should update (it's the one we interacted with)
+    assert.dom("#table1-order").hasText("B A C", "table1 updates after moveLeft");
+
+    // Table2 SHOULD also update since it shares the same adapter,
+    // but currently it doesn't because preferences is only read once.
+    // If preferences was a thunk, both tables would react to the change.
+    assert.dom("#table2-order").hasText(
+      "B A C",
+      "table2 should also react to shared preference change",
+    );
   });
 });
