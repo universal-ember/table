@@ -2,20 +2,16 @@
   "solution": {
     "@universal-ember/table": {
       "impact": "minor",
-      "oldVersion": "3.4.3",
-      "newVersion": "3.5.0",
+      "oldVersion": "3.5.0",
+      "newVersion": "3.6.0",
       "constraints": [
         {
           "impact": "minor",
           "reason": "Appears in changelog section :rocket: Enhancement"
-        },
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
         }
       ],
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2026-01-28)\n\n@universal-ember/table 3.5.0 (minor)\n\n#### :rocket: Enhancement\n* `@universal-ember/table`, `test-app`\n  * [#150](https://github.com/universal-ember/table/pull/150) Fix/column reordering reactive preferences ([@johanrd](https://github.com/johanrd))\n\n#### :bug: Bug Fix\n* `@universal-ember/table`, `test-app`\n  * [#150](https://github.com/universal-ember/table/pull/150) Fix/column reordering reactive preferences ([@johanrd](https://github.com/johanrd))\n  * [#149](https://github.com/universal-ember/table/pull/149) fix(preferences): make restore() reactive by using TrackedMap ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
+  "description": "## Release (2026-01-28)\n\n@universal-ember/table 3.6.0 (minor)\n\n#### :rocket: Enhancement\n* `@universal-ember/table`, `test-app`\n  * [#156](https://github.com/universal-ember/table/pull/156) Add reactive thunk overload to `preferences` config option    ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* `docs-app`\n  * [#155](https://github.com/universal-ember/table/pull/155) fix(docs): Upgrade @html-next/vertical-collection as an attempt to solve #61 ([@johanrd](https://github.com/johanrd))\n* `docs-api`, `docs-app`\n  * [#154](https://github.com/universal-ember/table/pull/154) fix(docs): Add discoverable cross linking between • Github • API Reference • Docs app ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- [@johanrd](https://github.com/johanrd)\n"
 }

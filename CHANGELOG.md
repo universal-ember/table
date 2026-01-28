@@ -2,6 +2,23 @@
 
 ## Release (2026-01-28)
 
+@universal-ember/table 3.6.0 (minor)
+
+#### :rocket: Enhancement
+* `@universal-ember/table`, `test-app`
+  * [#156](https://github.com/universal-ember/table/pull/156) Add reactive thunk overload to `preferences` config option    ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* `docs-app`
+  * [#155](https://github.com/universal-ember/table/pull/155) fix(docs): Upgrade @html-next/vertical-collection as an attempt to solve #61 ([@johanrd](https://github.com/johanrd))
+* `docs-api`, `docs-app`
+  * [#154](https://github.com/universal-ember/table/pull/154) fix(docs): Add discoverable cross linking between • Github • API Reference • Docs app ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
+## Release (2026-01-28)
+
 @universal-ember/table 3.5.0 (minor)
 
 #### :rocket: Enhancement
