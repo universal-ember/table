@@ -110,26 +110,30 @@ export interface TableConfig<DataType> {
    * you have a table representing "blog posts", your table key may be "blog-posts".
    *
    * And most importantly, the `adapter` is how you load and save the preferences.
-   * This may bo to local storage, or some API.
+   * This may be to local storage, or some API.
+   *
+   * Can be provided as a thunk for reactive multi-table sync.
    */
-  preferences?: {
-    /**
-     * What to name the table in the preferences storage of your choice.
-     * Any string is valid provided that the storage adapter of your choice supports
-     * the format.
-     *
-     * For example, if you have a table of "blog posts", the preferences key might be
-     * `"all-blog-posts"`
-     */
-    key: string;
-    /**
-     * Configuration for how you wish to `persist` and `restore` the configuration for your table.
-     *
-     * `persist` may be async as it is a fire-and-forget type of action.
-     *
-     * However, `restore` must be synchronous, as this is a blocking operation for rendering the table.
-     * So it's best to load up the table preferences before rendering a table.
-     */
-    adapter?: PreferencesAdapter;
-  };
+  preferences?:
+    | {
+        /**
+         * What to name the table in the preferences storage of your choice.
+         * Any string is valid provided that the storage adapter of your choice supports
+         * the format.
+         *
+         * For example, if you have a table of "blog posts", the preferences key might be
+         * `"all-blog-posts"`
+         */
+        key: string;
+        /**
+         * Configuration for how you wish to `persist` and `restore` the configuration for your table.
+         *
+         * `persist` may be async as it is a fire-and-forget type of action.
+         *
+         * However, `restore` must be synchronous, as this is a blocking operation for rendering the table.
+         * So it's best to load up the table preferences before rendering a table.
+         */
+        adapter?: PreferencesAdapter;
+      }
+    | (() => { key: string; adapter?: PreferencesAdapter });
 }
