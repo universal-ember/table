@@ -60,12 +60,16 @@ export class TablePreferences {
  * The API for reactively interacting with preferences
  */
 class TrackedPreferences {
-  plugins = new Map<string, TrackedPluginPrefs>();
+  plugins = new TrackedMap<string, TrackedPluginPrefs>();
 
   get isAtDefault(): boolean {
     return [...this.plugins.values()].every(
       (pluginPrefs) => pluginPrefs.isAtDefault,
     );
+  }
+
+  getPlugin(name: string): TrackedPluginPrefs | undefined {
+    return this.plugins.get(name);
   }
 
   forPlugin(name: string) {
@@ -112,7 +116,7 @@ class TrackedPreferences {
 
 class TrackedPluginPrefs<PluginName = unknown> {
   table = new TrackedMap<string, unknown>();
-  columns = new Map<string, TrackedMap<string, unknown>>();
+  columns = new TrackedMap<string, TrackedMap<string, unknown>>();
 
   get isAtDefault(): boolean {
     return (
@@ -120,6 +124,10 @@ class TrackedPluginPrefs<PluginName = unknown> {
       [...this.columns.values()].every((x) => x.size === 0)
     );
   }
+
+  getColumn = (key: string): TrackedMap<string, unknown> | undefined => {
+    return this.columns.get(key);
+  };
 
   forColumn = (key: string): TrackedMap<string, unknown> => {
     let existing = this.columns.get(key);

@@ -167,8 +167,10 @@ export const preferences = {
        */
       delete(key: string) {
         const prefs = column.table.preferences;
-        const existing = prefs.storage.forPlugin(klass.name);
-        const columnPrefs = existing.forColumn(column.key);
+        const pluginPrefs = prefs.storage.getPlugin(klass.name);
+        if (!pluginPrefs) return prefs.persist();
+        const columnPrefs = pluginPrefs.getColumn(column.key);
+        if (!columnPrefs) return prefs.persist();
 
         columnPrefs.delete(key);
 
@@ -179,9 +181,10 @@ export const preferences = {
        */
       get(key: string) {
         const prefs = column.table.preferences;
-        const existing = prefs.storage.forPlugin(klass.name);
-        const columnPrefs = existing.forColumn(column.key);
-
+        const pluginPrefs = prefs.storage.getPlugin(klass.name);
+        if (!pluginPrefs) return undefined;
+        const columnPrefs = pluginPrefs.getColumn(column.key);
+        if (!columnPrefs) return undefined;
         return columnPrefs.get(key);
       },
       /**
@@ -218,8 +221,10 @@ export const preferences = {
 
         for (const column of table.columns) {
           const prefs = column.table.preferences;
-          const existing = prefs.storage.forPlugin(klass.name);
-          const columnPrefs = existing.forColumn(column.key);
+          const pluginPrefs = prefs.storage.getPlugin(klass.name);
+          if (!pluginPrefs) continue;
+          const columnPrefs = pluginPrefs.getColumn(column.key);
+          if (!columnPrefs) continue;
 
           columnPrefs.delete(key);
         }
@@ -249,9 +254,10 @@ export const preferences = {
        */
       delete(key: string) {
         const prefs = table.preferences;
-        const existing = prefs.storage.forPlugin(klass.name);
+        const pluginPrefs = prefs.storage.getPlugin(klass.name);
+        if (!pluginPrefs) return prefs.persist();
 
-        existing.table.delete(key);
+        pluginPrefs.table.delete(key);
 
         return prefs.persist();
       },
@@ -260,9 +266,9 @@ export const preferences = {
        */
       get(key: string) {
         const prefs = table.preferences;
-        const existing = prefs.storage.forPlugin(klass.name);
-
-        return existing.table.get(key);
+        const pluginPrefs = prefs.storage.getPlugin(klass.name);
+        if (!pluginPrefs) return undefined;
+        return pluginPrefs.table.get(key);
       },
       /**
        * set an entry on the underlying `Map` used for this table-plugin pair
