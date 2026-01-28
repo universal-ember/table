@@ -1,8 +1,11 @@
 import { render, settled } from "@ember/test-helpers";
 import { module, test } from "qunit";
 import { setupRenderingTest, setupTest } from "ember-qunit";
+import { setOwner } from "@ember/owner";
 
-import { TablePreferences } from "@universal-ember/table";
+import { headlessTable, TablePreferences } from "@universal-ember/table";
+import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
+import { meta } from "@universal-ember/table/plugins";
 
 // import sinon from 'sinon';
 import type { PreferencesData } from "@universal-ember/table";
@@ -401,5 +404,56 @@ module("Preferences | rendering", function (hooks) {
     await settled();
 
     assert.dom("#visibility").hasText("false", "value updates after restore()");
+  });
+
+  test("ColumnReordering reacts to restored preferences", async function (assert) {
+    class Ctx {
+      table = headlessTable(this, {
+        columns: () => [{ key: "A" }, { key: "B" }, { key: "C" }],
+        data: () => [],
+        preferences: {
+          key: "test-reorder",
+          adapter: {
+            restore: () => undefined, // Start with no saved preferences
+            persist: () => {},
+          },
+        },
+        plugins: [ColumnReordering],
+      });
+
+      get columnOrder() {
+        return meta
+          .forTable(this.table, ColumnReordering)
+          .columns.map((c) => c.key)
+          .join(" ");
+      }
+    }
+
+    let ctx = new Ctx();
+    setOwner(ctx, this.owner);
+
+    await render(
+      <template>
+        <out id="order">{{ctx.columnOrder}}</out>
+      </template>,
+    );
+
+    assert.dom("#order").hasText("A B C", "initial order is default");
+
+    // Restore preferences with a different order
+    ctx.table.preferences.storage.restore({
+      plugins: {
+        ColumnReordering: {
+          table: {
+            order: { A: 2, B: 0, C: 1 },
+          },
+          columns: {},
+        },
+      },
+    });
+
+    await settled();
+
+    assert.dom("#order").hasText("B C A", "order updates after restore()");
   });
 });

@@ -120,7 +120,7 @@ export class TableMeta<DataType = unknown> {
     columns: () => this.allColumns,
     visibleColumns: () => this.visibleColumns,
     save: this.save,
-    existingOrder: this.read(),
+    read: () => this.read(),
   });
 
   /**
@@ -257,15 +257,24 @@ export class ColumnOrder<DataType = unknown> {
        */
       save?: (order: Map<string, number>) => void;
       /**
+       * Optional: Callback to read the current saved order from preferences.
+       * Called reactively - when preferences change, order updates automatically.
+       */
+      read?: () => Map<string, number> | undefined;
+      /**
+       * @deprecated Use `read` instead for reactive preferences support.
        * Optional: Previously saved column order to restore.
        */
       existingOrder?: Map<string, number>;
     },
   ) {
+    // Initialize map from existingOrder for backwards compatibility
+    // The reactive `read` callback will override this in orderedMap
     let allColumns = this.args.columns();
+    const initialOrder = args.existingOrder ?? args.read?.();
 
-    if (args.existingOrder) {
-      let newOrder = new Map(args.existingOrder.entries());
+    if (initialOrder) {
+      let newOrder = new Map(initialOrder.entries());
 
       addMissingColumnsToMap(allColumns, newOrder);
       removeExtraColumnsFromMap(allColumns, newOrder);
@@ -488,11 +497,15 @@ export class ColumnOrder<DataType = unknown> {
   }
 
   /**
-   * The same as this.map, but with all the columns' information
+   * The same as this.map, but with all the columns' information.
+   * Prefers preferences (via read callback) when available for reactivity.
    */
   @cached
   get orderedMap(): ReadonlyMap<string, number> {
-    return orderOf(this.args.columns(), this.map);
+    // Prefer preferences for reactivity, fall back to local map
+    const savedOrder = this.args.read?.();
+    const baseMap = savedOrder ?? this.map;
+    return orderOf(this.args.columns(), baseMap);
   }
 
   @cached
@@ -505,7 +518,8 @@ export class ColumnOrder<DataType = unknown> {
       },
       {} as Record<string, Column<DataType>>,
     );
-    const mergedOrder = orderOf(allColumns, this.map);
+    // Use orderedMap which is reactive to preferences
+    const mergedOrder = this.orderedMap;
 
     const result: Column<DataType>[] = Array.from({
       length: allColumns.length,
