@@ -1,4 +1,4 @@
-import { GitHubLink } from "#components/header.gts";
+import { APIReferenceLink, GitHubLink } from "#components/header.gts";
 import { ExternalLink, service } from "ember-primitives";
 
 import { OopsError, PageLayout } from "@universal-ember/docs-support";
@@ -10,6 +10,7 @@ import { OopsError, PageLayout } from "@universal-ember/docs-support";
     </:logoLink>
     <:topRight>
       <GitHubLink />
+      <APIReferenceLink />
     </:topRight>
     <:error as |error|>
       <OopsError @error={{error}}>

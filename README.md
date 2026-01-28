@@ -30,14 +30,11 @@ ember install @universal-ember/table
 * typescript >= 4.8, [rolling window policy](https://www.semver-ts.org/#decouple-typescript-support-from-lts-cycles), range: TS@current-2 to TS@current (3 version window).
 * Glint -- 1.0+
 
-### Usage
+## Documentation
 
-See the [Documentation][docs-app] for examples.
-
-[API Reference][docs-api] can be found [here][docs-api].
-
-[docs-app]: https://ue-table.pages.dev/
-[docs-api]: https://ue-table.pages.dev/api/modules/
+- [Guides](https://ue-table.pages.dev/1-get-started/index.md) - Getting started and usage
+- [Demos](https://ue-table.pages.dev/3-demos/basic.md) - Interactive examples
+- [API Reference](https://ue-table.pages.dev/api/) - Full API documentation
 
 
 ## Contributors
