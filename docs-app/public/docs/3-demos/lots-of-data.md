@@ -218,24 +218,13 @@ function formatElapsed(value) {
   return str;
 }
 
-/**
- * Temporary work-around because docfy.dev doesn't support gjs
- */
-import { setComponentTemplate } from "@ember/component";
-import templateOnly from "@ember/component/template-only";
-import { hbs } from "ember-cli-htmlbars";
-
-const QueryStatus = templateOnly();
-setComponentTemplate(
-  hbs`
+const QueryStatus = <template>
   <td>
     <span class="{{@row.data.countClassName}}">
       {{@row.data.queries.length}}
     </span>
   </td>
-`,
-  QueryStatus,
-);
+</template>;
 
 /**
  * dbmon code copied from
