@@ -5,7 +5,7 @@ import { GitHub } from "@universal-ember/docs-support/icons";
 export const APIReferenceLink = <template>
   <a
     href="/api"
-    class="text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
+    class="self-center text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
   >
     API Reference
   </a>
