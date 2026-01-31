@@ -1,0 +1,8 @@
+# Unlabeled Changes
+
+* `docs-app`
+  * [#159](https://github.com/universal-ember/table/pull/159) fix(docs): Cosmetical alignment of `Api Reference` link in docs header ([@johanrd](https://github.com/johanrd))
+  * [#158](https://github.com/universal-ember/table/pull/158) fix for #61 ([@johanrd](https://github.com/johanrd))
+
+
+*Cannot plan release until the above changes are labeled*.
