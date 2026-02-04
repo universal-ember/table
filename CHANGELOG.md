@@ -1,5 +1,21 @@
 # Changelog
 
+## Release (2026-02-04)
+
+@universal-ember/table 3.6.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`, `test-app`
+  * [#161](https://github.com/universal-ember/table/pull/161) fix: addMissingColumnsToMap skips new columns when stale keys exist in saved order ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* `docs-app`
+  * [#159](https://github.com/universal-ember/table/pull/159) fix(docs): Cosmetical alignment of `Api Reference` link in docs header ([@johanrd](https://github.com/johanrd))
+  * [#158](https://github.com/universal-ember/table/pull/158) fix for #61 ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- [@johanrd](https://github.com/johanrd)
+
 ## Release (2026-01-28)
 
 @universal-ember/table 3.6.0 (minor)
