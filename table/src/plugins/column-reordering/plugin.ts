@@ -593,13 +593,11 @@ function addMissingColumnsToMap(
   columns: { key: string }[],
   map: Map<string, number>,
 ): void {
-  if (map.size < columns.length) {
-    let maxAssignedColumn = Math.max(...map.values());
+  let maxAssignedColumn = Math.max(...map.values());
 
-    for (let column of columns) {
-      if (map.get(column.key) === undefined) {
-        map.set(column.key, ++maxAssignedColumn);
-      }
+  for (let column of columns) {
+    if (map.get(column.key) === undefined) {
+      map.set(column.key, ++maxAssignedColumn);
     }
   }
 }

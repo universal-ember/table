@@ -109,4 +109,22 @@ module('Plugin | column-reordering | orderOf', function () {
       'column B was added at the end',
     );
   });
+
+  test('handles renamed column (stale key replaced by new key)', function (assert) {
+    // Saved order has stale "Equipment" key, but current columns have "Count" instead.
+    // map.size (3) === columns.length (3), so the old guard skipped adding "Count".
+    let result = orderOf(
+      [{ key: 'A' }, { key: 'Count' }, { key: 'C' }],
+      new Map([
+        ['A', 0],
+        ['Equipment', 1],
+        ['C', 2],
+      ]),
+    );
+
+    assert.true(
+      result.has('Count'),
+      'new column "Count" is present in the order',
+    );
+  });
 });
