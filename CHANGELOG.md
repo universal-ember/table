@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-02-05)
+
+* @universal-ember/table 3.6.2 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#164](https://github.com/universal-ember/table/pull/164) Fix release ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* Other
+  * [#162](https://github.com/universal-ember/table/pull/162) Fix release ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+
+#### Committers: 1
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-02-04)
 
 @universal-ember/table 3.6.1 (patch)
