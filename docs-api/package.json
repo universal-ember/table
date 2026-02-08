@@ -8,12 +8,12 @@
     "docs:watch": "typedoc --options ./typedoc.config.json --watch"
   },
   "devDependencies": {
-    "typedoc": "^0.27.9",
+    "typedoc": "^0.28.0",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typedoc-gitlab-wiki-theme": "^2.1.0",
     "typedoc-plugin-markdown": "^4.4.2",
     "typedoc-plugin-markdown-pages": "^0.3.0",
     "typedoc-plugin-mdn-links": "^5.0.1",
-    "typescript": "~5.8.2"
+    "typescript": "~5.9.0"
   }
 }
