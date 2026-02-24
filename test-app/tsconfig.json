@@ -1,8 +1,5 @@
 {
   "extends": "@tsconfig/ember/tsconfig.json",
-  "glint": {
-    "environment": ["ember-template-imports"]
-  },
   "compilerOptions": {
     "noEmitOnError": false,
     "allowSyntheticDefaultImports": true,
