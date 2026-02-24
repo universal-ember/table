@@ -71,7 +71,7 @@ jobs:
         run: |
           pnpm --filter test-app exec tsc -v;
           pnpm --filter test-app exec ember-tsc --version;
-          pnpm --filter test-app exec ember-tsc;
+          pnpm --filter test-app exec ember-tsc --noEmit;
 
 
   default_tests:
