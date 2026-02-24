@@ -23,8 +23,10 @@ import {
   <IndexPage>
     <:header>
       <TopRight>
-        <GitHubLink />
-        <APIReferenceLink />
+        <GitHubLink class="!text-white hover:!text-slate-200" />
+        <APIReferenceLink
+          class="!text-white hover:!text-slate-200 dark:!text-white"
+        />
       </TopRight>
     </:header>
     <:tagline>
