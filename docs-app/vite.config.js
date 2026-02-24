@@ -8,12 +8,7 @@ export default defineConfig(() => ({
   plugins: [
     ember(),
     kolay({
-      groups: [
-        {
-          name: 'Docs',
-          src: import.meta.resolve('./public/docs', import.meta.url),
-        },
-      ],
+      src: import.meta.resolve('./public/docs', import.meta.url),
       packages: ['@universal-ember/table'],
     }),
     babel({
