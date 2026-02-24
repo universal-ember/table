@@ -3,8 +3,8 @@ import Route from '@ember/routing/route';
 import rehypeShikiFromHighlighter from '@shikijs/rehype/core';
 import { setupTabster } from 'ember-primitives/tabster';
 import { setupKolay } from 'kolay/setup';
-import { getHighlighterCore } from 'shiki/core';
-import getWasm from 'shiki/wasm';
+import { createOnigurumaEngine } from 'shiki/engine/oniguruma';
+import { createHighlighterCore } from 'shiki/core';
 
 import { Callout } from '@universal-ember/docs-support';
 
@@ -13,7 +13,7 @@ import { DATA } from '../sample-data';
 
 export default class Application extends Route {
   async model() {
-    const highlighter = await getHighlighterCore({
+    const highlighter = await createHighlighterCore({
       themes: [import('shiki/themes/github-dark.mjs'), import('shiki/themes/github-light.mjs')],
       langs: [
         import('shiki/langs/javascript.mjs'),
@@ -28,7 +28,7 @@ export default class Application extends Route {
         import('shiki/langs/jsonc.mjs'),
         import('shiki/langs/markdown.mjs'),
       ],
-      loadWasm: getWasm,
+      engine: createOnigurumaEngine(import('shiki/wasm')),
     });
 
     const [manifest] = await Promise.all([
@@ -40,30 +40,30 @@ export default class Application extends Route {
           ComponentSignature,
           ModifierSignature,
         },
-        resolve: {
+        modules: {
           // this library
-          '@universal-ember/table': import('@universal-ember/table'),
-          '@universal-ember/table/plugins': import('@universal-ember/table/plugins'),
-          '@universal-ember/table/plugins/metadata': import('@universal-ember/table/plugins/metadata'),
-          '@universal-ember/table/plugins/column-resizing': import('@universal-ember/table/plugins/column-resizing'),
-          '@universal-ember/table/plugins/column-reordering': import('@universal-ember/table/plugins/column-reordering'),
-          '@universal-ember/table/plugins/column-visibility': import('@universal-ember/table/plugins/column-visibility'),
-          '@universal-ember/table/plugins/data-sorting': import('@universal-ember/table/plugins/data-sorting'),
-          '@universal-ember/table/plugins/sticky-columns': import('@universal-ember/table/plugins/sticky-columns'),
-          '@universal-ember/table/plugins/row-selection': import('@universal-ember/table/plugins/row-selection'),
+          '@universal-ember/table': () => import('@universal-ember/table'),
+          '@universal-ember/table/plugins': () => import('@universal-ember/table/plugins'),
+          '@universal-ember/table/plugins/metadata': () => import('@universal-ember/table/plugins/metadata'),
+          '@universal-ember/table/plugins/column-resizing': () => import('@universal-ember/table/plugins/column-resizing'),
+          '@universal-ember/table/plugins/column-reordering': () => import('@universal-ember/table/plugins/column-reordering'),
+          '@universal-ember/table/plugins/column-visibility': () => import('@universal-ember/table/plugins/column-visibility'),
+          '@universal-ember/table/plugins/data-sorting': () => import('@universal-ember/table/plugins/data-sorting'),
+          '@universal-ember/table/plugins/sticky-columns': () => import('@universal-ember/table/plugins/sticky-columns'),
+          '@universal-ember/table/plugins/row-selection': () => import('@universal-ember/table/plugins/row-selection'),
 
-          '#sample-data': Promise.resolve({ DATA }),
-          'docs-app/sample-data': Promise.resolve({ DATA }),
+          '#sample-data': () => ({ DATA }),
+          'docs-app/sample-data': () => ({ DATA }),
 
           // community libraries
-          'ember-resources': import('ember-resources'),
-          'tracked-built-ins': import('tracked-built-ins'),
-          'ember-primitives': import('ember-primitives'),
-          'reactiveweb/fps': import('reactiveweb/fps'),
-          'reactiveweb/map': import('reactiveweb/map'),
+          'ember-resources': () => import('ember-resources'),
+          'tracked-built-ins': () => import('tracked-built-ins'),
+          'ember-primitives': () => import('ember-primitives'),
+          'reactiveweb/fps': () => import('reactiveweb/fps'),
+          'reactiveweb/map': () => import('reactiveweb/map'),
           // @ts-expect-error no types
-          '@html-next/vertical-collection': import('@html-next/vertical-collection'),
-          kolay: import('kolay'),
+          '@html-next/vertical-collection': () => import('@html-next/vertical-collection'),
+          kolay: () => import('kolay'),
         },
         rehypePlugins: [
           [

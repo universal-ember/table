@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh release:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(head:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:www.npmjs.com)",
+      "WebFetch(domain:unpkg.com)",
+      "WebSearch",
+      "WebFetch(domain:kolay.nullvoxpopuli.com)",
+      "WebFetch(domain:api.github.com)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm ls:*)",
+      "Bash(tail:*)",
+      "Bash(pnpm view:*)",
+      "Bash(pnpm:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(gh pr:*)"
+    ]
+  }
+}

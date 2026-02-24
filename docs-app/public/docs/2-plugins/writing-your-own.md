@@ -145,7 +145,6 @@ via JSON.stringify -- so sticking to vanilla objects and arrays will result in t
 Ultimately, you can do whatever you want, but this is the structure that `@universal-ember/table` uses for each plugin.
 
 - `/{plugin-name}/` - folder named after your plugin
-
   - `plugin.ts` - defines the actual plugin, `Meta`, `Options`, and other related structures.
     The name of the plugin class should be a PascalCased version of the folder name.
   - `helpers.ts` - helpers aimed at public API, but not directly imported -- pre-wires usage of meta (or the other base utilities) along with the plugin exported from `plugin.ts`.
