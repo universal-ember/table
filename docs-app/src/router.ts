@@ -6,7 +6,7 @@ import config from '#config';
 import { addRoutes } from 'kolay';
 
 @properLinks({
-  ignore: ['/tests'],
+  ignore: ['/tests', '/api'],
 })
 export default class Router extends EmberRouter {
   location = config.locationType;

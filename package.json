@@ -22,10 +22,10 @@
   },
   "devDependencies": {
     "@glint/core": "1.5.2",
-    "concurrently": "^9.1.2",
-    "prettier": "^3.5.3",
+    "concurrently": "^9.2.1",
+    "prettier": "^3.8.1",
     "release-plan": "^0.17.4",
-    "turbo": "^2.4.4"
+    "turbo": "^2.8.10"
   },
   "packageManager": "pnpm@10.28.2",
   "engines": {
@@ -43,11 +43,9 @@
       ]
     },
     "overrides": {
-      "@embroider/macros": "alpha",
-      "ember-auto-import": "^2.6.2"
+      "kolay": "^5.1.3"
     },
     "patchedDependencies": {
-      "@embroider/addon-dev": "patches/@embroider__addon-dev.patch",
       "ember-try": "patches/ember-try.patch",
       "github-changelog": "patches/github-changelog.patch"
     }

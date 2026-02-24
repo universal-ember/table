@@ -20,9 +20,9 @@ import { OopsError, PageLayout } from "@universal-ember/docs-support";
       </OopsError>
     </:error>
     <:editLink as |Link|>
-      {{#let (service "kolay/docs") as |docs|}}
+      {{#let (service "router") as |router|}}
         <Link
-          @href="https://github.com/universal-ember/table/edit/main/docs-app/public/docs{{docs.selected.path}}.md"
+          @href="https://github.com/universal-ember/table/edit/main/docs-app/public/docs{{router.currentURL}}"
         >
           Edit this page
         </Link>

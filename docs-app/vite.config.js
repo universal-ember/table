@@ -1,4 +1,4 @@
-import { classicEmberSupport, ember, extensions } from '@embroider/vite';
+import { ember, extensions } from '@embroider/vite';
 
 import { babel } from '@rollup/plugin-babel';
 import { kolay } from 'kolay/vite';
@@ -6,11 +6,14 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
   plugins: [
-    classicEmberSupport(),
     ember(),
     kolay({
-      src: 'public/docs',
-      groups: [],
+      groups: [
+        {
+          name: 'Docs',
+          src: import.meta.resolve('./public/docs', import.meta.url),
+        },
+      ],
       packages: ['@universal-ember/table'],
     }),
     babel({
@@ -31,7 +34,7 @@ export default defineConfig(() => ({
   },
   optimizeDeps: {
     // a wasm-providing dependency
-    exclude: ['content-tag'],
+    exclude: ['content-tag', 'kolay', '@universal-ember/table'],
     // for top-level-await, etc
     esbuildOptions: {
       target: 'esnext',

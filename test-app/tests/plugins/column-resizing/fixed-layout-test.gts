@@ -84,11 +84,11 @@ module("Plugins | resizing | fixed layout", function (hooks) {
                 {{#each this.table.columns as |column|}}
                   <th {{this.modifiers.columnHeader column}}>
                     <span>{{column.name}}</span>
-                    <div
+                    <button
                       data-handle
                       {{resizeHandle column}}
                       type="button"
-                    >|</div>
+                    >|</button>
                   </th>
                 {{/each}}
               </tr>

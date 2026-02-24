@@ -27,6 +27,10 @@ export default [
       "@typescript-eslint/no-unused-vars": 0,
       "@typescript-eslint/unbound-method": 0,
       "@typescript-eslint/no-empty-object-types": 0,
+      // Pre-existing test patterns; fix separately
+      "qunit/no-assert-equal": 0,
+      "qunit/no-assert-equal-boolean": 0,
+      "qunit/require-expect": 0,
     },
   },
 ];

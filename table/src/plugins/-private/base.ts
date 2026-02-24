@@ -84,9 +84,9 @@ declare const __Signature__: unique symbol;
  *
  * One instance of a plugin exists per table
  */
-export abstract class BasePlugin<Signature = unknown>
-  implements Plugin<Signature>
-{
+export abstract class BasePlugin<
+  Signature = unknown,
+> implements Plugin<Signature> {
   constructor(protected table: Table) {}
 
   /**

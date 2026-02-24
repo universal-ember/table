@@ -68,7 +68,7 @@ module("Plugins | dataSorting", function (hooks) {
       return meta.forColumn(column, DataSorting).sortDirection;
     };
 
-    sort = (column: Column) => {
+    sort = <T,>(column: Column<T>) => {
       meta.forTable(column.table, DataSorting).handleSort(column);
     };
 
