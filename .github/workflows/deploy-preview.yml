@@ -118,7 +118,8 @@ jobs:
       docsUrl: ${{ steps.deploy.outputs.url }}
     steps:
       - uses: actions/download-artifact@v7
-        name: deploy-prep-dist
+        with:
+          name: deploy-prep-dist
       - id: deploy
         uses: cloudflare/pages-action@v1.5.0
         with:
@@ -126,7 +127,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ue-table
-          directory: ./deploy-prep-dist/
+          directory: ./docs-app/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
   PostComment:
