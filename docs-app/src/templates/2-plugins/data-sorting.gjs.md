@@ -21,7 +21,7 @@ import {
   sortDirection,
 } from "@universal-ember/table/plugins/data-sorting";
 
-import { DATA } from "docs-app/sample-data";
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {

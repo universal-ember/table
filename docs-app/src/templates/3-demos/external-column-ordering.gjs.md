@@ -20,7 +20,7 @@ import {
   moveLeft, moveRight
 } from '@universal-ember/table/plugins/column-reordering';
 
-import { DATA } from 'docs-app/sample-data';
+import { DATA } from '#sample-data';
 
 export default class extends Component {
   @tracked pendingColumnOrder;
