@@ -4,11 +4,13 @@
   "type": "module",
   "exports": {
     "./tests/*": "./tests/*",
+    "./sample-data": "./src/sample-data/index.ts",
     "./*": "./src/*"
   },
   "imports": {
     "#src/*": "./src/*",
     "#data": "./src/sample-data/index.ts",
+    "#sample-data": "./src/sample-data/index.ts",
     "#config": "./src/config.ts",
     "#components/*": "./src/components/*"
   },

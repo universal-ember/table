@@ -8,7 +8,7 @@ The default value can be changed at the table level or per-column.
 import Component from "@glimmer/component";
 
 import { headlessTable } from "@universal-ember/table";
-import { DATA } from "docs-app/sample-data";
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
@@ -67,7 +67,7 @@ You can set a default value for all columns using `defaultCellValue` in the tabl
 import Component from "@glimmer/component";
 
 import { headlessTable } from "@universal-ember/table";
-import { DATA } from "docs-app/sample-data";
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {

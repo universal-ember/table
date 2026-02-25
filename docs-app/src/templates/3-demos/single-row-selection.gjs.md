@@ -18,7 +18,7 @@ import {
   isSelected,
 } from "@universal-ember/table/plugins/row-selection";
 
-import { DATA } from "docs-app/sample-data";
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   selection = new TrackedSet();

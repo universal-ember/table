@@ -19,7 +19,7 @@ import {
   show,
 } from "@universal-ember/table/plugins/column-visibility";
 
-import { DATA } from "docs-app/sample-data";
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
@@ -148,7 +148,7 @@ import {
 } from "@universal-ember/table/plugins/column-visibility";
 import { ColumnReordering } from "@universal-ember/table/plugins/column-reordering";
 
-import { DATA } from "docs-app/sample-data";
+import { DATA } from "#sample-data";
 
 export default class extends Component {
   table = headlessTable(this, {
