@@ -41,7 +41,7 @@ import {
     </:tagline>
     <:callToAction>
       <InternalLink
-        href="/1-get-started/index.gjs.md"
+        href="/1-get-started"
         style="color: white; text-shadow: 0px 2px 0px black; transform: scale(2.5);"
       >
         Get Started ➤
@@ -189,7 +189,7 @@ const Socials = <template>
 
 const GetStarted = <template>
   <InternalLink
-    href="/1-get-started/index.gjs.md"
+    href="/1-get-started"
     style="transform: scale(2.5);"
   >
     Get Started ➤
