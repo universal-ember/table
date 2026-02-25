@@ -8,12 +8,6 @@ export default defineConfig(() => ({
   plugins: [
     ember(),
     kolay({
-      groups: [
-        {
-          name: '',
-          src: import.meta.resolve('./public/docs'),
-        },
-      ],
       packages: ['@universal-ember/table'],
     }),
     babel({
@@ -34,7 +28,8 @@ export default defineConfig(() => ({
   },
   optimizeDeps: {
     // a wasm-providing dependency
-    exclude: ['content-tag', 'kolay', '@universal-ember/table'],
+    exclude: ['content-tag', '@universal-ember/table', '@universal-ember/docs-support'],
+    include: ['@shikijs/rehype', 'shiki'],
     // for top-level-await, etc
     esbuildOptions: {
       target: 'esnext',
