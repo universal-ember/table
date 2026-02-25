@@ -188,7 +188,10 @@ const Socials = <template>
 </template>;
 
 const GetStarted = <template>
-  <InternalLink href="/1-get-started/index.gjs.md" style="transform: scale(2.5);">
+  <InternalLink
+    href="/1-get-started/index.gjs.md"
+    style="transform: scale(2.5);"
+  >
     Get Started ➤
   </InternalLink>
 </template>;
