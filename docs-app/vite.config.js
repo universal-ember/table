@@ -1,6 +1,7 @@
 import { ember, extensions } from '@embroider/vite';
 
 import { babel } from '@rollup/plugin-babel';
+import rehypeShiki from '@shikijs/rehype';
 import { kolay } from 'kolay/vite';
 import { createRequire } from 'module';
 import path from 'path';
@@ -27,6 +28,18 @@ export default defineConfig(() => ({
     ember(),
     kolay({
       packages: ['@universal-ember/table'],
+      rehypePlugins: [
+        [
+          rehypeShiki,
+          {
+            themes: {
+              light: 'github-light',
+              dark: 'github-dark',
+            },
+            defaultColor: 'light-dark()',
+          },
+        ],
+      ],
     }),
     babel({
       babelHelpers: 'runtime',
