@@ -120,6 +120,7 @@ jobs:
       - uses: actions/download-artifact@v7
         with:
           name: deploy-prep-dist
+          path: ./docs-app/dist
       - id: deploy
         uses: cloudflare/pages-action@v1.5.0
         with:
