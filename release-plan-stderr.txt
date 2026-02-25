@@ -1,0 +1,13 @@
+# Unlabeled Changes
+
+* [#180](https://github.com/universal-ember/table/pull/180) fix: resolve ember-raf-scheduler to its ESM addon source for the lots-of-data demo ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#179](https://github.com/universal-ember/table/pull/179) Fix docs-app first-page routing and Get Started link ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#178](https://github.com/universal-ember/table/pull/178) Rename docs-app/src template files from .md to .gjs.md ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#176](https://github.com/universal-ember/table/pull/176) fix(docs-app): move docs to `src/templates/` and clean up vite config ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#177](https://github.com/universal-ember/table/pull/177) Fix Deploy Preview workflow: artifact extracted to wrong directory ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#175](https://github.com/universal-ember/table/pull/175) Fix deploy preview workflow: broken artifact download and wrong deploy directory ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#174](https://github.com/universal-ember/table/pull/174) Fix docs site: kolay `src` shorthand is not implemented, must use `groups` ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#173](https://github.com/universal-ember/table/pull/173) fix: add @ember/app-tsconfig to docs-app to unblock production deploy ([@Copilot](https://github.com/apps/copilot-swe-agent))
+
+
+*Cannot plan release until the above changes are labeled*.
