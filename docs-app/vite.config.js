@@ -28,7 +28,11 @@ export default defineConfig(() => ({
   },
   optimizeDeps: {
     // a wasm-providing dependency
-    exclude: ['content-tag', '@universal-ember/table', '@universal-ember/docs-support'],
+    exclude: [
+      'content-tag',
+      '@universal-ember/table',
+      '@universal-ember/docs-support',
+    ],
     include: ['@shikijs/rehype', 'shiki'],
     // for top-level-await, etc
     esbuildOptions: {
