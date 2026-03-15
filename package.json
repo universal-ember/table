@@ -27,13 +27,13 @@
     "release-plan": "^0.17.4",
     "turbo": "^2.8.10"
   },
-  "packageManager": "pnpm@10.30.3",
+  "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": "24.11.1"
   },
   "volta": {
     "node": "24.11.1",
-    "pnpm": "10.30.3"
+    "pnpm": "10.32.1"
   },
   "pnpm": {
     "peerDependencyRules": {
