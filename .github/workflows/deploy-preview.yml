@@ -75,7 +75,7 @@ jobs:
         working-directory: docs-api
       - run: pnpm build:prod
         working-directory: docs-app
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: deploy-prep-dist
           if-no-files-found: error
