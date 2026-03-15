@@ -47,7 +47,7 @@
     "@embroider/vite": "^1.5.2",
     "@glimmer/component": "^2.0.0",
     "@glint/ember-tsc": "^1.1.1",
-    "@glint/template": "1.7.4",
+    "@glint/template": "1.7.6",
     "@html-next/vertical-collection": "^5.0.2",
     "@rollup/plugin-babel": "^6.1.0",
     "@tailwindcss/typography": "^0.5.19",
