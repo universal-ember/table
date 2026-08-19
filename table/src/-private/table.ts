@@ -103,18 +103,24 @@ export class Table<DataType = unknown> {
   /**
    * @private
    *
-   * The owner is read from the parent on first use, because the parent
-   * can receive its owner after the table is created. For example, a class
-   * field runs before `setOwner` on a manually constructed object.
+   * `link` copies the owner over, but the parent can receive its owner
+   * after the table is created. A class field initializes before `setOwner`
+   * runs on a manually constructed object, so the owner is read from the
+   * parent on first use.
    */
-  get #owner(): Owner | undefined {
-    const existing = getOwner(this);
+  get #owner(): Owner {
+    let owner = getOwner(this);
 
-    if (existing) return existing;
+    if (!owner) {
+      owner = getOwner(this.#parent);
 
-    const owner = getOwner(this.#parent);
+      assert(
+        `The Table does not have an owner. cannot create a plugin without an owner`,
+        owner,
+      );
 
-    if (owner) setOwner(this, owner);
+      setOwner(this, owner);
+    }
 
     return owner;
   }
@@ -215,13 +221,7 @@ export class Table<DataType = unknown> {
       if (typeof PluginClass === 'function') {
         const plugin = new PluginClass(this);
 
-        const owner = this.#owner;
-
-        assert(
-          `The Table does not have an owner. cannot create a plugin without an owner`,
-          owner,
-        );
-        setOwner(plugin, owner);
+        setOwner(plugin, this.#owner);
 
         return plugin;
       }
