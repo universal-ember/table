@@ -5,7 +5,7 @@ import { guidFor } from '@ember/object/internals';
 
 import { isDevelopingApp, macroCondition } from '@embroider/macros';
 import { modifier } from 'ember-modifier';
-import { Resource } from 'ember-modify-based-class-resource';
+import { link } from 'reactiveweb/link';
 import { map } from 'reactiveweb/map';
 
 import {
@@ -20,6 +20,7 @@ import { composeFunctionModifiers } from './utils.ts';
 import type { BasePlugin, Plugin } from '../plugins/index.ts';
 import type { Class } from './private-types.ts';
 import type { Destructor, TableConfig } from './interfaces';
+import type Owner from '@ember/owner';
 import { compatOwner } from './ember-compat.ts';
 
 const getOwner = compatOwner.getOwner;
@@ -30,18 +31,9 @@ const DEFAULT_COLUMN_CONFIG = {
   minWidth: 128,
 };
 
-interface Signature<DataType> {
-  Named: TableConfig<DataType>;
-}
-
 /**
  * Because the table is our entry-point object to all the table behaviors,
  * we need a stable way to know which table we have.
- * Normally, this could be done with referential integrity / identity.
- * However, due to how resources are implemented, if the consumer opts to
- * not use the `@use` decorator, then proxies get involved.
- * The proxies don't maintain instanceof checks, which may be a bug in
- * ember-resources.
  */
 export const TABLE_KEY = Symbol('__TABLE_KEY__');
 export const TABLE_META_KEY = Symbol('__TABLE_META__');
@@ -54,7 +46,7 @@ const attachContainer = (element: Element, table: Table) => {
   table.scrollContainerElement = element;
 };
 
-export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
+export class Table<DataType = unknown> {
   /**
    * @private
    */
@@ -91,45 +83,68 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
   /**
    * @private
-   *
-   * Lazy way to delay consuming arguments until they are needed.
    */
-  @tracked declare args: { named: Signature<DataType>['Named'] };
+  scrollContainerElement?: HTMLElement;
+
+  #parent: object;
+  #config: TableConfig<DataType>;
+
+  constructor(parent: object, config: TableConfig<DataType>) {
+    this.#parent = parent;
+    this.#config = config;
+
+    /**
+     * The table is destroyed with the object that created it,
+     * and it uses that object's owner for its plugins.
+     */
+    link(this, parent);
+  }
 
   /**
    * @private
+   *
+   * The owner is read from the parent on first use, because the parent
+   * can receive its owner after the table is created. For example, a class
+   * field runs before `setOwner` on a manually constructed object.
    */
-  scrollContainerElement?: HTMLElement;
+  get #owner(): Owner | undefined {
+    const existing = getOwner(this);
+
+    if (existing) return existing;
+
+    const owner = getOwner(this.#parent);
+
+    if (owner) setOwner(this, owner);
+
+    return owner;
+  }
+
+  /**
+   * @private
+   *
+   * used by other private APIs
+   */
+  get config(): TableConfig<DataType> {
+    return this.#config;
+  }
 
   /**
    * Interact with, save, modify, etc the preferences for the table,
    * plugins, columns, etc
+   *
+   * When the `preferences` config is a function, the preferences are
+   * restored again every time the tracked data that the function reads changes.
    */
-  declare preferences: TablePreferences;
-
-  /**
-   * @private
-   */
-  modify(_: [] | undefined, named: Signature<DataType>['Named']) {
-    this.args = { named };
-
-    const preferences = named?.preferences;
+  @cached
+  get preferences(): TablePreferences {
+    const config = this.#config.preferences;
     const { key = guidFor(this), adapter } =
-      (typeof preferences === 'function' ? preferences() : preferences) ?? {};
+      (typeof config === 'function' ? config() : config) ?? {};
 
-    // only set the preferences once
-    if (!this.preferences) {
-      // TODO: when no key is present,
-      //       use "local-storage" preferences.
-      //       it does not make sense to use a guid in a user's preferences
-      this.preferences = new TablePreferences(key, adapter);
-    } else {
-      // subsequent updates to args
-      if (typeof preferences === 'function' && adapter) {
-        this.preferences.restore(adapter);
-      }
-      this.resetScrollContainer();
-    }
+    // TODO: when no key is present,
+    //       use "local-storage" preferences.
+    //       it does not make sense to use a guid in a user's preferences
+    return new TablePreferences(key, adapter);
   }
 
   /**
@@ -186,12 +201,10 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
    * @private
    *
    * For all configured plugins, instantiates each one.
-   * If the plugins argument changes to the Table (either directly or through
-   * headlessTable, all state is lost and re-created)
    */
   @cached
   get plugins(): Plugin[] {
-    const plugins = normalizePluginsConfig(this.args.named?.plugins);
+    const plugins = normalizePluginsConfig(this.#config.plugins);
 
     verifyPlugins(plugins);
 
@@ -202,7 +215,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
       if (typeof PluginClass === 'function') {
         const plugin = new PluginClass(this);
 
-        const owner = getOwner(this);
+        const owner = this.#owner;
 
         assert(
           `The Table does not have an owner. cannot create a plugin without an owner`,
@@ -239,18 +252,9 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
     return result as unknown as Instance | undefined;
   }
 
-  /**
-   * @private
-   *
-   * used by other private APIs
-   */
-  get config() {
-    return this.args.named;
-  }
-
   rows = map(this, {
     data: () => {
-      const dataFn = this.args.named?.data;
+      const dataFn = this.#config.data;
 
       if (!dataFn) return [];
 
@@ -261,7 +265,7 @@ export class Table<DataType = unknown> extends Resource<Signature<DataType>> {
 
   columns = map(this, {
     data: () => {
-      const configFn = this.args.named?.columns;
+      const configFn = this.#config.columns;
 
       if (!configFn) return [];
 

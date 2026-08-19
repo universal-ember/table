@@ -253,12 +253,6 @@ importers:
       ember-modifier:
         specifier: ^4.3.0
         version: 4.3.0(@babel/core@7.29.0)
-      ember-modify-based-class-resource:
-        specifier: ^1.1.2
-        version: 1.1.2(24a2df5f3e45b9f9d6498ae47b2fbae9)
-      ember-resources:
-        specifier: ^7.0.7
-        version: 7.0.7(972e7a9dd19717b828f7a881726685f7)
       reactiveweb:
         specifier: ^1.9.1
         version: 1.9.1(e6a5f41cb5e16588d59169bb30fdd2b0)
@@ -3784,15 +3778,6 @@ packages:
 
   ember-modifier@4.3.0:
     resolution: {integrity: sha512-O0rirSLQbGg0VJ/NqoQ4uN1bh2iAekZC/Ykma+FkjCM2ofrO38u+d8n3+AK6uVWeMJmogGX2KL+Is5fofoInJg==}
-
-  ember-modify-based-class-resource@1.1.2:
-    resolution: {integrity: sha512-eruTLd+aMzrXaLDInQSYv3zTcG5+0Ttn69W31JtOp6nSR3T22ET3q+6zZjCVNxmlDufSAu6lSFd9EAtKaazCdA==}
-    peerDependencies:
-      '@glimmer/component': ^1.1.2 || >= 2.0.0
-      ember-resources: '>= 6.4.0'
-    peerDependenciesMeta:
-      '@glimmer/component':
-        optional: true
 
   ember-page-title@9.0.3:
     resolution: {integrity: sha512-fedRHUsvq8tIZgOii8jTrfAyeq+la/9H5eAzhNNwEyzo7nDMmqK2SxsyBUGXprd8fOacsPabLlzlucMi/4mUpA==}
@@ -12497,19 +12482,6 @@ snapshots:
       decorator-transforms: 2.3.1(@babel/core@7.29.0)
     transitivePeerDependencies:
       - '@babel/core'
-      - supports-color
-
-  ember-modify-based-class-resource@1.1.2(24a2df5f3e45b9f9d6498ae47b2fbae9):
-    dependencies:
-      '@babel/runtime': 7.28.6
-      '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.20.1(882cf82caec78f226fcbd647b89f3bbe)
-      ember-resources: 7.0.7(972e7a9dd19717b828f7a881726685f7)
-    optionalDependencies:
-      '@glimmer/component': 2.0.0
-    transitivePeerDependencies:
-      - '@babel/core'
-      - '@glint/template'
       - supports-color
 
   ember-page-title@9.0.3:
