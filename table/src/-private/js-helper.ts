@@ -1,34 +1,16 @@
+import { assert } from '@ember/debug';
+
 import { Table } from './table.ts';
 
 import type { TableConfig } from './interfaces';
 
-type Args<T> =
-  | [destroyable: object, options: TableConfig<T>]
-  | [options: TableConfig<T>];
-
 /**
  * Represents a UI-less version of a table
  *
  * _For use for building tables in ui frameworks_.
  *
- * @example
- * ```js
- * import { use } from 'ember-resources';
- * import { headlessTable } '@universal-ember/table';
- *
- * class MyImplementation {
- *   @use table = headlessTable({
- *     // your config here
- *   })
- * }
- * ```
- */
-export function headlessTable<T = unknown>(options: TableConfig<T>): Table<T>;
-
-/**
- * Represents a UI-less version of a table
- *
- * _For use for building tables in ui frameworks_.
+ * The first argument is the object that owns the table.
+ * The table is destroyed with that object, and uses that object's owner.
  *
  * @example
  * ```js
@@ -43,23 +25,14 @@ export function headlessTable<T = unknown>(options: TableConfig<T>): Table<T>;
  *
  */
 export function headlessTable<T = unknown>(
-  destroyable: object,
+  parent: object,
   options: TableConfig<T>,
-): Table<T>;
+): Table<T> {
+  assert(
+    `headlessTable requires a parent object as the first argument, usually \`this\`. ` +
+      `The single-argument form was removed, because the table is no longer a Resource.`,
+    options,
+  );
 
-export function headlessTable<T = unknown>(...args: Args<T>): Table<T> {
-  if (args.length === 2) {
-    const [destroyable, options] = args;
-
-    /**
-     * If any "root level" config changes, we need to throw-away everything.
-     * otherwise individual-property reactivity can be managed on a per-property
-     * "thunk"-basis
-     */
-    return Table.from<Table<T>>(destroyable, () => options);
-  }
-
-  const [options] = args;
-
-  return Table.from<Table<T>>(() => options);
+  return new Table<T>(parent, options);
 }

@@ -126,8 +126,6 @@
     "@embroider/addon-shim": "^1.10.2",
     "@embroider/macros": "^1.19.7",
     "ember-modifier": "^4.3.0",
-    "ember-modify-based-class-resource": "^1.1.2",
-    "ember-resources": "^7.0.7",
     "reactiveweb": "^1.9.1",
     "tracked-built-ins": "^4.1.0"
   },

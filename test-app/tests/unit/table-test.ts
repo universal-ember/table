@@ -3,7 +3,6 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
 import { headlessTable } from '@universal-ember/table';
-import { use } from 'ember-resources';
 
 import type {
   ColumnConfig,
@@ -29,9 +28,9 @@ function withTestDefaults(
 module('Unit | -private | table', function (hooks) {
   setupTest(hooks);
 
-  test('supports @use', async function (assert) {
+  test('supports an owner that is assigned after construction', async function (assert) {
     class TestObject {
-      @use table = headlessTable({
+      table = headlessTable(this, {
         columns: () => [
           { key: 'firstName', name: 'First name' },
           { key: 'lastName', name: 'Last name' },
