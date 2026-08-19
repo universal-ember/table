@@ -1,5 +1,41 @@
 # Changelog
 
+## Release (2026-08-19)
+
+* @universal-ember/table 4.0.0 (major)
+
+#### :boom: Breaking Change
+* `@universal-ember/table`
+  * [#193](https://github.com/universal-ember/table/pull/193) Remove ember-modify-based-class-resource, derive from data instead ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :memo: Documentation
+* [#180](https://github.com/universal-ember/table/pull/180) fix: resolve ember-raf-scheduler to its ESM addon source for the lots-of-data demo ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#179](https://github.com/universal-ember/table/pull/179) Fix docs-app first-page routing and Get Started link ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#178](https://github.com/universal-ember/table/pull/178) Rename docs-app/src template files from .md to .gjs.md ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#176](https://github.com/universal-ember/table/pull/176) fix(docs-app): move docs to `src/templates/` and clean up vite config ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#177](https://github.com/universal-ember/table/pull/177) Fix Deploy Preview workflow: artifact extracted to wrong directory ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#175](https://github.com/universal-ember/table/pull/175) Fix deploy preview workflow: broken artifact download and wrong deploy directory ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#174](https://github.com/universal-ember/table/pull/174) Fix docs site: kolay `src` shorthand is not implemented, must use `groups` ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#173](https://github.com/universal-ember/table/pull/173) fix: add @ember/app-tsconfig to docs-app to unblock production deploy ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* [#167](https://github.com/universal-ember/table/pull/167) fix(docs): contrast on header links in dark/index ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* Other
+  * [#194](https://github.com/universal-ember/table/pull/194) Fix ember-release, ember-beta and ember-canary on ember-source 7 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#192](https://github.com/universal-ember/table/pull/192) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+  * [#181](https://github.com/universal-ember/table/pull/181) Enable syntax highlighting in docs-app code snippets ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#172](https://github.com/universal-ember/table/pull/172) Remove resolve object from test-app/vite.config.js ([@Copilot](https://github.com/apps/copilot-swe-agent))
+  * [#171](https://github.com/universal-ember/table/pull/171) fix: handle @glimmer/tracking/primitives/cache path change in ember-source 6.12+ ([@Copilot](https://github.com/apps/copilot-swe-agent))
+* `@universal-ember/table`
+  * [#169](https://github.com/universal-ember/table/pull/169) chore(deps): upgrade glint to v2 ([@johanrd](https://github.com/johanrd))
+  * [#168](https://github.com/universal-ember/table/pull/168) fix(deps): update deps in the hope it Closes [#152](https://github.com/universal-ember/table/issues/152) ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 4
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-02-05)
 
 * @universal-ember/table 3.6.2 (patch)

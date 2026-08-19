@@ -1,18 +1,22 @@
 {
   "solution": {
     "@universal-ember/table": {
-      "impact": "patch",
-      "oldVersion": "3.6.1",
-      "newVersion": "3.6.2",
+      "impact": "major",
+      "oldVersion": "3.6.2",
+      "newVersion": "4.0.0",
       "tagName": "latest",
       "constraints": [
         {
+          "impact": "major",
+          "reason": "Appears in changelog section :boom: Breaking Change"
+        },
+        {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2026-02-05)\n\n* @universal-ember/table 3.6.2 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#164](https://github.com/universal-ember/table/pull/164) Fix release ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* Other\n  * [#162](https://github.com/universal-ember/table/pull/162) Fix release ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n\n#### Committers: 1\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2026-08-19)\n\n* @universal-ember/table 4.0.0 (major)\n\n#### :boom: Breaking Change\n* `@universal-ember/table`\n  * [#193](https://github.com/universal-ember/table/pull/193) Remove ember-modify-based-class-resource, derive from data instead ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :memo: Documentation\n* [#180](https://github.com/universal-ember/table/pull/180) fix: resolve ember-raf-scheduler to its ESM addon source for the lots-of-data demo ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#179](https://github.com/universal-ember/table/pull/179) Fix docs-app first-page routing and Get Started link ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#178](https://github.com/universal-ember/table/pull/178) Rename docs-app/src template files from .md to .gjs.md ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#176](https://github.com/universal-ember/table/pull/176) fix(docs-app): move docs to `src/templates/` and clean up vite config ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#177](https://github.com/universal-ember/table/pull/177) Fix Deploy Preview workflow: artifact extracted to wrong directory ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#175](https://github.com/universal-ember/table/pull/175) Fix deploy preview workflow: broken artifact download and wrong deploy directory ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#174](https://github.com/universal-ember/table/pull/174) Fix docs site: kolay `src` shorthand is not implemented, must use `groups` ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#173](https://github.com/universal-ember/table/pull/173) fix: add @ember/app-tsconfig to docs-app to unblock production deploy ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* [#167](https://github.com/universal-ember/table/pull/167) fix(docs): contrast on header links in dark/index ([@johanrd](https://github.com/johanrd))\n\n#### :house: Internal\n* Other\n  * [#194](https://github.com/universal-ember/table/pull/194) Fix ember-release, ember-beta and ember-canary on ember-source 7 ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#192](https://github.com/universal-ember/table/pull/192) Update release-plan ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n  * [#181](https://github.com/universal-ember/table/pull/181) Enable syntax highlighting in docs-app code snippets ([@Copilot](https://github.com/apps/copilot-swe-agent))\n  * [#172](https://github.com/universal-ember/table/pull/172) Remove resolve object from test-app/vite.config.js ([@Copilot](https://github.com/apps/copilot-swe-agent))\n  * [#171](https://github.com/universal-ember/table/pull/171) fix: handle @glimmer/tracking/primitives/cache path change in ember-source 6.12+ ([@Copilot](https://github.com/apps/copilot-swe-agent))\n* `@universal-ember/table`\n  * [#169](https://github.com/universal-ember/table/pull/169) chore(deps): upgrade glint to v2 ([@johanrd](https://github.com/johanrd))\n  * [#168](https://github.com/universal-ember/table/pull/168) fix(deps): update deps in the hope it Closes [#152](https://github.com/universal-ember/table/issues/152) ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 4\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- Copilot [Bot] ([@copilot-swe-agent](https://github.com/apps/copilot-swe-agent))\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
 }
