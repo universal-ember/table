@@ -135,7 +135,7 @@ importers:
         version: 1.20.1(6981406cb46cb4e376d432007157f8ed)
       '@embroider/vite':
         specifier: ^1.5.2
-        version: 1.5.2(24485580a9f11f407027d38dc2e340d7)
+        version: 1.5.2(730ccddd4298aed516cb29411284cc2b)
       '@glimmer/component':
         specifier: ^2.0.0
         version: 2.0.0
@@ -233,8 +233,8 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
       vite:
-        specifier: 7.3.1
-        version: 7.3.1(e7f63d0dfe5a518a0272c99c8dd258cd)
+        specifier: 7.3.5
+        version: 7.3.5(e7f63d0dfe5a518a0272c99c8dd258cd)
 
   table:
     dependencies:
@@ -7850,6 +7850,46 @@ packages:
       yaml:
         optional: true
 
+  vite@7.3.5:
+    resolution: {integrity: sha512-KuOaNhcnGFN2zIPGA7wRmzF+lJA1sea7rHq17aiJ++9lzY1WWG6Jpwqwe1KNbRVPIqHmr8GLYx7jbrQcN/7/ww==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^20.19.0 || >=22.12.0
+      jiti: '>=1.21.0'
+      less: ^4.0.0
+      lightningcss: ^1.21.0
+      sass: ^1.70.0
+      sass-embedded: ^1.70.0
+      stylus: '>=0.54.8'
+      sugarss: ^5.0.0
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+
   volar-service-html@0.0.68:
     resolution: {integrity: sha512-fru9gsLJxy33xAltXOh4TEdi312HP80hpuKhpYQD4O5hDnkNPEBdcQkpB+gcX0oK0VxRv1UOzcGQEUzWCVHLfA==}
     peerDependencies:
@@ -9565,6 +9605,34 @@ snapshots:
       source-map-url: 0.4.1
       terser: 5.46.0
       vite: 7.3.1(e7f63d0dfe5a518a0272c99c8dd258cd)
+    transitivePeerDependencies:
+      - '@glint/template'
+      - bufferutil
+      - canvas
+      - rollup
+      - supports-color
+      - utf-8-validate
+
+  '@embroider/vite@1.5.2(730ccddd4298aed516cb29411284cc2b)':
+    dependencies:
+      '@babel/core': 7.29.6
+      '@embroider/core': 4.4.3(@glint/template@1.7.4)
+      '@embroider/macros': 1.19.7(6981406cb46cb4e376d432007157f8ed)
+      '@embroider/reverse-exports': 0.2.0
+      '@rollup/pluginutils': 5.3.0(rollup@4.59.0)
+      assert-never: 1.4.0
+      browserslist: 4.28.1
+      browserslist-to-esbuild: 2.1.1(browserslist@4.28.1)
+      chalk: 5.6.2
+      content-tag: 4.1.0
+      debug: 4.4.3
+      fast-glob: 3.3.3
+      fs-extra: 10.1.0
+      jsdom: 25.0.1
+      send: 0.18.0
+      source-map-url: 0.4.1
+      terser: 5.46.0
+      vite: 7.3.5(e7f63d0dfe5a518a0272c99c8dd258cd)
     transitivePeerDependencies:
       - '@glint/template'
       - bufferutil
@@ -17694,6 +17762,21 @@ snapshots:
       vfile-message: 4.0.3
 
   vite@7.3.1(e7f63d0dfe5a518a0272c99c8dd258cd):
+    dependencies:
+      esbuild: 0.27.3
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
+      postcss: 8.5.6
+      rollup: 4.59.0
+      tinyglobby: 0.2.15
+    optionalDependencies:
+      '@types/node': 25.3.0
+      fsevents: 2.3.3
+      jiti: 1.21.7
+      terser: 5.46.0
+      yaml: 2.8.2
+
+  vite@7.3.5(e7f63d0dfe5a518a0272c99c8dd258cd):
     dependencies:
       esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
