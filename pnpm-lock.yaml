@@ -240,7 +240,7 @@ importers:
     dependencies:
       '@babel/runtime':
         specifier: ^7.28.6
-        version: 7.28.6
+        version: 7.29.7
       '@ember/string':
         specifier: ^4.0.1
         version: 4.0.1
@@ -9409,7 +9409,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.6)
       '@babel/plugin-transform-runtime': 7.29.0(@babel/core@7.29.6)
       '@babel/preset-env': 7.29.0(@babel/core@7.29.6)
-      '@babel/runtime': 7.28.6
+      '@babel/runtime': 7.29.7
       '@babel/traverse': 7.29.0
       '@embroider/core': 4.4.3(@glint/template@1.7.4)
       '@embroider/macros': 1.19.7(6981406cb46cb4e376d432007157f8ed)
