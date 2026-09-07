@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2026-08-19)
 
 * @universal-ember/table 4.0.0 (major)
