@@ -240,7 +240,7 @@ importers:
     dependencies:
       '@babel/runtime':
         specifier: ^7.28.6
-        version: 7.28.6
+        version: 7.29.7
       '@ember/string':
         specifier: ^4.0.1
         version: 4.0.1
@@ -3087,6 +3087,7 @@ packages:
 
   charm@1.0.2:
     resolution: {integrity: sha512-wqW3VdPnlSWT4eRiYX+hcs+C6ViBPUWk1qTCd+37qw9kEm/a5n2qcyQDMBWvSYKN/ctqZzeXNQaeBjOetJJUkw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -9397,7 +9398,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.6)
       '@babel/plugin-transform-runtime': 7.29.0(@babel/core@7.29.6)
       '@babel/preset-env': 7.29.0(@babel/core@7.29.6)
-      '@babel/runtime': 7.28.6
+      '@babel/runtime': 7.29.7
       '@babel/traverse': 7.29.0
       '@embroider/core': 4.4.3(@glint/template@1.7.4)
       '@embroider/macros': 1.19.7(6981406cb46cb4e376d432007157f8ed)
