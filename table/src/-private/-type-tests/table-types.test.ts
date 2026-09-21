@@ -54,7 +54,7 @@ expectTypeOf(report.rows[0]!.data).toEqualTypeOf<Person>();
 expectTypeOf(report.columns[0]!.meta).toEqualTypeOf<
   ReportColumnMeta | undefined
 >();
-expectTypeOf(report.columns[0]!.table.config.meta.updateCell).toBeFunction();
+expectTypeOf(report.columns[0]!.table.config.meta!.updateCell).toBeFunction();
 
 // helpers that return columns keep the type
 expectTypeOf(columns.for(report)[0]!.meta).toEqualTypeOf<
@@ -247,17 +247,44 @@ legacyHelper([...plain.columns]);
 legacyHelper([...report.columns]);
 
 /////////////////////////////////////////////
-// Types that declare `tableMeta` make `meta` required, so reading it needs no check
-headlessTable(
+// A table can give its cells args of its own, passed where the cell is rendered:
+// <column.Cell @row={{row}} @column={{column}} @dateRange={{@dateRange}} />
+interface ListTypes {
+  cellArgs: { dateRange: [Date, Date]; onUpdate: (person: Person) => void };
+}
+
+declare const DateCell: ComponentLike<
+  CellContext<Person, ListTypes> & ListTypes['cellArgs']
+>;
+declare const UntypedCell: ComponentLike<CellContext<Person>>;
+
+const list = headlessTable(
   {},
-  // @ts-expect-error `meta` is missing
-  { types, columns: () => [{ key: 'name' }], data: () => people },
+  {
+    types: tableTypes<ListTypes>(),
+    columns: () => [
+      { key: 'name', Cell: DateCell },
+      { key: 'plain', Cell: UntypedCell },
+    ],
+    data: () => people,
+    plugins: [ColumnVisibility],
+  },
 );
 
-expectTypeOf(report.config.meta.updateCell).toBeFunction();
-expectTypeOf(report.columns[0]!.table.config.meta.updateCell).toBeFunction();
+type Args =
+  NonNullable<(typeof list.columns)[0]['Cell']> extends ComponentLike<infer A>
+    ? A
+    : never;
+expectTypeOf<Args['dateRange']>().toEqualTypeOf<[Date, Date]>();
 
-// without `tableMeta`, `meta` stays optional
-expectTypeOf(other.config.meta).toEqualTypeOf<
-  { totalRowCount?: number; totalRowsSelectedCount?: number } | undefined
->();
+// typed columns and tables still fit code that knows nothing about these types
+expectTypeOf(isVisible(list.columns[0]!)).toEqualTypeOf<boolean>();
+expectTypeOf(columns.for(list)).toBeArray();
+function anyColumn(column: Column<Person>) {
+  return column.key;
+}
+function anyTable(table: Table<Person>) {
+  return table.columns.length;
+}
+anyColumn(list.columns[0]!);
+anyTable(list);

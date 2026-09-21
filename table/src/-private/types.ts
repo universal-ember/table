@@ -8,6 +8,7 @@ import type { TableMeta } from './interfaces/table.ts';
  * interface ReportTypes {
  *   columnMeta: ReportColumnMeta;
  *   tableMeta: ReportTableMeta;
+ *   cellArgs: { dateRange: DateRange };
  * }
  *
  * headlessTable(this, { types: tableTypes<ReportTypes>(), columns, data });
@@ -21,6 +22,7 @@ import type { TableMeta } from './interfaces/table.ts';
 export interface TableTypes {
   columnMeta?: object;
   tableMeta?: object;
+  cellArgs?: object;
 }
 
 /**
@@ -63,3 +65,11 @@ export type ExtractColumnMeta<Types, T = unknown> = Types extends {
 export type ExtractTableMeta<Types> = Types extends { tableMeta: object }
   ? TableMeta & Types['tableMeta']
   : TableMeta;
+
+/**
+ * The args a table gives its cells besides `@row`, `@column` and `@options`:
+ * the table's `cellArgs` when it declares them.
+ */
+export type ExtractCellArgs<Types> = Types extends { cellArgs: object }
+  ? Types['cellArgs']
+  : unknown;

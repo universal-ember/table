@@ -15,6 +15,7 @@ export { deserializeSorts, serializeSorts } from './utils.ts';
 export type { Column } from './-private/column.ts';
 export type { CellArgs, TypedColumnConfig } from './-private/column-helper.ts';
 export type {
+  ExtractCellArgs,
   ExtractColumnMeta,
   ExtractTableMeta,
   TableTypes,

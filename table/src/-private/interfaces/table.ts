@@ -10,20 +10,7 @@ export interface TableMeta {
   totalRowsSelectedCount?: number;
 }
 
-/**
- * `meta` is required when the table's types declare `tableMeta`, else optional.
- * So where the table is read, `table.config.meta` is there when the types say so.
- */
-type MetaOption<Types> = Types extends { tableMeta: object }
-  ? { meta: ExtractTableMeta<Types> }
-  : { meta?: TableMeta };
-
-export type TableConfig<
-  DataType,
-  Types extends TableTypes = TableTypes,
-> = TableOptions<DataType, Types> & MetaOption<NoInfer<Types>>;
-
-interface TableOptions<DataType, Types extends TableTypes> {
+export interface TableConfig<DataType, Types extends TableTypes = TableTypes> {
   /**
    * The types this table declares for itself, see `tableTypes`.
    */
@@ -106,6 +93,7 @@ interface TableOptions<DataType, Types extends TableTypes> {
   onRowSelectionChange?: (selection: DataType | undefined) => void;
 
   // Uncategorized
+  meta?: ExtractTableMeta<NoInfer<Types>>;
   pagination?: Pagination;
 
   /**

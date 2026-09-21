@@ -1,6 +1,10 @@
 import type { BasePlugin, Plugin } from '../../plugins';
 import type { Column } from '../column';
-import type { ExtractColumnMeta, TableTypes } from '../types.ts';
+import type {
+  ExtractCellArgs,
+  ExtractColumnMeta,
+  TableTypes,
+} from '../types.ts';
 import type { Row } from '../row';
 import type { ColumnOptionsFor, SignatureFrom } from './plugins';
 import type { Constructor } from '../private-types';
@@ -69,7 +73,9 @@ export interface ColumnConfig<
    * Out-of-the-box, this property isn't used, but the provided type may be
    * a convenience for consumers of the headless table
    */
-  Cell?: ComponentLike<CellContext<T, Types> & { options?: CellOptions }>;
+  Cell?: ComponentLike<
+    CellContext<T, Types> & { options?: CellOptions } & ExtractCellArgs<Types>
+  >;
 
   /**
    * The name or title of the column, shown in the column heading / th
