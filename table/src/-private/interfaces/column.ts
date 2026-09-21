@@ -14,6 +14,25 @@ type ColumnPluginOption<P = Plugin> = P extends BasePlugin
   ? [Constructor<P>, () => ColumnOptionsFor<SignatureFrom<P>>]
   : [P | Constructor<P>, () => unknown];
 
+/**
+ * What an app knows about a column, apart from how to render its cells,
+ * for example alignment, or a width to use in an export.
+ *
+ * Empty by default. Apps declare their own keys:
+ *
+ * ```ts
+ * declare module '@universal-ember/table' {
+ *   interface ColumnMeta<T> {
+ *     align?: 'left' | 'right';
+ *     exportValue?: (data: T) => string;
+ *   }
+ * }
+ * ```
+ *
+ * `T` is the type of each row's data. A declaration must use the same name for it.
+ */
+export interface ColumnMeta<T = unknown> {}
+
 export type CellOptions = {
   /**
    * when no value is present for a given set of data for the given column config
@@ -44,12 +63,18 @@ export interface ColumnConfig<T = unknown> {
    * Out-of-the-box, this property isn't used, but the provided type may be
    * a convenience for consumers of the headless table
    */
-  Cell?: ComponentLike<CellContext<T>>;
+  Cell?: ComponentLike<CellContext<T> & { options?: CellOptions }>;
 
   /**
    * The name or title of the column, shown in the column heading / th
    */
   name?: string;
+
+  /**
+   * Static information about the column, read as `column.meta`.
+   * Unlike `options`, it needs no row.
+   */
+  meta?: ColumnMeta<T>;
 
   /**
    * Bag of extra properties to pass to Cell via `@options`, if desired

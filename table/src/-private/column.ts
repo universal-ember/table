@@ -25,6 +25,10 @@ export class Column<T = unknown> {
     return this.config.name;
   }
 
+  get meta() {
+    return this.config.meta;
+  }
+
   constructor(
     public table: Table<T>,
     public config: ColumnConfig<T>,
