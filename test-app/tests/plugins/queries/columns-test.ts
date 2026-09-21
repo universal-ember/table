@@ -201,7 +201,7 @@ module('Plugins | Queries | columns', function (hooks) {
           });
         }
 
-        let table: Plugins['table'];
+        let table: Table;
 
         hooks.beforeEach(function (assert) {
           table = create(Plugins, this.owner).table;
@@ -309,7 +309,7 @@ module('Plugins | Queries | columns', function (hooks) {
   });
 
   module('columns.next', function (hooks) {
-    let table: OnePlugin['table'];
+    let table: Table;
 
     /**
      * In the OnePlugin scenario,
@@ -363,7 +363,7 @@ module('Plugins | Queries | columns', function (hooks) {
   });
 
   module('columns.previous', function (hooks) {
-    let table: OnePlugin['table'];
+    let table: Table;
 
     /**
      * In the OnePlugin scenario,
@@ -420,7 +420,7 @@ module('Plugins | Queries | columns', function (hooks) {
   });
 
   module('columns.before', function (hooks) {
-    let table: OnePlugin['table'];
+    let table: Table;
 
     /**
      * In the OnePlugin scenario,
@@ -479,7 +479,7 @@ module('Plugins | Queries | columns', function (hooks) {
   });
 
   module('columns.after', function (hooks) {
-    let table: OnePlugin['table'];
+    let table: Table;
 
     /**
      * In the OnePlugin scenario,

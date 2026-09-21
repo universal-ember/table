@@ -68,7 +68,7 @@ export class Context {
 
   table = headlessTable(this, {
     columns: () => this.columns,
-    data: (): { name: string; key: string }[] => [],
+    data: () => [] as unknown[],
     plugins: [ColumnResizing],
   });
 }

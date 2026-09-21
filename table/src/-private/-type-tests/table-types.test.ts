@@ -54,7 +54,7 @@ expectTypeOf(report.rows[0]!.data).toEqualTypeOf<Person>();
 expectTypeOf(report.columns[0]!.meta).toEqualTypeOf<
   ReportColumnMeta | undefined
 >();
-expectTypeOf(report.columns[0]!.table.config.meta!.updateCell).toBeFunction();
+expectTypeOf(report.columns[0]!.table.config.meta.updateCell).toBeFunction();
 
 // helpers that return columns keep the type
 expectTypeOf(columns.for(report)[0]!.meta).toEqualTypeOf<
@@ -245,3 +245,19 @@ function legacyHelper(columns: Column<Person>[]) {
 }
 legacyHelper([...plain.columns]);
 legacyHelper([...report.columns]);
+
+/////////////////////////////////////////////
+// Types that declare `tableMeta` make `meta` required, so reading it needs no check
+headlessTable(
+  {},
+  // @ts-expect-error `meta` is missing
+  { types, columns: () => [{ key: 'name' }], data: () => people },
+);
+
+expectTypeOf(report.config.meta.updateCell).toBeFunction();
+expectTypeOf(report.columns[0]!.table.config.meta.updateCell).toBeFunction();
+
+// without `tableMeta`, `meta` stays optional
+expectTypeOf(other.config.meta).toEqualTypeOf<
+  { totalRowCount?: number; totalRowsSelectedCount?: number } | undefined
+>();
