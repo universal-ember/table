@@ -6,6 +6,8 @@ import type { ColumnOptionsFor, SignatureFrom } from './plugins';
 import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
 
+declare const rowType: unique symbol;
+
 export interface CellContext<T, Types extends TableTypes = TableTypes> {
   column: Column<T, Types>;
   row: Row<T>;
@@ -97,6 +99,15 @@ export interface ColumnConfig<
    * ```
    */
   pluginOptions?: ColumnPluginOption[];
+
+  /**
+   * Type-only, never set.
+   *
+   * The row type is otherwise used in callback parameters only. With this mention,
+   * a list annotated as `ColumnConfig[]` always gives the table the row type `unknown`.
+   * Without it, TypeScript's result depends on which types it compared first.
+   */
+  readonly [rowType]?: T;
 }
 
 export type ColumnKey<T> = NonNullable<ColumnConfig<T>['key']>;
