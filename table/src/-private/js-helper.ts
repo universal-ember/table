@@ -2,6 +2,7 @@ import { assert } from '@ember/debug';
 
 import { Table } from './table.ts';
 
+import type { TableTypes } from './types.ts';
 import type { TableConfig } from './interfaces';
 
 /**
@@ -24,15 +25,15 @@ import type { TableConfig } from './interfaces';
  * ```
  *
  */
-export function headlessTable<T = unknown>(
-  parent: object,
-  options: TableConfig<T>,
-): Table<T> {
+export function headlessTable<
+  T = unknown,
+  Types extends TableTypes = TableTypes,
+>(parent: object, options: TableConfig<T, Types>): Table<T, Types> {
   assert(
     `headlessTable requires a parent object as the first argument, usually \`this\`. ` +
       `The single-argument form was removed, because the table is no longer a Resource.`,
     options,
   );
 
-  return new Table<T>(parent, options);
+  return new Table<T, Types>(parent, options);
 }

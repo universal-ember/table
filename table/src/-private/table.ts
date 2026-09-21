@@ -19,6 +19,7 @@ import { composeFunctionModifiers } from './utils.ts';
 
 import type { BasePlugin, Plugin } from '../plugins/index.ts';
 import type { Class } from './private-types.ts';
+import type { TableTypes } from './types.ts';
 import type { Destructor, TableConfig } from './interfaces';
 import type Owner from '@ember/owner';
 import { compatOwner } from './ember-compat.ts';
@@ -46,7 +47,7 @@ const attachContainer = (element: Element, table: Table) => {
   table.scrollContainerElement = element;
 };
 
-export class Table<DataType = unknown> {
+export class Table<DataType = unknown, Types extends TableTypes = TableTypes> {
   /**
    * @private
    */
@@ -87,9 +88,9 @@ export class Table<DataType = unknown> {
   scrollContainerElement?: HTMLElement;
 
   #parent: object;
-  #config: TableConfig<DataType>;
+  #config: TableConfig<DataType, Types>;
 
-  constructor(parent: object, config: TableConfig<DataType>) {
+  constructor(parent: object, config: TableConfig<DataType, Types>) {
     this.#parent = parent;
     this.#config = config;
 
@@ -130,7 +131,7 @@ export class Table<DataType = unknown> {
    *
    * used by other private APIs
    */
-  get config(): TableConfig<DataType> {
+  get config(): TableConfig<DataType, Types> {
     return this.#config;
   }
 
@@ -295,7 +296,7 @@ export class Table<DataType = unknown> {
       return result;
     },
     map: (config) => {
-      return new Column<DataType>(this, {
+      return new Column<DataType, Types>(this, {
         ...DEFAULT_COLUMN_CONFIG,
         ...config,
       });

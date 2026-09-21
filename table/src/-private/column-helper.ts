@@ -1,4 +1,5 @@
 import type { Column } from './column.ts';
+import type { TableTypes } from './types.ts';
 import type { CellContext, CellOptions, ColumnConfig } from './interfaces';
 import type { Row } from './row.ts';
 import type { ComponentLike } from '@glint/template';
@@ -7,8 +8,12 @@ import type { ComponentLike } from '@glint/template';
  * The args of a `Cell` that is given `@options`, when rendered as
  * `<column.Cell @row={{row}} @column={{column}} @options={{column.getOptionsForRow row}} />`
  */
-export interface CellArgs<T, Options extends CellOptions = CellOptions> {
-  column: Column<T>;
+export interface CellArgs<
+  T,
+  Options extends CellOptions = CellOptions,
+  Types extends TableTypes = TableTypes,
+> {
+  column: Column<T, Types>;
   row: Row<T>;
   options: Options;
 }
@@ -16,12 +21,13 @@ export interface CellArgs<T, Options extends CellOptions = CellOptions> {
 /**
  * A column config where the `Cell` and the `options` must agree.
  */
-export type TypedColumnConfig<T, Options extends CellOptions> = Omit<
-  ColumnConfig<T>,
-  'Cell' | 'options'
-> & {
-  Cell?: ComponentLike<CellArgs<T, Options>>;
-  options?: (context: CellContext<T>) => Options;
+export type TypedColumnConfig<
+  T,
+  Options extends CellOptions,
+  Types extends TableTypes = TableTypes,
+> = Omit<ColumnConfig<T, Types>, 'Cell' | 'options'> & {
+  Cell?: ComponentLike<CellArgs<T, Options, Types>>;
+  options?: (context: CellContext<T, Types>) => Options;
 };
 
 /**
@@ -41,12 +47,12 @@ export type TypedColumnConfig<T, Options extends CellOptions> = Omit<
  * `T` is given first and `Options` is inferred per call,
  * because TypeScript cannot infer only some of a function's type arguments.
  */
-export function column<T>() {
+export function column<T, Types extends TableTypes = TableTypes>() {
   return <Options extends CellOptions>(
-    config: TypedColumnConfig<T, Options>,
-  ): ColumnConfig<T> => {
+    config: TypedColumnConfig<T, Options, Types>,
+  ): ColumnConfig<T, Types> => {
     // `Options` is only known per column, and a list of columns has one element type.
     // The check has happened by here, so the list can hold the general type.
-    return config as unknown as ColumnConfig<T>;
+    return config as unknown as ColumnConfig<T, Types>;
   };
 }

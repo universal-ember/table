@@ -1,5 +1,6 @@
 import type { Plugins } from '../../plugins/-private/utils';
 import type { ColumnConfig } from './column';
+import type { ExtractTableMeta, TableTypes } from '../types.ts';
 import type { Pagination } from './pagination';
 import type { PreferencesAdapter } from './preferences';
 import type { Selection } from './selection';
@@ -9,13 +10,18 @@ export interface TableMeta {
   totalRowsSelectedCount?: number;
 }
 
-export interface TableConfig<DataType> {
+export interface TableConfig<DataType, Types extends TableTypes = TableTypes> {
+  /**
+   * The types this table declares for itself, see `tableTypes`.
+   */
+  types?: Types;
+
   /**
    * Configuration describing how the table will crawl through `data`
    * and render it. Within this `columns` config, there will also be opportunities
    * to set the behavior of columns when rendered
    */
-  columns: () => ColumnConfig<DataType>[];
+  columns: () => ColumnConfig<DataType, NoInfer<Types>>[];
   /**
    * The data to render, as described via the `columns` option.
    *
@@ -87,7 +93,7 @@ export interface TableConfig<DataType> {
   onRowSelectionChange?: (selection: DataType | undefined) => void;
 
   // Uncategorized
-  meta?: TableMeta;
+  meta?: ExtractTableMeta<NoInfer<Types>>;
   pagination?: Pagination;
 
   /**

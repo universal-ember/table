@@ -33,7 +33,7 @@ module("Plugins | resizing | non-tables", function (hooks) {
    * https://ember-aria.pages.dev/docs
    */
   class TestComponentA extends Component<{
-    Args: { containerWidth: number; table: ReturnType<typeof headlessTable> };
+    Args: { containerWidth: number; table: Context["table"] };
   }> {
     get table() {
       return this.args.table;
