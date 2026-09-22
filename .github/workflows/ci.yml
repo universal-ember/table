@@ -66,7 +66,8 @@ jobs:
       - uses: wyvox/action-setup-pnpm@v3
       - uses: ./.github/actions/download-built-package
       - name: 'Change TS to ${{ matrix.typescript-scenario }}'
-        run: 'pnpm add --save-dev ${{ matrix.typescript-scenario}}'
+        # A bare typescript@6.0 keeps the @typescript/typescript6 alias, so name the npm package
+        run: 'pnpm add --save-dev "typescript@npm:${{ matrix.typescript-scenario }}"'
         working-directory: ./test-app
       - name: 'Type checking'
         run: |
