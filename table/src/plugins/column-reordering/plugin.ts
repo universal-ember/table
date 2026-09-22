@@ -33,20 +33,23 @@ export interface Signature {
 
 export class ColumnReordering extends BasePlugin<Signature> {
   name = 'column-reordering';
-  static features = ['columnOrder'];
+  static features: string[] = ['columnOrder'];
 
-  meta = {
+  meta: {
+    readonly column: typeof ColumnMeta;
+    readonly table: typeof TableMeta;
+  } = {
     column: ColumnMeta,
     table: TableMeta,
   } as const;
 
-  reset() {
+  reset(): void {
     const tableMeta = meta.forTable(this.table, ColumnReordering);
 
     tableMeta.reset();
   }
 
-  get columns() {
+  get columns(): Column<unknown>[] {
     return meta.forTable(this.table, ColumnReordering).columns;
   }
 }
@@ -70,36 +73,36 @@ export class ColumnMeta<DataType = unknown> {
     this.#tableMeta.setPosition(this.column, value);
   }
 
-  get canMoveLeft() {
+  get canMoveLeft(): boolean {
     return this.#tableMeta.getPosition(this.column) !== 0;
   }
 
-  get canMoveRight() {
+  get canMoveRight(): boolean {
     return (
       this.#tableMeta.getPosition(this.column) !==
       this.#tableMeta.columns.length - 1
     );
   }
 
-  get cannotMoveLeft() {
+  get cannotMoveLeft(): boolean {
     return !this.canMoveLeft;
   }
 
-  get cannotMoveRight() {
+  get cannotMoveRight(): boolean {
     return !this.canMoveRight;
   }
 
   /**
    * Move the column one spot to the left
    */
-  moveLeft = () => {
+  moveLeft = (): void => {
     this.#tableMeta.columnOrder.moveLeft(this.column.key);
   };
 
   /**
    * Move the column one spot to the right
    */
-  moveRight = () => {
+  moveRight = (): void => {
     this.#tableMeta.columnOrder.moveRight(this.column.key);
   };
 }
@@ -116,7 +119,7 @@ export class TableMeta<DataType = unknown> {
    * This is also why the order of the columns is maintained via column key
    */
   @tracked
-  columnOrder = new ColumnOrder<DataType>({
+  columnOrder: ColumnOrder<DataType> = new ColumnOrder<DataType>({
     columns: () => this.allColumns,
     visibleColumns: () => this.visibleColumns,
     save: this.save,
@@ -127,7 +130,7 @@ export class TableMeta<DataType = unknown> {
    * Get the curret order/position of a column
    */
   @action
-  getPosition(column: Column<DataType>) {
+  getPosition(column: Column<DataType>): number {
     return this.columnOrder.get(column.key);
   }
 
@@ -135,14 +138,17 @@ export class TableMeta<DataType = unknown> {
    * Swap the column with the column at `newPosition`
    */
   @action
-  setPosition(column: Column<DataType>, newPosition: number) {
+  setPosition(
+    column: Column<DataType>,
+    newPosition: number,
+  ): false | undefined {
     return this.columnOrder.swapWith(column.key, newPosition);
   }
 
   /**
    * Using a `ColumnOrder` instance, set the order of all columns
    */
-  setOrder = (order: ColumnOrder<DataType>) => {
+  setOrder = (order: ColumnOrder<DataType>): void => {
     this.columnOrder.setAll(order.map);
   };
 
@@ -151,7 +157,7 @@ export class TableMeta<DataType = unknown> {
    * and clear the columnOrder
    */
   @action
-  reset() {
+  reset(): void {
     preferences.forTable(this.table, ColumnReordering).delete('order');
     this.columnOrder = new ColumnOrder<DataType>({
       columns: () => this.allColumns,
@@ -164,7 +170,7 @@ export class TableMeta<DataType = unknown> {
    * @private
    */
   @action
-  save(map: Map<string, number>) {
+  save(map: Map<string, number>): void {
     const order: Record<string, number> = {};
 
     for (const [key, position] of map.entries()) {
@@ -188,7 +194,7 @@ export class TableMeta<DataType = unknown> {
     return new Map<string, number>(Object.entries(order));
   }
 
-  get columns() {
+  get columns(): Column<DataType>[] {
     return this.columnOrder.orderedColumns.filter(
       (column) => this.visibleColumns[column.key],
     );
@@ -221,7 +227,7 @@ export class ColumnOrder<DataType = unknown> {
   /**
    * This map will be empty until we re-order something.
    */
-  map = new TrackedMap<string, number>();
+  map: TrackedMap<string, number> = new TrackedMap<string, number>();
 
   constructor(
     private args: {
@@ -311,7 +317,7 @@ export class ColumnOrder<DataType = unknown> {
    * - set the position to whatever that is.
    */
   @action
-  moveLeft(key: string) {
+  moveLeft(key: string): void {
     const orderedColumns = this.orderedColumns;
     if (this.map.get(key) === 0) {
       return;
@@ -349,7 +355,7 @@ export class ColumnOrder<DataType = unknown> {
     this.args.save?.(this.map);
   }
 
-  setAll = (map: Map<string, number>) => {
+  setAll = (map: Map<string, number>): void => {
     let allColumns = this.args.columns();
 
     addMissingColumnsToMap(allColumns, map);
@@ -372,7 +378,7 @@ export class ColumnOrder<DataType = unknown> {
    * - set the position to whatever that is.
    */
   @action
-  moveRight(key: string) {
+  moveRight(key: string): void {
     const orderedColumns = this.orderedColumns;
     let found = false;
 
@@ -410,7 +416,7 @@ export class ColumnOrder<DataType = unknown> {
    * Performs a swap of the column's position with the column at position
    */
   @action
-  swapWith(key: string, position: number) {
+  swapWith(key: string, position: number): false | undefined {
     const validPositions = [...this.orderedMap.values()];
 
     /**
@@ -484,7 +490,7 @@ export class ColumnOrder<DataType = unknown> {
   }
 
   @action
-  get(key: string) {
+  get(key: string): number {
     const result = this.orderedMap.get(key);
 
     assert(

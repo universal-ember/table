@@ -6,23 +6,25 @@ import type { Column } from '../../index.ts';
 /**
  * Hide a column
  */
-export const hide = <DataType = unknown>(column: Column<DataType>) =>
+export const hide = <DataType = unknown>(column: Column<DataType>): void =>
   meta.forColumn(column, ColumnVisibility).hide();
 
 /**
  * Show a column
  */
-export const show = <DataType = unknown>(column: Column<DataType>) =>
+export const show = <DataType = unknown>(column: Column<DataType>): void =>
   meta.forColumn(column, ColumnVisibility).show();
 
 /**
  * Ask if a column is presently supposed to be visible
  */
-export const isVisible = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, ColumnVisibility).isVisible;
+export const isVisible = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, ColumnVisibility).isVisible;
 
 /**
  * Ask if a column is presently supposed to be hidden
  */
-export const isHidden = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, ColumnVisibility).isHidden;
+export const isHidden = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, ColumnVisibility).isHidden;

@@ -2,36 +2,42 @@ import { meta } from '../-private/base.ts';
 import { Sorting } from './plugin.ts';
 
 import type { Column } from '../../index.ts';
+import type { SortDirection } from './types.ts';
 
 /**
  * Query a specific column's current sort direction
  */
-export const sortDirection = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, Sorting).sortDirection;
+export const sortDirection = <DataType = unknown>(
+  column: Column<DataType>,
+): SortDirection => meta.forColumn(column, Sorting).sortDirection;
 
 /**
  * Ask if a column is sortable
  */
-export const isSortable = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, Sorting).isSortable;
+export const isSortable = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, Sorting).isSortable;
 
 /**
  * Ask if a column is ascending
  */
-export const isAscending = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, Sorting).isAscending;
+export const isAscending = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, Sorting).isAscending;
 
 /**
  * Ask if a column is sorted descending
  */
-export const isDescending = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, Sorting).isDescending;
+export const isDescending = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, Sorting).isDescending;
 
 /**
  * Ask if a column is not sorted
  */
-export const isUnsorted = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, Sorting).isUnsorted;
+export const isUnsorted = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, Sorting).isUnsorted;
 
 /**
  * Sort the specified column's data using a tri-toggle.
@@ -40,17 +46,19 @@ export const isUnsorted = <DataType = unknown>(column: Column<DataType>) =>
  *   Ascending => None => Descending
  *    ⬑ ---------- <= ---------- ↲
  */
-export const sort = <DataType = unknown>(column: Column<DataType>) =>
+export const sort = <DataType = unknown>(column: Column<DataType>): void =>
   meta.forTable(column.table, Sorting).handleSort(column);
 
 /**
  * Toggle a column between descending and not unsorted states
  */
-export const sortDescending = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forTable(column.table, Sorting).toggleDescending(column);
+export const sortDescending = <DataType = unknown>(
+  column: Column<DataType>,
+): void => meta.forTable(column.table, Sorting).toggleDescending(column);
 
 /**
  * Toggle a column between ascending and not unsorted states
  */
-export const sortAscending = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forTable(column.table, Sorting).toggleAscending(column);
+export const sortAscending = <DataType = unknown>(
+  column: Column<DataType>,
+): void => meta.forTable(column.table, Sorting).toggleAscending(column);
