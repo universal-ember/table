@@ -5,6 +5,8 @@ import type { ColumnOptionsFor, SignatureFrom } from './plugins';
 import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
 
+declare const rowType: unique symbol;
+
 /**
  * What `value`, `options`, and a `Cell` receive.
  *
@@ -92,6 +94,14 @@ export interface ColumnConfig<
    * ```
    */
   pluginOptions?: ColumnPluginOption[];
+
+  /**
+   * Type-only, never set.
+   *
+   * Without a direct mention of `T`, a list typed `ColumnConfig[]`
+   * gives `headlessTable` a row type that depends on the order TypeScript checks the program in.
+   */
+  readonly [rowType]?: T;
 }
 
 export type ColumnKey<T> = NonNullable<ColumnConfig<T>['key']>;
