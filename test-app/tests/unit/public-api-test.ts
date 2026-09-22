@@ -24,6 +24,8 @@ module('Public API', function () {
       [
         'headlessTable',
         'table',
+        'column',
+        'tableTypes',
         'TablePreferences',
         'deserializeSorts',
         'serializeSorts',
