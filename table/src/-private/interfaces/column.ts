@@ -14,7 +14,7 @@ declare const rowType: unique symbol;
  * and `Meta` is the `meta` of the table config.
  */
 export interface CellContext<T, out ColumnMeta = unknown, out Meta = unknown> {
-  column: Column<T, ColumnMeta, Meta>;
+  column: Column<T, ColumnMeta, Meta, any>;
   row: Row<T>;
 }
 
@@ -29,10 +29,15 @@ export type CellOptions = {
   defaultValue?: string;
 } & Record<string, unknown>;
 
+/**
+ * `CellArgs` are the args a `Cell` takes besides `@row` and `@column`,
+ * passed where the cell is rendered.
+ */
 export interface ColumnConfig<
   T = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
+  CellArgs = unknown,
 > {
   /**
    * the `key` is required for preferences storage, as well as
@@ -61,7 +66,9 @@ export interface ColumnConfig<
    * Out-of-the-box, this property isn't used, but the provided type may be
    * a convenience for consumers of the headless table
    */
-  Cell?: ComponentLike<CellContext<T, NoInfer<ColumnMeta>, NoInfer<Meta>>>;
+  Cell?: ComponentLike<
+    CellContext<T, NoInfer<ColumnMeta>, NoInfer<Meta>> & CellArgs
+  >;
 
   /**
    * The name or title of the column, shown in the column heading / th

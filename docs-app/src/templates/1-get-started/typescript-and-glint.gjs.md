@@ -71,58 +71,10 @@ class Demo {
 }
 ```
 
-### Column and table meta
+### Column meta, table meta, and cell args
 
-A column's `meta` and the table's `meta` are for information that is not tied to a row, for example the alignment of a column.
-Their types are inferred from the config, so there is nothing to declare.
-
-```ts
-class Demo {
-  table = headlessTable(this, {
-    columns: () => [
-      { key: "name", meta: { align: "left" } },
-      { key: "age", meta: { align: "right" } },
-    ],
-    data: () => this.people,
-    meta: { currency: "EUR" },
-  });
-}
-
-// column.meta: { align?: 'left' | 'right' } | undefined
-// table.config.meta.currency: string
-```
-
-To check each column against a shape, use `satisfies`, or give the list a type:
-
-```ts
-interface Alignment {
-  align?: "left" | "right";
-}
-
-class Demo {
-  // checks this column, and keeps the inferred type
-  table = headlessTable(this, {
-    columns: () => [
-      { key: "name", meta: { align: "left" } satisfies Alignment },
-    ],
-    data: () => this.people,
-  });
-
-  // every column in the list has `Alignment` as its meta
-  columns: ColumnConfig<Person, Alignment>[] = [
-    /* ... */
-  ];
-}
-```
-
-A `Cell` component can ask for the meta it reads.
-TypeScript then reports a column or table whose meta does not match:
-
-```ts
-const AlignedCell: TOC<{
-  Args: CellContext<Person, Alignment, { currency: string }>;
-}> = <template>...</template>;
-```
+These types are inferred too.
+To check them, or to declare them yourself, see [Typing meta and cells](/docs/get-started/typing-meta-and-cells).
 
 ## In Templates
 

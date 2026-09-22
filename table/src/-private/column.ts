@@ -14,13 +14,23 @@ const DEFAULT_OPTIONS = {
 
 /**
  * `ColumnMeta` is the type of `meta`, and `Meta` the type of `table.config.meta`.
+ * `CellArgs` are the args of `Cell` besides `@row` and `@column`.
  *
  * `config` and `Cell` do not carry the column meta,
  * so that a column fits wherever a column with a wider meta is expected.
  */
-export class Column<T = unknown, ColumnMeta = unknown, Meta = unknown> {
-  get Cell(): ComponentLike<CellContext<T, unknown, Meta>> | undefined {
-    return this.config.Cell;
+export class Column<
+  T = unknown,
+  ColumnMeta = unknown,
+  Meta = unknown,
+  CellArgs = unknown,
+> {
+  get Cell():
+    | ComponentLike<CellContext<T, unknown, any> & CellArgs>
+    | undefined {
+    return this.config.Cell as
+      | ComponentLike<CellContext<T, unknown, any> & CellArgs>
+      | undefined;
   }
 
   get key(): string {
@@ -36,7 +46,7 @@ export class Column<T = unknown, ColumnMeta = unknown, Meta = unknown> {
   }
 
   constructor(
-    public table: Table<T, ColumnMeta, Meta>,
+    public table: Table<T, ColumnMeta, Meta, CellArgs>,
     public config: ColumnConfig<T, unknown, Meta>,
   ) {}
 

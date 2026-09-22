@@ -1,5 +1,6 @@
 import type { Plugins } from '../../plugins/-private/utils';
 import type { ColumnConfig } from './column';
+import type { CellArgsOf } from '../meta.ts';
 import type { Pagination } from './pagination';
 import type { PreferencesAdapter } from './preferences';
 import type { Selection } from './selection';
@@ -151,6 +152,10 @@ export interface TableConfig<DataType, Meta = unknown> {
  * `ColumnMetas` holds the `meta` of each column, in order,
  * so that each column's `meta` is inferred.
  *
+ * `Columns` is the column list as written.
+ * The extra args of its Cells are read from it,
+ * and every Cell is checked against all of them.
+ *
  * `TableConfig` stays a plain interface,
  * for code that annotates a config or reads `table.config`.
  *
@@ -163,6 +168,7 @@ export type HeadlessTableConfig<
   DataType,
   ColumnMetas extends unknown[] = unknown[],
   Meta = unknown,
+  Columns extends readonly unknown[] = readonly unknown[],
 > = Omit<TableConfig<DataType, Meta>, 'columns'> & {
   /**
    * Configuration describing how the table will crawl through `data`
@@ -170,6 +176,12 @@ export type HeadlessTableConfig<
    * to set the behavior of columns when rendered
    */
   columns: () => {
-    [K in keyof ColumnMetas]: ColumnConfig<DataType, ColumnMetas[K], Meta>;
-  } & readonly ColumnConfig<DataType, any, Meta>[];
+    [K in keyof ColumnMetas]: ColumnConfig<
+      DataType,
+      ColumnMetas[K],
+      Meta,
+      NoInfer<CellArgsOf<Columns>>
+    >;
+  } & Columns &
+    readonly ColumnConfig<DataType, any, Meta, any>[];
 };

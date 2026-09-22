@@ -55,6 +55,7 @@ export interface Table<
   DataType = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
+  CellArgs = unknown,
 > {
   /**
    * @private
@@ -77,11 +78,17 @@ export interface Table<
 /**
  * `ColumnMeta` is the type of `column.meta`,
  * and `Meta` the type of `table.config.meta`, apart from the keys of `TableMeta`.
+ * `CellArgs` are the args of `column.Cell` besides `@row` and `@column`.
  *
- * `headlessTable` infers both from the config.
+ * `headlessTable` infers all three from the config.
  */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class Table<DataType = unknown, ColumnMeta = unknown, Meta = unknown> {
+export class Table<
+  DataType = unknown,
+  ColumnMeta = unknown,
+  Meta = unknown,
+  CellArgs = unknown,
+> {
   /**
    * @private
    *
@@ -300,7 +307,7 @@ export class Table<DataType = unknown, ColumnMeta = unknown, Meta = unknown> {
 
   columns: MappedArray<
     ColumnConfig<DataType, unknown, Meta>[],
-    Column<DataType, ColumnMeta, Meta>
+    Column<DataType, ColumnMeta, Meta, CellArgs>
   > = map(this, {
     data: () => {
       const configFn = this.#config.columns;
@@ -333,7 +340,7 @@ export class Table<DataType = unknown, ColumnMeta = unknown, Meta = unknown> {
       return result;
     },
     map: (config) => {
-      return new Column<DataType, ColumnMeta, Meta>(this, {
+      return new Column<DataType, ColumnMeta, Meta, CellArgs>(this, {
         ...DEFAULT_COLUMN_CONFIG,
         ...config,
       });

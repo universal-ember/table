@@ -3,7 +3,7 @@ import { assert } from '@ember/debug';
 import { Table } from './table.ts';
 
 import type { HeadlessTableConfig, TableConfig } from './interfaces';
-import type { ColumnMetaOf } from './meta.ts';
+import type { CellArgsOf, ColumnMetaOf } from './meta.ts';
 
 /**
  * Represents a UI-less version of a table
@@ -29,10 +29,11 @@ export function headlessTable<
   T = unknown,
   const ColumnMetas extends unknown[] = unknown[],
   Meta = unknown,
+  Columns extends readonly unknown[] = readonly unknown[],
 >(
   parent: object,
-  options: HeadlessTableConfig<T, ColumnMetas, Meta>,
-): Table<T, ColumnMetaOf<ColumnMetas>, Meta> {
+  options: HeadlessTableConfig<T, ColumnMetas, Meta, Columns>,
+): Table<T, ColumnMetaOf<ColumnMetas>, Meta, CellArgsOf<Columns>> {
   assert(
     `headlessTable requires a parent object as the first argument, usually \`this\`. ` +
       `The single-argument form was removed, because the table is no longer a Resource.`,
