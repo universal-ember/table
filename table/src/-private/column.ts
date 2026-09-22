@@ -12,8 +12,14 @@ const DEFAULT_OPTIONS = {
   [DEFAULT_VALUE_KEY]: DEFAULT_VALUE,
 };
 
-export class Column<T = unknown> {
-  get Cell(): ComponentLike<CellContext<T>> | undefined {
+/**
+ * `ColumnMeta` is the type of `meta`, and `Meta` the type of `table.config.meta`.
+ *
+ * `config` and `Cell` do not carry the column meta,
+ * so that a column fits wherever a column with a wider meta is expected.
+ */
+export class Column<T = unknown, ColumnMeta = unknown, Meta = unknown> {
+  get Cell(): ComponentLike<CellContext<T, unknown, Meta>> | undefined {
     return this.config.Cell;
   }
 
@@ -25,9 +31,13 @@ export class Column<T = unknown> {
     return this.config.name;
   }
 
+  get meta(): ColumnMeta | undefined {
+    return this.config.meta as ColumnMeta | undefined;
+  }
+
   constructor(
-    public table: Table<T>,
-    public config: ColumnConfig<T>,
+    public table: Table<T, ColumnMeta, Meta>,
+    public config: ColumnConfig<T, unknown, Meta>,
   ) {}
 
   @action

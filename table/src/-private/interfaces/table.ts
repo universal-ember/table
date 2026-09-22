@@ -9,13 +9,16 @@ export interface TableMeta {
   totalRowsSelectedCount?: number;
 }
 
-export interface TableConfig<DataType> {
+/**
+ * `Meta` is the type of this config's own `meta`.
+ */
+export interface TableConfig<DataType, Meta = unknown> {
   /**
    * Configuration describing how the table will crawl through `data`
    * and render it. Within this `columns` config, there will also be opportunities
    * to set the behavior of columns when rendered
    */
-  columns: () => ColumnConfig<DataType>[];
+  columns: () => ColumnConfig<DataType, unknown, Meta>[];
   /**
    * The data to render, as described via the `columns` option.
    *
@@ -87,7 +90,11 @@ export interface TableConfig<DataType> {
   onRowSelectionChange?: (selection: DataType | undefined) => void;
 
   // Uncategorized
-  meta?: TableMeta;
+  /**
+   * Information about the table, for plugins, columns, and cells.
+   * Its type is inferred, and read back as `table.config.meta`.
+   */
+  meta?: TableMeta & Meta;
   pagination?: Pagination;
 
   /**
@@ -137,3 +144,30 @@ export interface TableConfig<DataType> {
       }
     | (() => { key: string; adapter?: PreferencesAdapter });
 }
+
+/**
+ * The config that `headlessTable` takes.
+ *
+ * `ColumnMetas` holds the `meta` of each column, in order,
+ * so that each column's `meta` is inferred.
+ *
+ * `TableConfig` itself has no such list:
+ * a mapped type there would make TypeScript compare every `Table` structurally.
+ *
+ * The plain list next to it lets TypeScript infer `DataType` from the columns too,
+ * which the mapped list alone does not.
+ */
+export type HeadlessTableConfig<
+  DataType,
+  ColumnMetas extends unknown[] = unknown[],
+  Meta = unknown,
+> = Omit<TableConfig<DataType, Meta>, 'columns'> & {
+  /**
+   * Configuration describing how the table will crawl through `data`
+   * and render it. Within this `columns` config, there will also be opportunities
+   * to set the behavior of columns when rendered
+   */
+  columns: () => {
+    [K in keyof ColumnMetas]: ColumnConfig<DataType, ColumnMetas[K], Meta>;
+  } & readonly ColumnConfig<DataType, any, Meta>[];
+};

@@ -51,7 +51,11 @@ const attachContainer = (element: Element, table: Table) => {
  * Symbol-keyed fields live on this interface,
  * because `isolatedDeclarations` cannot emit computed class members.
  */
-export interface Table<DataType = unknown> {
+export interface Table<
+  DataType = unknown,
+  ColumnMeta = unknown,
+  Meta = unknown,
+> {
   /**
    * @private
    */
@@ -70,8 +74,14 @@ export interface Table<DataType = unknown> {
   [ROW_META_KEY]: WeakMap<Row, Map<Class<unknown>, any>>;
 }
 
+/**
+ * `ColumnMeta` is the type of `column.meta`,
+ * and `Meta` the type of `table.config.meta`, apart from the keys of `TableMeta`.
+ *
+ * `headlessTable` infers both from the config.
+ */
 // eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
-export class Table<DataType = unknown> {
+export class Table<DataType = unknown, ColumnMeta = unknown, Meta = unknown> {
   /**
    * @private
    *
@@ -95,9 +105,9 @@ export class Table<DataType = unknown> {
   scrollContainerElement?: HTMLElement;
 
   #parent: object;
-  #config: TableConfig<DataType>;
+  #config: TableConfig<DataType, Meta>;
 
-  constructor(parent: object, config: TableConfig<DataType>) {
+  constructor(parent: object, config: TableConfig<DataType, Meta>) {
     this.#parent = parent;
     this.#config = config;
     this[TABLE_KEY] = guidFor(this);
@@ -142,7 +152,7 @@ export class Table<DataType = unknown> {
    *
    * used by other private APIs
    */
-  get config(): TableConfig<DataType> {
+  get config(): TableConfig<DataType, Meta> {
     return this.#config;
   }
 
@@ -288,7 +298,10 @@ export class Table<DataType = unknown> {
     map: (datum) => new Row(this, datum),
   });
 
-  columns: MappedArray<ColumnConfig<DataType>[], Column<DataType>> = map(this, {
+  columns: MappedArray<
+    ColumnConfig<DataType, unknown, Meta>[],
+    Column<DataType, ColumnMeta, Meta>
+  > = map(this, {
     data: () => {
       const configFn = this.#config.columns;
 
@@ -320,7 +333,7 @@ export class Table<DataType = unknown> {
       return result;
     },
     map: (config) => {
-      return new Column<DataType>(this, {
+      return new Column<DataType, ColumnMeta, Meta>(this, {
         ...DEFAULT_COLUMN_CONFIG,
         ...config,
       });
