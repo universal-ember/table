@@ -50,9 +50,9 @@ export interface ColumnConfig<
    * Optionally provide a function to determine the value of a row at this column
    *
    * `column.meta` is `unknown` here, and in `options`.
-   * If callbacks were typed with it, TypeScript would fix the column metas
-   * before it reads them, and a list where every column has a callback
-   * would lose its meta type.
+   * Typed with the column meta, it would be `any`:
+   * TypeScript takes the type from the plain column list in `HeadlessTableConfig`,
+   * where the column meta is `any`.
    */
   value?: (context: CellContext<T, unknown, NoInfer<Meta>>) => ContentValue;
 

@@ -151,11 +151,13 @@ export interface TableConfig<DataType, Meta = unknown> {
  * `ColumnMetas` holds the `meta` of each column, in order,
  * so that each column's `meta` is inferred.
  *
- * `TableConfig` itself has no such list:
- * a mapped type there would make TypeScript compare every `Table` structurally.
+ * `TableConfig` stays a plain interface,
+ * for code that annotates a config or reads `table.config`.
  *
- * The plain list next to it lets TypeScript infer `DataType` from the columns too,
- * which the mapped list alone does not.
+ * The plain list next to the mapped one lets TypeScript infer `DataType`
+ * from the columns too, which the mapped list alone does not.
+ * Its column meta is `any`, so that Cells that read a meta fit it.
+ * The mapped list checks each column's meta.
  */
 export type HeadlessTableConfig<
   DataType,
