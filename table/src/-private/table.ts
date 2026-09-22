@@ -55,7 +55,7 @@ export interface Table<
   DataType = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
-  CellArgs = unknown,
+  CellArgs = any,
 > {
   /**
    * @private
@@ -87,7 +87,7 @@ export class Table<
   DataType = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
-  CellArgs = unknown,
+  CellArgs = any,
 > {
   /**
    * @private
@@ -294,7 +294,10 @@ export class Table<
     return result as unknown as Instance | undefined;
   }
 
-  rows: MappedArray<DataType[], Row<DataType>> = map(this, {
+  rows: MappedArray<
+    DataType[],
+    Row<DataType> & { table: Table<DataType, ColumnMeta, Meta, CellArgs> }
+  > = map(this, {
     data: () => {
       const dataFn = this.#config.data;
 
@@ -302,7 +305,11 @@ export class Table<
 
       return dataFn() ?? [];
     },
-    map: (datum) => new Row(this, datum),
+    // A row's table is this table, so it has this table's types.
+    map: (datum) =>
+      new Row(this, datum) as Row<DataType> & {
+        table: Table<DataType, ColumnMeta, Meta, CellArgs>;
+      },
   });
 
   columns: MappedArray<

@@ -186,19 +186,48 @@ const AlignedCell: TOC<{
 ```
 
 TypeScript reports a column whose meta does not match `Alignment`, and a table whose meta has no `currency`.
+The table meta is also on `@row.table.config.meta`.
+
+Each column decides which Cell fits it.
+A Cell is checked against the `meta` of its own column, not against the meta of the other columns:
+
+```ts
+columns: () => [
+  { key: "name", meta: { align: "left" }, Cell: AlignedCell },
+  { key: "age", meta: { width: 80 }, Cell: WidthCell },
+  // error: this column has no `align`
+  { key: "email", Cell: AlignedCell },
+],
+```
+
+### Options
+
+A column's `options` returns what its Cell gets as `@options`:
+
+```gts
+const UnitCell: TOC<{
+  Args: CellContext<Person> & { options: { unit: string } };
+}> = <template>{{@row.data.age}} {{@options.unit}}</template>;
+
+columns: () => [
+  { key: "age", Cell: UnitCell, options: () => ({ unit: "years" }) },
+],
+```
+
+```gts
+<column.Cell
+  @row={{row}}
+  @column={{column}}
+  @options={{column.getOptionsForRow row}}
+/>
+```
+
+`column.getOptionsForRow` has the type of the `@options` that the Cells ask for, and the `defaultValue`.
 
 ## Code that takes any table
 
-A function that accepts `Column<Person>` or `Table<Person>` accepts columns and tables with any meta.
-
-A column whose Cell takes extra args needs `any` as the fourth type argument,
-because its Cell cannot be rendered with `@row` and `@column` only:
-
-```ts
-function keysOf(columns: Column<Person, unknown, unknown, any>[]) {
-  return columns.map((column) => column.key);
-}
-```
+A function that accepts `Column<Person>` or `Table<Person>` accepts columns and tables with any meta and any cell args.
+The plugin helpers, for example `sort` and `isVisible`, are typed this way.
 
 To read a meta, ask for it:
 
@@ -215,3 +244,5 @@ function exportWidthOf(column: Column<Person, { exportWidth?: number }>) {
 - An inline `<template>` Cell has no types for its args.
   To use `@row` or other args in it, move it into a constant with a `TOC` type, as in the examples above.
 - A function inside a `meta` needs types on its parameters.
+- TypeScript does not check that a column's `options` returns the `@options` its Cell asks for.
+  The return type of `options` is only known after the Cell types are fixed.

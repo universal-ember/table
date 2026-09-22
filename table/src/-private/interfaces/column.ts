@@ -1,6 +1,7 @@
 import type { BasePlugin, Plugin } from '../../plugins';
 import type { Column } from '../column';
 import type { Row } from '../row';
+import type { Table } from '../table';
 import type { ColumnOptionsFor, SignatureFrom } from './plugins';
 import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
@@ -15,7 +16,10 @@ declare const rowType: unique symbol;
  */
 export interface CellContext<T, out ColumnMeta = unknown, out Meta = unknown> {
   column: Column<T, ColumnMeta, Meta, any>;
-  row: Row<T>;
+  /**
+   * The row, whose `table` has the meta types of this table.
+   */
+  row: Row<T> & { table: Table<T, ColumnMeta, Meta, any> };
 }
 
 type ColumnPluginOption<P = Plugin> = P extends BasePlugin

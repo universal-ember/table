@@ -99,3 +99,13 @@ export type CellArgsOf<Columns extends readonly unknown[]> = [
 ] extends [never]
   ? unknown
   : UnionToIntersection<ExtraArgsOf<ProvidedCells<Columns>>>;
+
+/**
+ * The `@options` the Cells of a table ask for, from their args.
+ * Without such a Cell, nothing is added to the default value.
+ */
+export type CellOptionsOf<CellArgs> = CellArgs extends {
+  options?: infer Options;
+}
+  ? Options
+  : unknown;

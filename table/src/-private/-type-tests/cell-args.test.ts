@@ -1,6 +1,17 @@
 import { expectTypeOf } from 'expect-type';
 
 import { headlessTable } from '../../index.ts';
+import {
+  ColumnReordering,
+  moveLeft,
+} from '../../plugins/column-reordering/index.ts';
+import {
+  ColumnVisibility,
+  hide,
+  isVisible,
+} from '../../plugins/column-visibility/index.ts';
+import { DataSorting, sort } from '../../plugins/data-sorting/index.ts';
+import { meta } from '../../plugins/index.ts';
 
 import type { CellContext, Column, ColumnConfig, Table } from '../../index.ts';
 import type { ComponentLike } from '@glint/template';
@@ -156,8 +167,8 @@ expectTypeOf<CellArgsOf<(typeof plain.columns)[0]['Cell']>>().toEqualTypeOf<
 >();
 
 /////////////////////////////////////////////
-// A column whose Cell takes args fits code that accepts any cell args
-function takesAnyColumn(column: Column<Person, unknown, unknown, any>) {
+// A column whose Cell takes args fits code that knows nothing about them
+function takesAnyColumn(column: Column<Person>) {
   return column.key;
 }
 function takesAnyTable(table: Table<Person>) {
@@ -167,10 +178,62 @@ takesAnyColumn(grouped.columns[0]!);
 takesAnyColumn(plain.columns[0]!);
 takesAnyTable(grouped);
 
-function takesPlainColumn(column: Column<Person>) {
-  return column.key;
-}
-// @ts-expect-error its Cell needs args that a plain column's Cell is not given
-takesPlainColumn(grouped.columns[0]!);
+// The plugin helpers take it too
+const withPlugins = headlessTable(
+  {},
+  {
+    columns: () => [{ key: 'name', Cell: GroupedCell }],
+    data: () => people,
+    meta: { currency: 'EUR' },
+    plugins: [ColumnVisibility, DataSorting, ColumnReordering],
+  },
+);
+const groupedColumn = withPlugins.columns[0]!;
+
+expectTypeOf(isVisible(groupedColumn)).toEqualTypeOf<boolean>();
+hide(groupedColumn);
+sort(groupedColumn);
+moveLeft(groupedColumn);
+meta.forColumn(groupedColumn, ColumnVisibility);
+
+/////////////////////////////////////////////
+// The table of a row has the types of the table, like the table of a column
+expectTypeOf(
+  withPlugins.rows[0]!.table.config.meta!.currency,
+).toEqualTypeOf<string>();
+
+declare const CurrencyCell: ComponentLike<
+  CellContext<Person, unknown, { currency: string }>
+>;
+type CurrencyArgs = CellArgsOf<typeof CurrencyCell>;
+expectTypeOf<
+  NonNullable<CurrencyArgs['row']['table']['config']['meta']>['currency']
+>().toEqualTypeOf<string>();
 
 void wrongArgs;
+
+/////////////////////////////////////////////
+// `getOptionsForRow` has the `@options` that the Cells ask for
+interface Unit {
+  unit: string;
+}
+declare const UnitCell: ComponentLike<CellContext<Person> & { options: Unit }>;
+
+const withOptions = headlessTable(
+  {},
+  {
+    columns: () => [
+      { key: 'age', Cell: UnitCell, options: () => ({ unit: 'years' }) },
+      { key: 'name', Cell: PlainCell },
+    ],
+    data: () => people,
+  },
+);
+declare const optionsRow: (typeof withOptions.rows)[number];
+const options = withOptions.columns[0]!.getOptionsForRow(optionsRow);
+
+expectTypeOf(options.unit).toEqualTypeOf<string>();
+expectTypeOf(options.defaultValue).toEqualTypeOf<string>();
+expectTypeOf(plain.columns[0]!.getOptionsForRow(optionsRow)).toEqualTypeOf<{
+  defaultValue: string;
+}>();

@@ -28,6 +28,21 @@ const AgeCell: TOC<{ Args: CellContext<Person> }> = <template>
   <span class="age">{{@row.data.age}}</span>
 </template>;
 
+const UnitCell: TOC<{
+  Args: CellContext<Person> & { options: { unit: string } };
+}> = <template>
+  <span class="unit">{{@row.data.age}} {{@options.unit}}</span>
+</template>;
+
+class OptionsContext {
+  table = headlessTable(this, {
+    columns: () => [
+      { key: "age", Cell: UnitCell, options: () => ({ unit: "years" }) },
+    ],
+    data: () => people,
+  });
+}
+
 class Context {
   table = headlessTable(this, {
     columns: () => [
@@ -70,6 +85,33 @@ module("Cells", function (hooks) {
     assert.dom(".grouped").hasText("Ada by week");
     assert.dom(".age").exists({ count: 2 });
     assert.dom(".inline").exists({ count: 2 });
+  });
+
+  test("a Cell gets the options of its column", async function (assert) {
+    const ctx = new OptionsContext();
+
+    setOwner(ctx, this.owner);
+
+    const table = ctx.table;
+
+    await render(
+      <template>
+        {{#each table.rows as |row|}}
+          {{#each table.columns as |column|}}
+            {{#if column.Cell}}
+              <column.Cell
+                @row={{row}}
+                @column={{column}}
+                @options={{column.getOptionsForRow row}}
+              />
+            {{/if}}
+          {{/each}}
+        {{/each}}
+      </template>,
+    );
+
+    assert.dom(".unit").exists({ count: 2 });
+    assert.dom(".unit").hasText("36 years");
   });
 });
 
