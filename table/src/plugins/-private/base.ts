@@ -77,19 +77,10 @@ export type SignatureFrom<Klass extends BasePlugin<any>> =
 declare const __Signature__: unique symbol;
 
 /**
- * @public
- *
- * If your table plugin is a class, you may extend from BasePlugin, which provides
- * small utility methods and properties for getting the metadata for your plugin
- * for the table and each column
- *
- * One instance of a plugin exists per table
+ * The signature marker lives on this interface,
+ * because `isolatedDeclarations` cannot emit computed class members.
  */
-export abstract class BasePlugin<
-  Signature = unknown,
-> implements Plugin<Signature> {
-  constructor(protected table: Table) {}
-
+export interface BasePlugin<Signature = unknown> {
   /**
    * @private (secret)
    *
@@ -99,7 +90,23 @@ export abstract class BasePlugin<
    * This isn't a real API, but does help with type inference
    * with the SignatureFrom utility above
    */
-  declare [__Signature__]: Signature;
+  [__Signature__]: Signature;
+}
+
+/**
+ * @public
+ *
+ * If your table plugin is a class, you may extend from BasePlugin, which provides
+ * small utility methods and properties for getting the metadata for your plugin
+ * for the table and each column
+ *
+ * One instance of a plugin exists per table
+ */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
+export abstract class BasePlugin<
+  Signature = unknown,
+> implements Plugin<Signature> {
+  constructor(protected table: Table) {}
 
   /**
    * Helper for specifying plugins on `headlessTable` with the plugin-level options
@@ -143,7 +150,7 @@ export abstract class BasePlugin<
 export function hasPlugin<P extends BasePlugin<any>, Data = unknown>(
   table: Table<Data>,
   klass: Class<P>,
-) {
+): boolean {
   return Boolean(table.pluginOf(klass));
 }
 
@@ -166,7 +173,7 @@ export const preferences = {
       /**
        * delete an entry on the underlying `Map` used for this column-plugin pair
        */
-      delete(key: string) {
+      delete(key: string): void {
         const prefs = column.table.preferences;
         const pluginPrefs = prefs.storage.getPlugin(klass.name);
         if (!pluginPrefs) return prefs.persist();
@@ -180,7 +187,7 @@ export const preferences = {
       /**
        * get an entry on the underlying `Map` used for this column-plugin pair
        */
-      get(key: string) {
+      get(key: string): unknown {
         const prefs = column.table.preferences;
         const pluginPrefs = prefs.storage.getPlugin(klass.name);
         if (!pluginPrefs) return undefined;
@@ -191,7 +198,7 @@ export const preferences = {
       /**
        * set an entry on the underlying `Map` used for this column-plugin pair
        */
-      set(key: string, value: unknown) {
+      set(key: string, value: unknown): void {
         const prefs = column.table.preferences;
         const existing = prefs.storage.forPlugin(klass.name);
         const columnPrefs = existing.forColumn(column.key);
@@ -217,7 +224,7 @@ export const preferences = {
       /**
        * delete an entry on every column in the underlying column `Map` for this table-plugin pair
        */
-      delete(key: string) {
+      delete(key: string): void {
         const tablePrefs = table.preferences;
 
         for (const column of table.columns) {
@@ -253,7 +260,7 @@ export const preferences = {
       /**
        * delete an entry on the underlying `Map` used for this table-plugin pair
        */
-      delete(key: string) {
+      delete(key: string): void {
         const prefs = table.preferences;
         const pluginPrefs = prefs.storage.getPlugin(klass.name);
         if (!pluginPrefs) return prefs.persist();
@@ -265,7 +272,7 @@ export const preferences = {
       /**
        * get an entry on the underlying `Map` used for this table-plugin pair
        */
-      get(key: string) {
+      get(key: string): unknown {
         const prefs = table.preferences;
         const pluginPrefs = prefs.storage.getPlugin(klass.name);
         if (!pluginPrefs) return undefined;
@@ -274,7 +281,7 @@ export const preferences = {
       /**
        * set an entry on the underlying `Map` used for this table-plugin pair
        */
-      set(key: string, value: unknown) {
+      set(key: string, value: unknown): void {
         const prefs = table.preferences;
         const existing = prefs.storage.forPlugin(klass.name);
 
@@ -418,7 +425,9 @@ function columnsFor<
 }
 
 export const columns = {
-  for: columnsFor,
+  // isolatedDeclarations cannot infer the type of a referenced function
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  for: columnsFor as typeof columnsFor,
 
   /**
    * for a given current or reference column, return the column that

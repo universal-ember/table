@@ -55,23 +55,38 @@ jobs:
       fail-fast: true
       matrix:
         typescript-scenario:
-          - typescript@5.5
           - typescript@5.6
           - typescript@5.7
           - typescript@5.8
+          - typescript@5.9
+          - typescript@6.0
+          - typescript@next
 
     steps:
       - uses: actions/checkout@v6
       - uses: wyvox/action-setup-pnpm@v3
       - uses: ./.github/actions/download-built-package
       - name: 'Change TS to ${{ matrix.typescript-scenario }}'
-        run: 'pnpm add --save-dev ${{ matrix.typescript-scenario}}'
+        if: matrix.typescript-scenario != 'typescript@next'
+        # A bare typescript@6.0 keeps the @typescript/typescript6 alias, so name the npm package
+        run: 'pnpm add --save-dev "typescript@npm:${{ matrix.typescript-scenario }}"'
         working-directory: ./test-app
       - name: 'Type checking'
+        if: matrix.typescript-scenario != 'typescript@next'
         run: |
           pnpm --filter test-app exec tsc -v;
           pnpm --filter test-app exec ember-tsc --version;
           pnpm --filter test-app exec ember-tsc --noEmit;
+      # TypeScript 7 checks .gts through ember-content-mapper, not ember-tsc
+      - name: 'Change TS to the latest TypeScript 7 nightly'
+        if: matrix.typescript-scenario == 'typescript@next'
+        run: 'pnpm add --save-dev "@typescript/native@npm:typescript@next"'
+        working-directory: ./test-app
+      - name: 'Type checking (TypeScript 7)'
+        if: matrix.typescript-scenario == 'typescript@next'
+        run: |
+          pnpm --filter test-app exec tsc -v;
+          pnpm --filter test-app exec tsc --noEmit --runExternalCode;
 
 
   default_tests:

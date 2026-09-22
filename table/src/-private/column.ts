@@ -17,19 +17,19 @@ export class Column<
   T = unknown,
   TableTypes extends TableTypeSlots = TableTypeSlots,
 > {
-  get Cell() {
+  get Cell(): ColumnConfig<T, TableTypes>['Cell'] {
     return this.config.Cell;
   }
 
-  get key() {
+  get key(): string {
     return this.config.key;
   }
 
-  get name() {
+  get name(): string | undefined {
     return this.config.name;
   }
 
-  get meta() {
+  get meta(): ColumnConfig<T, TableTypes>['meta'] {
     return this.config.meta;
   }
 
@@ -64,7 +64,9 @@ export class Column<
   }
 
   @action
-  getOptionsForRow(row: Row<T>) {
+  getOptionsForRow(row: Row<T>): {
+    defaultValue: string;
+  } {
     const configuredDefault = this.table.config.defaultCellValue;
     const defaults = {
       [DEFAULT_VALUE_KEY]:

@@ -48,18 +48,21 @@ export class ColumnVisibility
   implements Plugin<Signature>
 {
   name = 'column-visibility';
-  static features = ['columnVisibility'];
+  static features: string[] = ['columnVisibility'];
 
-  meta = {
+  meta: {
+    column: typeof ColumnMeta;
+    table: typeof TableMeta;
+  } = {
     column: ColumnMeta,
     table: TableMeta,
   };
 
-  reset() {
+  reset(): void {
     preferences.forAllColumns(this.table, ColumnVisibility).delete('isVisible');
   }
 
-  get columns() {
+  get columns(): Column<unknown>[] {
     return meta.forTable(this.table, ColumnVisibility).visibleColumns;
   }
 }
@@ -83,7 +86,7 @@ export class ColumnMeta<Data = unknown> {
     return !this.isVisible;
   }
 
-  hide = () => {
+  hide = (): void => {
     if (!this.isVisible) return;
 
     const myPreferences = preferences.forColumn(this.column, ColumnVisibility);
@@ -102,7 +105,7 @@ export class ColumnMeta<Data = unknown> {
     myPreferences.set('isVisible', false);
   };
 
-  show = () => {
+  show = (): void => {
     if (this.isVisible) return;
 
     const myPreferences = preferences.forColumn(this.column, ColumnVisibility);
@@ -121,7 +124,7 @@ export class ColumnMeta<Data = unknown> {
     myPreferences.set('isVisible', true);
   };
 
-  toggle = () => {
+  toggle = (): void => {
     if (this.isVisible) {
       this.hide();
 
@@ -147,7 +150,7 @@ export class TableMeta<Data = unknown> {
   }
 
   @action
-  toggleColumnVisibility(column: Column<Data>) {
+  toggleColumnVisibility(column: Column<Data>): void {
     const columnMeta = meta.forColumn(column, ColumnVisibility);
 
     columnMeta.toggle();

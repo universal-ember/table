@@ -82,7 +82,7 @@ function collectRequirements(plugins: ExpandedPluginOption[]) {
   return result;
 }
 
-export function verifyPlugins(plugins: ExpandedPluginOption[]) {
+export function verifyPlugins(plugins: ExpandedPluginOption[]): void {
   const features = collectFeatures(plugins);
   const requirements = collectRequirements(plugins);
   const allFeatures = Object.keys(features);
@@ -123,7 +123,7 @@ type AssignableStyles = Omit<CSSStyleDeclaration, 'length' | 'parentRule'>;
 export function applyStyles(
   element: HTMLElement | SVGElement,
   styles: Partial<AssignableStyles>,
-) {
+): void {
   for (const [name, value] of Object.entries(styles)) {
     if (name in element.style) {
       assignStyle(
@@ -158,7 +158,7 @@ function removeStyle(element: HTMLElement | SVGElement, styleName: string) {
 export function removeStyles(
   element: HTMLElement | SVGElement,
   styles: Array<keyof AssignableStyles>,
-) {
+): void {
   for (const name of styles) {
     if (typeof name !== 'string') continue;
     removeStyle(element, name);

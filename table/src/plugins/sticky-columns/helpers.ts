@@ -5,8 +5,9 @@ import { StickyColumns } from './plugin.ts';
 
 import type { Column } from '../../index.ts';
 
-export const isSticky = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, StickyColumns).isSticky;
+export const isSticky = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, StickyColumns).isSticky;
 
 export const styleFor = <DataType = unknown>(
   column: Column<DataType>,

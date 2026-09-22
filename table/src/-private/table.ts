@@ -4,9 +4,9 @@ import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 
 import { isDevelopingApp, macroCondition } from '@embroider/macros';
-import { modifier } from 'ember-modifier';
+import { modifier, type FunctionBasedModifier } from 'ember-modifier';
 import { link } from 'reactiveweb/link';
-import { map } from 'reactiveweb/map';
+import { map, type MappedArray } from 'reactiveweb/map';
 
 import {
   normalizePluginsConfig,
@@ -20,9 +20,10 @@ import { composeFunctionModifiers } from './utils.ts';
 import type { BasePlugin, Plugin } from '../plugins/index.ts';
 import type { Class } from './private-types.ts';
 import type { TableTypeSlots } from './types.ts';
-import type { Destructor, TableConfig } from './interfaces';
+import type { ColumnConfig, Destructor, TableConfig } from './interfaces';
 import type Owner from '@ember/owner';
 import { compatOwner } from './ember-compat.ts';
+import type { EmptyObject } from 'ember-modifier/-private/signature';
 
 const getOwner = compatOwner.getOwner;
 const setOwner = compatOwner.setOwner;
@@ -36,10 +37,10 @@ const DEFAULT_COLUMN_CONFIG = {
  * Because the table is our entry-point object to all the table behaviors,
  * we need a stable way to know which table we have.
  */
-export const TABLE_KEY = Symbol('__TABLE_KEY__');
-export const TABLE_META_KEY = Symbol('__TABLE_META__');
-export const COLUMN_META_KEY = Symbol('__COLUMN_META__');
-export const ROW_META_KEY = Symbol('__ROW_META__');
+export const TABLE_KEY: unique symbol = Symbol('__TABLE_KEY__');
+export const TABLE_META_KEY: unique symbol = Symbol('__TABLE_META__');
+export const COLUMN_META_KEY: unique symbol = Symbol('__COLUMN_META__');
+export const ROW_META_KEY: unique symbol = Symbol('__ROW_META__');
 
 const attachContainer = (element: Element, table: Table) => {
   assert('Must be installed on an HTMLElement', element instanceof HTMLElement);
@@ -47,27 +48,37 @@ const attachContainer = (element: Element, table: Table) => {
   table.scrollContainerElement = element;
 };
 
-export class Table<
+/**
+ * Symbol-keyed fields live on this interface,
+ * because `isolatedDeclarations` cannot emit computed class members.
+ */
+export interface Table<
   DataType = unknown,
   TableTypes extends TableTypeSlots = TableTypeSlots,
 > {
   /**
    * @private
    */
-  [TABLE_KEY] = guidFor(this);
+  [TABLE_KEY]: string;
   /**
    * @private
    */
-  [TABLE_META_KEY] = new Map<Class<unknown>, any>();
+  [TABLE_META_KEY]: Map<Class<unknown>, any>;
   /**
    * @private
    */
-  [COLUMN_META_KEY] = new WeakMap<Column, Map<Class<unknown>, any>>();
+  [COLUMN_META_KEY]: WeakMap<Column, Map<Class<unknown>, any>>;
   /**
    * @private
    */
-  [ROW_META_KEY] = new WeakMap<Row, Map<Class<unknown>, any>>();
+  [ROW_META_KEY]: WeakMap<Row, Map<Class<unknown>, any>>;
+}
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
+export class Table<
+  DataType = unknown,
+  TableTypes extends TableTypeSlots = TableTypeSlots,
+> {
   /**
    * @private
    *
@@ -96,6 +107,10 @@ export class Table<
   constructor(parent: object, config: TableConfig<DataType, TableTypes>) {
     this.#parent = parent;
     this.#config = config;
+    this[TABLE_KEY] = guidFor(this);
+    this[TABLE_META_KEY] = new Map();
+    this[COLUMN_META_KEY] = new WeakMap();
+    this[ROW_META_KEY] = new WeakMap();
 
     /**
      * The table is destroyed with the object that created it,
@@ -166,7 +181,20 @@ export class Table<
    *
    * These are all no-use, no-cost utilities
    */
-  modifiers = {
+  modifiers: {
+    container: FunctionBasedModifier<{
+      Element: HTMLElement;
+      Args: { Positional: unknown[]; Named: EmptyObject };
+    }>;
+    columnHeader: FunctionBasedModifier<{
+      Element: HTMLElement;
+      Args: { Positional: [Column<DataType, TableTypes>]; Named: EmptyObject };
+    }>;
+    row: FunctionBasedModifier<{
+      Element: HTMLElement;
+      Args: { Positional: [Row<DataType>]; Named: EmptyObject };
+    }>;
+  } = {
     container: modifier((element: HTMLElement): Destructor => {
       const modifiers = this.plugins.map((plugin) => plugin.containerModifier);
       const composed = composeFunctionModifiers([
@@ -187,7 +215,10 @@ export class Table<
     //       With curried+composed modifiers, only the plugin's headerModifier
     //       that has tracked changes would run, leaving the other modifiers alone
     columnHeader: modifier(
-      (element: HTMLElement, [column]: [Column<DataType>]): Destructor => {
+      (
+        element: HTMLElement,
+        [column]: [Column<DataType, TableTypes>],
+      ): Destructor => {
         const modifiers = this.plugins.map(
           (plugin) => plugin.headerCellModifier,
         );
@@ -256,7 +287,7 @@ export class Table<
     return result as unknown as Instance | undefined;
   }
 
-  rows = map(this, {
+  rows: MappedArray<DataType[], Row<DataType>> = map(this, {
     data: () => {
       const dataFn = this.#config.data;
 
@@ -267,7 +298,10 @@ export class Table<
     map: (datum) => new Row(this, datum),
   });
 
-  columns = map(this, {
+  columns: MappedArray<
+    ColumnConfig<DataType, TableTypes>[],
+    Column<DataType, TableTypes>
+  > = map(this, {
     data: () => {
       const configFn = this.#config.columns;
 
@@ -310,14 +344,14 @@ export class Table<
    * @private
    */
   @action
-  resetScrollContainer() {
+  resetScrollContainer(): void {
     if (!this.scrollContainerElement) return;
 
     this.scrollContainerElement.scrollTop = 0;
   }
 
   @action
-  resetToDefaults() {
+  resetToDefaults(): void {
     this.plugins.forEach((plugin) => plugin.reset?.());
   }
 }

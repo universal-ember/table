@@ -6,7 +6,16 @@ interface Selectors {
   scrollContainer?: string;
 }
 
-export function createHelpers(selectors: Selectors) {
+interface Helpers {
+  dragLeft: (column: Element, amount: number) => Promise<void>;
+  dragRight: (column: Element, amount: number) => Promise<void>;
+  scrollLeft: (distance: number) => Promise<void>;
+  scrollRight: (distance: number) => Promise<void>;
+  swipeLeft: (distance: number) => Promise<void>;
+  swipeRight: (distance: number) => Promise<void>;
+}
+
+export function createHelpers(selectors: Selectors): Helpers {
   async function resize(parent: Element, delta: number) {
     assert(
       `Can't use the dragLeft/dragRight/resize helpers without a \`resizeHandle\` selector`,
@@ -70,7 +79,7 @@ export function createHelpers(selectors: Selectors) {
   };
 }
 
-export async function requestAnimationFrameSettled() {
+export async function requestAnimationFrameSettled(): Promise<void> {
   await new Promise(requestAnimationFrame);
   await settled();
 }

@@ -18,7 +18,7 @@ export class Row<DataType = Record<string, unknown>> {
     return i;
   }
 
-  get isOdd() {
+  get isOdd(): boolean {
     return this.index % 2 !== 0;
   }
 
@@ -36,7 +36,7 @@ export class Row<DataType = Record<string, unknown>> {
   }
 
   @action
-  handleClick(event: MouseEvent) {
+  handleClick(event: MouseEvent): void {
     assert(
       `expected event.target to be an instance of HTMLElement`,
       event.target instanceof HTMLElement || event.target instanceof SVGElement,
