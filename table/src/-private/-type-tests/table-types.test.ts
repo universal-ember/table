@@ -82,8 +82,8 @@ takesAnyTable(report);
 // shared code can ask for the meta it needs, and still use the whole table
 function exportWidths<
   T,
-  Types extends { columnMeta: { exportWidth?: number } },
->(table: Table<T, Types>) {
+  TableTypes extends { columnMeta: { exportWidth?: number } },
+>(table: Table<T, TableTypes>) {
   return columns.for(table).map((column) => column.meta?.exportWidth);
 }
 expectTypeOf(exportWidths(report)).toEqualTypeOf<(number | undefined)[]>();

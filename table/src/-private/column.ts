@@ -4,7 +4,7 @@ import { isEmpty } from '@ember/utils';
 import type { Row } from './row';
 import type { Table } from './table';
 import type { ContentValue } from '@glint/template';
-import type { TableTypes } from './types.ts';
+import type { TableTypeSlots } from './types.ts';
 import type { ColumnConfig } from './interfaces';
 
 const DEFAULT_VALUE = '--';
@@ -13,7 +13,10 @@ const DEFAULT_OPTIONS = {
   [DEFAULT_VALUE_KEY]: DEFAULT_VALUE,
 };
 
-export class Column<T = unknown, Types extends TableTypes = TableTypes> {
+export class Column<
+  T = unknown,
+  TableTypes extends TableTypeSlots = TableTypeSlots,
+> {
   get Cell() {
     return this.config.Cell;
   }
@@ -31,8 +34,8 @@ export class Column<T = unknown, Types extends TableTypes = TableTypes> {
   }
 
   constructor(
-    public table: Table<T, Types>,
-    public config: ColumnConfig<T, Types>,
+    public table: Table<T, TableTypes>,
+    public config: ColumnConfig<T, TableTypes>,
   ) {}
 
   @action

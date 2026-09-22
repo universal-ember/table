@@ -19,7 +19,7 @@ import type { TableMeta } from './interfaces/table.ts';
  * Only tables created with these types get them, so two tables in one app
  * can declare different shapes. The slot names are those of TanStack Table.
  */
-export interface TableTypes {
+export interface TableTypeSlots {
   columnMeta?: object;
   tableMeta?: object;
   cellArgs?: object;
@@ -31,8 +31,8 @@ export interface TableTypes {
  * It is a call because TypeScript infers a type argument from a value:
  * writing `headlessTable<Person, ReportTypes>(...)` would stop `Person` being inferred.
  */
-export function tableTypes<Types extends TableTypes>(): Types {
-  return {} as Types;
+export function tableTypes<TableTypes extends TableTypeSlots>(): TableTypes {
+  return {} as TableTypes;
 }
 
 declare const undeclared: unique symbol;
@@ -50,10 +50,10 @@ export interface NoColumnMeta {
  * The type of `column.meta`: the table's `columnMeta` when it declares one,
  * else the app-wide `ColumnMeta` interface, else `NoColumnMeta`.
  */
-export type ExtractColumnMeta<Types, T = unknown> = Types extends {
+export type ExtractColumnMeta<TableTypes, T = unknown> = TableTypes extends {
   columnMeta: object;
 }
-  ? Types['columnMeta']
+  ? TableTypes['columnMeta']
   : keyof ColumnMeta<T> extends never
     ? NoColumnMeta
     : ColumnMeta<T>;
@@ -62,14 +62,18 @@ export type ExtractColumnMeta<Types, T = unknown> = Types extends {
  * The type of `table.config.meta`: the table's `tableMeta` slot when it declares one,
  * together with the keys this library defines itself.
  */
-export type ExtractTableMeta<Types> = Types extends { tableMeta: object }
-  ? TableMeta & Types['tableMeta']
+export type ExtractTableMeta<TableTypes> = TableTypes extends {
+  tableMeta: object;
+}
+  ? TableMeta & TableTypes['tableMeta']
   : TableMeta;
 
 /**
  * The args a table gives its cells besides `@row`, `@column` and `@options`:
  * the table's `cellArgs` when it declares them.
  */
-export type ExtractCellArgs<Types> = Types extends { cellArgs: object }
-  ? Types['cellArgs']
+export type ExtractCellArgs<TableTypes> = TableTypes extends {
+  cellArgs: object;
+}
+  ? TableTypes['cellArgs']
   : unknown;

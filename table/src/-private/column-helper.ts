@@ -1,5 +1,5 @@
 import type { Column } from './column.ts';
-import type { TableTypes } from './types.ts';
+import type { TableTypeSlots } from './types.ts';
 import type { CellContext, CellOptions, ColumnConfig } from './interfaces';
 import type { Row } from './row.ts';
 import type { ComponentLike } from '@glint/template';
@@ -11,9 +11,9 @@ import type { ComponentLike } from '@glint/template';
 export interface CellArgs<
   T,
   Options extends CellOptions = CellOptions,
-  Types extends TableTypes = TableTypes,
+  TableTypes extends TableTypeSlots = TableTypeSlots,
 > {
-  column: Column<T, Types>;
+  column: Column<T, TableTypes>;
   row: Row<T>;
   options: Options;
 }
@@ -24,10 +24,10 @@ export interface CellArgs<
 export type TypedColumnConfig<
   T,
   Options extends CellOptions,
-  Types extends TableTypes = TableTypes,
-> = Omit<ColumnConfig<T, Types>, 'Cell' | 'options'> & {
-  Cell?: ComponentLike<CellArgs<T, Options, Types>>;
-  options?: (context: CellContext<T, Types>) => Options;
+  TableTypes extends TableTypeSlots = TableTypeSlots,
+> = Omit<ColumnConfig<T, TableTypes>, 'Cell' | 'options'> & {
+  Cell?: ComponentLike<CellArgs<T, Options, TableTypes>>;
+  options?: (context: CellContext<T, TableTypes>) => Options;
 };
 
 /**
@@ -47,12 +47,15 @@ export type TypedColumnConfig<
  * `T` is given first and `Options` is inferred per call,
  * because TypeScript cannot infer only some of a function's type arguments.
  */
-export function column<T, Types extends TableTypes = TableTypes>() {
+export function column<
+  T,
+  TableTypes extends TableTypeSlots = TableTypeSlots,
+>() {
   return <Options extends CellOptions>(
-    config: TypedColumnConfig<T, Options, Types>,
-  ): ColumnConfig<T, Types> => {
+    config: TypedColumnConfig<T, Options, TableTypes>,
+  ): ColumnConfig<T, TableTypes> => {
     // `Options` is only known per column, and a list of columns has one element type.
     // The check has happened by here, so the list can hold the general type.
-    return config as unknown as ColumnConfig<T, Types>;
+    return config as unknown as ColumnConfig<T, TableTypes>;
   };
 }

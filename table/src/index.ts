@@ -18,7 +18,7 @@ export type {
   ExtractCellArgs,
   ExtractColumnMeta,
   ExtractTableMeta,
-  TableTypes,
+  TableTypeSlots,
 } from './-private/types.ts';
 export type {
   CellContext,

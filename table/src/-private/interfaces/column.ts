@@ -3,7 +3,7 @@ import type { Column } from '../column';
 import type {
   ExtractCellArgs,
   ExtractColumnMeta,
-  TableTypes,
+  TableTypeSlots,
 } from '../types.ts';
 import type { Row } from '../row';
 import type { ColumnOptionsFor, SignatureFrom } from './plugins';
@@ -12,8 +12,11 @@ import type { ComponentLike, ContentValue } from '@glint/template';
 
 declare const rowType: unique symbol;
 
-export interface CellContext<T, Types extends TableTypes = TableTypes> {
-  column: Column<T, Types>;
+export interface CellContext<
+  T,
+  TableTypes extends TableTypeSlots = TableTypeSlots,
+> {
+  column: Column<T, TableTypes>;
   row: Row<T>;
 }
 
@@ -49,7 +52,7 @@ export type CellOptions = {
 
 export interface ColumnConfig<
   T = unknown,
-  Types extends TableTypes = TableTypes,
+  TableTypes extends TableTypeSlots = TableTypeSlots,
 > {
   /**
    * the `key` is required for preferences storage, as well as
@@ -66,7 +69,7 @@ export interface ColumnConfig<
   /**
    * Optionally provide a function to determine the value of a row at this column
    */
-  value?: (context: CellContext<T, Types>) => ContentValue;
+  value?: (context: CellContext<T, TableTypes>) => ContentValue;
 
   /**
    * Recommended property to use for custom components for each cell per column.
@@ -74,7 +77,9 @@ export interface ColumnConfig<
    * a convenience for consumers of the headless table
    */
   Cell?: ComponentLike<
-    CellContext<T, Types> & { options?: CellOptions } & ExtractCellArgs<Types>
+    CellContext<T, TableTypes> & {
+      options?: CellOptions;
+    } & ExtractCellArgs<TableTypes>
   >;
 
   /**
@@ -86,12 +91,12 @@ export interface ColumnConfig<
    * Static information about the column, read as `column.meta`.
    * Unlike `options`, it needs no row.
    */
-  meta?: ExtractColumnMeta<Types, T>;
+  meta?: ExtractColumnMeta<TableTypes, T>;
 
   /**
    * Bag of extra properties to pass to Cell via `@options`, if desired
    */
-  options?: (context: CellContext<T, Types>) => CellOptions;
+  options?: (context: CellContext<T, TableTypes>) => CellOptions;
 
   /**
    * Each plugin may provide column options, and provides similar syntax to how
