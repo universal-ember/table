@@ -99,14 +99,17 @@ interface Signature {
  */
 export class ColumnResizing extends BasePlugin<Signature> {
   name = 'column-resizing';
-  static features = ['columnWidth'];
+  static features: string[] = ['columnWidth'];
 
-  meta = {
+  meta: {
+    column: typeof ColumnMeta;
+    table: typeof TableMeta;
+  } = {
     column: ColumnMeta,
     table: TableMeta,
   };
 
-  headerCellModifier = (element: HTMLElement, { column }: ColumnApi) => {
+  headerCellModifier = (element: HTMLElement, { column }: ColumnApi): void => {
     const columnMeta = meta.forColumn(column, ColumnResizing);
 
     element.setAttribute('data-test-is-resizable', `${columnMeta.isResizable}`);
@@ -122,9 +125,9 @@ export class ColumnResizing extends BasePlugin<Signature> {
    * the container instead of the window to prevent unneeded updates (as a window can change
    * size without the container changing size)
    */
-  containerModifier = resizeObserver;
+  containerModifier: typeof resizeObserver = resizeObserver;
 
-  reset() {
+  reset(): void {
     preferences.forAllColumns(this.table, ColumnResizing).delete('width');
   }
 }
@@ -146,12 +149,12 @@ export class ColumnMeta {
   @tracked _width?: number;
   @tracked isResizing = false;
 
-  get tableMeta() {
+  get tableMeta(): TableMeta {
     return meta.forTable(this.column.table, ColumnResizing);
   }
 
   @cached
-  get options() {
+  get options(): ColumnOptions & { minWidth: number } {
     const columnOptions = options.forColumn(this.column, ColumnResizing);
     const filteredOptions = Object.entries(columnOptions || {}).reduce(
       (result, [k, v]) => {
@@ -170,15 +173,15 @@ export class ColumnMeta {
     };
   }
 
-  get key() {
+  get key(): string {
     return this.column.key;
   }
 
-  get minWidth() {
+  get minWidth(): number {
     return this.options.minWidth;
   }
 
-  get initialWidth() {
+  get initialWidth(): number | undefined {
     const savedWidth = preferences
       .forColumn(this.column, ColumnResizing)
       .get('width');
@@ -198,19 +201,19 @@ export class ColumnMeta {
     return parseInt(savedWidth, 10);
   }
 
-  get canShrink() {
+  get canShrink(): boolean | 0 {
     return this.width && this.width > this.minWidth;
   }
 
-  get roomToShrink() {
+  get roomToShrink(): number {
     return this.width ? this.width - this.minWidth : 0;
   }
 
-  get isResizable() {
+  get isResizable(): boolean {
     return this.options.isResizable ?? this.tableMeta.isResizable;
   }
 
-  get hasResizeHandle() {
+  get hasResizeHandle(): boolean {
     const position = this.tableMeta.options?.handlePosition ?? 'left';
 
     if (position === 'right') {
@@ -228,7 +231,7 @@ export class ColumnMeta {
     }
   }
 
-  get width() {
+  get width(): number {
     let width = this._width ?? this.initialWidth;
 
     if (!width) {
@@ -246,7 +249,7 @@ export class ColumnMeta {
     this._width = value;
   }
 
-  get style() {
+  get style(): Partial<Pick<CSSStyleDeclaration, 'width' | 'minWidth'>> {
     const styles: Partial<Pick<CSSStyleDeclaration, 'width' | 'minWidth'>> = {};
 
     if (this.width) styles.width = `${this.width}px`;
@@ -256,12 +259,12 @@ export class ColumnMeta {
   }
 
   @action
-  resize(delta: number) {
+  resize(delta: number): void {
     this.tableMeta.resizeColumn(this.column, delta);
   }
 
   @action
-  save() {
+  save(): void {
     this.tableMeta.saveColWidths(this.tableMeta.visibleColumnMetas);
   }
 }
@@ -309,15 +312,15 @@ export class TableMeta {
   @tracked scrollContainerHeight?: number;
   @tracked scrollContainerWidth?: number;
 
-  get options() {
+  get options(): Partial<TableOptions> {
     return options.forTable(this.table, ColumnResizing);
   }
 
-  get isResizable() {
+  get isResizable(): boolean {
     return this.options?.enabled ?? true;
   }
 
-  get defaultColumnWidth() {
+  get defaultColumnWidth(): number | undefined {
     if (!this.scrollContainerWidth) return;
 
     return (
@@ -330,24 +333,24 @@ export class TableMeta {
     return columns.for(this.table, ColumnResizing);
   }
 
-  get visibleColumnMetas() {
+  get visibleColumnMetas(): ColumnMeta[] {
     return this.#availableColumns.map((column) =>
       meta.forColumn(column, ColumnResizing),
     );
   }
 
-  get totalInitialColumnWidths() {
+  get totalInitialColumnWidths(): number {
     return this.visibleColumnMetas.reduce(
       (acc, meta) => (acc += meta.initialWidth ?? 0),
       0,
     );
   }
 
-  get columnsWithoutInitialWidth() {
+  get columnsWithoutInitialWidth(): ColumnMeta[] {
     return this.visibleColumnMetas.filter((meta) => !meta.initialWidth);
   }
 
-  get totalVisibleColumnsWidth() {
+  get totalVisibleColumnsWidth(): number {
     return this.visibleColumnMetas.reduce(
       (acc, column) => (acc += column.width ?? 0),
       0,
@@ -355,7 +358,7 @@ export class TableMeta {
   }
 
   @action
-  saveColWidths(visibleColumnMetas: ColumnMeta[]) {
+  saveColWidths(visibleColumnMetas: ColumnMeta[]): void {
     const tablePrefs = this.table.preferences;
 
     for (const column of visibleColumnMetas) {
@@ -369,7 +372,7 @@ export class TableMeta {
   }
 
   @action
-  reset() {
+  reset(): void {
     if (!this.scrollContainerWidth) return;
 
     for (const column of this.visibleColumnMetas) {
@@ -378,7 +381,7 @@ export class TableMeta {
   }
 
   @action
-  onTableResize(entry: ResizeObserverEntry) {
+  onTableResize(entry: ResizeObserverEntry): void {
     assert(
       'scroll container element must be an HTMLElement',
       entry.target instanceof HTMLElement,
@@ -403,7 +406,10 @@ export class TableMeta {
   }
 
   @action
-  resizeColumn<DataType = unknown>(column: Column<DataType>, delta: number) {
+  resizeColumn<DataType = unknown>(
+    column: Column<DataType>,
+    delta: number,
+  ): void {
     if (delta === 0) return;
 
     const tableLayout = this.options?.tableLayout ?? 'auto';
@@ -520,7 +526,7 @@ function resizeObserver(element: HTMLElement, table: Table) {
 
   observer.observe(element);
 
-  return () => {
+  return (): void => {
     observer.unobserve(element);
   };
 }

@@ -9,8 +9,9 @@ import type { Column } from '../../index.ts';
  * Is the column resizable?
  * This checks if resizing is enabled for this specific column,
  */
-export const isResizable = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, ColumnResizing).isResizable;
+export const isResizable = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, ColumnResizing).isResizable;
 
 /**
  * The column actively being resized by the user.
@@ -22,14 +23,16 @@ export const isResizable = <DataType = unknown>(column: Column<DataType>) =>
  * be marked as isResizing, because this is a user-scoped question:
  *   "Is the user directly resizing this column?"
  */
-export const isResizing = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, ColumnResizing).isResizing;
+export const isResizing = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, ColumnResizing).isResizing;
 
 /**
  * Does the column have room to shrink?
  */
-export const canShrink = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, ColumnResizing).canShrink;
+export const canShrink = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean | 0 => meta.forColumn(column, ColumnResizing).canShrink;
 
 /**
  * Does the column have a resize handle?
@@ -38,8 +41,9 @@ export const canShrink = <DataType = unknown>(column: Column<DataType>) =>
  *   - if resizing is enabled for the whole table
  *   - or if we're asking about the first column (resize handles may only be "between" columns)
  */
-export const hasResizeHandle = <DataType = unknown>(column: Column<DataType>) =>
-  meta.forColumn(column, ColumnResizing).hasResizeHandle;
+export const hasResizeHandle = <DataType = unknown>(
+  column: Column<DataType>,
+): boolean => meta.forColumn(column, ColumnResizing).hasResizeHandle;
 
 /**
  * In this plugin (by default), styles are only applied to the headers automatically.

@@ -16,7 +16,7 @@
   We use `getBoundingClientRect()` because it does not round the value to an
   integer, which can sometimes cause subpixel gaps.
 **/
-export const getAccurateClientWidth = (element: HTMLElement) => {
+export const getAccurateClientWidth = (element: HTMLElement): number => {
   const style = getComputedStyle(element);
   const padding =
     parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
@@ -25,7 +25,7 @@ export const getAccurateClientWidth = (element: HTMLElement) => {
   return element.getBoundingClientRect().width - padding - scrollbarWidth;
 };
 
-export const totalGapOf = (element?: Element | null) => {
+export const totalGapOf = (element?: Element | null): number => {
   if (!element) return 0;
 
   const style = getComputedStyle(element);
@@ -47,7 +47,7 @@ export const totalGapOf = (element?: Element | null) => {
   return gapSize * (element.children.length - 1) + totalCellPadding;
 };
 
-export const getAccurateClientHeight = (element: HTMLElement) => {
+export const getAccurateClientHeight = (element: HTMLElement): number => {
   const scrollbarHeight = element.offsetHeight - element.clientHeight;
 
   return element.getBoundingClientRect().height - scrollbarHeight;

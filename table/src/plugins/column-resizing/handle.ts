@@ -47,7 +47,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
   token?: unknown;
 
   isSetup = false;
-  modify(element: Element, [column]: [Column<DataType>]) {
+  modify(element: Element, [column]: [Column<DataType>]): void {
     this.column = column;
     this.meta = meta.forColumn(column, ColumnResizing);
     this.dragHandle = element as HTMLElement;
@@ -58,7 +58,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     }
   }
 
-  setup = () => {
+  setup = (): void => {
     this.dragHandle.addEventListener('touchstart', this.dragStartHandler, {
       passive: true,
     });
@@ -83,7 +83,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     });
   };
 
-  setPosition = (event: Event) => {
+  setPosition = (event: Event): void => {
     if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
 
     if ('TouchEvent' in window && event instanceof TouchEvent) {
@@ -99,7 +99,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     }
   };
 
-  setStartPosition = (event: Event) => {
+  setStartPosition = (event: Event): void => {
     if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
 
     if ('TouchEvent' in window && event instanceof TouchEvent) {
@@ -126,7 +126,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
    * the ember test waiter, we also ensure that we track them by also cancelling
    * the waiter in the requestAnimationFrame callback.
    */
-  queueUpdate = (callback?: () => void) => {
+  queueUpdate = (callback?: () => void): void => {
     if (this.dragFrame) {
       cancelAnimationFrame(this.dragFrame);
     }
@@ -146,7 +146,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     });
   };
 
-  dragEndHandler = () => {
+  dragEndHandler = (): void => {
     this.meta.isResizing = false;
 
     this.queueUpdate(this.meta.save);
@@ -160,13 +160,13 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     window.removeEventListener('mouseup', this.dragEndHandler);
   };
 
-  dragMove = (event: Event) => {
+  dragMove = (event: Event): void => {
     if (!this.meta.isResizing) return;
     this.setPosition(event);
     this.queueUpdate();
   };
 
-  dragStartHandler = (event: Event) => {
+  dragStartHandler = (event: Event): void => {
     if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
 
     this.meta.isResizing = true;
@@ -187,7 +187,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     window.addEventListener('mouseup', this.dragEndHandler);
   };
 
-  keyHandler = (event: KeyboardEvent) => {
+  keyHandler = (event: KeyboardEvent): void => {
     const deltaT = new Date().getTime() - this.lastKey;
     const isRapid = deltaT < 50;
 

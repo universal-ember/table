@@ -9,22 +9,22 @@ import type {
 } from './interfaces';
 
 export class TablePreferences {
-  storage = new TrackedPreferences();
+  storage: TrackedPreferences = new TrackedPreferences();
 
   constructor(
     private key: string,
-    private adapter?: Adapter,
+    private adapter?: Adapter | undefined,
   ) {
     if (this.adapter) {
       this.restore(this.adapter);
     }
   }
 
-  hasAdapter() {
+  hasAdapter(): boolean {
     return this.adapter !== undefined;
   }
 
-  getIsAtDefault() {
+  getIsAtDefault(): boolean {
     return this.storage.isAtDefault;
   }
 
@@ -35,7 +35,7 @@ export class TablePreferences {
    * local storage. The `adpater.restore` method can be used to restore
    * this structure back in to the {@link TrackedPreferences }
    */
-  persist() {
+  persist(): void {
     return this.adapter?.persist?.(this.key, {
       ...this.storage.serialize(),
     });
@@ -45,7 +45,7 @@ export class TablePreferences {
    * Using the `adapter.restore` method, convert the JSON structure
    * to {@link TrackedPreferences }
    */
-  restore(adapter: Adapter) {
+  restore(adapter: Adapter): void {
     const data = adapter?.restore?.(this.key);
 
     if (!data) return;
@@ -60,7 +60,10 @@ export class TablePreferences {
  * The API for reactively interacting with preferences
  */
 class TrackedPreferences {
-  plugins = new TrackedMap<string, TrackedPluginPrefs>();
+  plugins: TrackedMap<string, TrackedPluginPrefs<unknown>> = new TrackedMap<
+    string,
+    TrackedPluginPrefs
+  >();
 
   get isAtDefault(): boolean {
     return [...this.plugins.values()].every(
@@ -72,7 +75,7 @@ class TrackedPreferences {
     return this.plugins.get(name);
   }
 
-  forPlugin(name: string) {
+  forPlugin(name: string): TrackedPluginPrefs {
     let existing = this.plugins.get(name);
 
     if (!existing) {
@@ -115,8 +118,11 @@ class TrackedPreferences {
 }
 
 class TrackedPluginPrefs<PluginName = unknown> {
-  table = new TrackedMap<string, unknown>();
-  columns = new TrackedMap<string, TrackedMap<string, unknown>>();
+  table: TrackedMap<string> = new TrackedMap<string, unknown>();
+  columns: TrackedMap<string, TrackedMap<string, unknown>> = new TrackedMap<
+    string,
+    TrackedMap<string, unknown>
+  >();
 
   get isAtDefault(): boolean {
     return (

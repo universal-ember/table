@@ -48,14 +48,17 @@ export class StickyColumns extends BasePlugin<Signature> {
    * Other width-management plugins can be used instead of ColumnResizing, but they must declare
    * that they manage the width of the columns.
    */
-  static requires = ['columnWidth'];
+  static requires: string[] = ['columnWidth'];
 
-  meta = {
+  meta: {
+    table: typeof TableMeta;
+    column: typeof ColumnMeta;
+  } = {
     table: TableMeta,
     column: ColumnMeta,
   };
 
-  conditionallyRemoveStyles = (element: HTMLElement) => {
+  conditionallyRemoveStyles = (element: HTMLElement): void => {
     if (element.style.getPropertyValue('position') === 'sticky') {
       element.style.removeProperty('position');
     }
@@ -73,7 +76,10 @@ export class StickyColumns extends BasePlugin<Signature> {
     }
   };
 
-  headerCellModifier = (element: HTMLElement, { column, table }: ColumnApi) => {
+  headerCellModifier = (
+    element: HTMLElement,
+    { column, table }: ColumnApi,
+  ): void => {
     if (
       options.forTable(table, StickyColumns)
         .workaroundForModifierTimingUpdateRFC883
@@ -95,7 +101,7 @@ export class StickyColumns extends BasePlugin<Signature> {
    *
    * TODO: switch ColumnApi to "RowApi", add the row's data
    */
-  cellModifier = (element: HTMLElement, { column, table }: ColumnApi) => {
+  cellModifier = (element: HTMLElement, { column, table }: ColumnApi): void => {
     if (
       options.forTable(table, StickyColumns)
         .workaroundForModifierTimingUpdateRFC883
@@ -121,7 +127,7 @@ export class StickyColumns extends BasePlugin<Signature> {
 export class ColumnMeta {
   constructor(private column: Column) {}
 
-  get isSticky() {
+  get isSticky(): boolean {
     return this.position !== 'none';
   }
 
@@ -140,7 +146,7 @@ export class ColumnMeta {
   }
 
   @cached
-  get offset() {
+  get offset(): string | undefined {
     if (!this.isSticky) {
       return;
     }

@@ -70,7 +70,10 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
 > {
   name = 'row-selection';
 
-  meta = {
+  meta: {
+    row: typeof RowMeta;
+    table: typeof TableMeta;
+  } = {
     row: RowMeta,
     table: TableMeta,
   };
@@ -96,7 +99,7 @@ export class RowSelection<DataType = any, Key = DataType> extends BasePlugin<
 
     element.addEventListener('click', handler);
 
-    return () => {
+    return (): void => {
       element.removeEventListener('click', handler);
     };
   };
@@ -180,7 +183,7 @@ class RowMeta {
     return tableMeta.selection.has(compareWith);
   }
 
-  toggle = () => {
+  toggle = (): void => {
     if (this.isSelected) {
       this.deselect();
 
@@ -190,7 +193,7 @@ class RowMeta {
     this.select();
   };
 
-  select = () => {
+  select = (): void => {
     const pluginOptions = options.forTable(this.#row.table, RowSelection);
 
     if ('key' in pluginOptions && pluginOptions.key) {
@@ -204,7 +207,7 @@ class RowMeta {
     pluginOptions.onSelect?.(this.#row.data, this.#row);
   };
 
-  deselect = () => {
+  deselect = (): void => {
     const pluginOptions = options.forTable(this.#row.table, RowSelection);
 
     if ('key' in pluginOptions && pluginOptions.key) {

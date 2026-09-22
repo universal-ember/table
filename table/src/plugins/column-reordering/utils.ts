@@ -8,7 +8,7 @@ type ColumnOrder = { key: string; position: number | undefined }[];
 export function reorderColumns(
   columns: Column[],
   orderedColumns: ColumnOrder | undefined,
-) {
+): Column<unknown>[] {
   if (orderedColumns === undefined) {
     return columns;
   }

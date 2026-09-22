@@ -17,7 +17,7 @@ export function resizeObserver(element: HTMLElement, table: any) {
 
   observer.observe(element);
 
-  return () => {
+  return (): void => {
     observer.unobserve(element);
   };
 }

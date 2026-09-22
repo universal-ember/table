@@ -4,6 +4,15 @@
   "compilerOptions": {
     "declaration": true,
     "declarationDir": "declarations",
+
+    /**
+      https://www.typescriptlang.org/tsconfig#isolatedDeclarations
+
+      Exported API must carry explicit types,
+      so that declarations do not depend on inference across files.
+    */
+    "isolatedDeclarations": true,
+
     /**
       https://www.typescriptlang.org/tsconfig#noEmit
 

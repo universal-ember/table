@@ -82,12 +82,15 @@ export class Sorting<DataType = unknown> extends BasePlugin<
 > {
   name = 'data-sorting';
 
-  meta = {
+  meta: {
+    column: typeof ColumnMeta;
+    table: typeof TableMeta;
+  } = {
     column: ColumnMeta,
     table: TableMeta,
   };
 
-  headerCellModifier = (element: HTMLElement, { column }: ColumnApi) => {
+  headerCellModifier = (element: HTMLElement, { column }: ColumnApi): void => {
     const columnMeta = meta.forColumn(column, Sorting);
 
     element.setAttribute('data-test-is-sortable', `${columnMeta.isSortable}`);
@@ -99,19 +102,19 @@ export class ColumnMeta {
   constructor(private column: Column) {}
 
   @cached
-  get options() {
+  get options(): Partial<ColumnOptions> {
     return options.forColumn(this.column, Sorting);
   }
 
-  get isSortable() {
+  get isSortable(): boolean {
     return this.options?.isSortable ?? this.tableMeta.isSortable;
   }
 
-  get tableMeta() {
+  get tableMeta(): TableMeta {
     return meta.forTable(this.column.table, Sorting);
   }
 
-  get sortDirection() {
+  get sortDirection(): SortDirection {
     const sort = this.tableMeta.sorts.find(
       (sort) => sort.property === this.sortProperty,
     );
@@ -119,19 +122,19 @@ export class ColumnMeta {
     return sort?.direction ?? SortDirection.None;
   }
 
-  get isAscending() {
+  get isAscending(): boolean {
     return this.sortDirection === SortDirection.Ascending;
   }
 
-  get isDescending() {
+  get isDescending(): boolean {
     return this.sortDirection === SortDirection.Descending;
   }
 
-  get isUnsorted() {
+  get isUnsorted(): boolean {
     return this.sortDirection === SortDirection.None;
   }
 
-  get sortProperty() {
+  get sortProperty(): string {
     return this.options?.sortProperty ?? this.column.config.key;
   }
 }
@@ -140,24 +143,24 @@ export class TableMeta {
   constructor(private table: Table) {}
 
   @cached
-  get options() {
+  get options(): Partial<Options<unknown>> {
     return options.forTable(this.table, Sorting);
   }
 
-  get sorts() {
+  get sorts(): SortItem<unknown>[] {
     return this.options?.sorts ?? [];
   }
 
-  get isSortable() {
+  get isSortable(): boolean {
     return Boolean(this.options?.onSort) && Boolean(this.options?.sorts);
   }
 
-  get onSort() {
+  get onSort(): ((sorts: SortItem<unknown>[]) => void) | undefined {
     return this.options?.onSort;
   }
 
   @action
-  handleSort<DataType = unknown>(column: Column<DataType>) {
+  handleSort<DataType = unknown>(column: Column<DataType>): void {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -184,7 +187,7 @@ export class TableMeta {
   }
 
   @action
-  toggleAscending<DataType = unknown>(column: Column<DataType>) {
+  toggleAscending<DataType = unknown>(column: Column<DataType>): void {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -201,7 +204,7 @@ export class TableMeta {
   }
 
   @action
-  toggleDescending<DataType = unknown>(column: Column<DataType>) {
+  toggleDescending<DataType = unknown>(column: Column<DataType>): void {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {

@@ -19,7 +19,7 @@ export default defineConfig({
     }),
 
     addon.gjs(),
-    addon.declarations("declarations"),
+    addon.declarations("declarations", "tsc --declaration"),
     addon.clean(),
   ],
 });
