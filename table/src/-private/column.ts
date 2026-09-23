@@ -1,4 +1,4 @@
-import { action, get } from '@ember/object';
+import { get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 import type { CellComponent } from './cell-component.ts';
@@ -52,8 +52,7 @@ export class Column<
     public config: ColumnConfig<T, unknown, Meta>,
   ) {}
 
-  @action
-  getValueForRow(row: Row<T>): ContentValue {
+  getValueForRow = (row: Row<T>): ContentValue => {
     if (this.config.value) {
       return this.config.value(this.#contextFor(row));
     }
@@ -71,7 +70,7 @@ export class Column<
      *         properly constrained the type of value, (isEmpty doesn't narrow types either)
      */
     return value as ContentValue;
-  }
+  };
 
   private getDefaultValue(row: Row<T>) {
     return this.getOptionsForRow(row)[DEFAULT_VALUE_KEY];
@@ -84,10 +83,9 @@ export class Column<
    * The type also has the `@options` the table's Cells ask for.
    * The column's `options` must return them: this is not checked.
    */
-  @action
-  getOptionsForRow(
+  getOptionsForRow = (
     row: Row<T>,
-  ): { defaultValue: string } & CellOptionsOf<CellArgs> {
+  ): { defaultValue: string } & CellOptionsOf<CellArgs> => {
     const configuredDefault = this.table.config.defaultCellValue;
     const defaults = {
       [DEFAULT_VALUE_KEY]:
@@ -98,7 +96,7 @@ export class Column<
       ...defaults,
       ...this.config.options?.(this.#contextFor(row)),
     } as { defaultValue: string } & CellOptionsOf<CellArgs>;
-  }
+  };
 
   #contextFor(row: Row<T>): CellContext<T, unknown, Meta> {
     // The row is a row of this column's table, so its table has this table's types.
