@@ -217,6 +217,10 @@ export function localSort(data, sorts) {
 
 </div>
 
+> [!TIP]
+> Read the column list once per render, as the example above does, and pass it down.
+> `columns.for(table)` returns a new array on every call, so reading it once per row costs O(rows × columns) — including in a row component that takes the table and reads the list itself.
+
 ## Installation
 
 Use your favorite package manager / installation tool -- the library is called `@universal-ember/table`.
