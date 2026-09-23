@@ -1,5 +1,4 @@
 import { cached } from '@glimmer/tracking';
-import { action } from '@ember/object';
 
 import { BasePlugin, meta, options, preferences } from '../-private/base.ts';
 
@@ -149,10 +148,9 @@ export class TableMeta<Data = unknown> {
     });
   }
 
-  @action
-  toggleColumnVisibility(column: Column<Data>): void {
+  toggleColumnVisibility = (column: Column<Data>): void => {
     const columnMeta = meta.forColumn(column, ColumnVisibility);
 
     columnMeta.toggle();
-  }
+  };
 }

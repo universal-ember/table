@@ -1,6 +1,5 @@
 import { cached, tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
-import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 
 import { isDevelopingApp, macroCondition } from '@embroider/macros';
@@ -357,15 +356,13 @@ export class Table<
   /**
    * @private
    */
-  @action
-  resetScrollContainer(): void {
+  resetScrollContainer = (): void => {
     if (!this.scrollContainerElement) return;
 
     this.scrollContainerElement.scrollTop = 0;
-  }
+  };
 
-  @action
-  resetToDefaults(): void {
+  resetToDefaults = (): void => {
     this.plugins.forEach((plugin) => plugin.reset?.());
-  }
+  };
 }

@@ -1,6 +1,5 @@
 import { cached, tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
-import { action } from '@ember/object';
 
 import { TrackedMap } from 'tracked-built-ins';
 
@@ -122,28 +121,26 @@ export class TableMeta<DataType = unknown> {
   columnOrder: ColumnOrder<DataType> = new ColumnOrder<DataType>({
     columns: () => this.allColumns,
     visibleColumns: () => this.visibleColumns,
-    save: this.save,
+    save: (map) => this.save(map),
     read: () => this.read(),
   });
 
   /**
    * Get the curret order/position of a column
    */
-  @action
-  getPosition(column: Column<DataType>): number {
+  getPosition = (column: Column<DataType>): number => {
     return this.columnOrder.get(column.key);
-  }
+  };
 
   /**
    * Swap the column with the column at `newPosition`
    */
-  @action
-  setPosition(
+  setPosition = (
     column: Column<DataType>,
     newPosition: number,
-  ): false | undefined {
+  ): false | undefined => {
     return this.columnOrder.swapWith(column.key, newPosition);
-  }
+  };
 
   /**
    * Using a `ColumnOrder` instance, set the order of all columns
@@ -156,21 +153,19 @@ export class TableMeta<DataType = unknown> {
    * Revert to default config, delete preferences,
    * and clear the columnOrder
    */
-  @action
-  reset(): void {
+  reset = (): void => {
     preferences.forTable(this.table, ColumnReordering).delete('order');
     this.columnOrder = new ColumnOrder<DataType>({
       columns: () => this.allColumns,
       visibleColumns: () => this.visibleColumns,
       save: this.save,
     });
-  }
+  };
 
   /**
    * @private
    */
-  @action
-  save(map: Map<string, number>): void {
+  save = (map: Map<string, number>): void => {
     const order: Record<string, number> = {};
 
     for (const [key, position] of map.entries()) {
@@ -178,13 +173,12 @@ export class TableMeta<DataType = unknown> {
     }
 
     preferences.forTable(this.table, ColumnReordering).set('order', order);
-  }
+  };
 
   /**
    * @private
    */
-  @action
-  private read() {
+  private read = () => {
     const order = preferences
       .forTable(this.table, ColumnReordering)
       .get('order');
@@ -192,7 +186,7 @@ export class TableMeta<DataType = unknown> {
     if (!order) return;
 
     return new Map<string, number>(Object.entries(order));
-  }
+  };
 
   get columns(): Column<DataType>[] {
     return this.columnOrder.orderedColumns.filter(
@@ -316,8 +310,7 @@ export class ColumnOrder<DataType = unknown> {
    * - skip over non-visible columns when determining the previous "index"
    * - set the position to whatever that is.
    */
-  @action
-  moveLeft(key: string): void {
+  moveLeft = (key: string): void => {
     const orderedColumns = this.orderedColumns;
     if (this.map.get(key) === 0) {
       return;
@@ -353,7 +346,7 @@ export class ColumnOrder<DataType = unknown> {
     }
 
     this.args.save?.(this.map);
-  }
+  };
 
   setAll = (map: Map<string, number>): void => {
     let allColumns = this.args.columns();
@@ -377,8 +370,7 @@ export class ColumnOrder<DataType = unknown> {
    * - skip over non-visible columns when determining the next "index"
    * - set the position to whatever that is.
    */
-  @action
-  moveRight(key: string): void {
+  moveRight = (key: string): void => {
     const orderedColumns = this.orderedColumns;
     let found = false;
 
@@ -410,13 +402,12 @@ export class ColumnOrder<DataType = unknown> {
     }
 
     this.args.save?.(this.map);
-  }
+  };
 
   /**
    * Performs a swap of the column's position with the column at position
    */
-  @action
-  swapWith(key: string, position: number): false | undefined {
+  swapWith = (key: string, position: number): false | undefined => {
     const validPositions = [...this.orderedMap.values()];
 
     /**
@@ -487,10 +478,9 @@ export class ColumnOrder<DataType = unknown> {
     }
 
     this.args.save?.(this.map);
-  }
+  };
 
-  @action
-  get(key: string): number {
+  get = (key: string): number => {
     const result = this.orderedMap.get(key);
 
     assert(
@@ -500,7 +490,7 @@ export class ColumnOrder<DataType = unknown> {
     );
 
     return result;
-  }
+  };
 
   /**
    * The same as this.map, but with all the columns' information.
