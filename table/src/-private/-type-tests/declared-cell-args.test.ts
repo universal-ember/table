@@ -4,6 +4,7 @@ import { headlessTable } from '../../index.ts';
 
 import type { CellContext, ColumnConfig } from '../../index.ts';
 import type { ComponentLike } from '@glint/template';
+import type { CellComponent } from '../cell-component.ts';
 
 interface Person {
   name: string;
@@ -15,7 +16,11 @@ interface GroupArgs {
 }
 
 type CellArgsOf<Cell> =
-  NonNullable<Cell> extends ComponentLike<infer Args> ? Args : never;
+  NonNullable<Cell> extends CellComponent<infer Args>
+    ? Args
+    : NonNullable<Cell> extends ComponentLike<infer Args>
+      ? Args
+      : never;
 
 /////////////////////////////////////////////
 // A shared component takes a column list from its caller.
