@@ -1,5 +1,6 @@
 import type { Plugins } from '../../plugins/-private/utils';
 import type { ColumnConfig } from './column';
+import type { CellArgsOf } from '../meta.ts';
 import type { Pagination } from './pagination';
 import type { PreferencesAdapter } from './preferences';
 import type { Selection } from './selection';
@@ -9,13 +10,16 @@ export interface TableMeta {
   totalRowsSelectedCount?: number;
 }
 
-export interface TableConfig<DataType> {
+/**
+ * `Meta` is the type of this config's own `meta`.
+ */
+export interface TableConfig<DataType, Meta = unknown> {
   /**
    * Configuration describing how the table will crawl through `data`
    * and render it. Within this `columns` config, there will also be opportunities
    * to set the behavior of columns when rendered
    */
-  columns: () => ColumnConfig<DataType>[];
+  columns: () => ColumnConfig<DataType, unknown, Meta>[];
   /**
    * The data to render, as described via the `columns` option.
    *
@@ -87,7 +91,11 @@ export interface TableConfig<DataType> {
   onRowSelectionChange?: (selection: DataType | undefined) => void;
 
   // Uncategorized
-  meta?: TableMeta;
+  /**
+   * Information about the table, for plugins, columns, and cells.
+   * Its type is inferred, and read back as `table.config.meta`.
+   */
+  meta?: TableMeta & Meta;
   pagination?: Pagination;
 
   /**
@@ -137,3 +145,43 @@ export interface TableConfig<DataType> {
       }
     | (() => { key: string; adapter?: PreferencesAdapter });
 }
+
+/**
+ * The config that `headlessTable` takes.
+ *
+ * `ColumnMetas` holds the `meta` of each column, in order,
+ * so that each column's `meta` is inferred.
+ *
+ * `Columns` is the column list as written.
+ * The extra args of its Cells are read from it,
+ * and every Cell is checked against all of them.
+ *
+ * `TableConfig` stays a plain interface,
+ * for code that annotates a config or reads `table.config`.
+ *
+ * The plain list next to the mapped one lets TypeScript infer `DataType`
+ * from the columns too, which the mapped list alone does not.
+ * Its column meta is `any`, so that Cells that read a meta fit it.
+ * The mapped list checks each column's meta.
+ */
+export type HeadlessTableConfig<
+  DataType,
+  ColumnMetas extends unknown[] = unknown[],
+  Meta = unknown,
+  Columns extends readonly unknown[] = readonly unknown[],
+> = Omit<TableConfig<DataType, Meta>, 'columns'> & {
+  /**
+   * Configuration describing how the table will crawl through `data`
+   * and render it. Within this `columns` config, there will also be opportunities
+   * to set the behavior of columns when rendered
+   */
+  columns: () => {
+    [K in keyof ColumnMetas]: ColumnConfig<
+      DataType,
+      ColumnMetas[K],
+      Meta,
+      NoInfer<CellArgsOf<Columns>>
+    >;
+  } & Columns &
+    readonly ColumnConfig<DataType, any, Meta, any>[];
+};

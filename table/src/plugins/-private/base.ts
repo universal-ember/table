@@ -309,7 +309,25 @@ export const preferences = {
  * This works recursively up the plugin tree up until a plugin has no requirements, and then
  * all columns from the table are returned.
  */
-function columnsFor<DataType = any>(
+function columnsFor<
+  DataType = any,
+  ColumnMeta = unknown,
+  Meta = unknown,
+  CellArgs = unknown,
+>(
+  table: Table<DataType, ColumnMeta, Meta, CellArgs>,
+  requester?: Plugin<any>,
+): Column<DataType, ColumnMeta, Meta, CellArgs>[] {
+  // Plugins hold columns of this same table, so they have its meta.
+  return resolveColumns(table, requester) as Column<
+    DataType,
+    ColumnMeta,
+    Meta,
+    CellArgs
+  >[];
+}
+
+function resolveColumns<DataType = any>(
   table: Table<DataType>,
   requester?: Plugin<any>,
 ): Column<DataType>[] {
@@ -432,10 +450,15 @@ export const columns = {
    * If a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  next: <Data = unknown>(
-    current: Column<Data>,
+  next: <
+    Data = unknown,
+    ColumnMeta = unknown,
+    Meta = unknown,
+    CellArgs = unknown,
+  >(
+    current: Column<Data, ColumnMeta, Meta, CellArgs>,
     requester?: Plugin<any>,
-  ): Column<Data> | undefined => {
+  ): Column<Data, ColumnMeta, Meta, CellArgs> | undefined => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -464,10 +487,15 @@ export const columns = {
    * If a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  previous: <Data = unknown>(
-    current: Column<Data>,
+  previous: <
+    Data = unknown,
+    ColumnMeta = unknown,
+    Meta = unknown,
+    CellArgs = unknown,
+  >(
+    current: Column<Data, ColumnMeta, Meta, CellArgs>,
     requester?: Plugin<any>,
-  ): Column<Data> | undefined => {
+  ): Column<Data, ColumnMeta, Meta, CellArgs> | undefined => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -494,10 +522,15 @@ export const columns = {
    * if a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  before: <Data = unknown>(
-    current: Column<Data>,
+  before: <
+    Data = unknown,
+    ColumnMeta = unknown,
+    Meta = unknown,
+    CellArgs = unknown,
+  >(
+    current: Column<Data, ColumnMeta, Meta, CellArgs>,
     requester?: Plugin<any>,
-  ): Column<Data>[] => {
+  ): Column<Data, ColumnMeta, Meta, CellArgs>[] => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);
@@ -513,10 +546,15 @@ export const columns = {
    * if a plugin class is provided, the hierarchy of column list modifications
    * will be respected.
    */
-  after: <Data = unknown>(
-    current: Column<Data>,
+  after: <
+    Data = unknown,
+    ColumnMeta = unknown,
+    Meta = unknown,
+    CellArgs = unknown,
+  >(
+    current: Column<Data, ColumnMeta, Meta, CellArgs>,
     requester?: Plugin<any>,
-  ): Column<Data>[] => {
+  ): Column<Data, ColumnMeta, Meta, CellArgs>[] => {
     const columns = requester
       ? columnsFor(current.table, requester)
       : columnsFor(current.table);

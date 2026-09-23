@@ -2,7 +2,8 @@ import { assert } from '@ember/debug';
 
 import { Table } from './table.ts';
 
-import type { TableConfig } from './interfaces';
+import type { HeadlessTableConfig, TableConfig } from './interfaces';
+import type { CellArgsOf, ColumnMetaOf } from './meta.ts';
 
 /**
  * Represents a UI-less version of a table
@@ -24,15 +25,21 @@ import type { TableConfig } from './interfaces';
  * ```
  *
  */
-export function headlessTable<T = unknown>(
+export function headlessTable<
+  T = unknown,
+  const ColumnMetas extends unknown[] = unknown[],
+  Meta = unknown,
+  Columns extends readonly unknown[] = readonly unknown[],
+>(
   parent: object,
-  options: TableConfig<T>,
-): Table<T> {
+  options: HeadlessTableConfig<T, ColumnMetas, Meta, Columns>,
+): Table<T, ColumnMetaOf<ColumnMetas>, Meta, CellArgsOf<Columns>> {
   assert(
     `headlessTable requires a parent object as the first argument, usually \`this\`. ` +
       `The single-argument form was removed, because the table is no longer a Resource.`,
     options,
   );
 
-  return new Table<T>(parent, options);
+  // The meta types only shape what the table returns, so they come from the return type.
+  return new Table(parent, options as TableConfig<T, Meta>);
 }

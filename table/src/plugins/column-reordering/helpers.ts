@@ -88,9 +88,14 @@ export const canMoveRight = <DataType = unknown>(
  * // Use the ordered columns for rendering or other operations
  * ```
  */
-export const orderedColumnsFor = <DataType = unknown>(
-  table: Table<DataType>,
-): Column<DataType>[] => {
+export const orderedColumnsFor = <
+  DataType = unknown,
+  ColumnMeta = unknown,
+  Meta = unknown,
+  CellArgs = unknown,
+>(
+  table: Table<DataType, ColumnMeta, Meta, CellArgs>,
+): Column<DataType, ColumnMeta, Meta, CellArgs>[] => {
   // Note: The meta.forTable API doesn't preserve the DataType generic from the table parameter.
   // This is a limitation of the current plugin meta system architecture.
   // We use a type assertion here because we know the columns come from the same table.
@@ -98,5 +103,10 @@ export const orderedColumnsFor = <DataType = unknown>(
     table,
     ColumnReordering,
   ) as TableMeta<DataType>;
-  return tableMeta.columnOrder.orderedColumns;
+  return tableMeta.columnOrder.orderedColumns as Column<
+    DataType,
+    ColumnMeta,
+    Meta,
+    CellArgs
+  >[];
 };

@@ -12,8 +12,10 @@ export { deserializeSorts, serializeSorts } from './utils.ts';
  *******************************/
 export type { Column } from './-private/column.ts';
 export type {
+  CellContext,
   ColumnConfig,
   ColumnKey,
+  HeadlessTableConfig,
   Pagination,
   PreferencesAdapter,
   TablePreferencesData as PreferencesData,

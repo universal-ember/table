@@ -71,6 +71,11 @@ class Demo {
 }
 ```
 
+### Column meta, table meta, and cell args
+
+These types are inferred too.
+To check them, or to declare them yourself, see [Typing meta and cells](/docs/get-started/typing-meta-and-cells).
+
 ## In Templates
 
 [Glint][docs-glint] can be a great choice to help ensure that your code is as bug-free as possible.
