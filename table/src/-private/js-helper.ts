@@ -29,7 +29,7 @@ export function headlessTable<
   T = unknown,
   const ColumnMetas extends unknown[] = unknown[],
   Meta = unknown,
-  Columns extends readonly unknown[] = readonly unknown[],
+  const Columns extends readonly unknown[] = readonly unknown[],
 >(
   parent: object,
   options: HeadlessTableConfig<T, ColumnMetas, Meta, Columns>,

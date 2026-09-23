@@ -13,6 +13,7 @@ export { deserializeSorts, serializeSorts } from './utils.ts';
 export type { Column } from './-private/column.ts';
 export type {
   CellContext,
+  CellOptions,
   ColumnConfig,
   ColumnKey,
   HeadlessTableConfig,
@@ -23,5 +24,6 @@ export type {
   TableConfig,
   TableMeta,
 } from './-private/interfaces/index.ts';
+export type { CellOptionsOf } from './-private/meta.ts';
 export type { Row } from './-private/row.ts';
 export type { Table } from './-private/table.ts';

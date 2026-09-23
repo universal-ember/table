@@ -237,3 +237,26 @@ expectTypeOf(options.defaultValue).toEqualTypeOf<string>();
 expectTypeOf(plain.columns[0]!.getOptionsForRow(optionsRow)).toEqualTypeOf<{
   defaultValue: string;
 }>();
+
+/////////////////////////////////////////////
+// A table meta and a callback with parameters do not stop the inference
+const withMetaAndCallback = headlessTable(
+  {},
+  {
+    columns: () => [
+      { key: 'name', meta: { align: 'left' }, Cell: GroupedCell },
+      { key: 'age', value: ({ row }) => row.data.age },
+    ],
+    data: () => people,
+    meta: { currency: 'EUR' },
+  },
+);
+
+type MetaAndCallbackArgs = CellArgsOf<
+  (typeof withMetaAndCallback.columns)[0]['Cell']
+>;
+
+expectTypeOf<MetaAndCallbackArgs['groupBy']>().toEqualTypeOf<'day' | 'week'>();
+expectTypeOf(withMetaAndCallback.columns[0]!.meta?.align).toEqualTypeOf<
+  'left' | undefined
+>();

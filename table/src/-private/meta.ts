@@ -4,6 +4,8 @@ import type {
   UnwrapNamedArgs,
 } from '@glint/template/-private/integration';
 import type { ComponentSignatureArgs } from '@glint/template/-private/signature';
+import type { CellContext, cellArgsType } from './interfaces/column.ts';
+import type { ComponentLike } from '@glint/template';
 
 /**
  * The metas of columns that set one.
@@ -94,11 +96,22 @@ type UnionToIntersection<U> = (
  *   [{ Cell: GroupByCell }, { Cell: UpdateCell }]
  *   → { groupBy: ... } & { onUpdate: ... }
  */
-export type CellArgsOf<Columns extends readonly unknown[]> = [
-  ProvidedCells<Columns>,
-] extends [never]
-  ? unknown
-  : UnionToIntersection<ExtraArgsOf<ProvidedCells<Columns>>>;
+export type CellArgsOf<Columns extends readonly unknown[]> =
+  typeof cellArgsType extends keyof Columns[number]
+    ? DeclaredCellArgs<Columns[number]>
+    : [ProvidedCells<Columns>] extends [never]
+      ? unknown
+      : UnionToIntersection<ExtraArgsOf<ProvidedCells<Columns>>>;
+
+/**
+ * The cell args of a column list with a declared type.
+ * Object literals do not have the key, so a list written in place reads its Cells.
+ */
+type DeclaredCellArgs<Column> = Column extends {
+  readonly [cellArgsType]?: infer CellArgs;
+}
+  ? CellArgs
+  : unknown;
 
 /**
  * The `@options` the Cells of a table ask for, from their args.
@@ -109,3 +122,37 @@ export type CellOptionsOf<CellArgs> = CellArgs extends {
 }
   ? Options
   : unknown;
+
+/**
+ * What a column written in place must fit, given its own `Cell`:
+ *
+ * - the Cell takes the row type, this column's `meta`, and the table's `meta`
+ * - when the Cell asks for `@options`, the column's `options` returns them
+ *
+ * Each column is checked on its own, once the column list is inferred.
+ * A check that reads the whole list while it is being inferred would see it empty.
+ */
+export type ColumnCheck<DataType, Meta, Column> = Column extends {
+  Cell?: infer Cell;
+}
+  ? unknown extends Cell
+    ? unknown
+    : CellCheck<DataType, Meta, Column, NonNullable<Cell>> &
+        OptionsCheck<NonNullable<Cell>>
+  : unknown;
+
+type CellCheck<DataType, Meta, Column, Cell> = {
+  Cell?: ComponentLike<
+    CellContext<
+      DataType,
+      Column extends { meta: infer ColumnMeta } ? ColumnMeta : unknown,
+      Meta
+    > &
+      ExtraArgsOf<Cell>
+  >;
+};
+
+type OptionsCheck<Cell> =
+  NamedArgsOf<Cell> extends { options: infer Options }
+    ? { options: (...args: any[]) => Omit<Options, 'defaultValue'> }
+    : unknown;

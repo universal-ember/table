@@ -7,6 +7,9 @@ import type { Constructor } from '../private-types';
 import type { ComponentLike, ContentValue } from '@glint/template';
 
 declare const rowType: unique symbol;
+declare const cellArgsType: unique symbol;
+
+export type { cellArgsType };
 
 /**
  * What `value`, `options`, and a `Cell` receive.
@@ -113,6 +116,15 @@ export interface ColumnConfig<
    * gives `headlessTable` a row type that depends on the order TypeScript checks the program in.
    */
   readonly [rowType]?: T;
+
+  /**
+   * Type-only, never set.
+   *
+   * A column list with a declared type has no Cells to read the args from,
+   * for example a list that a shared component takes as an argument.
+   * The args it declares are read from here.
+   */
+  readonly [cellArgsType]?: CellArgs;
 }
 
 export type ColumnKey<T> = NonNullable<ColumnConfig<T>['key']>;

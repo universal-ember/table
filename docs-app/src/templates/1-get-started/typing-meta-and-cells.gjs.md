@@ -224,6 +224,20 @@ columns: () => [
 
 `column.getOptionsForRow` has the type of the `@options` that the Cells ask for, and the `defaultValue`.
 
+TypeScript checks each column that you write in place:
+a column whose Cell asks for `@options` must have an `options` that returns them.
+
+```ts
+columns: () => [
+  // error: `unit` is not a number
+  { key: "age", Cell: UnitCell, options: () => ({ unit: 3 }) },
+  // error: the Cell asks for `@options`, and this column has no `options`
+  { key: "height", Cell: UnitCell },
+],
+```
+
+To name the types of options in your own code, import `CellOptions` (what `options` returns) and `CellOptionsOf` (the `@options` of a Cell's args).
+
 ## Code that takes any table
 
 A function that accepts `Column<Person>` or `Table<Person>` accepts columns and tables with any meta and any cell args.
@@ -237,6 +251,24 @@ function exportWidthOf(column: Column<Person, { exportWidth?: number }>) {
 }
 ```
 
+## Shared table components
+
+A component that takes a column list from its caller and builds the table itself
+can pass its type arguments through.
+The table keeps the cell args, and the column metas, that the list declares:
+
+```ts
+import type { ColumnConfig } from "@universal-ember/table";
+
+function makeTable<Row, CellArgs>(
+  parent: object,
+  columns: ColumnConfig<Row, unknown, unknown, CellArgs>[],
+  data: Row[],
+) {
+  return headlessTable(parent, { columns: () => columns, data: () => data });
+}
+```
+
 ## Limits
 
 - In `value` and `options`, `column.meta` is `unknown`, because TypeScript cannot give it the inferred type there.
@@ -244,5 +276,4 @@ function exportWidthOf(column: Column<Person, { exportWidth?: number }>) {
 - An inline `<template>` Cell has no types for its args.
   To use `@row` or other args in it, move it into a constant with a `TOC` type, as in the examples above.
 - A function inside a `meta` needs types on its parameters.
-- TypeScript does not check that a column's `options` returns the `@options` its Cell asks for.
-  The return type of `options` is only known after the Cell types are fixed.
+- In a list with a declared type, `options` is not checked against the `@options` of the Cells.

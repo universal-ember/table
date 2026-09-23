@@ -1,6 +1,6 @@
 import type { Plugins } from '../../plugins/-private/utils';
 import type { ColumnConfig } from './column';
-import type { CellArgsOf } from '../meta.ts';
+import type { ColumnCheck } from '../meta.ts';
 import type { Pagination } from './pagination';
 import type { PreferencesAdapter } from './preferences';
 import type { Selection } from './selection';
@@ -154,15 +154,13 @@ export interface TableConfig<DataType, Meta = unknown> {
  *
  * `Columns` is the column list as written.
  * The extra args of its Cells are read from it,
- * and every Cell is checked against all of them.
+ * and each column of it is checked on its own, see `ColumnCheck`.
  *
  * `TableConfig` stays a plain interface,
  * for code that annotates a config or reads `table.config`.
  *
- * The plain list next to the mapped one lets TypeScript infer `DataType`
- * from the columns too, which the mapped list alone does not.
- * Its column meta is `any`, so that Cells that read a meta fit it.
- * The mapped list checks each column's meta.
+ * The plain list lets TypeScript infer `DataType` from the columns too,
+ * which the mapped list alone does not.
  */
 export type HeadlessTableConfig<
   DataType,
@@ -176,12 +174,12 @@ export type HeadlessTableConfig<
    * to set the behavior of columns when rendered
    */
   columns: () => {
-    [K in keyof ColumnMetas]: ColumnConfig<
-      DataType,
-      ColumnMetas[K],
-      Meta,
-      NoInfer<CellArgsOf<Columns>>
-    >;
-  } & Columns &
-    readonly ColumnConfig<DataType, any, Meta, any>[];
+    [K in keyof ColumnMetas]: ColumnConfig<DataType, ColumnMetas[K], Meta, any>;
+  } & Columns & {
+      [K in Extract<keyof Columns, `${number}`>]: ColumnCheck<
+        DataType,
+        Meta,
+        Columns[K]
+      >;
+    } & readonly ColumnConfig<DataType, any, Meta, any>[];
 };
