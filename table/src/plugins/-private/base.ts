@@ -1,4 +1,5 @@
 import { assert } from '@ember/debug';
+import { createCache, getValue } from '@glimmer/tracking/primitives/cache';
 
 import {
   COLUMN_META_KEY,
@@ -309,7 +310,47 @@ export const preferences = {
  * This works recursively up the plugin tree up until a plugin has no requirements, and then
  * all columns from the table are returned.
  */
+/**
+ * One cache per table and requester. `createCache` participates in
+ * autotracking, so the list is recomputed when the columns, their order or
+ * their visibility change, and reused otherwise.
+ *
+ * Without it, reading the list once per rendered row costs O(rows x columns)
+ * per render, and nothing at the call site says so.
+ */
+const COLUMNS_CACHE = new WeakMap<
+  object,
+  Map<unknown, ReturnType<typeof createCache<unknown>>>
+>();
+
 function columnsFor<
+  DataType = any,
+  ColumnMeta = unknown,
+  Meta = unknown,
+  CellArgs = unknown,
+>(
+  table: Table<DataType, ColumnMeta, Meta, CellArgs>,
+  requester?: Plugin<any>,
+): Column<DataType, ColumnMeta, Meta, CellArgs>[] {
+  let byRequester = COLUMNS_CACHE.get(table);
+
+  if (byRequester === undefined) {
+    byRequester = new Map();
+    COLUMNS_CACHE.set(table, byRequester);
+  }
+
+  const key: unknown = requester ?? COLUMNS_CACHE;
+  let cache = byRequester.get(key);
+
+  if (cache === undefined) {
+    cache = createCache(() => uncachedColumnsFor(table, requester));
+    byRequester.set(key, cache);
+  }
+
+  return getValue(cache) as Column<DataType, ColumnMeta, Meta, CellArgs>[];
+}
+
+function uncachedColumnsFor<
   DataType = any,
   ColumnMeta = unknown,
   Meta = unknown,
