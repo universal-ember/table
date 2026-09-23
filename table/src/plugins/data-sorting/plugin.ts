@@ -1,5 +1,4 @@
 import { cached } from '@glimmer/tracking';
-import { action } from '@ember/object';
 
 import { BasePlugin, meta, options } from '../-private/base.ts';
 import { SortDirection } from './types.ts';
@@ -159,8 +158,7 @@ export class TableMeta {
     return this.options?.onSort;
   }
 
-  @action
-  handleSort<DataType = unknown>(column: Column<DataType>): void {
+  handleSort = <DataType = unknown>(column: Column<DataType>): void => {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -184,10 +182,9 @@ export class TableMeta {
         },
       ]);
     }
-  }
+  };
 
-  @action
-  toggleAscending<DataType = unknown>(column: Column<DataType>): void {
+  toggleAscending = <DataType = unknown>(column: Column<DataType>): void => {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -201,10 +198,9 @@ export class TableMeta {
     this.onSort?.([
       { direction: SortDirection.Ascending, property: columnMeta.sortProperty },
     ]);
-  }
+  };
 
-  @action
-  toggleDescending<DataType = unknown>(column: Column<DataType>): void {
+  toggleDescending = <DataType = unknown>(column: Column<DataType>): void => {
     const columnMeta = meta.forColumn(column, Sorting);
 
     if (!columnMeta.sortProperty) {
@@ -221,5 +217,5 @@ export class TableMeta {
         property: columnMeta.sortProperty,
       },
     ]);
-  }
+  };
 }

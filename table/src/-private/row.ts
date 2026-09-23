@@ -1,5 +1,4 @@
 import { assert } from '@ember/debug';
-import { action } from '@ember/object';
 
 import type { Table } from './table';
 
@@ -35,8 +34,7 @@ export class Row<DataType = Record<string, unknown>> {
     this.table = table;
   }
 
-  @action
-  handleClick(event: MouseEvent): void {
+  handleClick = (event: MouseEvent): void => {
     assert(
       `expected event.target to be an instance of HTMLElement`,
       event.target instanceof HTMLElement || event.target instanceof SVGElement,
@@ -62,5 +60,5 @@ export class Row<DataType = Record<string, unknown>> {
     if (inputParent) {
       return;
     }
-  }
+  };
 }

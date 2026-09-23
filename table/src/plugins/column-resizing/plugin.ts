@@ -1,7 +1,6 @@
 import { cached, tracked } from '@glimmer/tracking';
 import { assert } from '@ember/debug';
 import { isDestroyed, isDestroying } from '@ember/destroyable';
-import { action } from '@ember/object';
 
 import { preferences } from '../../plugins/index.ts';
 
@@ -258,15 +257,13 @@ export class ColumnMeta {
     return styles;
   }
 
-  @action
-  resize(delta: number): void {
+  resize = (delta: number): void => {
     this.tableMeta.resizeColumn(this.column, delta);
-  }
+  };
 
-  @action
-  save(): void {
+  save = (): void => {
     this.tableMeta.saveColWidths(this.tableMeta.visibleColumnMetas);
-  }
+  };
 }
 
 /**
@@ -357,8 +354,7 @@ export class TableMeta {
     );
   }
 
-  @action
-  saveColWidths(visibleColumnMetas: ColumnMeta[]): void {
+  saveColWidths = (visibleColumnMetas: ColumnMeta[]): void => {
     const tablePrefs = this.table.preferences;
 
     for (const column of visibleColumnMetas) {
@@ -369,19 +365,17 @@ export class TableMeta {
     }
 
     tablePrefs.persist();
-  }
+  };
 
-  @action
-  reset(): void {
+  reset = (): void => {
     if (!this.scrollContainerWidth) return;
 
     for (const column of this.visibleColumnMetas) {
       column._width = undefined;
     }
-  }
+  };
 
-  @action
-  onTableResize(entry: ResizeObserverEntry): void {
+  onTableResize = (entry: ResizeObserverEntry): void => {
     assert(
       'scroll container element must be an HTMLElement',
       entry.target instanceof HTMLElement,
@@ -403,13 +397,12 @@ export class TableMeta {
       this.scrollContainerWidth - this.totalVisibleColumnsWidth - totalGap;
 
     distributeDelta(diff, this.#availableColumns);
-  }
+  };
 
-  @action
-  resizeColumn<DataType = unknown>(
+  resizeColumn = <DataType = unknown>(
     column: Column<DataType>,
     delta: number,
-  ): void {
+  ): void => {
     if (delta === 0) return;
 
     const tableLayout = this.options?.tableLayout ?? 'auto';
@@ -419,7 +412,7 @@ export class TableMeta {
     } else {
       this.#resizeColumnAuto(column, delta);
     }
-  }
+  };
 
   /**
    * Simple column resizing for table-layout: fixed
