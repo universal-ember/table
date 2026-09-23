@@ -1,6 +1,7 @@
 import { action, get } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
+import type { CellComponent } from './cell-component.ts';
 import type { Row } from './row';
 import type { Table } from './table';
 import type { ComponentLike, ContentValue } from '@glint/template';
@@ -24,13 +25,13 @@ export class Column<
   T = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
-  CellArgs = any,
+  CellArgs = unknown,
 > {
   get Cell():
-    | ComponentLike<CellContext<T, unknown, any> & CellArgs>
+    | CellComponent<CellContext<T, unknown, any> & CellArgs>
     | undefined {
     return this.config.Cell as
-      | ComponentLike<CellContext<T, unknown, any> & CellArgs>
+      | CellComponent<CellContext<T, unknown, any> & CellArgs>
       | undefined;
   }
 

@@ -55,7 +55,7 @@ export interface Table<
   DataType = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
-  CellArgs = any,
+  CellArgs = unknown,
 > {
   /**
    * @private
@@ -87,7 +87,7 @@ export class Table<
   DataType = unknown,
   ColumnMeta = unknown,
   Meta = unknown,
-  CellArgs = any,
+  CellArgs = unknown,
 > {
   /**
    * @private
