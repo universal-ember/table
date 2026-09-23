@@ -6,7 +6,7 @@ import { setupRenderingTest } from "ember-qunit";
 import { headlessTable } from "@universal-ember/table";
 
 import type { TOC } from "@ember/component/template-only";
-import type { CellContext } from "@universal-ember/table";
+import type { CellContext, Column } from "@universal-ember/table";
 
 interface Person {
   name: string;
@@ -133,3 +133,23 @@ const TypeChecks: TOC<{ Args: { table: Context["table"] } }> = <template>
 </template>;
 
 void TypeChecks;
+
+/**
+ * A column written by hand, rather than one a table inferred.
+ *
+ * Its Cell takes `@row` and `@column` and nothing else, so leaving them out is
+ * an error. On 4.0.0 `Cell` was `ComponentLike<CellContext<T>>` and this held.
+ */
+declare const handWritten: Column<Person>;
+
+const HandWrittenColumnChecks: TOC<object> = <template>
+  {{#if handWritten.Cell}}
+    {{! @glint-expect-error a Cell is given @row and @column }}
+    <handWritten.Cell />
+
+    {{! @glint-expect-error a Cell is not given args it does not take }}
+    <handWritten.Cell @row={{undefined}} @column={{handWritten}} @nope="x" />
+  {{/if}}
+</template>;
+
+void HandWrittenColumnChecks;

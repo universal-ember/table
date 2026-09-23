@@ -15,6 +15,7 @@ import { meta } from '../../plugins/index.ts';
 
 import type { CellContext, Column, ColumnConfig, Table } from '../../index.ts';
 import type { ComponentLike } from '@glint/template';
+import type { CellComponent } from '../cell-component.ts';
 
 interface Person {
   name: string;
@@ -37,7 +38,11 @@ declare const UpdateCell: ComponentLike<
 declare const PlainCell: ComponentLike<CellContext<Person>>;
 
 type CellArgsOf<Cell> =
-  NonNullable<Cell> extends ComponentLike<infer Args> ? Args : never;
+  NonNullable<Cell> extends CellComponent<infer Args>
+    ? Args
+    : NonNullable<Cell> extends ComponentLike<infer Args>
+      ? Args
+      : never;
 
 /////////////////////////////////////////////
 // The args of the Cells are inferred, besides `@row` and `@column`
