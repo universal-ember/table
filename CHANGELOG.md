@@ -1,5 +1,31 @@
 # Changelog
 
+## Release (2026-09-23)
+
+* @universal-ember/table 4.1.0 (minor)
+
+#### :rocket: Enhancement
+* `@universal-ember/table`
+  * [#208](https://github.com/universal-ember/table/pull/208) Declare @action methods as arrow functions ([@johanrd](https://github.com/johanrd))
+  * [#206](https://github.com/universal-ember/table/pull/206) Cache the column list per table and requester ([@johanrd](https://github.com/johanrd))
+  * [#203](https://github.com/universal-ember/table/pull/203) Check each column's Cell and options, and keep the cell args of declared lists ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#202](https://github.com/universal-ember/table/pull/202) Infer the types of column meta and table meta ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#201](https://github.com/universal-ember/table/pull/201) Type-check with the TypeScript 7 nightly and isolatedDeclarations ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#209](https://github.com/universal-ember/table/pull/209) Fix the declared-cell-args type test on main ([@johanrd](https://github.com/johanrd))
+  * [#204](https://github.com/universal-ember/table/pull/204) Keep the Cell of a column checked, and let any column be read ([@johanrd](https://github.com/johanrd))
+
+#### :memo: Documentation
+* [#207](https://github.com/universal-ember/table/pull/207) Revert "docs: read the column list once per render" ([@NullVoxPopuli](https://github.com/NullVoxPopuli))
+* [#205](https://github.com/universal-ember/table/pull/205) docs: read the column list once per render ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 3
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+- [@NullVoxPopuli](https://github.com/NullVoxPopuli)
+
 ## Release (2026-08-19)
 
 * @universal-ember/table 4.0.0 (major)

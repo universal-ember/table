@@ -1,6 +1,6 @@
 {
   "name": "@universal-ember/table",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "An implementation of table behaviors for driving any table or table-like UI -- all without a UI or markup",
   "keywords": [
     "ember-addon",
