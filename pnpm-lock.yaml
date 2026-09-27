@@ -101,7 +101,7 @@ importers:
         version: 5.1.3(af1f83d70aa7a23944d99c9d9092ced0)
       reactiveweb:
         specifier: ^1.9.1
-        version: 1.9.1(47f4726bc5d4a040a67513425e8957ad)
+        version: 1.9.3(47f4726bc5d4a040a67513425e8957ad)
       shiki:
         specifier: ^3.22.0
         version: 3.22.0
@@ -261,7 +261,7 @@ importers:
         version: 4.3.0(@babel/core@7.29.6)
       reactiveweb:
         specifier: ^1.9.1
-        version: 1.9.1(47f4726bc5d4a040a67513425e8957ad)
+        version: 1.9.3(47f4726bc5d4a040a67513425e8957ad)
       tracked-built-ins:
         specifier: ^4.1.0
         version: 4.1.0(@babel/core@7.29.6)
@@ -1340,8 +1340,8 @@ packages:
     resolution: {integrity: sha512-/SusdG+zgosc3t+9sPFVKSFOYyiSgLfXOT6lYNWoG1YtnhWDxlK4S8leZ0jhcVjemdaHln5rTyxCnq8oFLxqpQ==}
     engines: {node: 12.* || 14.* || >= 16}
 
-  '@embroider/shared-internals@3.1.1':
-    resolution: {integrity: sha512-IlxD8okTt9cRUFpJKD8gTuQUBuEflrhCUju1xZFdYvmGm5XVqHPfG4I6+bEdKb8NO92aqHxr9SYuYibDmpMM9w==}
+  '@embroider/shared-internals@3.2.0':
+    resolution: {integrity: sha512-TzLZnwfhhrNkdTVGGyysovvciFCwyxEgMbzF9AZMzNbFlXirhocQSpGjy9V4AQArklu4wDFRYqqe5GMKULGIkw==}
     engines: {node: 12.* || 14.* || >= 16}
 
   '@embroider/vite@1.5.2':
@@ -3322,6 +3322,7 @@ packages:
 
   charm@1.0.2:
     resolution: {integrity: sha512-wqW3VdPnlSWT4eRiYX+hcs+C6ViBPUWk1qTCd+37qw9kEm/a5n2qcyQDMBWvSYKN/ctqZzeXNQaeBjOetJJUkw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -6911,6 +6912,11 @@ packages:
     peerDependencies:
       '@ember/test-waiters': '>= 3.1.0'
 
+  reactiveweb@1.9.3:
+    resolution: {integrity: sha512-RG7UVwn8EcokVfHFMi4G/v8Zw/ny5Myy/gZ6ywDnChL7gH1wmNuLHxwhps/BHewYz4Rw89rEMUtY21ddipynhQ==}
+    peerDependencies:
+      '@ember/test-waiters': '>= 3.1.0'
+
   read-cache@1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
 
@@ -9693,7 +9699,7 @@ snapshots:
 
   '@embroider/addon-shim@1.10.3':
     dependencies:
-      '@embroider/shared-internals': 3.1.1
+      '@embroider/shared-internals': 3.2.0
       broccoli-funnel: 3.0.8
       common-ancestor-path: 1.0.1
       semver: 7.8.5
@@ -9888,7 +9894,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@embroider/shared-internals@3.1.1':
+  '@embroider/shared-internals@3.2.0':
     dependencies:
       babel-import-util: 3.0.1
       debug: 4.4.3
@@ -10635,7 +10641,7 @@ snapshots:
   '@npmcli/fs@1.1.1':
     dependencies:
       '@gar/promisify': 1.1.3
-      semver: 7.8.5
+      semver: 7.7.4
 
   '@npmcli/git@6.0.3':
     dependencies:
@@ -10645,7 +10651,7 @@ snapshots:
       npm-pick-manifest: 10.0.0
       proc-log: 5.0.0
       promise-retry: 2.0.1
-      semver: 7.8.5
+      semver: 7.7.4
       which: 5.0.0
 
   '@npmcli/move-file@1.1.2':
@@ -11309,7 +11315,7 @@ snapshots:
       '@glint/template': 1.9.0
       ember-modifier: 4.3.0(@babel/core@7.29.6)
       ember-source: 6.11.0(@glimmer/component@2.0.0)(rsvp@4.8.5)
-      reactiveweb: 1.9.1(47f4726bc5d4a040a67513425e8957ad)
+      reactiveweb: 1.9.3(47f4726bc5d4a040a67513425e8957ad)
       tracked-built-ins: 4.1.0(@babel/core@7.29.6)
     optionalDependencies:
       '@ember/test-helpers': 5.4.1(b1e84a937951e9699b1daf2cc89053a3)
@@ -13315,7 +13321,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.6)
       ember-resources: 7.0.7(c45d02f94cea2b98e3e1a0acfc4e277a)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(47f4726bc5d4a040a67513425e8957ad)
+      reactiveweb: 1.9.3(47f4726bc5d4a040a67513425e8957ad)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.0(@babel/core@7.29.6)
@@ -13341,7 +13347,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.6)
       ember-resources: 7.0.7(c45d02f94cea2b98e3e1a0acfc4e277a)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(47f4726bc5d4a040a67513425e8957ad)
+      reactiveweb: 1.9.3(47f4726bc5d4a040a67513425e8957ad)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.0(@babel/core@7.29.6)
@@ -13367,7 +13373,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.6)
       ember-resources: 7.0.7(c45d02f94cea2b98e3e1a0acfc4e277a)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(c7f6fb85e83b4b193f05e2ee82c419e1)
+      reactiveweb: 1.9.3(c7f6fb85e83b4b193f05e2ee82c419e1)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.0(@babel/core@7.29.6)
@@ -13393,7 +13399,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.6)
       ember-resources: 7.0.7(c45d02f94cea2b98e3e1a0acfc4e277a)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(47f4726bc5d4a040a67513425e8957ad)
+      reactiveweb: 1.9.3(47f4726bc5d4a040a67513425e8957ad)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.0(@babel/core@7.29.6)
@@ -13419,7 +13425,7 @@ snapshots:
       ember-modifier: 4.3.0(@babel/core@7.29.6)
       ember-resources: 7.0.7(c45d02f94cea2b98e3e1a0acfc4e277a)
       form-data-utils: 0.6.0
-      reactiveweb: 1.9.1(c7f6fb85e83b4b193f05e2ee82c419e1)
+      reactiveweb: 1.9.3(c7f6fb85e83b4b193f05e2ee82c419e1)
       should-handle-link: 1.3.0
       tabster: 8.7.0
       tracked-built-ins: 4.1.0(@babel/core@7.29.6)
@@ -14182,7 +14188,7 @@ snapshots:
 
   filelist@1.0.5:
     dependencies:
-      minimatch: 10.2.6
+      minimatch: 10.2.2
 
   filesize@11.0.13: {}
 
@@ -16133,7 +16139,7 @@ snapshots:
 
   npm-install-checks@7.1.2:
     dependencies:
-      semver: 7.8.5
+      semver: 7.7.4
 
   npm-normalize-package-bin@4.0.0: {}
 
@@ -16141,7 +16147,7 @@ snapshots:
     dependencies:
       hosted-git-info: 8.1.0
       proc-log: 5.0.0
-      semver: 7.8.5
+      semver: 7.7.4
       validate-npm-package-name: 6.0.2
 
   npm-package-arg@13.0.2:
@@ -16156,7 +16162,7 @@ snapshots:
       npm-install-checks: 7.1.2
       npm-normalize-package-bin: 4.0.0
       npm-package-arg: 12.0.2
-      semver: 7.8.5
+      semver: 7.7.4
 
   npm-run-path@2.0.2:
     dependencies:
@@ -16351,7 +16357,7 @@ snapshots:
       ky: 1.14.3
       registry-auth-token: 5.1.1
       registry-url: 6.0.1
-      semver: 7.8.5
+      semver: 7.7.4
 
   package-json@6.5.0:
     dependencies:
@@ -16831,11 +16837,23 @@ snapshots:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
 
-  reactiveweb@1.9.1(47f4726bc5d4a040a67513425e8957ad):
+  reactiveweb@1.9.1(c7f6fb85e83b4b193f05e2ee82c419e1):
     dependencies:
       '@ember/test-waiters': 4.1.1(b1e84a937951e9699b1daf2cc89053a3)
       '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.20.1(b1e84a937951e9699b1daf2cc89053a3)
+      '@embroider/macros': 1.20.1(6981406cb46cb4e376d432007157f8ed)
+      decorator-transforms: 2.3.1(@babel/core@7.29.6)
+      ember-resources: 7.0.7(095f463117b36b2aeb73c051742be972)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@glimmer/component'
+      - '@glint/template'
+      - supports-color
+
+  reactiveweb@1.9.3(47f4726bc5d4a040a67513425e8957ad):
+    dependencies:
+      '@ember/test-waiters': 4.1.1(b1e84a937951e9699b1daf2cc89053a3)
+      '@embroider/addon-shim': 1.10.3
       decorator-transforms: 2.3.1(@babel/core@7.29.6)
       ember-resources: 7.0.7(c45d02f94cea2b98e3e1a0acfc4e277a)
     transitivePeerDependencies:
@@ -16844,11 +16862,10 @@ snapshots:
       - '@glint/template'
       - supports-color
 
-  reactiveweb@1.9.1(c7f6fb85e83b4b193f05e2ee82c419e1):
+  reactiveweb@1.9.3(c7f6fb85e83b4b193f05e2ee82c419e1):
     dependencies:
       '@ember/test-waiters': 4.1.1(b1e84a937951e9699b1daf2cc89053a3)
-      '@embroider/addon-shim': 1.10.2
-      '@embroider/macros': 1.20.1(6981406cb46cb4e376d432007157f8ed)
+      '@embroider/addon-shim': 1.10.3
       decorator-transforms: 2.3.1(@babel/core@7.29.6)
       ember-resources: 7.0.7(095f463117b36b2aeb73c051742be972)
     transitivePeerDependencies:
