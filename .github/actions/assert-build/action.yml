@@ -27,7 +27,7 @@ runs:
       npx assert-folder-contents
 
   - name: Upload dist assets to cache
-    uses: actions/upload-artifact@v6
+    uses: actions/upload-artifact@v7
     with:
       name: bulit-assets
       path: table
