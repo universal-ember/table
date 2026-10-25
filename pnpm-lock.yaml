@@ -246,7 +246,7 @@ importers:
     dependencies:
       '@babel/runtime':
         specifier: ^7.28.6
-        version: 7.28.6
+        version: 7.29.10
       '@ember/string':
         specifier: ^4.0.1
         version: 4.0.1
@@ -1090,6 +1090,10 @@ packages:
     resolution: {integrity: sha512-05WQkdpL9COIMz4LjTxGpPNCdlpyimKppYNoJ5Di5EUObifl8t4tuLuUBBZEpoLYOmfvIWrsp9fCl0HoPRVTdA==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/runtime@7.29.10':
+    resolution: {integrity: sha512-NpugTzbKgGrNe45Ui32cN8vCFFMxVtP/9rtfwv0nP5FRDAjvYBxJcLVpYA9mr1jxP6cnIT7x9LUzuDTbWYYNRA==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/runtime@7.29.7':
     resolution: {integrity: sha512-Nq8OhGWiZIZGV6hLHoyAKLLcJihP/xFeBMGJoUrxTX2psI8dCifzLhZISFb+VWS3wFMRDmCGw5R+dOySCqPLhw==}
     engines: {node: '>=6.9.0'}
@@ -1623,6 +1627,9 @@ packages:
 
   '@glimmer/syntax@0.95.0':
     resolution: {integrity: sha512-W/PHdODnpONsXjbbdY9nedgIHpglMfOzncf/moLVrKIcCfeQhw2vG07Rs/YW8KeJCgJRCLkQsi+Ix7XvrurGAg==}
+
+  '@glimmer/syntax@0.97.0':
+    resolution: {integrity: sha512-uDUqlAxU40eJHJjMUR6ffdpDp6W53gNvS9YZNrBbf77sUL5xUFsBAaReB3FuyVPbwRg09p5rviioUJ8nyg7BBA==}
 
   '@glimmer/tracking@1.1.2':
     resolution: {integrity: sha512-cyV32zsHh+CnftuRX84ALZpd2rpbDrhLhJnTXn9W//QpqdRZ5rdMsxSY9fOsj0CKEc706tmEU299oNnDc0d7tA==}
@@ -3322,6 +3329,7 @@ packages:
 
   charm@1.0.2:
     resolution: {integrity: sha512-wqW3VdPnlSWT4eRiYX+hcs+C6ViBPUWk1qTCd+37qw9kEm/a5n2qcyQDMBWvSYKN/ctqZzeXNQaeBjOetJJUkw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -7373,6 +7381,10 @@ packages:
   simple-html-tokenizer@0.5.11:
     resolution: {integrity: sha512-C2WEK/Z3HoSFbYq8tI7ni3eOo/NneSPRoPpcM7WdLjFOArFuyXEjAoCdOC3DgMfRyziZQ1hCNR4mrNdWEvD0og==}
 
+  simple-html-tokenizer@1.0.0:
+    resolution: {integrity: sha512-ydo9dHOcttfRxVWBglPk7jcBucsuva2zN+5SmUO5eXgUBlxFCZ9CwYEpF30ESzfKsckimVQE+GIbfsgM3mgSdQ==}
+    engines: {node: '>= 20.19'}
+
   slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
@@ -9241,6 +9253,8 @@ snapshots:
 
   '@babel/runtime@7.28.6': {}
 
+  '@babel/runtime@7.29.10': {}
+
   '@babel/runtime@7.29.7': {}
 
   '@babel/template@7.29.7':
@@ -9709,7 +9723,7 @@ snapshots:
       '@babel/plugin-syntax-typescript': 7.28.6(@babel/core@7.29.6)
       '@babel/plugin-transform-runtime': 7.29.0(@babel/core@7.29.6)
       '@babel/preset-env': 7.29.0(@babel/core@7.29.6)
-      '@babel/runtime': 7.28.6
+      '@babel/runtime': 7.29.10
       '@babel/traverse': 7.29.0
       '@embroider/core': 4.4.3(@glint/template@1.9.0)
       '@embroider/macros': 1.19.7(b1e84a937951e9699b1daf2cc89053a3)
@@ -10235,6 +10249,10 @@ snapshots:
       '@glimmer/wire-format': 0.94.8
       '@handlebars/parser': 2.2.2
       simple-html-tokenizer: 0.5.11
+
+  '@glimmer/syntax@0.97.0':
+    dependencies:
+      simple-html-tokenizer: 1.0.0
 
   '@glimmer/tracking@1.1.2':
     dependencies:
@@ -11625,7 +11643,7 @@ snapshots:
 
   babel-plugin-ember-template-compilation@2.4.1:
     dependencies:
-      '@glimmer/syntax': 0.95.0
+      '@glimmer/syntax': 0.97.0
       babel-import-util: 3.0.1
 
   babel-plugin-ember-template-compilation@3.1.0:
@@ -13304,7 +13322,7 @@ snapshots:
 
   ember-primitives@0.46.0(031154a331d1c4f37231c797ad47d019):
     dependencies:
-      '@babel/runtime': 7.29.7
+      '@babel/runtime': 7.29.10
       '@ember/test-waiters': 4.1.1(b1e84a937951e9699b1daf2cc89053a3)
       '@embroider/addon-shim': 1.10.2
       '@embroider/macros': 1.20.1(b1e84a937951e9699b1daf2cc89053a3)
@@ -13330,7 +13348,7 @@ snapshots:
 
   ember-primitives@0.51.0(031154a331d1c4f37231c797ad47d019):
     dependencies:
-      '@babel/runtime': 7.29.7
+      '@babel/runtime': 7.29.10
       '@ember/test-waiters': 4.1.1(b1e84a937951e9699b1daf2cc89053a3)
       '@embroider/addon-shim': 1.10.3
       '@embroider/macros': 1.20.1(b1e84a937951e9699b1daf2cc89053a3)
@@ -13356,7 +13374,7 @@ snapshots:
 
   ember-primitives@0.51.0(4e675f84250b0cd6a3fd9fa1ad2467d3):
     dependencies:
-      '@babel/runtime': 7.29.7
+      '@babel/runtime': 7.29.10
       '@ember/test-waiters': 4.1.1(b1e84a937951e9699b1daf2cc89053a3)
       '@embroider/addon-shim': 1.10.3
       '@embroider/macros': 1.20.1(6981406cb46cb4e376d432007157f8ed)
@@ -17544,6 +17562,8 @@ snapshots:
       - supports-color
 
   simple-html-tokenizer@0.5.11: {}
+
+  simple-html-tokenizer@1.0.0: {}
 
   slash@3.0.0: {}
 
