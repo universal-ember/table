@@ -1,5 +1,20 @@
 # Changelog
 
+## Release (2026-10-30)
+
+* @universal-ember/table 4.1.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#213](https://github.com/universal-ember/table/pull/213) Replace isEmpty from @ember/utils with a native check ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `@universal-ember/table`
+  * [#214](https://github.com/universal-ember/table/pull/214) Update @ember/test-helpers to 5.7.0 to fix ember-beta and ember-canary ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 1
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+
 ## Release (2026-09-23)
 
 * @universal-ember/table 4.1.0 (minor)
