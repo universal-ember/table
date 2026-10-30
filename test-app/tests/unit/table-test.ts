@@ -176,4 +176,35 @@ module('Unit | -private | table', function (hooks) {
       'uses built-in default when no defaults are configured',
     );
   });
+
+  test('defaultCellValue: empty values show the default, other falsy values do not', async function (assert) {
+    const data = {
+      null: null,
+      undefined: undefined,
+      emptyString: '',
+      zero: 0,
+      false: false,
+      text: 'a',
+    };
+    const table = headlessTable(this, {
+      columns: () => Object.keys(data).map((key) => ({ key })),
+      data: () => [data],
+    });
+
+    const row = table.rows[0]!;
+    const values = Object.fromEntries(
+      table.columns
+        .values()
+        .map((column) => [column.key, column.getValueForRow(row)]),
+    );
+
+    assert.deepEqual(values, {
+      null: '--',
+      undefined: '--',
+      emptyString: '--',
+      zero: 0,
+      false: false,
+      text: 'a',
+    });
+  });
 });
