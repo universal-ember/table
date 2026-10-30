@@ -1,22 +1,22 @@
 {
   "solution": {
     "@universal-ember/table": {
-      "impact": "minor",
-      "oldVersion": "4.0.0",
-      "newVersion": "4.1.0",
+      "impact": "patch",
+      "oldVersion": "4.1.0",
+      "newVersion": "4.1.1",
       "tagName": "latest",
       "constraints": [
         {
-          "impact": "minor",
-          "reason": "Appears in changelog section :rocket: Enhancement"
+          "impact": "patch",
+          "reason": "Appears in changelog section :bug: Bug Fix"
         },
         {
           "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
+          "reason": "Appears in changelog section :house: Internal"
         }
       ],
       "pkgJSONPath": "./table/package.json"
     }
   },
-  "description": "## Release (2026-09-23)\n\n* @universal-ember/table 4.1.0 (minor)\n\n#### :rocket: Enhancement\n* `@universal-ember/table`\n  * [#208](https://github.com/universal-ember/table/pull/208) Declare @action methods as arrow functions ([@johanrd](https://github.com/johanrd))\n  * [#206](https://github.com/universal-ember/table/pull/206) Cache the column list per table and requester ([@johanrd](https://github.com/johanrd))\n  * [#203](https://github.com/universal-ember/table/pull/203) Check each column's Cell and options, and keep the cell args of declared lists ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#202](https://github.com/universal-ember/table/pull/202) Infer the types of column meta and table meta ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n  * [#201](https://github.com/universal-ember/table/pull/201) Type-check with the TypeScript 7 nightly and isolatedDeclarations ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#209](https://github.com/universal-ember/table/pull/209) Fix the declared-cell-args type test on main ([@johanrd](https://github.com/johanrd))\n  * [#204](https://github.com/universal-ember/table/pull/204) Keep the Cell of a column checked, and let any column be read ([@johanrd](https://github.com/johanrd))\n\n#### :memo: Documentation\n* [#207](https://github.com/universal-ember/table/pull/207) Revert \"docs: read the column list once per render\" ([@NullVoxPopuli](https://github.com/NullVoxPopuli))\n* [#205](https://github.com/universal-ember/table/pull/205) docs: read the column list once per render ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 3\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n- [@NullVoxPopuli](https://github.com/NullVoxPopuli)\n"
+  "description": "## Release (2026-10-30)\n\n* @universal-ember/table 4.1.1 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/table`\n  * [#213](https://github.com/universal-ember/table/pull/213) Replace isEmpty from @ember/utils with a native check ([@johanrd](https://github.com/johanrd))\n\n#### :house: Internal\n* `@universal-ember/table`\n  * [#214](https://github.com/universal-ember/table/pull/214) Update @ember/test-helpers to 5.7.0 to fix ember-beta and ember-canary ([@johanrd](https://github.com/johanrd))\n\n#### Committers: 1\n- Johan Røed ([@johanrd](https://github.com/johanrd))\n"
 }
