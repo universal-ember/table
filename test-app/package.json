@@ -35,7 +35,7 @@
     "dist:ember:test": "ember test --path dist --config-file ./testem.cjs"
   },
   "dependencies": {
-    "@ember/test-helpers": "^5.4.1",
+    "@ember/test-helpers": "^5.7.0",
     "@ember/test-waiters": "^4.1.1",
     "@universal-ember/table": "workspace:*",
     "ember-auto-import": "^2.12.0",
