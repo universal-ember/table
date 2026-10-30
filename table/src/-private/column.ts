@@ -1,5 +1,4 @@
 import { get } from '@ember/object';
-import { isEmpty } from '@ember/utils';
 
 import type { CellComponent } from './cell-component.ts';
 import type { Row } from './row';
@@ -61,13 +60,13 @@ export class Column<
     // even though the real implementation does
     const value = get(row.data, this.config.key);
 
-    if (isEmpty(value)) {
+    if (value === undefined || value === null || value === '') {
       return this.getDefaultValue(row);
     }
 
     /**
      * UNSAFE: casting to ContentValue is incorrect, because we have not
-     *         properly constrained the type of value, (isEmpty doesn't narrow types either)
+     *         properly constrained the type of value.
      */
     return value as ContentValue;
   };
