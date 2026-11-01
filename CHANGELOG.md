@@ -1,5 +1,22 @@
 # Changelog
 
+## Release (2026-11-01)
+
+* @universal-ember/table 4.1.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/table`
+  * [#215](https://github.com/universal-ember/table/pull/215) Column resizing: use pointer events, so touch works ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+  * [#213](https://github.com/universal-ember/table/pull/213) Replace isEmpty from @ember/utils with a native check ([@johanrd](https://github.com/johanrd))
+
+#### :house: Internal
+* `@universal-ember/table`
+  * [#214](https://github.com/universal-ember/table/pull/214) Update @ember/test-helpers to 5.7.0 to fix ember-beta and ember-canary ([@johanrd](https://github.com/johanrd))
+
+#### Committers: 2
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+- Johan Røed ([@johanrd](https://github.com/johanrd))
+
 ## Release (2026-09-23)
 
 * @universal-ember/table 4.1.0 (minor)
