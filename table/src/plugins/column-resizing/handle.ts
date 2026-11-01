@@ -12,7 +12,7 @@ import type { Column } from '../../-private/column.ts';
 const waiter = buildWaiter('ColumnResizing#ResizeHandle');
 
 /**
- * - why are mouse events used instead of drag events?
+ * - why are pointer events used instead of drag events?
  * - why not use the "draggable" attribute?
  *
  * It seems drag events are more for files and/or moving images around on a page
@@ -20,8 +20,7 @@ const waiter = buildWaiter('ColumnResizing#ResizeHandle');
  * The same thing happens with text.
  * This prevents us from having total control of the styling of how dragging works.
  *
- *
- *
+ * Pointer events are one code path for mouse, touch, and pen.
  */
 
 class ResizeHandle<DataType = unknown> extends Modifier<{
@@ -33,9 +32,8 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
 
   // Pointer
   pointerStartX = 0;
-  pointerStartY = 0;
   pointerX = 0;
-  pointerY = 0;
+  pointerId?: number;
   declare dragFrame: number;
 
   // Keyboard
@@ -59,10 +57,13 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
   }
 
   setup = (): void => {
-    this.dragHandle.addEventListener('touchstart', this.dragStartHandler, {
-      passive: true,
-    });
-    this.dragHandle.addEventListener('mousedown', this.dragStartHandler);
+    /**
+     * Without this, the browser takes a touch drag for a scroll
+     * and sends pointercancel.
+     */
+    this.dragHandle.style.touchAction = 'none';
+
+    this.dragHandle.addEventListener('pointerdown', this.dragStartHandler);
     this.dragHandle.addEventListener('keydown', this.keyHandler);
 
     registerDestructor(this, () => {
@@ -73,46 +74,16 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
         this.token = undefined;
       }
 
-      this.dragHandle.removeEventListener('touchstart', this.dragStartHandler);
-      this.dragHandle.removeEventListener('mousedown', this.dragStartHandler);
-      window.removeEventListener('touchmove', this.dragMove);
-      window.removeEventListener('touchend', this.dragEndHandler);
-      window.removeEventListener('mousemove', this.dragMove);
-      window.removeEventListener('mouseup', this.dragEndHandler);
+      this.dragHandle.removeEventListener('pointerdown', this.dragStartHandler);
       this.dragHandle.removeEventListener('keydown', this.keyHandler);
+      this.removeDragListeners();
     });
   };
 
-  setPosition = (event: Event): void => {
-    if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
-
-    if ('TouchEvent' in window && event instanceof TouchEvent) {
-      const firstTouch = event.touches[0];
-
-      if (!firstTouch) return;
-
-      this.pointerX = firstTouch.clientX;
-      this.pointerY = firstTouch.clientY;
-    } else {
-      this.pointerX = event.clientX;
-      this.pointerY = event.clientY;
-    }
-  };
-
-  setStartPosition = (event: Event): void => {
-    if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
-
-    if ('TouchEvent' in window && event instanceof TouchEvent) {
-      const firstTouch = event.touches[0];
-
-      if (!firstTouch) return;
-
-      this.pointerStartX = firstTouch.clientX;
-      this.pointerStartY = firstTouch.clientY;
-    } else {
-      this.pointerStartX = event.clientX;
-      this.pointerStartY = event.clientY;
-    }
+  removeDragListeners = (): void => {
+    window.removeEventListener('pointermove', this.dragMove);
+    window.removeEventListener('pointerup', this.dragEndHandler);
+    window.removeEventListener('pointercancel', this.dragEndHandler);
   };
 
   /**
@@ -146,7 +117,9 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     });
   };
 
-  dragEndHandler = (): void => {
+  dragEndHandler = (event: PointerEvent): void => {
+    if (event.pointerId !== this.pointerId) return;
+
     this.meta.isResizing = false;
 
     this.queueUpdate(this.meta.save);
@@ -154,23 +127,27 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
     /**
      * No need to listen if we aren't dragging
      */
-    window.removeEventListener('touchmove', this.dragMove);
-    window.removeEventListener('touchend', this.dragEndHandler);
-    window.removeEventListener('mousemove', this.dragMove);
-    window.removeEventListener('mouseup', this.dragEndHandler);
+    this.removeDragListeners();
   };
 
-  dragMove = (event: Event): void => {
+  dragMove = (event: PointerEvent): void => {
     if (!this.meta.isResizing) return;
-    this.setPosition(event);
+    if (event.pointerId !== this.pointerId) return;
+
+    this.pointerX = event.clientX;
     this.queueUpdate();
   };
 
-  dragStartHandler = (event: Event): void => {
-    if (!(event instanceof PointerEvent || event instanceof MouseEvent)) return;
+  dragStartHandler = (event: PointerEvent): void => {
+    if (event.target !== this.dragHandle) return;
+
+    /**
+     * A second finger must not restart the drag of the first.
+     */
+    if (this.meta.isResizing) return;
 
     this.meta.isResizing = true;
-    if (event.target !== this.dragHandle) return;
+    this.pointerId = event.pointerId;
 
     if (this.token) {
       waiter.endAsync(this.token);
@@ -178,13 +155,12 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
 
     this.token = waiter.beginAsync();
 
-    this.setPosition(event);
-    this.setStartPosition(event);
+    this.pointerX = event.clientX;
+    this.pointerStartX = event.clientX;
 
-    window.addEventListener('touchend', this.dragEndHandler);
-    window.addEventListener('touchmove', this.dragMove);
-    window.addEventListener('mousemove', this.dragMove);
-    window.addEventListener('mouseup', this.dragEndHandler);
+    window.addEventListener('pointermove', this.dragMove);
+    window.addEventListener('pointerup', this.dragEndHandler);
+    window.addEventListener('pointercancel', this.dragEndHandler);
   };
 
   keyHandler = (event: KeyboardEvent): void => {
@@ -212,7 +188,7 @@ class ResizeHandle<DataType = unknown> extends Modifier<{
 
 /**
  * Modifier to attach to the column resize handles.
- * This provides both keyboard and mouse support for resizing columns.
+ * This provides keyboard, mouse, touch, and pen support for resizing columns.
  * (provided the resize handle element is focusable -- so consider using
  * a button for the resize element)
  *
