@@ -2,7 +2,7 @@ import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { assert, assert as debugAssert } from "@ember/debug";
 import { htmlSafe } from "@ember/template";
-import { click, render, settled } from "@ember/test-helpers";
+import { click, find, render, settled } from "@ember/test-helpers";
 import { module, test, skip } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { setOwner } from "@ember/owner";
@@ -154,6 +154,62 @@ module("Plugins | resizing", function (hooks) {
     hooks.beforeEach(function () {
       ctx = new DefaultOptions();
       setOwner(ctx, this.owner);
+    });
+
+    test("a touch drag does not scroll the page", async function (assert) {
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
+
+      const handle = find("[data-handle]") as HTMLElement;
+
+      assert.strictEqual(handle.style.touchAction, "none");
+    });
+
+    test("a second finger does not restart a drag", async function (assert) {
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
+      await requestAnimationFrameSettled();
+
+      const startA = width(getColumns()[0]!);
+
+      const handle = find("[data-handle]") as HTMLElement;
+      const move = (type: string, pointerId: number, clientX: number) =>
+        handle.dispatchEvent(
+          new PointerEvent(type, { bubbles: true, pointerId, clientX }),
+        );
+
+      move("pointerdown", 1, 100);
+      move("pointerdown", 2, 400);
+      move("pointermove", 2, 500);
+      move("pointermove", 1, 150);
+      move("pointerup", 2, 500);
+      move("pointerup", 1, 150);
+      await settled();
+
+      assert.strictEqual(width(getColumns()[0]!), startA + 50);
+    });
+
+    test("a canceled touch ends the drag", async function (assert) {
+      await render(<template><TestComponentA @ctx={{ctx}} /></template>);
+      await requestAnimationFrameSettled();
+
+      const startA = width(getColumns()[0]!);
+
+      const handle = find("[data-handle]") as HTMLElement;
+      const move = (type: string, clientX: number) =>
+        handle.dispatchEvent(
+          new PointerEvent(type, { bubbles: true, pointerId: 1, clientX }),
+        );
+
+      move("pointerdown", 100);
+      move("pointermove", 110);
+      move("pointercancel", 110);
+      await settled();
+
+      assert.strictEqual(width(getColumns()[0]!), startA + 10);
+
+      move("pointermove", 300);
+      await settled();
+
+      assert.strictEqual(width(getColumns()[0]!), startA + 10);
     });
 
     test("it resizes each column", async function () {

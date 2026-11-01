@@ -320,4 +320,18 @@ but it'll be most important to ensure that tab-order makes sense.
 - buttons are focusable
 - buttons can be navigated to and pressed via keyboard
 
-This will ensure that keyboard users, as well as mouse users can resize their columns.
+This will ensure that keyboard users, as well as mouse and touch users can resize their columns.
+
+### Touch
+
+`resizeHandle` uses pointer events, and it sets `touch-action: none` on the handle so that a drag does not scroll the page.
+
+A finger needs a larger target than a mouse. Make the handle larger on any device with a touch screen:
+
+```css
+@media (any-pointer: coarse) {
+  .resize-handle {
+    width: 1.5rem;
+  }
+}
+```

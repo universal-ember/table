@@ -35,9 +35,9 @@ export function createHelpers(selectors: Selectors): Helpers {
 
     const targetX = startX + delta;
 
-    triggerEvent(element, 'mousedown', { clientX: startX, button: 0 });
-    triggerEvent(element, 'mousemove', { clientX: targetX, button: 0 });
-    triggerEvent(element, 'mouseup', { clientX: targetX, button: 0 });
+    triggerEvent(element, 'pointerdown', { clientX: startX, button: 0 });
+    triggerEvent(element, 'pointermove', { clientX: targetX, button: 0 });
+    triggerEvent(element, 'pointerup', { clientX: targetX, button: 0 });
 
     await settled();
   }
